@@ -1,14 +1,17 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
 title: "FIFA World Cup 2026 - DataCamp Competition"
+
 authors:
-  - family name: Pham
-    given name: Tuong Nguyen
-    orcid: "https://orcid.org/0009-0003-7411-1336"
+  - family-names: Pham
+    given-names: Tuong Nguyen
+    orcid: https://orcid.org/0009-0003-7411-1336
+
 references:
-  - type: website
+  - type: software
     title: "Match Simulation results of FIFA WORLD CUP 2026"
     authors:
-      - name: Ra'uf Fauzan Rambe
-    location: "https://www.kaggle.com/code/rauffauzanrambe/match-simulation-results-of-fifa-world-cup-2026"
+      - family-names: Rambe
+        given-names: Ra'uf Fauzan Fauzan
+    url: https://www.kaggle.com/code/rauffauzanrambe/match-simulation-results-of-fifa-world-cup-2026
     year: 2026
