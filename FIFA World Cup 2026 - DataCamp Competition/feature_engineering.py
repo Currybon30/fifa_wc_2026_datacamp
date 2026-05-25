@@ -347,7 +347,6 @@ def pseudo_corners(team_hist, row):
     return home_corners, away_corners
 
 
-
 # ===============================
 # ADD MATCH FEATURES
 # ===============================
@@ -443,9 +442,35 @@ def add_match_features(mydf, team_hist, window=10):
 # ===============================
 # IS HOME ADVANTAGE
 # ===============================
-def is_home_advantage(home_team, host_countries):
-    return home_team in host_countries
-
+def is_home_advantage(home_team, venue):
+    HOST_PLACES = {
+        "USA": [
+            "Atlanta",
+            "Boston",
+            "Dallas",
+            "Houston",
+            "Kansas City",
+            "Los Angeles",
+            "Miami",
+            "New York",
+            "Philadelphia",
+            "Seattle",
+            "San Francisco"
+        ],
+        "Canada": [
+            "Toronto",
+            "Vancouver"
+        ],
+        "Mexico": [
+            "Mexico City",
+            "Guadalajara",
+            "Monterrey"
+        ]
+    }
+    host_cities = HOST_PLACES.get(home_team[0], [])
+    if not host_cities:  # not USA / Canada / Mexico
+        return False
+    return any(city in str(venue) for city in host_cities)
 
 # ===============================
 # TEAM HIST
