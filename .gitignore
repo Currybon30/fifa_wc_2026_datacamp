@@ -2,3 +2,5 @@ train.csv
 val.csv
 test.csv
 best_models_results.csv
+raw_history.csv
+models/
