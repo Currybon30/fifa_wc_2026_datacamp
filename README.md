@@ -6,7 +6,7 @@ This project combines multiple ML models, feature engineering pipelines, and pro
 
 ---
 
-# 🌍 Overview
+# 👁️‍🗨️ Overview
 
 The FIFA World Cup 2026 will feature:
 
