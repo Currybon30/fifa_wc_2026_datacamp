@@ -5,3 +5,4 @@ best_models_results.csv
 raw_history.csv
 models/
 __pycache__
+.venv/
