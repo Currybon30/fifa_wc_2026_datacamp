@@ -1,4 +1,4 @@
-# ⚽ FIFA World Cup 2026 Prediction System
+# ⚽🏆🌍 FIFA World Cup 2026 Prediction System
 
 An advanced football analytics and tournament simulation system for predicting the **2026 FIFA World Cup** using ML, Elo ratings, statistical modeling, and Monte Carlo simulations.
 
