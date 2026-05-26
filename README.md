@@ -75,11 +75,11 @@ The system uses multiple specialized machine learning models for:
 
 | Prediction Task | Model Type |
 |---|---|
-| Home Goals | Regression Model |
-| Away Goals | Regression Model |
-| Corners | Regression Model |
-| Yellow Cards | Regression Model |
-| Red Cards | Regression Model |
+| Home Goals | Poisson Regressor Model |
+| Away Goals | Poisson Regressor Model |
+| Corners | Ridge Model |
+| Yellow Cards | Poisson Regressor Model |
+| Red Cards | Logistic Regression Model |
 
 The trained models are generated and stored as `.pkl` files after running `models.ipynb`.
 
