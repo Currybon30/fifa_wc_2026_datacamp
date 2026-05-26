@@ -1,4 +1,4 @@
-# ⚽ FIFA World Cup 2026 Prediction System
+# ⚽🏆🌍 FIFA World Cup 2026 Prediction System
 
 An advanced football analytics and tournament simulation system for predicting the **2026 FIFA World Cup** using ML, Elo ratings, statistical modeling, and Monte Carlo simulations.
 
@@ -6,7 +6,7 @@ This project combines multiple ML models, feature engineering pipelines, and pro
 
 ---
 
-# 🌍 Overview
+# 👁️‍🗨️ Overview
 
 The FIFA World Cup 2026 will feature:
 
@@ -75,11 +75,11 @@ The system uses multiple specialized machine learning models for:
 
 | Prediction Task | Model Type |
 |---|---|
-| Home Goals | Regression Model |
-| Away Goals | Regression Model |
-| Corners | Regression Model |
-| Yellow Cards | Regression Model |
-| Red Cards | Regression Model |
+| Home Goals | Poisson Regressor Model |
+| Away Goals | Poisson Regressor Model |
+| Corners | Ridge Model |
+| Yellow Cards | Poisson Regressor Model |
+| Red Cards | Logistic Regression Model |
 
 The trained models are generated and stored as `.pkl` files after running `models.ipynb`.
 
