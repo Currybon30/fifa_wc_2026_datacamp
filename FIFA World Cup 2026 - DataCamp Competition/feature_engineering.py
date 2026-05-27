@@ -1,6 +1,8 @@
 from collections import defaultdict
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+
 
 # ===============================
 # RESOLVE TEAM NAME ORIGINAL GROUP FIXTURES TO UPDATED NAME
@@ -28,7 +30,7 @@ def resolve_team_updated_to_original(name):
         "Czechia": "UEFA Playoff D",
         "DR Congo": "FIFA Playoff 1",
         "Iraq": "FIFA Playoff 2",
-        "United States": "USA" # This is a special case, USA is the official name of the country, but the team is called "United States" in the dataset
+        "United States": "USA"  # This is a special case, USA is the official name of the country, but the team is called "United States" in the dataset
     }
     return UPDATED_TO_ORIGINAL_NAME.get(name, name)
 
@@ -61,7 +63,7 @@ def combine_teams_elo(match_csv, elo_csv):
 # TOURNAMENT WEIGHT
 # ===============================
 def tournament_weight(tournament):
-    
+
     if pd.isna(tournament):
         return 1.0
 
@@ -121,7 +123,7 @@ def team_disc(team):
 # ===============================
 def get_team_rates(team_hist, team, current_date, window=10, default=1.0):
     history = team_hist.get(team, [])
-    
+
     # filter only relevant history games where date is before current date
     history = [h for h in history if h.date < current_date]
 
@@ -140,7 +142,6 @@ def get_team_rates(team_hist, team, current_date, window=10, default=1.0):
             scored.append(h.away_score)
             conceded.append(h.home_score)
 
-    
     weights = np.array([tournament_weight(h.tournament) for h in history])
 
     n = len(history)
@@ -165,7 +166,6 @@ def get_team_rates(team_hist, team, current_date, window=10, default=1.0):
     # =========================
     last5 = history[-5:]
     prev5 = history[-10:-5]
-    
 
     def calc(chunk):
         if len(chunk) == 0:
@@ -177,7 +177,7 @@ def get_team_rates(team_hist, team, current_date, window=10, default=1.0):
             if h.home_team == team:
                 sh = h.home_score
                 ch = h.away_score
-                
+
             else:
                 sh = h.away_score
                 ch = h.home_score
@@ -218,7 +218,7 @@ def team_attack(team_hist, team, current_date):
 # ===============================
 def team_def(team_hist, team, current_date):
     _, def_rate = get_team_rates(team_hist, team, current_date)
-    return def_rate   
+    return def_rate
 
 
 # =========================
@@ -241,22 +241,23 @@ def pseudo_yellow(team_hist, row, row_index):
     h_attack = team_attack(team_hist, row.home_team, row.date)
     a_attack = team_attack(team_hist, row.away_team, row.date)
 
-    # intensity per team (NOT shared)
-    home_effect = 0.25 * (h_attack + a_disc - 1)
-    away_effect = 0.25 * (a_attack + h_disc - 1)
+    home_effect = 0.12 * ((h_attack - 1) + (a_disc - 1))
+    away_effect = 0.12 * ((a_attack - 1) + (h_disc - 1))
 
-    home_base += home_effect + 0.35 * h_disc
-    away_base += away_effect + 0.35 * a_disc
+    home_base += home_effect + 0.15 * (h_disc - 1)
+    away_base += away_effect + 0.15 * (a_disc - 1)
 
     # tournament effects - world cup
-
-    home_base *= 1.15
-    away_base *= 1.15
+    home_base *= 1.05
+    away_base *= 1.05
+    
+    home_base = np.clip(home_base, 0.8, 3.2)
+    away_base = np.clip(away_base, 0.8, 3.2)
 
     rng = np.random.default_rng(hash(row_index) % 2**32)
 
-    home_yellow = rng.poisson(np.clip(home_base, 0.5, 7))
-    away_yellow = rng.poisson(np.clip(away_base, 0.5, 7))
+    home_yellow = rng.poisson(home_base)
+    away_yellow = rng.poisson(away_base)
 
     return home_yellow, away_yellow
 
@@ -316,7 +317,7 @@ def pseudo_corners(team_hist, row, row_index):
     away_pressure = a_attack + (1.0 - h_def)
 
     pressure_diff = home_pressure - away_pressure
-    
+
     # =========================
     # WORLD CUP BASELINE
     # =========================
@@ -475,6 +476,8 @@ def is_home_advantage(home_team, venue):
 # ===============================
 # TEAM HIST
 # ===============================
+
+
 def get_team_hist(rawdf):
     team_hist = defaultdict(list)
     for r in rawdf.itertuples(index=False):
