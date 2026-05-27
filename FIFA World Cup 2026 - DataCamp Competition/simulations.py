@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd
-import copy
-from helpers import knockout_map
 
 
 # =========================
@@ -28,7 +26,7 @@ def simulate_match(match_id, cache, knockout=False, et_total=0.8):
     # =========================
     # EXTRA TIME
     # =========================
-    isPenalty = False
+    is_penalty = False
     penalty_winner = None
 
     if knockout and home_goals == away_goals:
@@ -49,7 +47,7 @@ def simulate_match(match_id, cache, knockout=False, et_total=0.8):
         away_goals += et_away
 
         if et_home == et_away:
-            isPenalty = True
+            is_penalty = True
             penalty_winner = (
                 c["home_team"] if np.random.random() < 0.5 else c["away_team"]
             )
@@ -64,7 +62,7 @@ def simulate_match(match_id, cache, knockout=False, et_total=0.8):
     else:
         result_str = "D"
 
-    if isPenalty:
+    if is_penalty:
         result_str = "W" if penalty_winner == c["home_team"] else "L"
 
     return {
@@ -76,7 +74,7 @@ def simulate_match(match_id, cache, knockout=False, et_total=0.8):
         "away_red": away_red,
         "home_corners": home_corners,
         "away_corners": away_corners,
-        "penalty": isPenalty,
+        "penalty": is_penalty,
         "result_str": result_str
     }
 
@@ -119,7 +117,6 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
             for t in group_teams_map[g]
         }
 
-    
     # store results for replay / debugging
     results = []
 
@@ -136,14 +133,13 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
     for match_id, group, home_team, away_team in rows:
 
         stats = group_stats[group]
-        group_teams = group_teams_map[group] 
-        
-        
+        group_teams = group_teams_map[group]
+
         result = simulate_match_fn(
-            match_id, 
+            match_id,
             cache
-            )
-        
+        )
+
         home = home_team
         away = away_team
 
@@ -156,7 +152,6 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
         home_corners = result["home_corners"]
         away_corners = result["away_corners"]
         result_str = result["result_str"]
-        
 
         # =========================
         # UPDATE STATS
@@ -165,7 +160,6 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
         # goals for / against
         stats[home]["gf"] += home_goals
         stats[home]["ga"] += away_goals
-        
 
         stats[away]["gf"] += away_goals
         stats[away]["ga"] += home_goals
@@ -200,7 +194,7 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
             stats[home]["d"] += 1
             stats[away]["d"] += 1
             winning_team = "draw"
-                
+
         # =========================
         # STORE RESULT
         # =========================
@@ -214,7 +208,7 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
             "yellow_cards": home_yellow + away_yellow,
             "red_cards": home_red + away_red,
             "corners": home_corners + away_corners,
-            "winning_team": winning_team # home, away, or draw
+            "winning_team": winning_team  # home, away, or draw
         }
         results.append(result_record)
 
@@ -223,7 +217,6 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
         # =========================
         stats[home]["gd"] = stats[home]["gf"] - stats[home]["ga"]
         stats[away]["gd"] = stats[away]["gf"] - stats[away]["ga"]
-
 
         # =========================
         # PRINT STATS
@@ -239,9 +232,9 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
                     stats[x]["gd"],
                     stats[x]["gf"]
                 ),
-                reverse=True # sort in descending order
+                reverse=True  # sort in descending order
             )
-            
+
             print(f"\n{'═' * 60}")
             print(f"  GROUP {group}")
             print(f"{'═' * 60}\n")
@@ -253,15 +246,16 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
                 s = stats[t]
 
                 print(f"{i+1:<3} {t:<25} {s['pts']:>4} {s['w']:>4} "
-                    f"{s['d']:>4} {s['l']:>4} {s['gf']:>4} {s['ga']:>4} "
-                    f"{s['gd']:>4} {s['corners']:>7} {s['yc']:>4} "
-                    f"{s['rc']:>4}")
+                      f"{s['d']:>4} {s['l']:>4} {s['gf']:>4} {s['ga']:>4} "
+                      f"{s['gd']:>4} {s['corners']:>7} {s['yc']:>4} "
+                      f"{s['rc']:>4}")
 
             print(f"\nMatch Results - Group {group}:")
             for r in results:
                 if r["group"] == group:
-                    print(f"  {r['home_team']:<15} {r['predicted_home_goals']} - {r['predicted_away_goals']} {r['away_team']}")
-            
+                    print(
+                        f"  {r['home_team']:<15} {r['predicted_home_goals']} - {r['predicted_away_goals']} {r['away_team']}")
+
     return {
         "group_stats": group_stats,
         "group_results": results
@@ -271,7 +265,7 @@ def simulate_group_stage(stage_table_df, cache, simulate_match_fn, verbose=False
 # =========================
 # GET ROUND OF 32 FUNCTION
 # =========================
-def get_round_of_32(group_stats, verbose = False):
+def get_round_of_32(group_stats, verbose=False):
     """
     Top 2 from each group (24) + 8 best 3rd-placed teams = 32.
     Tiebreakers for 3rd place: Pts → GD → GF.
@@ -280,8 +274,6 @@ def get_round_of_32(group_stats, verbose = False):
     # =========================
     # PREP DATA
     # =========================
-    group_stats = copy.deepcopy(group_stats)
-
     qualifiers = []
     third_pool = []
 
@@ -297,7 +289,7 @@ def get_round_of_32(group_stats, verbose = False):
                 teams_stats[x]["pts"],
                 teams_stats[x]["gd"],
                 teams_stats[x]["gf"],
-                -teams_stats[x]["yc"], # - to sort in descending order
+                -teams_stats[x]["yc"],  # - to sort in descending order
                 -teams_stats[x]["rc"]
             ),
             reverse=True
@@ -361,13 +353,13 @@ def get_round_of_32(group_stats, verbose = False):
     # =========================
     best_third = third_pool[:8]
     r32 = qualifiers + [
-            {
-                "team": t["team"],
-                "group": t["group"],
-                "pos": t["pos"]
-            }
-            for t in best_third
-        ]
+        {
+            "team": t["team"],
+            "group": t["group"],
+            "pos": t["pos"]
+        }
+        for t in best_third
+    ]
 
     if verbose:
         eliminated = third_pool[8:]
@@ -376,10 +368,12 @@ def get_round_of_32(group_stats, verbose = False):
         print(f"{'═' * 60}\n")
         print(f"\n  🟢 Best 3rd-Place Teams (advance to R32):")
         for i, t in enumerate(best_third):
-            print(f"  {i+1:<2}. {t['team']:<16} {t['group']} {t['pts']:>3} {t['gd']:>3} {t['gf']:>3} {t['yc']:>3} {t['rc']:>3}")
+            print(
+                f"  {i+1:<2}. {t['team']:<16} {t['group']} {t['pts']:>3} {t['gd']:>3} {t['gf']:>3} {t['yc']:>3} {t['rc']:>3}")
         print(f"\n  🔴 Eliminated Teams (remain in 3rd Pool):")
         for i, t in enumerate(eliminated):
-            print(f"  {i+1:<2}. {t['team']:<16} {t['group']} {t['pts']:>3} {t['gd']:>3} {t['gf']:>3} {t['yc']:>3} {t['rc']:>3}")
+            print(
+                f"  {i+1:<2}. {t['team']:<16} {t['group']} {t['pts']:>3} {t['gd']:>3} {t['gf']:>3} {t['yc']:>3} {t['rc']:>3}")
         print(f"\n{'═' * 60}")
         print(f"\n  📊 Total Qualifiers: {len(qualifiers)}")
 
@@ -414,7 +408,7 @@ def knockout_simulate(round_name, knockout_df, cache, simulate_match_fn, verbose
     matches = knockout_df.copy()
 
     results = []
-    
+
     rows = list(zip(
         matches["match_id"],
         matches["predicted_home_team"],
@@ -441,9 +435,8 @@ def knockout_simulate(round_name, knockout_df, cache, simulate_match_fn, verbose
         away_red = result["away_red"]
         home_corners = result["home_corners"]
         away_corners = result["away_corners"]
-        isPenalty = result["penalty"]
+        is_penalty = result["penalty"]
         result_str = result["result_str"]
-        
 
         match_winner = None
         match_loser = None
@@ -457,7 +450,6 @@ def knockout_simulate(round_name, knockout_df, cache, simulate_match_fn, verbose
             match_loser = home_team
             winning_team = "away"
 
-
         results.append({
             "match_id": match_id,
             "round": round_name,
@@ -468,10 +460,12 @@ def knockout_simulate(round_name, knockout_df, cache, simulate_match_fn, verbose
             "yellow_cards": home_yellow + away_yellow,
             "red_cards": home_red + away_red,
             "corners": home_corners + away_corners,
-            "penalties": isPenalty, # True or False
-            "match_winner": match_winner, # Team name will be stored (e.g: Brazil)
-            "match_loser": match_loser, # Team name will be stored (e.g: Brazil)
-            "winning_team": winning_team # home or away
+            "penalties": is_penalty,  # True or False
+            # Team name will be stored (e.g: Brazil)
+            "match_winner": match_winner,
+            # Team name will be stored (e.g: Brazil)
+            "match_loser": match_loser,
+            "winning_team": winning_team  # home or away
         })
 
         if verbose:
@@ -485,6 +479,3 @@ def knockout_simulate(round_name, knockout_df, cache, simulate_match_fn, verbose
         "round_name": round_name,
         "knockout_results": results,
     }
-    
-
-

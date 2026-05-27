@@ -376,7 +376,7 @@ def build_lambda_cache_group_stage(stage_table_df, models, elo_ratings, team_his
     cache = {}
 
     stage_table_df = stage_table_df.copy()
-    stage_table_df["date"] = pd.to_datetime(stage_table_df["date_utc"], utc=True)
+    stage_table_df["date"] = stage_table_df["date_utc"]
 
     goal_cols = [
         "home_elo", "away_elo", "elo_diff", "home_advantage",
@@ -458,7 +458,9 @@ def build_lambda_cache_knockout(
     # PREP DATA
     # =========================
     df = knockout_df.copy()
-    df["date"] = pd.to_datetime(df["date_utc"], utc=True)
+    # df["date"] = pd.to_datetime(df["date_utc"], utc=True)
+    
+    df["date"] = df["date_utc"]
 
     goal_cols = [
         "home_elo", "away_elo", "elo_diff", "home_advantage",

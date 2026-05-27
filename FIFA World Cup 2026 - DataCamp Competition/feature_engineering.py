@@ -122,8 +122,8 @@ def team_disc(team):
 def get_team_rates(team_hist, team, current_date, window=10, default=1.0):
     history = team_hist.get(team, [])
     
-    # filter only relevant games
-    history = [h for h in history if pd.to_datetime(h.date, utc=True) < pd.to_datetime(current_date, utc=True)]
+    # filter only relevant history games where date is before current date
+    history = [h for h in history if h.date < current_date]
 
     if len(history) == 0:
         return default, default
@@ -224,7 +224,7 @@ def team_def(team_hist, team, current_date):
 # =========================
 # YELLOW CARDS
 # =========================
-def pseudo_yellow(team_hist, row):
+def pseudo_yellow(team_hist, row, row_index):
 
     # =========================
     # GLOBAL BASE (IMPORTANT)
@@ -235,11 +235,11 @@ def pseudo_yellow(team_hist, row):
     home_base = BASE_TOTAL * 0.52
     away_base = BASE_TOTAL * 0.48
 
-    h_disc = team_disc(row["home_team"])
-    a_disc = team_disc(row["away_team"])
+    h_disc = team_disc(row.home_team)
+    a_disc = team_disc(row.away_team)
 
-    h_attack = team_attack(team_hist, row["home_team"], row["date"])
-    a_attack = team_attack(team_hist, row["away_team"], row["date"])
+    h_attack = team_attack(team_hist, row.home_team, row.date)
+    a_attack = team_attack(team_hist, row.away_team, row.date)
 
     # intensity per team (NOT shared)
     home_effect = 0.25 * (h_attack + a_disc - 1)
@@ -253,7 +253,7 @@ def pseudo_yellow(team_hist, row):
     home_base *= 1.15
     away_base *= 1.15
 
-    rng = np.random.default_rng(hash(row.name) % 2**32)
+    rng = np.random.default_rng(hash(row_index) % 2**32)
 
     home_yellow = rng.poisson(np.clip(home_base, 0.5, 7))
     away_yellow = rng.poisson(np.clip(away_base, 0.5, 7))
@@ -264,13 +264,13 @@ def pseudo_yellow(team_hist, row):
 # =========================
 # RED CARDS
 # =========================
-def pseudo_red(team_hist, row):
+def pseudo_red(team_hist, row, row_index):
 
-    h_disc = team_disc(row["home_team"])
-    a_disc = team_disc(row["away_team"])
+    h_disc = team_disc(row.home_team)
+    a_disc = team_disc(row.away_team)
 
-    h_attack = team_attack(team_hist, row["home_team"], row["date"])
-    a_attack = team_attack(team_hist, row["away_team"], row["date"])
+    h_attack = team_attack(team_hist, row.home_team, row.date)
+    a_attack = team_attack(team_hist, row.away_team, row.date)
 
     # asymmetry affects BOTH teams differently
     home_intensity = abs(h_attack - a_attack)
@@ -292,7 +292,7 @@ def pseudo_red(team_hist, row):
     p_home = np.clip(p_home, 0.005, 0.25)
     p_away = np.clip(p_away, 0.005, 0.25)
 
-    rng = np.random.default_rng(hash(row.name) % 2**32)
+    rng = np.random.default_rng(hash(row_index) % 2**32)
 
     home_red = int(rng.random() < p_home)
     away_red = int(rng.random() < p_away)
@@ -303,13 +303,13 @@ def pseudo_red(team_hist, row):
 # =========================
 # CORNERS
 # =========================
-def pseudo_corners(team_hist, row):
+def pseudo_corners(team_hist, row, row_index):
 
-    h_attack = team_attack(team_hist, row["home_team"], row["date"])
-    a_attack = team_attack(team_hist, row["away_team"], row["date"])
+    h_attack = team_attack(team_hist, row.home_team, row.date)
+    a_attack = team_attack(team_hist, row.away_team, row.date)
 
-    h_def = team_def(team_hist, row["home_team"], row["date"])
-    a_def = team_def(team_hist, row["away_team"], row["date"])
+    h_def = team_def(team_hist, row.home_team, row.date)
+    a_def = team_def(team_hist, row.away_team, row.date)
 
     # pressure model (attack vs opponent defense)
     home_pressure = h_attack + (1.0 - a_def)
@@ -335,7 +335,7 @@ def pseudo_corners(team_hist, row):
     # =========================
     # ADD MATCH VARIANCE
     # =========================
-    rng = np.random.default_rng(hash(row.name) % 2**32)
+    rng = np.random.default_rng(hash(row_index) % 2**32)
 
     # clamp realistic ranges
     base_home = np.clip(base_home, 1.0, 12)
@@ -363,12 +363,12 @@ def add_match_features(mydf, team_hist, window=10):
 
     home_corners_list, away_corners_list = [], []
 
-    for _, row in mydf.iterrows():
+    for i, row in enumerate(mydf.itertuples(index=False)):
 
-        date = row["date"]
+        date = row.date
 
-        h_team = row["home_team"]
-        a_team = row["away_team"]
+        h_team = row.home_team
+        a_team = row.away_team
 
         # =========================
         # ATTACK / DEFENSE
@@ -393,7 +393,7 @@ def add_match_features(mydf, team_hist, window=10):
         # =========================
         # YELLOW CARDS
         # =========================
-        y_home, y_away = pseudo_yellow(team_hist, row)
+        y_home, y_away = pseudo_yellow(team_hist, row, i)
 
         yellow_home.append(y_home)
         yellow_away.append(y_away)
@@ -401,7 +401,7 @@ def add_match_features(mydf, team_hist, window=10):
         # =========================
         # RED CARDS
         # =========================
-        r_home, r_away = pseudo_red(team_hist, row)
+        r_home, r_away = pseudo_red(team_hist, row, i)
 
         red_home.append(r_home)
         red_away.append(r_away)
@@ -409,7 +409,7 @@ def add_match_features(mydf, team_hist, window=10):
         # =========================
         # CORNERS
         # =========================
-        hc, ac = pseudo_corners(team_hist, row)
+        hc, ac = pseudo_corners(team_hist, row, i)
 
         home_corners_list.append(hc)
         away_corners_list.append(ac)
