@@ -280,7 +280,7 @@ def get_round_of_32(group_stats, verbose=False):
     # =========================
     # PROCESS EACH GROUP
     # =========================
-    for gname, teams_stats in group_stats.items():
+    for group, teams_stats in group_stats.items():
 
         # FINAL RANKING
         ranking = sorted(
@@ -302,7 +302,7 @@ def get_round_of_32(group_stats, verbose=False):
         qualifiers.append(
             {
                 "team": ranking[0],
-                "group": gname,
+                "group": group,
                 "pos":  1
             }
         )
@@ -311,7 +311,7 @@ def get_round_of_32(group_stats, verbose=False):
         qualifiers.append(
             {
                 "team": ranking[1],
-                "group": gname,
+                "group": group,
                 "pos":  2
             }
         )
@@ -325,7 +325,7 @@ def get_round_of_32(group_stats, verbose=False):
 
             third_pool.append({
                 "team": t,
-                "group": gname,
+                "group": group,
                 "pts": s["pts"],
                 "gd": s["gd"],
                 "gf": s["gf"],

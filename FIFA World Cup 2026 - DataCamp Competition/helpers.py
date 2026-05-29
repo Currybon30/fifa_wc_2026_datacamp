@@ -1,7 +1,9 @@
-from collections import defaultdict, Counter
-from feature_engineering import resolve_team_updated_to_original
 import numbers
+from collections import Counter, defaultdict
+
 import pandas as pd
+from feature_engineering import resolve_team_updated_to_original
+
 
 # =========================
 # STEP 1: flatten iterations
@@ -55,39 +57,74 @@ def monte_carlo_aggregate(data):
         categorical = defaultdict(list)
         binary = defaultdict(list)
 
+        score_pairs = []
+        home_goals_sims = []
+        away_goals_sims = []
+
         for sim in sims:
             for k, v in sim.items():
 
                 if k == "match_id":
                     continue
 
-                # penalties (binary)
                 if k == "penalties":
                     binary[k].append(v)
                     continue
 
-                # numeric → mean
-                if isinstance(v, numbers.Number) or isinstance(v, int):
+                if k == "predicted_home_goals":
+                    home_goals_sims.append(v)
                     sums[k] += v
                     counts[k] += 1
+                    continue
 
-                # categorical → mode
+                if k == "predicted_away_goals":
+                    away_goals_sims.append(v)
+                    sums[k] += v
+                    counts[k] += 1
+                    continue
+
+                if isinstance(v, numbers.Number):
+                    sums[k] += v
+                    counts[k] += 1
                 else:
                     categorical[k].append(v)
 
+            # build score pairs per simulation (BEST SCORELINE SOURCE)
+            if "predicted_home_goals" in sim and "predicted_away_goals" in sim:
+                score_pairs.append(
+                    (sim["predicted_home_goals"], sim["predicted_away_goals"])
+                )
+
         row = {}
 
-        # numeric averages
+        # =========================
+        # EXPECTED VALUES (MEAN)
+        # =========================
         for k in sums:
-            row[k] = int(round(sums[k] / counts[k]))
+            row[k] = int(round(sums[k] / counts[k])) 
 
-        # categorical modes
+        # =========================
+        # CATEGORICAL MODE
+        # =========================
         for k, vals in categorical.items():
             row[k] = mode(vals)
 
-        # binary (penalties) → majority vote
-        for k, vals in binary.items():
-            row[k] = mode(vals)
+        # =========================
+        # PENALTIES (FROM DISTRIBUTION)
+        # =========================
+        if home_goals_sims and away_goals_sims:
+            draw_rate = sum(h == a for h, a in zip(home_goals_sims, away_goals_sims)) / len(home_goals_sims)
+            row["penalties"] = draw_rate > 0.25
+        else:
+            row["penalties"] = False
+
+        # =========================
+        # BEST SCORELINE (MOST LIKELY)
+        # =========================
+        if score_pairs:
+            best_score = Counter(score_pairs).most_common(1)[0][0]
+            row["predicted_home_goals"] = best_score[0]
+            row["predicted_away_goals"] = best_score[1]
 
         result[match_id] = row
 
@@ -109,6 +146,7 @@ def run_mc_pipeline(group_stage_sims, knockout_stage_sims):
 # =========================
 # FILL PREDICTIONS DF
 # =========================
+
 
 def fill_predictions_df(group_df, knockout_df, predictions, match_id_col="match_id"):
     """
@@ -178,7 +216,7 @@ def fill_predictions_df(group_df, knockout_df, predictions, match_id_col="match_
             if k in knockout_df.columns:
 
                 if k == "winning_team":
-                    knockout_df.loc[k_mask, "match_winner"] = v 
+                    knockout_df.loc[k_mask, "match_winner"] = v
                 else:
                     knockout_df.loc[k_mask, k] = v
 
@@ -186,21 +224,23 @@ def fill_predictions_df(group_df, knockout_df, predictions, match_id_col="match_
         if "winning_team" in pred:
             knockout_df.loc[k_mask, "match_winner"] = pred["winning_team"]
 
-
         # =========================
         # RESOLVE TEAM NAMES - REVERSE MAPPING
         # =========================
-        
+
         # Group Fixtures
         group_df = group_df.copy()
-        group_df["home_team"] = group_df["home_team"].apply(resolve_team_updated_to_original)
-        group_df["away_team"] = group_df["away_team"].apply(resolve_team_updated_to_original)
+        group_df["home_team"] = group_df["home_team"].apply(
+            resolve_team_updated_to_original)
+        group_df["away_team"] = group_df["away_team"].apply(
+            resolve_team_updated_to_original)
 
         # Knockout Slots
         knockout_df = knockout_df.copy()
-        knockout_df["predicted_home_team"] = knockout_df["predicted_home_team"].apply(resolve_team_updated_to_original)
-        knockout_df["predicted_away_team"] = knockout_df["predicted_away_team"].apply(resolve_team_updated_to_original)
-
+        knockout_df["predicted_home_team"] = knockout_df["predicted_home_team"].apply(
+            resolve_team_updated_to_original)
+        knockout_df["predicted_away_team"] = knockout_df["predicted_away_team"].apply(
+            resolve_team_updated_to_original)
 
     return group_df, knockout_df
 
@@ -266,8 +306,8 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
     # FILTER ROUND
     # =====================================================
     df_round = knockout_df[
-            knockout_df["round"] == round_name
-        ].copy()
+        knockout_df["round"] == round_name
+    ].copy()
 
     # =====================================================
     # ROUND OF 32
@@ -322,9 +362,9 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
     # =====================================================
     else:
         winner_map, loser_map = knockout_map(previous_round_results)
-        
+
         def resolve(slot):
-            
+
             if slot is None:
                 return None
 
@@ -348,7 +388,7 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
                 match_id = int(slot.split()[-1])
 
                 return loser_map.get(match_id)
-        
+
             return slot
 
     # =====================================================
@@ -357,16 +397,17 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
     knockout_df = knockout_df.copy()
 
     df_round["predicted_home_team"] = df_round["slot_home"].apply(resolve)
-    df_round["predicted_away_team"] = df_round["slot_away"].apply(resolve) 
-    
+    df_round["predicted_away_team"] = df_round["slot_away"].apply(resolve)
+
     # =====================================================
     # WRITE BACK TO FULL DF (CRITICAL)
     # =====================================================
-    knockout_df.loc[df_round.index, "predicted_home_team"] = df_round["predicted_home_team"].values
-    knockout_df.loc[df_round.index, "predicted_away_team"] = df_round["predicted_away_team"].values
-        
-    return knockout_df
+    knockout_df.loc[df_round.index,
+                    "predicted_home_team"] = df_round["predicted_home_team"].values
+    knockout_df.loc[df_round.index,
+                    "predicted_away_team"] = df_round["predicted_away_team"].values
 
+    return knockout_df
 
 
 # =========================
@@ -406,7 +447,8 @@ def build_lambda_cache_group_stage(stage_table_df, models, elo_ratings, team_his
         match_row = feature_engine["combine_elo"](match_row, elo_ratings)
 
         match_row["home_advantage"] = int(
-            feature_engine["home_adv"](match_row["home_team"], match_row["venue"])
+            feature_engine["home_adv"](
+                match_row["home_team"], match_row["venue"])
         )
 
         match_row = feature_engine["match_features"](match_row, team_hist)
@@ -459,7 +501,7 @@ def build_lambda_cache_knockout(
     # =========================
     df = knockout_df.copy()
     # df["date"] = pd.to_datetime(df["date_utc"], utc=True)
-    
+
     df["date"] = df["date_utc"]
 
     goal_cols = [
@@ -508,7 +550,8 @@ def build_lambda_cache_knockout(
         match_row = feature_engine["combine_elo"](match_row, elo_ratings)
 
         match_row["home_advantage"] = int(
-            feature_engine["home_adv"](match_row["home_team"], match_row["venue"])
+            feature_engine["home_adv"](
+                match_row["home_team"], match_row["venue"])
         )
 
         match_row = feature_engine["match_features"](match_row, team_hist)
