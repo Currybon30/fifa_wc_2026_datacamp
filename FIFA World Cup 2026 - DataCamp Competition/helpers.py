@@ -52,35 +52,47 @@ def monte_carlo_aggregate(data):
 
     for match_id, sims in data.items():
 
+        # =========================
+        # NUMERICAL STATS
+        # =========================
         sums = defaultdict(float)
         counts = defaultdict(int)
-        categorical = defaultdict(list)
-        binary = defaultdict(list)
 
-        score_pairs = []
-        home_goals_sims = []
-        away_goals_sims = []
+        # =========================
+        # CATEGORICAL STATS
+        # =========================
+        categorical = defaultdict(list)
+
+        # =========================
+        # GROUP STAGE OUTCOME STORAGE
+        # =========================
+        group_home_goals = []
+        group_away_goals = []
+
+        # =========================
+        # KNOCKOUT OUTCOME STORAGE (JOINT!)
+        # =========================
+        knockout_outcomes = []
 
         for sim in sims:
+
+            # -------------------------
+            # NUMERIC + CATEGORICAL
+            # -------------------------
             for k, v in sim.items():
 
-                if k == "match_id":
+                if k in ["match_id"]:
                     continue
 
-                if k == "penalties":
-                    binary[k].append(v)
-                    continue
-
-                if k == "predicted_home_goals":
-                    home_goals_sims.append(v)
-                    sums[k] += v
-                    counts[k] += 1
-                    continue
-
-                if k == "predicted_away_goals":
-                    away_goals_sims.append(v)
-                    sums[k] += v
-                    counts[k] += 1
+                # skip outcome fields (handled separately)
+                if k in [
+                    "predicted_home_team",
+                    "predicted_away_team",
+                    "predicted_home_goals",
+                    "predicted_away_goals",
+                    "winning_team",
+                    "penalties"
+                ]:
                     continue
 
                 if isinstance(v, numbers.Number):
@@ -89,42 +101,87 @@ def monte_carlo_aggregate(data):
                 else:
                     categorical[k].append(v)
 
-            # build score pairs per simulation (BEST SCORELINE SOURCE)
+            # -------------------------
+            # GROUP STAGE
+            # -------------------------
             if "predicted_home_goals" in sim and "predicted_away_goals" in sim:
-                score_pairs.append(
-                    (sim["predicted_home_goals"], sim["predicted_away_goals"])
-                )
 
+                hg = sim["predicted_home_goals"]
+                ag = sim["predicted_away_goals"]
+
+                group_home_goals.append(hg)
+                group_away_goals.append(ag)
+
+            # -------------------------
+            # KNOCKOUT (JOINT STATE)
+            # -------------------------
+            if all(k in sim for k in [
+                "predicted_home_team",
+                "predicted_away_team",
+                "predicted_home_goals",
+                "predicted_away_goals",
+                "winning_team",
+                "penalties"
+            ]):
+
+                knockout_outcomes.append((
+                    sim["predicted_home_team"],
+                    sim["predicted_away_team"],
+                    sim["predicted_home_goals"],
+                    sim["predicted_away_goals"],
+                    sim["winning_team"],
+                    sim["penalties"]
+                ))
+
+        # =========================
+        # BUILD FINAL ROW
+        # =========================
         row = {}
 
-        # =========================
-        # EXPECTED VALUES (MEAN)
-        # =========================
+        # -------------------------
+        # MEAN FOR NUMERIC STATS
+        # -------------------------
         for k in sums:
-            row[k] = int(round(sums[k] / counts[k])) 
+            row[k] = int(round(sums[k] / counts[k]))
 
-        # =========================
-        # CATEGORICAL MODE
-        # =========================
+        # -------------------------
+        # MODE FOR CATEGORICAL
+        # -------------------------
         for k, vals in categorical.items():
-            row[k] = mode(vals)
+            if vals:
+                row[k] = mode(vals)
 
         # =========================
-        # PENALTIES (FROM DISTRIBUTION)
+        # GROUP STAGE RESULT
         # =========================
-        if home_goals_sims and away_goals_sims:
-            draw_rate = sum(h == a for h, a in zip(home_goals_sims, away_goals_sims)) / len(home_goals_sims)
-            row["penalties"] = draw_rate > 0.25
-        else:
-            row["penalties"] = False
+        if group_home_goals and group_away_goals:
+
+            h = mode(group_home_goals)
+            a = mode(group_away_goals)
+
+            row["predicted_home_goals"] = h
+            row["predicted_away_goals"] = a
+
+            if h > a:
+                row["winning_team"] = "home"
+            elif h < a:
+                row["winning_team"] = "away"
+            else:
+                row["winning_team"] = "draw"
 
         # =========================
-        # BEST SCORELINE (MOST LIKELY)
+        # KNOCKOUT RESULT (JOINT MODE)
         # =========================
-        if score_pairs:
-            best_score = Counter(score_pairs).most_common(1)[0][0]
-            row["predicted_home_goals"] = best_score[0]
-            row["predicted_away_goals"] = best_score[1]
+        if knockout_outcomes:
+
+            best = Counter(knockout_outcomes).most_common(1)[0][0]
+
+            row["predicted_home_team"] = best[0]
+            row["predicted_away_team"] = best[1]
+            row["predicted_home_goals"] = best[2]
+            row["predicted_away_goals"] = best[3]
+            row["winning_team"] = best[4]
+            row["penalties"] = best[5]
 
         result[match_id] = row
 
@@ -132,16 +189,111 @@ def monte_carlo_aggregate(data):
 
 
 # =========================
+# RE-CHAIN KNOCKOUT BRACKET
+# =========================
+KNOCKOUT_ROUND_ORDER = [
+    "Round of 32",
+    "Round of 16",
+    "Quarter-final",
+    "Semi-final",
+    "Third-place playoff",
+    "Final",
+]
+
+
+def rechain_knockout_bracket(predictions, knockout_df):
+    """
+    Make the aggregated knockout bracket internally consistent.
+
+    `monte_carlo_aggregate` picks the most common result for each match_id
+    INDEPENDENTLY. That breaks the bracket chain: the team in a later slot
+    (e.g. "Winner Match 73") is that match's own modal team, which need not
+    equal the aggregated winner of match 73. This walks the bracket round by
+    round and rewrites each match's teams from the previous rounds' aggregated
+    winners / losers, exactly like a single deterministic run does.
+
+    Round of 32 teams are left untouched (they come from the group-stage
+    aggregation). The winning side ("home"/"away") and all match statistics
+    from the aggregation are preserved; only the team identities are re-linked.
+
+    Parameters
+    -------------------------------
+    predictions : dict[match_id, dict]
+        Output of `monte_carlo_aggregate`.
+
+    knockout_df : DataFrame
+        Knockout slot definitions (needs: match_id, round, slot_home, slot_away).
+
+    Returns
+    -------------------------------
+    dict[match_id, dict]
+        The same predictions dict with consistent knockout team identities.
+    """
+    slots = {
+        int(row.match_id): (row.round, row.slot_home, row.slot_away)
+        for row in knockout_df.itertuples(index=False)
+    }
+
+    winner_map = {}
+    loser_map = {}
+
+    def resolve_slot(slot):
+        if not isinstance(slot, str):
+            return slot
+        if "Winner Match" in slot:
+            return winner_map.get(int(slot.split()[-1]))
+        if "Loser Match" in slot:
+            return loser_map.get(int(slot.split()[-1]))
+        # Round of 32 slots already hold actual team names post-aggregation.
+        return slot
+
+    for round_name in KNOCKOUT_ROUND_ORDER:
+        for match_id, (r, slot_home, slot_away) in slots.items():
+
+            if r != round_name:
+                continue
+
+            pred = predictions.get(match_id)
+            if pred is None:
+                continue
+
+            # Re-derive teams from previous rounds for every round after R32.
+            if round_name != "Round of 32":
+                pred["predicted_home_team"] = resolve_slot(slot_home)
+                pred["predicted_away_team"] = resolve_slot(slot_away)
+
+            home = pred.get("predicted_home_team")
+            away = pred.get("predicted_away_team")
+
+            # winning_team is the modal winning SIDE; map it onto the
+            # (now consistent) team identities to propagate forward.
+            if pred.get("winning_team") == "away":
+                winner_map[match_id], loser_map[match_id] = away, home
+            else:
+                winner_map[match_id], loser_map[match_id] = home, away
+
+    return predictions
+
+
+# =========================
 # FULL PIPELINE
 # =========================
-def run_mc_pipeline(group_stage_sims, knockout_stage_sims):
+def run_mc_pipeline(group_stage_sims, knockout_stage_sims, knockout_df=None):
 
     group_flat = flatten_by_match_id(group_stage_sims)
     knockout_flat = flatten_by_match_id(knockout_stage_sims)
 
     merged = merge_stages(group_flat, knockout_flat)
 
-    return monte_carlo_aggregate(merged)
+    predictions = monte_carlo_aggregate(merged)
+
+    # Re-link the knockout bracket so later-round teams match the aggregated
+    # winners of the matches that feed them (independent per-match modes break
+    # this chain). Requires the slot definitions; skipped if not provided.
+    if knockout_df is not None:
+        predictions = rechain_knockout_bracket(predictions, knockout_df)
+
+    return predictions
 
 # =========================
 # FILL PREDICTIONS DF
@@ -224,23 +376,20 @@ def fill_predictions_df(group_df, knockout_df, predictions, match_id_col="match_
         if "winning_team" in pred:
             knockout_df.loc[k_mask, "match_winner"] = pred["winning_team"]
 
-        # =========================
-        # RESOLVE TEAM NAMES - REVERSE MAPPING
-        # =========================
+    # =========================
+    # RESOLVE TEAM NAMES - REVERSE MAPPING
+    # =========================
+    # Group Fixtures
+    group_df["home_team"] = group_df["home_team"].apply(
+        resolve_team_updated_to_original)
+    group_df["away_team"] = group_df["away_team"].apply(
+        resolve_team_updated_to_original)
 
-        # Group Fixtures
-        group_df = group_df.copy()
-        group_df["home_team"] = group_df["home_team"].apply(
-            resolve_team_updated_to_original)
-        group_df["away_team"] = group_df["away_team"].apply(
-            resolve_team_updated_to_original)
-
-        # Knockout Slots
-        knockout_df = knockout_df.copy()
-        knockout_df["predicted_home_team"] = knockout_df["predicted_home_team"].apply(
-            resolve_team_updated_to_original)
-        knockout_df["predicted_away_team"] = knockout_df["predicted_away_team"].apply(
-            resolve_team_updated_to_original)
+    # Knockout Slots
+    knockout_df["predicted_home_team"] = knockout_df["predicted_home_team"].apply(
+        resolve_team_updated_to_original)
+    knockout_df["predicted_away_team"] = knockout_df["predicted_away_team"].apply(
+        resolve_team_updated_to_original)
 
     return group_df, knockout_df
 
@@ -273,6 +422,56 @@ def knockout_map(previous_round_results):
         loser_map[match_id] = loser
 
     return winner_map, loser_map
+
+
+# =========================
+# BEST 3rd-PLACE ASSIGNMENT
+# =========================
+def assign_third_place_slots(third_slots, available_groups):
+    """
+    Globally assign qualified 3rd-place groups to "Best 3rd" knockout slots.
+
+    Each Round of 32 slot only accepts a 3rd-place team from a fixed set of
+    groups (e.g. "Best 3rd (Groups A/B/C/D/F)"). A purely greedy, slot-by-slot
+    assignment can dead-end: an early slot may grab the only group a later
+    slot could have used. This solves it as a bipartite matching (Kuhn's
+    augmenting-path algorithm) so assignments are reshuffled (backtracked)
+    whenever that frees up a feasible team for another slot.
+
+    Parameters
+    -------------------------------
+    third_slots : list[tuple[str, list[str]]]
+        Ordered list of (slot_string, candidate_groups) pairs.
+
+    available_groups : set[str]
+        Groups that actually have a qualified 3rd-place team.
+
+    Returns
+    -------------------------------
+    dict[str, str]
+        Mapping of slot_string -> assigned group.
+    """
+    # group -> index of the slot it is currently matched to
+    group_to_slot = {}
+
+    def try_assign(slot_idx, visited):
+        for group in third_slots[slot_idx][1]:
+            if group not in available_groups or group in visited:
+                continue
+            visited.add(group)
+            current = group_to_slot.get(group)
+            if current is None or try_assign(current, visited):
+                group_to_slot[group] = slot_idx
+                return True
+        return False
+
+    for slot_idx in range(len(third_slots)):
+        try_assign(slot_idx, set())
+
+    return {
+        third_slots[slot_idx][0]: group
+        for group, slot_idx in group_to_slot.items()
+    }
 
 
 # =========================
@@ -319,7 +518,7 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
         # =========================
         group_winners = {}
         group_runners = {}
-        group_thirds = []
+        group_thirds = {}
 
         for qualifier in qualifiers:
             if qualifier["pos"] == 1:
@@ -327,15 +526,33 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
             elif qualifier["pos"] == 2:
                 group_runners[qualifier["group"]] = qualifier["team"]
             elif qualifier["pos"] == 3:
-                group_thirds.append(qualifier["team"])
+                group_thirds[qualifier["group"]] = qualifier["team"]
 
-        third_index = 0
+        # =========================
+        # GLOBAL "BEST 3rd" ASSIGNMENT
+        # =========================
+        # Collect every distinct "Best 3rd" slot in this round together with
+        # the groups it accepts, then solve all of them jointly so a slot can
+        # be reassigned to free up a needed group for another slot.
+        third_slots = []
+        seen_slots = set()
+        for slot in pd.concat([df_round["slot_home"], df_round["slot_away"]]):
+            if isinstance(slot, str) and "Best 3rd" in slot and slot not in seen_slots:
+                seen_slots.add(slot)
+                inside = slot[slot.find("(") + 1: slot.find(")")]
+                candidate_groups = [
+                    g.strip()
+                    for g in inside.replace("Groups", "").strip().split("/")
+                ]
+                third_slots.append((slot, candidate_groups))
+
+        third_assignment = assign_third_place_slots(
+            third_slots, set(group_thirds.keys()))
 
         # =========================
         # SLOT RESOLVER
         # =========================
         def resolve(slot):
-            nonlocal third_index
 
             # Winner Group X
             if "Winner Group" in slot:
@@ -347,13 +564,12 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
                 group = slot.split()[-1]
                 return group_runners.get(group)
 
-            # Best 3rd
+            # Best 3rd (Groups A/B/C/D/F)
             if "Best 3rd" in slot:
-                if third_index >= len(group_thirds):
+                group = third_assignment.get(slot)
+                if group is None:
                     return None
-                team = group_thirds[third_index]
-                third_index += 1
-                return team
+                return group_thirds[group]
 
             return None  # strict fallback (prevents silent bad data)
 
