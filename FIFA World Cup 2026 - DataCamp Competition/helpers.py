@@ -202,7 +202,7 @@ KNOCKOUT_ROUND_ORDER = [
 ]
 
 
-def rechain_knockout_bracket(predictions, knockout_df):
+def rechain_knockout_bracket_monte_carlo(predictions, knockout_df):
     """
     Make the aggregated knockout bracket internally consistent.
 
@@ -294,10 +294,10 @@ def run_mc_pipeline(group_stage_sims, knockout_stage_sims, knockout_df=None):
     if knockout_df is not None:
         # R32 teams from per-match modes can repeat (same team in 2+ matches).
         # Rebuild from aggregated group-stage qualifiers + slot rules instead.
-        qualifiers = aggregate_r32_qualifiers_from_mc(group_stage_sims)
-        predictions = apply_round_of_32_teams(
+        qualifiers = aggregate_r32_qualifiers_from_monte_carlo(group_stage_sims)
+        predictions = apply_round_of_32_teams_monte_carlo(
             predictions, knockout_df, qualifiers)
-        predictions = rechain_knockout_bracket(predictions, knockout_df)
+        predictions = rechain_knockout_bracket_monte_carlo(predictions, knockout_df)
 
     return predictions
 
@@ -533,7 +533,7 @@ def build_group_stats_from_results(group_results):
     return group_stats
 
 
-def aggregate_r32_qualifiers_from_mc(group_stage_sims):
+def aggregate_r32_qualifiers_from_monte_carlo(group_stage_sims):
     """
     Build one R32 qualifier list from many MC group-stage iterations.
 
@@ -634,7 +634,7 @@ def make_r32_slot_resolver(df_round, qualifiers):
     return resolve
 
 
-def apply_round_of_32_teams(predictions, knockout_df, qualifiers):
+def apply_round_of_32_teams_monte_carlo(predictions, knockout_df, qualifiers):
     """
     Overwrite R32 predicted teams using qualifiers + slot rules.
 
