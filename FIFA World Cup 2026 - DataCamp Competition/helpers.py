@@ -39,13 +39,6 @@ def monte_carlo_aggregate_group_stage(data):
     result = {}
 
     for match_id, sims in data.items():
-
-        # =========================
-        # NUMERICAL STATS
-        # =========================
-        sums = defaultdict(float)
-        counts = defaultdict(int)
-
         # =========================
         # CATEGORICAL STATS
         # =========================
@@ -57,7 +50,6 @@ def monte_carlo_aggregate_group_stage(data):
         group_home_goals = []
         group_away_goals = []
 
-
         for sim in sims:
 
             # -------------------------
@@ -65,7 +57,7 @@ def monte_carlo_aggregate_group_stage(data):
             # -------------------------
             for k, v in sim.items():
 
-                if k in ["match_id"]:
+                if k in "match_id":
                     continue
 
                 # skip outcome fields (handled separately)
@@ -75,15 +67,16 @@ def monte_carlo_aggregate_group_stage(data):
                     "predicted_home_goals",
                     "predicted_away_goals",
                     "winning_team",
-                    "penalties"
+                    "penalties",
+                    "corners",
+                    "yellow_cards",
+                    "red_cards",
                 ]:
                     continue
 
                 if isinstance(v, numbers.Number):
-                    sums[k] += v
-                    counts[k] += 1
-                else:
-                    categorical[k].append(v)
+                    continue
+                categorical[k].append(v)
 
             # -------------------------
             # GROUP STAGE
@@ -102,10 +95,14 @@ def monte_carlo_aggregate_group_stage(data):
         row = {}
 
         # -------------------------
-        # MEAN FOR NUMERIC STATS
+        # ONE RANDOM SIM FOR YELLOW, RED CARDS AND CORNERS
         # -------------------------
-        for k in sums:
-            row[k] = int(round(sums[k] / counts[k]))
+        if sims:
+            final = sims[np.random.randint(len(sims))]
+            row["yellow_cards"] = final["yellow_cards"]
+            row["red_cards"] = final["red_cards"]
+            row["corners"] = final["corners"]
+
 
         # -------------------------
         # MODE FOR CATEGORICAL
@@ -138,25 +135,11 @@ def monte_carlo_aggregate_group_stage(data):
 
 
 # =========================
-# KNOCKOUT ROUNDS (corners / cards means only)
+# KNOCKOUT ROUNDS (corners / cards from one random sim)
 # =========================
-_KNOCKOUT_AGG_SKIP = {
-    "match_id",
-    "round",
-    "predicted_home_team",
-    "predicted_away_team",
-    "predicted_home_goals",
-    "predicted_away_goals",
-    "winning_team",
-    "penalties",
-    "match_winner",
-    "match_loser",
-}
-
-
 def monte_carlo_aggregate_knockout_rounds(knockout_flat):
     """
-    Mean corners / yellow_cards / red_cards per knockout match_id.
+    Pick corners / yellow_cards / red_cards from one random sim per match_id.
 
     Goals, teams, winner side, and penalties come from
     rechain_knockout_bracket_monte_carlo (paired from stored sims).
@@ -164,21 +147,14 @@ def monte_carlo_aggregate_knockout_rounds(knockout_flat):
     result = {}
 
     for match_id, sims in knockout_flat.items():
-        sums = defaultdict(float)
-        counts = defaultdict(int)
-
-        for sim in sims:
-            for k, v in sim.items():
-                if k in _KNOCKOUT_AGG_SKIP:
-                    continue
-                if isinstance(v, numbers.Number):
-                    sums[k] += v
-                    counts[k] += 1
-
-        if counts:
-            result[match_id] = {
-                k: int(round(sums[k] / counts[k])) for k in sums
-            }
+        if not sims:
+            continue
+        final = sims[np.random.randint(len(sims))]
+        result[match_id] = {
+            "yellow_cards": final["yellow_cards"],
+            "red_cards": final["red_cards"],
+            "corners": final["corners"],
+        }
 
     return result
 
