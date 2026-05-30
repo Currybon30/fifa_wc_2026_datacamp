@@ -3,6 +3,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 from feature_engineering import resolve_team_updated_to_original
+from simulations import get_round_of_32
 
 
 # =========================
@@ -291,6 +292,11 @@ def run_mc_pipeline(group_stage_sims, knockout_stage_sims, knockout_df=None):
     # winners of the matches that feed them (independent per-match modes break
     # this chain). Requires the slot definitions; skipped if not provided.
     if knockout_df is not None:
+        # R32 teams from per-match modes can repeat (same team in 2+ matches).
+        # Rebuild from aggregated group-stage qualifiers + slot rules instead.
+        qualifiers = aggregate_r32_qualifiers_from_mc(group_stage_sims)
+        predictions = apply_round_of_32_teams(
+            predictions, knockout_df, qualifiers)
         predictions = rechain_knockout_bracket(predictions, knockout_df)
 
     return predictions
@@ -475,6 +481,180 @@ def assign_third_place_slots(third_slots, available_groups):
 
 
 # =========================
+# GROUP STAGE -> R32 QUALIFIERS (MONTE CARLO)
+# =========================
+def build_group_stats_from_results(group_results):
+    """Rebuild group standings from a list of simulated group-stage matches."""
+    group_stats = {}
+
+    for match in group_results:
+        g = match["group"]
+        home = match["home_team"]
+        away = match["away_team"]
+
+        if g not in group_stats:
+            group_stats[g] = {}
+
+        for t in (home, away):
+            if t not in group_stats[g]:
+                group_stats[g][t] = {
+                    "pts": 0, "gf": 0, "ga": 0, "gd": 0,
+                    "w": 0, "d": 0, "l": 0,
+                    "yc": 0, "rc": 0, "corners": 0,
+                }
+
+        s = group_stats[g]
+        hg = match["predicted_home_goals"]
+        ag = match["predicted_away_goals"]
+
+        s[home]["gf"] += hg
+        s[home]["ga"] += ag
+        s[away]["gf"] += ag
+        s[away]["ga"] += hg
+
+        wt = match.get("winning_team", "")
+        if wt == "home":
+            s[home]["pts"] += 3
+            s[home]["w"] += 1
+            s[away]["l"] += 1
+        elif wt == "away":
+            s[away]["pts"] += 3
+            s[away]["w"] += 1
+            s[home]["l"] += 1
+        else:
+            s[home]["pts"] += 1
+            s[away]["pts"] += 1
+            s[home]["d"] += 1
+            s[away]["d"] += 1
+
+        s[home]["gd"] = s[home]["gf"] - s[home]["ga"]
+        s[away]["gd"] = s[away]["gf"] - s[away]["ga"]
+
+    return group_stats
+
+
+def aggregate_r32_qualifiers_from_mc(group_stage_sims):
+    """
+    Build one R32 qualifier list from many MC group-stage iterations.
+
+    Per iteration, standings are recomputed and get_round_of_32 is applied.
+    Positions 1 and 2 use the modal (1st, 2nd) *pair* per group so the same
+    team cannot be both winner and runner-up, and cross-group modes cannot
+    create duplicate fixtures (e.g. Brazil vs Netherlands twice in R32).
+    """
+    pair_counts = Counter()       # (group, 1st_team, 2nd_team) -> count
+    third_group_counts = Counter()
+    third_team_counts = Counter()  # (group, team) -> count when advancing
+
+    for matches in group_stage_sims.values():
+        if not matches:
+            continue
+        group_stats = build_group_stats_from_results(matches)
+        by_group = defaultdict(dict)
+        for q in get_round_of_32(group_stats)["r32"]:
+            by_group[q["group"]][q["pos"]] = q["team"]
+
+        for group, pos_team in by_group.items():
+            if 1 in pos_team and 2 in pos_team:
+                pair_counts[(group, pos_team[1], pos_team[2])] += 1
+            if 3 in pos_team:
+                third_group_counts[group] += 1
+                third_team_counts[(group, pos_team[3])] += 1
+
+    qualifiers = []
+    for group in sorted({g for g, _, _ in pair_counts}):
+        pairs = [
+            (first, second, cnt)
+            for (g, first, second), cnt in pair_counts.items()
+            if g == group
+        ]
+        if not pairs:
+            continue
+        first, second, _ = max(pairs, key=lambda x: x[2])
+        qualifiers.append({"team": first, "group": group, "pos": 1})
+        qualifiers.append({"team": second, "group": group, "pos": 2})
+
+    for group, _ in third_group_counts.most_common(8):
+        teams = [
+            (team, cnt)
+            for (g, team), cnt in third_team_counts.items()
+            if g == group
+        ]
+        if teams:
+            qualifiers.append({
+                "team": max(teams, key=lambda x: x[1])[0],
+                "group": group,
+                "pos": 3,
+            })
+
+    return qualifiers
+
+
+def make_r32_slot_resolver(df_round, qualifiers):
+    """Return a resolve(slot) function for Round of 32 slot strings."""
+    group_winners = {}
+    group_runners = {}
+    group_thirds = {}
+
+    for qualifier in qualifiers:
+        if qualifier["pos"] == 1:
+            group_winners[qualifier["group"]] = qualifier["team"]
+        elif qualifier["pos"] == 2:
+            group_runners[qualifier["group"]] = qualifier["team"]
+        elif qualifier["pos"] == 3:
+            group_thirds[qualifier["group"]] = qualifier["team"]
+
+    third_slots = []
+    seen_slots = set()
+    for slot in pd.concat([df_round["slot_home"], df_round["slot_away"]]):
+        if isinstance(slot, str) and "Best 3rd" in slot and slot not in seen_slots:
+            seen_slots.add(slot)
+            inside = slot[slot.find("(") + 1: slot.find(")")]
+            candidate_groups = [
+                g.strip()
+                for g in inside.replace("Groups", "").strip().split("/")
+            ]
+            third_slots.append((slot, candidate_groups))
+
+    third_assignment = assign_third_place_slots(
+        third_slots, set(group_thirds.keys()))
+
+    def resolve(slot):
+        if "Winner Group" in slot:
+            return group_winners.get(slot.split()[-1])
+        if "Runner-up Group" in slot:
+            return group_runners.get(slot.split()[-1])
+        if "Best 3rd" in slot:
+            group = third_assignment.get(slot)
+            if group is None:
+                return None
+            return group_thirds.get(group)
+        return None
+
+    return resolve
+
+
+def apply_round_of_32_teams(predictions, knockout_df, qualifiers):
+    """
+    Overwrite R32 predicted teams using qualifiers + slot rules.
+
+    Ensures each advancing team appears at most once in the Round of 32
+    (unlike independent per-match Monte Carlo modes).
+    """
+    df_round = knockout_df[knockout_df["round"] == "Round of 32"]
+    resolve = make_r32_slot_resolver(df_round, qualifiers)
+
+    for row in df_round.itertuples(index=False):
+        match_id = int(row.match_id)
+        if match_id not in predictions:
+            predictions[match_id] = {}
+        predictions[match_id]["predicted_home_team"] = resolve(row.slot_home)
+        predictions[match_id]["predicted_away_team"] = resolve(row.slot_away)
+
+    return predictions
+
+
+# =========================
 # FILL KNOCKOUT TABLE FUNCTION
 # =========================
 def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_results=None):
@@ -513,65 +693,12 @@ def fill_knockout_table(knockout_df, round_name, qualifiers, previous_round_resu
     # =====================================================
 
     if round_name == "Round of 32":
-        # =========================
-        # BUILD LOOKUPS
-        # =========================
-        group_winners = {}
-        group_runners = {}
-        group_thirds = {}
-
-        for qualifier in qualifiers:
-            if qualifier["pos"] == 1:
-                group_winners[qualifier["group"]] = qualifier["team"]
-            elif qualifier["pos"] == 2:
-                group_runners[qualifier["group"]] = qualifier["team"]
-            elif qualifier["pos"] == 3:
-                group_thirds[qualifier["group"]] = qualifier["team"]
-
-        # =========================
-        # GLOBAL "BEST 3rd" ASSIGNMENT
-        # =========================
-        # Collect every distinct "Best 3rd" slot in this round together with
-        # the groups it accepts, then solve all of them jointly so a slot can
-        # be reassigned to free up a needed group for another slot.
-        third_slots = []
-        seen_slots = set()
-        for slot in pd.concat([df_round["slot_home"], df_round["slot_away"]]):
-            if isinstance(slot, str) and "Best 3rd" in slot and slot not in seen_slots:
-                seen_slots.add(slot)
-                inside = slot[slot.find("(") + 1: slot.find(")")]
-                candidate_groups = [
-                    g.strip()
-                    for g in inside.replace("Groups", "").strip().split("/")
-                ]
-                third_slots.append((slot, candidate_groups))
-
-        third_assignment = assign_third_place_slots(
-            third_slots, set(group_thirds.keys()))
-
-        # =========================
-        # SLOT RESOLVER
-        # =========================
-        def resolve(slot):
-
-            # Winner Group X
-            if "Winner Group" in slot:
-                group = slot.split()[-1]
-                return group_winners.get(group)
-
-            # Runner-up Group X
-            if "Runner-up Group" in slot:
-                group = slot.split()[-1]
-                return group_runners.get(group)
-
-            # Best 3rd (Groups A/B/C/D/F)
-            if "Best 3rd" in slot:
-                group = third_assignment.get(slot)
-                if group is None:
-                    return None
-                return group_thirds[group]
-
-            return None  # strict fallback (prevents silent bad data)
+        # qualifiers is the r32 list (pos 1/2/3) from get_round_of_32
+        if isinstance(qualifiers, dict):
+            r32 = qualifiers.get("r32", qualifiers)
+        else:
+            r32 = qualifiers
+        resolve = make_r32_slot_resolver(df_round, r32)
 
     # =====================================================
     # ALL OTHER ROUNDS (R16, R8, R4, Final, Third place)
