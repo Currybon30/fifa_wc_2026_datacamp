@@ -1,14 +1,12 @@
 import numbers
 from collections import Counter, defaultdict
 
+import numpy as np
 import pandas as pd
 from feature_engineering import resolve_team_updated_to_original
-from simulations import get_round_of_32
+from simulations import get_round_of_32, simulate_match
 
 
-# =========================
-# STEP 1: flatten iterations
-# =========================
 def flatten_by_match_id(stage_sims):
     """
     Input:
@@ -26,25 +24,14 @@ def flatten_by_match_id(stage_sims):
     return dict(grouped)
 
 
-# =========================
-# STEP 2: merge stages
-# =========================
-def merge_stages(group_flat, knockout_flat):
-    merged = defaultdict(list)
+def monte_carlo_aggregate_group_stage(data):
+    """
+    Aggregate group-stage MC sims per match_id.
 
-    for k, v in group_flat.items():
-        merged[k].extend(v)
-
-    for k, v in knockout_flat.items():
-        merged[k].extend(v)
-
-    return dict(merged)
-
-
-# =========================
-# STEP 3: Monte Carlo aggregate
-# =========================
-def monte_carlo_aggregate(data):
+    Goals and winning_team use separate modes (draw allowed).
+    Knockout matches must not be passed here — use
+    monte_carlo_aggregate_knockout_rounds + rechain for knockout.
+    """
 
     def mode(values):
         return Counter(values).most_common(1)[0][0]
@@ -70,10 +57,6 @@ def monte_carlo_aggregate(data):
         group_home_goals = []
         group_away_goals = []
 
-        # =========================
-        # KNOCKOUT OUTCOME STORAGE (JOINT!)
-        # =========================
-        knockout_outcomes = []
 
         for sim in sims:
 
@@ -113,27 +96,6 @@ def monte_carlo_aggregate(data):
                 group_home_goals.append(hg)
                 group_away_goals.append(ag)
 
-            # -------------------------
-            # KNOCKOUT (JOINT STATE)
-            # -------------------------
-            if all(k in sim for k in [
-                "predicted_home_team",
-                "predicted_away_team",
-                "predicted_home_goals",
-                "predicted_away_goals",
-                "winning_team",
-                "penalties"
-            ]):
-
-                knockout_outcomes.append((
-                    sim["predicted_home_team"],
-                    sim["predicted_away_team"],
-                    sim["predicted_home_goals"],
-                    sim["predicted_away_goals"],
-                    sim["winning_team"],
-                    sim["penalties"]
-                ))
-
         # =========================
         # BUILD FINAL ROW
         # =========================
@@ -169,22 +131,54 @@ def monte_carlo_aggregate(data):
                 row["winning_team"] = "away"
             else:
                 row["winning_team"] = "draw"
-
-        # =========================
-        # KNOCKOUT RESULT (JOINT MODE)
-        # =========================
-        if knockout_outcomes:
-
-            best = Counter(knockout_outcomes).most_common(1)[0][0]
-
-            row["predicted_home_team"] = best[0]
-            row["predicted_away_team"] = best[1]
-            row["predicted_home_goals"] = best[2]
-            row["predicted_away_goals"] = best[3]
-            row["winning_team"] = best[4]
-            row["penalties"] = best[5]
-
+                
         result[match_id] = row
+
+    return result
+
+
+# =========================
+# KNOCKOUT ROUNDS (corners / cards means only)
+# =========================
+_KNOCKOUT_AGG_SKIP = {
+    "match_id",
+    "round",
+    "predicted_home_team",
+    "predicted_away_team",
+    "predicted_home_goals",
+    "predicted_away_goals",
+    "winning_team",
+    "penalties",
+    "match_winner",
+    "match_loser",
+}
+
+
+def monte_carlo_aggregate_knockout_rounds(knockout_flat):
+    """
+    Mean corners / yellow_cards / red_cards per knockout match_id.
+
+    Goals, teams, winner side, and penalties come from
+    rechain_knockout_bracket_monte_carlo (paired from stored sims).
+    """
+    result = {}
+
+    for match_id, sims in knockout_flat.items():
+        sums = defaultdict(float)
+        counts = defaultdict(int)
+
+        for sim in sims:
+            for k, v in sim.items():
+                if k in _KNOCKOUT_AGG_SKIP:
+                    continue
+                if isinstance(v, numbers.Number):
+                    sums[k] += v
+                    counts[k] += 1
+
+        if counts:
+            result[match_id] = {
+                k: int(round(sums[k] / counts[k])) for k in sums
+            }
 
     return result
 
@@ -202,38 +196,273 @@ KNOCKOUT_ROUND_ORDER = [
 ]
 
 
-def rechain_knockout_bracket_monte_carlo(predictions, knockout_df):
+def _knockout_outcome_from_sim(sim, bracket_home, bracket_away):
+    """
+  Extract (home_goals, away_goals, winning_team, penalties) in bracket
+    home/away orientation. Returns None if sim is missing required fields.
+    """
+    if not all(k in sim for k in (
+        "predicted_home_goals",
+        "predicted_away_goals",
+        "winning_team",
+        "penalties",
+    )):
+        return None
+
+    sim_home = sim.get("predicted_home_team")
+    sim_away = sim.get("predicted_away_team")
+    hg = sim["predicted_home_goals"]
+    ag = sim["predicted_away_goals"]
+    wt = sim["winning_team"]
+    pens = sim["penalties"]
+
+    if sim_home == bracket_home and sim_away == bracket_away:
+        return hg, ag, wt, pens
+
+    if sim_home == bracket_away and sim_away == bracket_home:
+        if wt == "home":
+            wt = "away"
+        elif wt == "away":
+            wt = "home"
+        return ag, hg, wt, pens
+
+    return None
+
+
+def modal_knockout_score_for_pair(sims, home, away):
+    """
+    Modal score for bracket home/away from sims with that pairing (either side).
+    """
+    if not home or not away:
+        return None
+
+    outcomes = []
+    for sim in sims:
+        row = _knockout_outcome_from_sim(sim, home, away)
+        if row is not None:
+            outcomes.append(row)
+
+    if not outcomes:
+        return None
+
+    return Counter(outcomes).most_common(1)[0][0]
+
+
+def modal_knockout_score_for_match(sims):
+    """
+    Modal score across all sims for this match_id (ignore teams).
+
+    Fallback when the aggregated bracket pairing never appeared in MC.
+    """
+    outcomes = []
+    for sim in sims:
+        if not all(k in sim for k in (
+            "predicted_home_goals",
+            "predicted_away_goals",
+            "winning_team",
+            "penalties",
+        )):
+            continue
+        outcomes.append((
+            sim["predicted_home_goals"],
+            sim["predicted_away_goals"],
+            sim["winning_team"],
+            sim["penalties"],
+        ))
+
+    if not outcomes:
+        return None
+
+    return Counter(outcomes).most_common(1)[0][0]
+
+
+def _write_knockout_outcome(pred, outcome):
+    hg, ag, winner_side, pens = outcome
+    pred["predicted_home_goals"] = hg
+    pred["predicted_away_goals"] = ag
+    pred["winning_team"] = winner_side
+    pred["penalties"] = pens
+
+
+def build_single_match_lambda_entry(
+    home, away, date, venue, models, elo_ratings, team_hist, feature_engine,
+):
+    """One cache row for simulate_match (ML lambdas + features)."""
+    goal_cols = [
+        "home_elo", "away_elo", "elo_diff", "home_advantage",
+        "home_attack_rate", "home_defense_rate",
+        "away_attack_rate", "away_defense_rate",
+    ]
+    card_cols = goal_cols + ["home_disc", "away_disc", "disc_diff", "disc_sum"]
+
+    match_row = pd.DataFrame({
+        "home_team": [home],
+        "away_team": [away],
+        "date": [date],
+        "venue": [venue],
+    })
+
+    match_row = feature_engine["combine_elo"](match_row, elo_ratings)
+    match_row["home_advantage"] = int(
+        feature_engine["home_adv"](match_row["home_team"], match_row["venue"])
+    )
+    match_row = feature_engine["match_features"](match_row, team_hist)
+
+    x_goals = match_row[goal_cols].to_numpy()
+    x_cards = match_row[card_cols].to_numpy()
+
+    return {
+        "home_team": home,
+        "away_team": away,
+        "lam_home_goal": float(models["goal_home"].predict(x_goals)[0]),
+        "lam_away_goal": float(models["goal_away"].predict(x_goals)[0]),
+        "lam_home_yellow": float(models["yellow_home"].predict(x_cards)[0]),
+        "lam_away_yellow": float(models["yellow_away"].predict(x_cards)[0]),
+        "lam_home_red": float(models["red_home"].predict(x_cards)[0]),
+        "lam_away_red": float(models["red_away"].predict(x_cards)[0]),
+        "lam_home_corner": float(models["corner_home"].predict(x_goals)[0]),
+        "lam_away_corner": float(models["corner_away"].predict(x_goals)[0]),
+    }
+
+
+def predict_knockout_outcome_poisson(
+    match_id, home, away, date, venue, models, elo_ratings, team_hist,
+    feature_engine, seed=None,
+):
+    """
+    Predict one knockout result: ML lambdas + Poisson (same as simulate_match).
+    Returns (home_goals, away_goals, winning_team, penalties).
+    """
+    if not home or not away:
+        return None
+
+    if seed is not None:
+        np.random.seed(int(seed) + int(match_id))
+
+    entry = build_single_match_lambda_entry(
+        home, away, date, venue, models, elo_ratings, team_hist, feature_engine,
+    )
+    result = simulate_match(match_id, {match_id: entry}, knockout=True)
+
+    winning_team = "home" if result["result_str"] == "W" else "away"
+    return (
+        result["home_goals"],
+        result["away_goals"],
+        winning_team,
+        result["penalty"],
+    )
+
+
+def apply_paired_knockout_scores(
+    pred, sims, home, away, match_id=None, date=None, venue=None, model_ctx=None,
+):
+    """
+    Write goals / winner side / penalties for a knockout match.
+
+    1. Modal score from MC sims with this home/away pair (incl. swapped).
+    2. Else ML goal models + Poisson via simulate_match (if model_ctx set).
+    3. Else modal score for this match_id only (legacy fallback).
+    """
+    if home and away:
+        paired = modal_knockout_score_for_pair(sims, home, away)
+        if paired is not None:
+            _write_knockout_outcome(pred, paired)
+            return True
+
+    if (
+        model_ctx is not None
+        and match_id is not None
+        and home
+        and away
+        and date is not None
+    ):
+        ml_outcome = predict_knockout_outcome_poisson(
+            match_id,
+            home,
+            away,
+            date,
+            venue,
+            model_ctx["models"],
+            model_ctx["elo_ratings"],
+            model_ctx["team_hist"],
+            model_ctx["feature_engine"],
+            seed=model_ctx.get("seed"),
+        )
+        if ml_outcome is not None:
+            _write_knockout_outcome(pred, ml_outcome)
+            return True
+
+    fallback = modal_knockout_score_for_match(sims)
+    if fallback is None:
+        return False
+
+    _write_knockout_outcome(pred, fallback)
+    return True
+
+
+def sync_winning_side_with_goals(pred):
+    """
+    When regulation goals pick a winner, align winning_team with the scoreline.
+    Keeps paired ET/penalty rows (level scores) on the modal winning_team.
+    """
+    hg = pred.get("predicted_home_goals")
+    ag = pred.get("predicted_away_goals")
+    if hg is None or ag is None:
+        return
+    if hg > ag:
+        pred["winning_team"] = "home"
+    elif ag > hg:
+        pred["winning_team"] = "away"
+
+
+def update_winner_loser_maps(match_id, home, away, pred, winner_map, loser_map):
+    """Record winner/loser team names for Winner Match X / Loser Match X slots."""
+    if not home or not away:
+        return
+    if pred.get("winning_team") == "away":
+        winner_map[match_id] = away
+        loser_map[match_id] = home
+    else:
+        winner_map[match_id] = home
+        loser_map[match_id] = away
+
+
+def _knockout_matches_by_round(knockout_df):
+    """match_ids per round in bracket schedule order (sorted match_id)."""
+    by_round = {}
+    for round_name in KNOCKOUT_ROUND_ORDER:
+        ids = (
+            knockout_df.loc[knockout_df["round"] == round_name, "match_id"]
+            .sort_values()
+            .astype(int)
+            .tolist()
+        )
+        by_round[round_name] = ids
+    return by_round
+
+
+def rechain_knockout_bracket_monte_carlo(
+    predictions, knockout_df, knockout_flat=None, model_ctx=None,
+):
     """
     Make the aggregated knockout bracket internally consistent.
 
-    `monte_carlo_aggregate` picks the most common result for each match_id
-    INDEPENDENTLY. That breaks the bracket chain: the team in a later slot
-    (e.g. "Winner Match 73") is that match's own modal team, which need not
-    equal the aggregated winner of match 73. This walks the bracket round by
-    round and rewrites each match's teams from the previous rounds' aggregated
-    winners / losers, exactly like a single deterministic run does.
+    Processes rounds in KNOCKOUT_ROUND_ORDER and matches by ascending match_id
+    so winner_map / loser_map are filled before any later round reads
+    "Winner Match N" / "Loser Match N" slots.
 
-    Round of 32 teams are left untouched (they come from the group-stage
-    aggregation). The winning side ("home"/"away") and all match statistics
-    from the aggregation are preserved; only the team identities are re-linked.
-
-    Parameters
-    -------------------------------
-    predictions : dict[match_id, dict]
-        Output of `monte_carlo_aggregate`.
-
-    knockout_df : DataFrame
-        Knockout slot definitions (needs: match_id, round, slot_home, slot_away).
-
-    Returns
-    -------------------------------
-    dict[match_id, dict]
-        The same predictions dict with consistent knockout team identities.
+    Scores: MC modal for the final team pair when available; otherwise
+    ML lambdas + Poisson (model_ctx) instead of unrelated match-level modes.
     """
     slots = {
         int(row.match_id): (row.round, row.slot_home, row.slot_away)
         for row in knockout_df.itertuples(index=False)
     }
+    meta_by_match = {
+        int(row.match_id): (row.date_utc, row.venue)
+        for row in knockout_df.itertuples(index=False)
+    }
+    matches_by_round = _knockout_matches_by_round(knockout_df)
 
     winner_map = {}
     loser_map = {}
@@ -245,20 +474,17 @@ def rechain_knockout_bracket_monte_carlo(predictions, knockout_df):
             return winner_map.get(int(slot.split()[-1]))
         if "Loser Match" in slot:
             return loser_map.get(int(slot.split()[-1]))
-        # Round of 32 slots already hold actual team names post-aggregation.
         return slot
 
     for round_name in KNOCKOUT_ROUND_ORDER:
-        for match_id, (r, slot_home, slot_away) in slots.items():
-
-            if r != round_name:
-                continue
+        for match_id in matches_by_round.get(round_name, []):
+            r, slot_home, slot_away = slots[match_id]
 
             pred = predictions.get(match_id)
             if pred is None:
-                continue
+                pred = {}
+                predictions[match_id] = pred
 
-            # Re-derive teams from previous rounds for every round after R32.
             if round_name != "Round of 32":
                 pred["predicted_home_team"] = resolve_slot(slot_home)
                 pred["predicted_away_team"] = resolve_slot(slot_away)
@@ -266,12 +492,22 @@ def rechain_knockout_bracket_monte_carlo(predictions, knockout_df):
             home = pred.get("predicted_home_team")
             away = pred.get("predicted_away_team")
 
-            # winning_team is the modal winning SIDE; map it onto the
-            # (now consistent) team identities to propagate forward.
-            if pred.get("winning_team") == "away":
-                winner_map[match_id], loser_map[match_id] = away, home
-            else:
-                winner_map[match_id], loser_map[match_id] = home, away
+            sims = knockout_flat.get(match_id, []) if knockout_flat else []
+            date, venue = meta_by_match.get(match_id, (None, None))
+            apply_paired_knockout_scores(
+                pred,
+                sims,
+                home,
+                away,
+                match_id=match_id,
+                date=date,
+                venue=venue,
+                model_ctx=model_ctx,
+            )
+
+            sync_winning_side_with_goals(pred)
+            update_winner_loser_maps(
+                match_id, home, away, pred, winner_map, loser_map)
 
     return predictions
 
@@ -279,25 +515,45 @@ def rechain_knockout_bracket_monte_carlo(predictions, knockout_df):
 # =========================
 # FULL PIPELINE
 # =========================
-def run_mc_pipeline(group_stage_sims, knockout_stage_sims, knockout_df=None):
-
+def run_mc_pipeline(
+    group_stage_sims,
+    knockout_stage_sims,
+    knockout_df=None,
+    models=None,
+    elo_ratings=None,
+    team_hist=None,
+    feature_engine=None,
+    mc_seed=42,
+):
     group_flat = flatten_by_match_id(group_stage_sims)
     knockout_flat = flatten_by_match_id(knockout_stage_sims)
 
-    merged = merge_stages(group_flat, knockout_flat)
+    predictions = monte_carlo_aggregate_group_stage(group_flat)
 
-    predictions = monte_carlo_aggregate(merged)
+    for match_id, extras in monte_carlo_aggregate_knockout_rounds(
+            knockout_flat).items():
+        predictions.setdefault(match_id, {}).update(extras)
 
-    # Re-link the knockout bracket so later-round teams match the aggregated
-    # winners of the matches that feed them (independent per-match modes break
-    # this chain). Requires the slot definitions; skipped if not provided.
+    model_ctx = None
+    if all(x is not None for x in (models, elo_ratings, team_hist, feature_engine)):
+        model_ctx = {
+            "models": models,
+            "elo_ratings": elo_ratings,
+            "team_hist": team_hist,
+            "feature_engine": feature_engine,
+            "seed": mc_seed,
+        }
+
     if knockout_df is not None:
-        # R32 teams from per-match modes can repeat (same team in 2+ matches).
-        # Rebuild from aggregated group-stage qualifiers + slot rules instead.
         qualifiers = aggregate_r32_qualifiers_from_monte_carlo(group_stage_sims)
         predictions = apply_round_of_32_teams_monte_carlo(
             predictions, knockout_df, qualifiers)
-        predictions = rechain_knockout_bracket_monte_carlo(predictions, knockout_df)
+        predictions = rechain_knockout_bracket_monte_carlo(
+            predictions,
+            knockout_df,
+            knockout_flat,
+            model_ctx=model_ctx,
+        )
 
     return predictions
 
