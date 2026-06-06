@@ -18,8 +18,8 @@ from utils.teams import resolve_team_name
 
 load_dotenv()
 
-API_FOOTBALL_BASE = os.getenv("API_FOOTBALL_HOST")
-FOOTBALL_DATA_BASE = os.getenv("FOOTBALL_DATA_HOST")
+API_FOOTBALL_BASE = os.getenv("API_FOOTBALL_HOST") or st.secrets.get("API_FOOTBALL_HOST")
+FOOTBALL_DATA_BASE = os.getenv("FOOTBALL_DATA_HOST") or st.secrets.get("FOOTBALL_DATA_HOST")
 WORLD_CUP_LEAGUE_ID = 1
 WORLD_CUP_SEASON = 2022 # Change to 2026 when the season starts
 MATCH_DURATION_MINUTES = 105
@@ -83,10 +83,10 @@ def load_local_fixtures() -> pd.DataFrame:
 
 
 def get_football_data_key() -> str | None:
-    return os.getenv("FOOTBALL_DATA_KEY") or None
+    return os.getenv("FOOTBALL_DATA_KEY") or st.secrets.get("FOOTBALL_DATA_KEY") or None
 
 def get_api_football_key() -> str | None:
-    return os.getenv("API_FOOTBALL_KEY") or None
+    return os.getenv("API_FOOTBALL_KEY") or st.secrets.get("API_FOOTBALL_KEY") or None
 
 
 def _api_headers(base: str, api_key: str) -> dict[str, str]:

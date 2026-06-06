@@ -79,7 +79,7 @@ def _fetch_standings_response(api_key: str) -> dict[str, Any]:
 
 
 def get_football_data_key() -> str | None:
-    return os.getenv("FOOTBALL_DATA_KEY") or None
+    return os.getenv("FOOTBALL_DATA_KEY") or st.secrets.get("FOOTBALL_DATA_KEY") or None
 
 
 @st.cache_data(ttl=21600, show_spinner=False)
