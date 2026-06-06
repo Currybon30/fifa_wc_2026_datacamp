@@ -1,0 +1,7 @@
+[server]
+enableStaticServing = true
+runOnSave = true
+headless = false
+
+[logger]
+level = "info"
