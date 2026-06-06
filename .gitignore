@@ -8,3 +8,4 @@ models/
 __pycache__
 .venv/
 .env
+results/

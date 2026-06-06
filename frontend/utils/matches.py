@@ -24,7 +24,7 @@ WORLD_CUP_LEAGUE_ID = 1
 WORLD_CUP_SEASON = 2022 # Change to 2026 when the season starts
 MATCH_DURATION_MINUTES = 105
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 GROUP_FIXTURES_CSV = (
     PROJECT_ROOT
