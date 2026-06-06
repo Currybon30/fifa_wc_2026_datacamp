@@ -1,7 +1,9 @@
 [server]
 enableStaticServing = true
-runOnSave = true
-headless = false
+headless = true
+
+[browser]
+gatherUsageStats = false
 
 [logger]
 level = "info"
