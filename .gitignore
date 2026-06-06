@@ -1,3 +1,4 @@
+.vscode/
 train.csv
 val.csv
 test.csv
@@ -6,3 +7,4 @@ raw_history.csv
 models/
 __pycache__
 .venv/
+.env
