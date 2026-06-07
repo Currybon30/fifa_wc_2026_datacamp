@@ -1,12 +1,15 @@
-import streamlit as st
-import plotly.express as px
-import pandas as pd
-
-from pathlib import Path
 import sys
+from pathlib import Path
+
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+from utils.predictions import (GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV,
+                               load_monte_carlo_predictions)
+from utils.teams import (all_teams_from_fixtures, is_slot_team,
+                         resolve_team_name)
 from utils.ui import inject_base_styles, render_copyright_footer
-from utils.teams import all_teams_from_fixtures, is_slot_team, resolve_team_name
-from utils.predictions import GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV, load_monte_carlo_predictions
+
 WC_GREEN = "#1a5f4a"
 WC_GREEN_LIGHT = "#2d8659"
 WC_ACCENT = "#0b3d2e"
@@ -21,7 +24,8 @@ PLOT_LAYOUT = dict(
 )
 
 COMPETITION_DIR = (
-    Path(__file__).resolve().parents[2] / "FIFA World Cup 2026 - DataCamp Competition"
+    Path(__file__).resolve().parents[2] /
+    "FIFA World Cup 2026 - DataCamp Competition"
 )
 if str(COMPETITION_DIR) not in sys.path:
     sys.path.insert(0, str(COMPETITION_DIR))
@@ -42,22 +46,28 @@ GROUP_PREDICTIONS = pd.read_csv(GROUP_PREDICTIONS_CSV)
 KNOCKOUT_PREDICTIONS = pd.read_csv(KNOCKOUT_PREDICTIONS_CSV)
 MONTE_CARLO_PREDICTIONS = load_monte_carlo_predictions()
 
-GROUP_PREDICTIONS["home_team"] = GROUP_PREDICTIONS["home_team"].apply(resolve_team_name)
-GROUP_PREDICTIONS["away_team"] = GROUP_PREDICTIONS["away_team"].apply(resolve_team_name)
-KNOCKOUT_PREDICTIONS["predicted_home_team"] = KNOCKOUT_PREDICTIONS["predicted_home_team"].apply(resolve_team_name)
-KNOCKOUT_PREDICTIONS["predicted_away_team"] = KNOCKOUT_PREDICTIONS["predicted_away_team"].apply(resolve_team_name)
+GROUP_PREDICTIONS["home_team"] = GROUP_PREDICTIONS["home_team"].apply(
+    resolve_team_name)
+GROUP_PREDICTIONS["away_team"] = GROUP_PREDICTIONS["away_team"].apply(
+    resolve_team_name)
+KNOCKOUT_PREDICTIONS["predicted_home_team"] = KNOCKOUT_PREDICTIONS["predicted_home_team"].apply(
+    resolve_team_name)
+KNOCKOUT_PREDICTIONS["predicted_away_team"] = KNOCKOUT_PREDICTIONS["predicted_away_team"].apply(
+    resolve_team_name)
 
 ALL_PREDICTIONS = pd.concat(
     [
         GROUP_PREDICTIONS.assign(stage="Group"),
         KNOCKOUT_PREDICTIONS.rename(
-            columns={"predicted_home_team": "home_team", "predicted_away_team": "away_team"}
+            columns={"predicted_home_team": "home_team",
+                     "predicted_away_team": "away_team"}
         ).assign(stage="Knockout", group=pd.NA),
     ],
     ignore_index=True,
 )
 ALL_PREDICTIONS["total_goals"] = (
-    ALL_PREDICTIONS["predicted_home_goals"] + ALL_PREDICTIONS["predicted_away_goals"]
+    ALL_PREDICTIONS["predicted_home_goals"] +
+    ALL_PREDICTIONS["predicted_away_goals"]
 )
 ALL_PREDICTIONS["total_cards"] = (
     ALL_PREDICTIONS["yellow_cards"] + ALL_PREDICTIONS["red_cards"]
@@ -72,7 +82,8 @@ wc_elo = (
 )
 
 HISTORICAL_STAT["date"] = pd.to_datetime(HISTORICAL_STAT["date"])
-wc_history = HISTORICAL_STAT[HISTORICAL_STAT["tournament"] == "FIFA World Cup"].copy()
+wc_history = HISTORICAL_STAT[HISTORICAL_STAT["tournament"]
+                             == "FIFA World Cup"].copy()
 wc_history = wc_history.dropna(subset=["home_score", "away_score"])
 wc_history["year"] = wc_history["date"].dt.year
 wc_history["total_goals"] = wc_history["home_score"] + wc_history["away_score"]
@@ -109,7 +120,7 @@ with tab_elo:
             xaxis_title="Elo rating",
             yaxis_title="",
         )
-        st.plotly_chart(fig_elo, use_container_width=True)
+        st.plotly_chart(fig_elo, width='stretch')
 
 with tab_history:
     st.subheader("Goals per match at past World Cups")
@@ -121,22 +132,27 @@ with tab_history:
         markers=True,
         labels={"year": "Tournament year", "avg_goals": "Avg goals / match"},
     )
-    fig_history.update_traces(line_color=WC_GREEN, marker=dict(size=8, color=WC_GREEN_LIGHT))
-    fig_history.update_layout(**PLOT_LAYOUT, height=400, yaxis=dict(range=[0, None]))
-    st.plotly_chart(fig_history, use_container_width=True)
+    fig_history.update_traces(
+        line_color=WC_GREEN, marker=dict(size=8, color=WC_GREEN_LIGHT))
+    fig_history.update_layout(
+        **PLOT_LAYOUT, height=400, yaxis=dict(range=[0, None]))
+    st.plotly_chart(fig_history, width='stretch')
 
     col_l, col_r = st.columns(2)
     with col_l:
         st.metric("World Cup matches in dataset", f"{len(wc_history):,}")
     with col_r:
-        st.metric("All-time avg goals / match", f"{wc_history['total_goals'].mean():.2f}")
+        st.metric("All-time avg goals / match",
+                  f"{wc_history['total_goals'].mean():.2f}")
 
 with tab_predictions:
-    st.caption("The prediction analysis is for reference only. The predictions are not guaranteed to be accurate.")
+    st.caption(
+        "The prediction analysis is for reference only. The predictions are not guaranteed to be accurate.")
     st.subheader("Predicted goals by group stage group")
     group_goals = (
         GROUP_PREDICTIONS.assign(
-            total_goals=lambda d: d["predicted_home_goals"] + d["predicted_away_goals"]
+            total_goals=lambda d: d["predicted_home_goals"] +
+            d["predicted_away_goals"]
         )
         .groupby("group", as_index=False)["total_goals"]
         .mean()
@@ -156,7 +172,7 @@ with tab_predictions:
         showlegend=False,
         coloraxis_showscale=False,
     )
-    st.plotly_chart(fig_group, use_container_width=True)
+    st.plotly_chart(fig_group, width='stretch')
 
     st.divider()
 
@@ -175,7 +191,8 @@ with tab_predictions:
         )
     )
     fig_stats = px.bar(
-        stage_stats.melt(id_vars="stage", var_name="metric", value_name="value"),
+        stage_stats.melt(id_vars="stage", var_name="metric",
+                         value_name="value"),
         x="stage",
         y="value",
         color="metric",
@@ -190,8 +207,8 @@ with tab_predictions:
         },
     )
     fig_stats.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
-    st.plotly_chart(fig_stats, use_container_width=True)
-    
+    st.plotly_chart(fig_stats, width='stretch')
+
     st.divider()
     st.subheader("Predicted goals by home - away teams")
     home_away_goals = (
@@ -209,7 +226,8 @@ with tab_predictions:
         )
     )
     fig_home_away = px.bar(
-        home_away_goals.melt(id_vars="stage", var_name="metric", value_name="value"),
+        home_away_goals.melt(
+            id_vars="stage", var_name="metric", value_name="value"),
         x="stage",
         y="value",
         color="metric",
@@ -225,8 +243,7 @@ with tab_predictions:
         },
     )
     fig_home_away.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
-    st.plotly_chart(fig_home_away, use_container_width=True)
-
+    st.plotly_chart(fig_home_away, width='stretch')
 
     st.divider()
     st.subheader("Predicted yellow and red cards by stage")
@@ -246,7 +263,8 @@ with tab_predictions:
         )
     )
     fig_card = px.bar(
-        card_stats.melt(id_vars="stage", var_name="metric", value_name="value"),
+        card_stats.melt(id_vars="stage", var_name="metric",
+                        value_name="value"),
         x="stage",
         y="value",
         color="metric",
@@ -262,8 +280,7 @@ with tab_predictions:
         },
     )
     fig_card.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
-    st.plotly_chart(fig_card, use_container_width=True)
-
+    st.plotly_chart(fig_card, width='stretch')
 
     st.divider()
     st.subheader("Predicted corners by stage")
@@ -280,7 +297,8 @@ with tab_predictions:
         )
     )
     fig_corner = px.bar(
-        corner_stats.melt(id_vars="stage", var_name="metric", value_name="value"),
+        corner_stats.melt(id_vars="stage", var_name="metric",
+                          value_name="value"),
         x="stage",
         y="value",
         color="metric",
@@ -295,8 +313,7 @@ with tab_predictions:
         },
     )
     fig_corner.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
-    st.plotly_chart(fig_corner, use_container_width=True)
-
+    st.plotly_chart(fig_corner, width='stretch')
 
     st.divider()
     st.subheader("Elo ratings and Win Percentage by teams in WC26 predictions")
@@ -312,7 +329,7 @@ with tab_predictions:
         }
     )
     fig_elo_win.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
-    st.plotly_chart(fig_elo_win, use_container_width=True)
+    st.plotly_chart(fig_elo_win, width='stretch')
 
 
 render_copyright_footer()
