@@ -543,6 +543,59 @@ def render_monte_carlo_champion_stats(df) -> None:
         )
 
 
+def render_monte_carlo_team_matchups(df) -> None:
+    from utils.predictions import lookup_monte_carlo_matchup
+    from utils.teams import all_teams_from_fixtures, is_slot_team
+
+    if df.empty:
+        st.info("Monte Carlo team matchup results are not available yet.")
+        return
+
+    tournament_teams = sorted(
+        {t for t in all_teams_from_fixtures() if not is_slot_team(t)}
+    )
+    teams_in_data = sorted(set(df["team_a"]) | set(df["team_b"]))
+    team_options = sorted(set(tournament_teams) | set(teams_in_data))
+
+    st.subheader("🤜🤛 Monte Carlo team matchups")
+    st.markdown(
+        "Pick any two nations to see how often they are drawn to face each other "
+        "across simulated World Cup 2026 tournaments — group stage and knockout."
+    )
+
+    pick_left, pick_right = st.columns(2)
+    with pick_left:
+        team_a = st.selectbox("Team A", options=team_options, key="matchup_team_a")
+    with pick_right:
+        team_b_options = [t for t in team_options if t != team_a]
+        team_b = st.selectbox(
+            "Team B",
+            options=team_b_options,
+            key="matchup_team_b",
+        )
+
+    matchup_percent, matchup_count = lookup_monte_carlo_matchup(df, team_a, team_b)
+
+    with st.container(border=True):
+        flag_left, vs_col, flag_right = st.columns([1, 0.4, 1], vertical_alignment="center")
+        with flag_left:
+            _show_team_flag(team_a, width=72)
+            st.markdown(f"**{team_a}**")
+        with vs_col:
+            st.markdown("### vs")
+        with flag_right:
+            _show_team_flag(team_b, width=72)
+            st.markdown(f"**{team_b}**")
+
+        st.metric("Chance of facing each other", f"{matchup_percent:.1f}%")
+        _render_probability_row("Matchup probability", matchup_percent, 100.0)
+
+        if matchup_count > 0:
+            st.caption(f"Met in **{matchup_count:,}** simulated tournament pairings.")
+        else:
+            st.caption("These two nations were never drawn together in the simulations (0%).")
+
+
 def render_group_standings(
     standings: dict,
     *,

@@ -15,6 +15,7 @@ RESULTS_DIR = PROJECT_ROOT / "FIFA World Cup 2026 - DataCamp Competition" / "res
 GROUP_PREDICTIONS_CSV = RESULTS_DIR / "final_group_predictions.csv"
 KNOCKOUT_PREDICTIONS_CSV = RESULTS_DIR / "final_knockout_predictions.csv"
 MONTE_CARLO_PREDICTIONS_CSV = RESULTS_DIR / "monte_carlo_results.csv"
+MONTE_CARLO_TEAM_MATCHUPS_CSV = RESULTS_DIR / "monte_carlo_team_matchups.csv"
 
 _COMMON_COLUMNS = [
     "match_id",
@@ -76,6 +77,34 @@ def load_monte_carlo_predictions() -> pd.DataFrame:
     )
     df["team"] = df["team"].map(resolve_team_name)
     return df.sort_values("win_percent", ascending=False).reset_index(drop=True)
+
+@st.cache_data(show_spinner=False)
+def load_monte_carlo_team_matchups() -> pd.DataFrame:
+    df = pd.read_csv(MONTE_CARLO_TEAM_MATCHUPS_CSV)
+    df = df.rename(
+        columns={
+            "Team A": "team_a",
+            "Team B": "team_b",
+            "Matchup Count": "matchup_count",
+            "Matchup %": "matchup_percent",
+        }
+    )
+    df["team_a"] = df["team_a"].map(resolve_team_name)
+    df["team_b"] = df["team_b"].map(resolve_team_name)
+    return df.sort_values("matchup_percent", ascending=False).reset_index(drop=True)
+
+
+def lookup_monte_carlo_matchup(
+    df: pd.DataFrame, team_a: str, team_b: str
+) -> tuple[float, int]:
+    if team_a == team_b or df.empty:
+        return 0.0, 0
+    first, second = sorted([team_a, team_b])
+    match = df[(df["team_a"] == first) & (df["team_b"] == second)]
+    if match.empty:
+        return 0.0, 0
+    row = match.iloc[0]
+    return float(row["matchup_percent"]), int(row["matchup_count"])
 
 
 def monte_carlo_total_simulations(df: pd.DataFrame) -> int:
