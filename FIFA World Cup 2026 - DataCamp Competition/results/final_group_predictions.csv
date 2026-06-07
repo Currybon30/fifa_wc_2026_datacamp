@@ -1,73 +1,73 @@
 match_id,group,home_team,away_team,date_utc,venue,predicted_home_goals,predicted_away_goals,corners,yellow_cards,red_cards,winning_team
-1,A,Mexico,South Africa,2026-06-11T19:00:00Z,"Estadio Azteca, Mexico City",2,0,9,4,1,home
-2,A,South Korea,UEFA Playoff D,2026-06-12T02:00:00Z,"Estadio Akron, Guadalajara",1,0,9,5,0,home
-3,B,Canada,UEFA Playoff A,2026-06-12T19:00:00Z,"BMO Field, Toronto",1,0,13,10,1,home
-4,D,USA,Paraguay,2026-06-13T01:00:00Z,"SoFi Stadium, Los Angeles",1,0,11,1,0,home
-5,D,Australia,UEFA Playoff C,2026-06-13T04:00:00Z,"BC Place, Vancouver",1,1,5,4,0,draw
-6,B,Qatar,Switzerland,2026-06-13T19:00:00Z,"Levi's Stadium, Santa Clara",0,1,8,3,0,away
+1,A,Mexico,South Africa,2026-06-11T19:00:00Z,"Estadio Azteca, Mexico City",1,0,6,3,1,home
+2,A,South Korea,UEFA Playoff D,2026-06-12T02:00:00Z,"Estadio Akron, Guadalajara",1,0,11,4,0,home
+3,B,Canada,UEFA Playoff A,2026-06-12T19:00:00Z,"BMO Field, Toronto",2,0,12,5,1,home
+4,D,USA,Paraguay,2026-06-13T01:00:00Z,"SoFi Stadium, Los Angeles",0,1,12,3,0,away
+5,D,Australia,UEFA Playoff C,2026-06-13T04:00:00Z,"BC Place, Vancouver",2,1,11,7,0,home
+6,B,Qatar,Switzerland,2026-06-13T19:00:00Z,"Levi's Stadium, Santa Clara",0,2,10,10,0,away
 7,C,Brazil,Morocco,2026-06-13T22:00:00Z,"MetLife Stadium, East Rutherford",1,0,12,6,0,home
-8,C,Haiti,Scotland,2026-06-14T01:00:00Z,"Gillette Stadium, Boston",1,1,4,6,0,draw
-9,E,Germany,Curaçao,2026-06-14T17:00:00Z,"NRG Stadium, Houston",2,0,11,4,0,home
-10,F,Netherlands,Japan,2026-06-14T20:00:00Z,"AT&T Stadium, Dallas",1,1,10,4,1,draw
-11,E,Côte d'Ivoire,Ecuador,2026-06-14T23:00:00Z,"Lincoln Financial Field, Philadelphia",0,1,15,5,0,away
-12,F,UEFA Playoff B,Tunisia,2026-06-15T02:00:00Z,"Estadio BBVA, Monterrey",1,1,10,3,0,draw
-13,H,Spain,Cabo Verde,2026-06-15T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",4,0,13,3,0,home
-14,G,Belgium,Egypt,2026-06-15T19:00:00Z,"Lumen Field, Seattle",1,0,10,9,0,home
-15,H,Saudi Arabia,Uruguay,2026-06-15T22:00:00Z,"Hard Rock Stadium, Miami",0,1,13,6,2,away
-16,G,Iran,New Zealand,2026-06-16T01:00:00Z,"SoFi Stadium, Los Angeles",1,1,9,2,1,draw
-17,J,Austria,Jordan,2026-06-16T04:00:00Z,"Levi's Stadium, Santa Clara",1,0,11,3,0,home
+8,C,Haiti,Scotland,2026-06-14T01:00:00Z,"Gillette Stadium, Boston",1,2,8,6,0,away
+9,E,Germany,Curaçao,2026-06-14T17:00:00Z,"NRG Stadium, Houston",1,0,10,6,0,home
+10,F,Netherlands,Japan,2026-06-14T20:00:00Z,"AT&T Stadium, Dallas",1,0,10,11,1,home
+11,E,Côte d'Ivoire,Ecuador,2026-06-14T23:00:00Z,"Lincoln Financial Field, Philadelphia",1,0,6,4,0,home
+12,F,UEFA Playoff B,Tunisia,2026-06-15T02:00:00Z,"Estadio BBVA, Monterrey",1,1,7,5,0,draw
+13,H,Spain,Cabo Verde,2026-06-15T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",4,0,10,4,0,home
+14,G,Belgium,Egypt,2026-06-15T19:00:00Z,"Lumen Field, Seattle",1,1,11,3,0,draw
+15,H,Saudi Arabia,Uruguay,2026-06-15T22:00:00Z,"Hard Rock Stadium, Miami",0,1,6,3,2,away
+16,G,Iran,New Zealand,2026-06-16T01:00:00Z,"SoFi Stadium, Los Angeles",2,1,9,6,1,home
+17,J,Austria,Jordan,2026-06-16T04:00:00Z,"Levi's Stadium, Santa Clara",1,0,8,2,0,home
 18,I,France,Senegal,2026-06-16T19:00:00Z,"MetLife Stadium, East Rutherford",1,1,12,4,0,draw
-19,I,FIFA Playoff 2,Norway,2026-06-16T22:00:00Z,"Gillette Stadium, Boston",0,2,11,4,0,away
-20,J,Argentina,Algeria,2026-06-17T01:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",1,0,8,4,1,home
-21,K,Portugal,FIFA Playoff 1,2026-06-17T17:00:00Z,"NRG Stadium, Houston",2,0,14,4,0,home
-22,L,England,Croatia,2026-06-17T20:00:00Z,"AT&T Stadium, Dallas",1,1,5,5,0,draw
-23,L,Ghana,Panama,2026-06-17T23:00:00Z,"BMO Field, Toronto",1,1,17,3,1,draw
-24,K,Uzbekistan,Colombia,2026-06-18T02:00:00Z,"Estadio Azteca, Mexico City",1,1,11,4,0,draw
-25,A,UEFA Playoff D,South Africa,2026-06-18T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",1,1,8,1,1,draw
-26,B,Switzerland,UEFA Playoff A,2026-06-18T19:00:00Z,"SoFi Stadium, Los Angeles",1,0,6,6,1,home
-27,B,Canada,Qatar,2026-06-18T22:00:00Z,"BC Place, Vancouver",2,0,9,6,1,home
-28,A,Mexico,South Korea,2026-06-19T01:00:00Z,"Estadio Akron, Guadalajara",1,0,10,6,1,home
-29,D,UEFA Playoff C,Paraguay,2026-06-19T04:00:00Z,"Levi's Stadium, Santa Clara",1,1,14,4,0,draw
-30,D,USA,Australia,2026-06-19T19:00:00Z,"Lumen Field, Seattle",1,1,15,4,0,draw
-31,C,Scotland,Morocco,2026-06-19T22:00:00Z,"Gillette Stadium, Boston",0,0,10,4,0,draw
-32,C,Brazil,Haiti,2026-06-20T01:00:00Z,"Lincoln Financial Field, Philadelphia",2,0,8,3,0,home
-33,F,Tunisia,Japan,2026-06-20T04:00:00Z,"Estadio BBVA, Monterrey",0,1,11,5,0,away
-34,F,Netherlands,UEFA Playoff B,2026-06-20T17:00:00Z,"NRG Stadium, Houston",2,1,11,5,1,home
-35,E,Germany,Côte d'Ivoire,2026-06-20T20:00:00Z,"BMO Field, Toronto",2,0,11,3,0,home
-36,E,Ecuador,Curaçao,2026-06-21T00:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",1,0,13,4,0,home
-37,H,Spain,Saudi Arabia,2026-06-21T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",3,0,10,7,0,home
-38,G,Belgium,Iran,2026-06-21T19:00:00Z,"SoFi Stadium, Los Angeles",1,1,9,7,0,draw
-39,H,Uruguay,Cabo Verde,2026-06-21T22:00:00Z,"Hard Rock Stadium, Miami",1,0,7,2,1,home
-40,G,New Zealand,Egypt,2026-06-22T01:00:00Z,"BC Place, Vancouver",1,1,6,7,0,draw
-41,J,Argentina,Austria,2026-06-22T17:00:00Z,"AT&T Stadium, Dallas",1,1,15,2,1,draw
-42,I,France,FIFA Playoff 2,2026-06-22T21:00:00Z,"Lincoln Financial Field, Philadelphia",2,0,11,4,0,home
-43,I,Norway,Senegal,2026-06-23T00:00:00Z,"MetLife Stadium, East Rutherford",1,1,8,6,0,draw
-44,J,Jordan,Algeria,2026-06-23T03:00:00Z,"Levi's Stadium, Santa Clara",1,1,8,3,0,draw
-45,K,Portugal,Uzbekistan,2026-06-23T17:00:00Z,"NRG Stadium, Houston",2,1,3,3,0,home
-46,L,England,Ghana,2026-06-23T20:00:00Z,"Gillette Stadium, Boston",2,0,10,1,0,home
-47,L,Panama,Croatia,2026-06-23T23:00:00Z,"BMO Field, Toronto",0,1,9,2,0,away
-48,K,Colombia,FIFA Playoff 1,2026-06-24T02:00:00Z,"Estadio Akron, Guadalajara",1,0,9,6,1,home
-49,B,Switzerland,Canada,2026-06-24T19:00:00Z,"BC Place, Vancouver",1,1,13,7,1,draw
-50,B,UEFA Playoff A,Qatar,2026-06-24T19:00:00Z,"Lumen Field, Seattle",1,0,6,6,1,home
-51,C,Scotland,Brazil,2026-06-24T22:00:00Z,"Hard Rock Stadium, Miami",1,1,10,5,0,draw
-52,C,Morocco,Haiti,2026-06-24T22:00:00Z,"Mercedes-Benz Stadium, Atlanta",1,0,11,2,0,home
-53,A,UEFA Playoff D,Mexico,2026-06-25T01:00:00Z,"Estadio Azteca, Mexico City",0,1,7,5,0,away
-54,A,South Africa,South Korea,2026-06-25T01:00:00Z,"Estadio BBVA, Monterrey",0,1,14,2,0,away
-55,E,Curaçao,Côte d'Ivoire,2026-06-25T20:00:00Z,"Lincoln Financial Field, Philadelphia",2,1,9,5,0,home
-56,E,Ecuador,Germany,2026-06-25T20:00:00Z,"MetLife Stadium, East Rutherford",0,1,11,5,0,away
-57,F,Japan,UEFA Playoff B,2026-06-25T23:00:00Z,"AT&T Stadium, Dallas",1,1,9,4,0,draw
-58,F,Tunisia,Netherlands,2026-06-25T23:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",0,1,8,2,0,away
-59,D,USA,UEFA Playoff C,2026-06-26T02:00:00Z,"SoFi Stadium, Los Angeles",1,1,9,7,0,draw
-60,D,Paraguay,Australia,2026-06-26T02:00:00Z,"Levi's Stadium, Santa Clara",1,1,10,3,0,draw
-61,I,Norway,France,2026-06-26T19:00:00Z,"Gillette Stadium, Boston",1,1,14,5,0,draw
-62,I,Senegal,FIFA Playoff 2,2026-06-26T19:00:00Z,"BMO Field, Toronto",1,0,6,7,0,home
-63,H,Cabo Verde,Saudi Arabia,2026-06-27T00:00:00Z,"NRG Stadium, Houston",1,1,14,5,2,draw
-64,H,Uruguay,Spain,2026-06-27T00:00:00Z,"Estadio Akron, Guadalajara",0,1,7,7,0,away
-65,G,Egypt,Iran,2026-06-27T03:00:00Z,"Lumen Field, Seattle",0,1,16,5,0,away
-66,G,New Zealand,Belgium,2026-06-27T03:00:00Z,"BC Place, Vancouver",1,1,7,6,0,draw
-67,L,Panama,England,2026-06-27T21:00:00Z,"MetLife Stadium, East Rutherford",0,1,14,2,0,away
-68,L,Croatia,Ghana,2026-06-27T21:00:00Z,"Lincoln Financial Field, Philadelphia",1,0,6,4,0,home
-69,K,Colombia,Portugal,2026-06-27T23:30:00Z,"Hard Rock Stadium, Miami",1,1,7,4,0,draw
-70,K,FIFA Playoff 1,Uzbekistan,2026-06-27T23:30:00Z,"Mercedes-Benz Stadium, Atlanta",0,1,10,5,0,away
-71,J,Algeria,Austria,2026-06-28T02:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",0,1,11,5,0,away
-72,J,Jordan,Argentina,2026-06-28T02:00:00Z,"AT&T Stadium, Dallas",0,1,11,5,0,away
+19,I,FIFA Playoff 2,Norway,2026-06-16T22:00:00Z,"Gillette Stadium, Boston",0,1,12,5,0,away
+20,J,Argentina,Algeria,2026-06-17T01:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",1,0,10,3,1,home
+21,K,Portugal,FIFA Playoff 1,2026-06-17T17:00:00Z,"NRG Stadium, Houston",1,0,11,7,0,home
+22,L,England,Croatia,2026-06-17T20:00:00Z,"AT&T Stadium, Dallas",1,1,9,4,0,draw
+23,L,Ghana,Panama,2026-06-17T23:00:00Z,"BMO Field, Toronto",1,1,12,9,1,draw
+24,K,Uzbekistan,Colombia,2026-06-18T02:00:00Z,"Estadio Azteca, Mexico City",1,1,9,3,0,draw
+25,A,UEFA Playoff D,South Africa,2026-06-18T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",1,0,12,3,1,home
+26,B,Switzerland,UEFA Playoff A,2026-06-18T19:00:00Z,"SoFi Stadium, Los Angeles",2,0,14,2,1,home
+27,B,Canada,Qatar,2026-06-18T22:00:00Z,"BC Place, Vancouver",2,0,10,3,1,home
+28,A,Mexico,South Korea,2026-06-19T01:00:00Z,"Estadio Akron, Guadalajara",1,0,9,5,1,home
+29,D,UEFA Playoff C,Paraguay,2026-06-19T04:00:00Z,"Levi's Stadium, Santa Clara",0,1,10,4,0,away
+30,D,USA,Australia,2026-06-19T19:00:00Z,"Lumen Field, Seattle",1,1,14,2,0,draw
+31,C,Scotland,Morocco,2026-06-19T22:00:00Z,"Gillette Stadium, Boston",0,0,9,6,0,draw
+32,C,Brazil,Haiti,2026-06-20T01:00:00Z,"Lincoln Financial Field, Philadelphia",2,0,7,2,0,home
+33,F,Tunisia,Japan,2026-06-20T04:00:00Z,"Estadio BBVA, Monterrey",1,2,10,1,0,away
+34,F,Netherlands,UEFA Playoff B,2026-06-20T17:00:00Z,"NRG Stadium, Houston",2,0,8,3,1,home
+35,E,Germany,Côte d'Ivoire,2026-06-20T20:00:00Z,"BMO Field, Toronto",2,0,13,2,0,home
+36,E,Ecuador,Curaçao,2026-06-21T00:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",1,0,10,5,0,home
+37,H,Spain,Saudi Arabia,2026-06-21T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",3,1,7,3,0,home
+38,G,Belgium,Iran,2026-06-21T19:00:00Z,"SoFi Stadium, Los Angeles",1,2,11,2,0,away
+39,H,Uruguay,Cabo Verde,2026-06-21T22:00:00Z,"Hard Rock Stadium, Miami",2,0,7,8,1,home
+40,G,New Zealand,Egypt,2026-06-22T01:00:00Z,"BC Place, Vancouver",1,1,9,4,0,draw
+41,J,Argentina,Austria,2026-06-22T17:00:00Z,"AT&T Stadium, Dallas",1,1,10,5,1,draw
+42,I,France,FIFA Playoff 2,2026-06-22T21:00:00Z,"Lincoln Financial Field, Philadelphia",2,0,9,4,0,home
+43,I,Norway,Senegal,2026-06-23T00:00:00Z,"MetLife Stadium, East Rutherford",1,1,10,9,0,draw
+44,J,Jordan,Algeria,2026-06-23T03:00:00Z,"Levi's Stadium, Santa Clara",1,1,6,6,0,draw
+45,K,Portugal,Uzbekistan,2026-06-23T17:00:00Z,"NRG Stadium, Houston",2,1,9,3,0,home
+46,L,England,Ghana,2026-06-23T20:00:00Z,"Gillette Stadium, Boston",3,0,6,9,0,home
+47,L,Panama,Croatia,2026-06-23T23:00:00Z,"BMO Field, Toronto",1,1,15,2,0,draw
+48,K,Colombia,FIFA Playoff 1,2026-06-24T02:00:00Z,"Estadio Akron, Guadalajara",2,1,7,6,1,home
+49,B,Switzerland,Canada,2026-06-24T19:00:00Z,"BC Place, Vancouver",1,1,11,3,1,draw
+50,B,UEFA Playoff A,Qatar,2026-06-24T19:00:00Z,"Lumen Field, Seattle",1,0,8,6,1,home
+51,C,Scotland,Brazil,2026-06-24T22:00:00Z,"Hard Rock Stadium, Miami",1,2,7,2,0,away
+52,C,Morocco,Haiti,2026-06-24T22:00:00Z,"Mercedes-Benz Stadium, Atlanta",2,0,4,5,0,home
+53,A,UEFA Playoff D,Mexico,2026-06-25T01:00:00Z,"Estadio Azteca, Mexico City",1,1,16,4,0,draw
+54,A,South Africa,South Korea,2026-06-25T01:00:00Z,"Estadio BBVA, Monterrey",0,1,14,7,0,away
+55,E,Curaçao,Côte d'Ivoire,2026-06-25T20:00:00Z,"Lincoln Financial Field, Philadelphia",2,1,12,7,0,home
+56,E,Ecuador,Germany,2026-06-25T20:00:00Z,"MetLife Stadium, East Rutherford",1,1,12,2,0,draw
+57,F,Japan,UEFA Playoff B,2026-06-25T23:00:00Z,"AT&T Stadium, Dallas",1,0,9,7,0,home
+58,F,Tunisia,Netherlands,2026-06-25T23:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",1,2,12,3,0,away
+59,D,USA,UEFA Playoff C,2026-06-26T02:00:00Z,"SoFi Stadium, Los Angeles",1,1,9,5,0,draw
+60,D,Paraguay,Australia,2026-06-26T02:00:00Z,"Levi's Stadium, Santa Clara",1,1,9,4,0,draw
+61,I,Norway,France,2026-06-26T19:00:00Z,"Gillette Stadium, Boston",1,1,12,5,0,draw
+62,I,Senegal,FIFA Playoff 2,2026-06-26T19:00:00Z,"BMO Field, Toronto",0,0,8,2,0,draw
+63,H,Cabo Verde,Saudi Arabia,2026-06-27T00:00:00Z,"NRG Stadium, Houston",0,1,5,4,2,away
+64,H,Uruguay,Spain,2026-06-27T00:00:00Z,"Estadio Akron, Guadalajara",0,0,7,2,0,draw
+65,G,Egypt,Iran,2026-06-27T03:00:00Z,"Lumen Field, Seattle",0,1,12,6,0,away
+66,G,New Zealand,Belgium,2026-06-27T03:00:00Z,"BC Place, Vancouver",1,1,14,4,0,draw
+67,L,Panama,England,2026-06-27T21:00:00Z,"MetLife Stadium, East Rutherford",0,1,9,3,0,away
+68,L,Croatia,Ghana,2026-06-27T21:00:00Z,"Lincoln Financial Field, Philadelphia",2,0,9,2,0,home
+69,K,Colombia,Portugal,2026-06-27T23:30:00Z,"Hard Rock Stadium, Miami",1,1,8,4,0,draw
+70,K,FIFA Playoff 1,Uzbekistan,2026-06-27T23:30:00Z,"Mercedes-Benz Stadium, Atlanta",1,1,8,11,0,draw
+71,J,Algeria,Austria,2026-06-28T02:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",1,1,5,6,0,draw
+72,J,Jordan,Argentina,2026-06-28T02:00:00Z,"AT&T Stadium, Dallas",0,1,8,10,0,away
