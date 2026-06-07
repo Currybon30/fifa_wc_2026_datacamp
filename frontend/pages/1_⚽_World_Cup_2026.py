@@ -102,7 +102,7 @@ if data_error:
 
 with tab_live:
     st.warning(f"⚠️ The system is still under development, all of the live matches below are not the FIFA World Cup 2026 matches. We will update once the tournament starts.")
-    st.warning(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
+    st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
     if using_api:
         if live_fixtures:
             for fixture in live_fixtures:
@@ -130,7 +130,7 @@ with tab_completed:
             for fixture in shown:
                 render_match_card_api(fixture)
         else:
-            st.info("No completed matches yet.")
+            st.info("No completed matches yet — the tournament has not started.")
     else:
         shown = completed_df.head(limit)
         if len(shown):

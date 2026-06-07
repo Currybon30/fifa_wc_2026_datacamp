@@ -1,14 +1,29 @@
 """Shared Streamlit UI helpers."""
 
 from datetime import datetime
+import textwrap
 
 import streamlit as st
 
 from utils.standings import STANDINGS_TABLE_HEIGHT, TEAMS_PER_GROUP
 
 
+def render_html(body: str) -> None:
+    st.markdown(textwrap.dedent(body).strip(), unsafe_allow_html=True)
+
+
+def _show_team_flag(team_name: str, *, width: int = 56) -> None:
+    from utils.teams import flag_file_path
+
+    path = flag_file_path(team_name)
+    if path.exists():
+        st.image(str(path), width=width)
+    else:
+        st.markdown("🏳️")
+
+
 def inject_base_styles() -> None:
-    st.markdown(
+    render_html(
         """
         <style>
         .wc-hero {
@@ -153,31 +168,36 @@ def inject_base_styles() -> None:
             color: #888;
             font-size: 0.82rem;
         }
+        .wc-podium-favourite-marker {
+            display: none;
+        }
+        div[data-testid="stVerticalBlockBorderWrapper"]:has(.wc-podium-favourite-marker) {
+            border-width: 3px !important;
+            border-color: #d4af37 !important;
+            box-shadow: 0 10px 28px rgba(212, 175, 55, 0.22);
+        }
         </style>
-        """,
-        unsafe_allow_html=True,
+        """
     )
 
 
 def render_copyright_footer() -> None:
     year = datetime.now().year
     if year == 2026:
-        st.markdown(
-            f"""
+        render_html(
+            """
             <div class="wc-footer">
                 © 2026 Tuong Nguyen Pham - FIFA World Cup 2026 Prediction System. All rights reserved.
             </div>
-            """,
-            unsafe_allow_html=True,
+            """
         )
     else:
-        st.markdown(
+        render_html(
             f"""
             <div class="wc-footer">
                 © 2026 - {year} Tuong Nguyen Pham - FIFA World Cup 2026 Prediction System. All rights reserved.
             </div>
-            """,
-            unsafe_allow_html=True,
+            """
         )
 
 
@@ -224,8 +244,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
         pen_html = f'<div class="wc-score-pens">{pen_score}</div>' if pen_score else ""
         score_html = f'<div class="wc-score"><div>{main_score}</div>{pen_html}</div>'
 
-        st.markdown(
-            f"""
+        render_html(f"""
             <div class="{card_class}">
                 <span class="wc-badge {badge_class}">{status_label}</span>
                 <span style="margin-left:0.5rem;color:#666;font-size:0.85rem;">{round_name}</span>
@@ -236,9 +255,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
                 </div>
                 <div class="wc-meta">{format_kickoff(fixture["fixture"]["date"])} · {location}</div>
             </div>
-            """,
-            unsafe_allow_html=True,
-        )
+            """)
     else:
         from utils.matches import (
             fd_match_away_team,
@@ -264,8 +281,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
         pen_html = f'<div class="wc-score-pens">{pen_score}</div>' if pen_score else ""
         score_html = f'<div class="wc-score"><div>{main_score}</div>{pen_html}</div>'
 
-        st.markdown(
-            f"""
+        render_html(f"""
             <div class="wc-card">
                 <span class="wc-badge {badge_class}">{status_label}</span>
                 <span style="margin-left:0.5rem;color:#666;font-size:0.85rem;">{round_name}</span>
@@ -276,9 +292,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
                 </div>
                 <div class="wc-meta">{format_kickoff(fixture["utcDate"])}</div>
             </div>
-            """,
-            unsafe_allow_html=True,
-        )
+            """)
 
 
 def render_match_card_local(row, *, live: bool = False, finished: bool = False) -> None:
@@ -297,8 +311,7 @@ def render_match_card_local(row, *, live: bool = False, finished: bool = False) 
         badge_class = "wc-badge-upcoming"
         card_class = "wc-card"
 
-    st.markdown(
-        f"""
+    render_html(f"""
         <div class="{card_class}">
             <span class="wc-badge {badge_class}">{status_badge(status)}</span>
             <span style="margin-left:0.5rem;color:#666;font-size:0.85rem;">{row["round"]}</span>
@@ -309,9 +322,7 @@ def render_match_card_local(row, *, live: bool = False, finished: bool = False) 
             </div>
             <div class="wc-meta">{format_kickoff(row["date_utc"])} · {row["venue"]}</div>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
 
 
 def render_prediction_card(row, *, variant: str = "scores") -> None:
@@ -349,8 +360,7 @@ def render_prediction_card(row, *, variant: str = "scores") -> None:
         )
         meta_extra = ""
 
-    st.markdown(
-        f"""
+    render_html(f"""
         <div class="wc-card">
             <span class="wc-badge wc-badge-upcoming">Predicted</span>
             <span style="margin-left:0.5rem;color:#666;font-size:0.85rem;">{round_name}</span>
@@ -361,9 +371,7 @@ def render_prediction_card(row, *, variant: str = "scores") -> None:
             </div>
             <div class="wc-meta">{kickoff} · {venue}{meta_extra}</div>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
 
 
 def render_comparison_card(row) -> None:
@@ -396,8 +404,7 @@ def render_comparison_card(row) -> None:
     )
     meta_extra = f" · Predicted winner: {format_winner(row)}"
 
-    st.markdown(
-        f"""
+    render_html(f"""
         <div class="wc-card">
             <span class="wc-badge {badge_class}">{badge_label}</span>
             <span style="margin-left:0.5rem;color:#666;font-size:0.85rem;">{round_name}</span>
@@ -408,9 +415,132 @@ def render_comparison_card(row) -> None:
             </div>
             <div class="wc-meta">{kickoff} · {venue}{meta_extra}</div>
         </div>
-        """,
-        unsafe_allow_html=True,
+        """)
+
+
+def _render_probability_row(label: str, value: float, scale: float) -> None:
+    st.caption(label)
+    st.progress(min(value / scale, 1.0) if scale > 0 else 0.0, text=f"{value:.1f}%")
+
+
+def render_monte_carlo_champion_stats(df) -> None:
+    from utils.predictions import (
+        monte_carlo_tier,
+        monte_carlo_total_simulations,
+        team_champion_narrative,
     )
+    from utils.teams import all_teams_from_fixtures, is_slot_team
+
+    if df.empty:
+        st.info("Monte Carlo results are not available yet.")
+        return
+
+    tournament_teams = {t for t in all_teams_from_fixtures() if not is_slot_team(t)}
+    contenders = df[df["team"].isin(tournament_teams) & (df["win_percent"] > 0)].copy()
+    if contenders.empty:
+        contenders = df[df["win_percent"] > 0].copy()
+
+    total_sims = monte_carlo_total_simulations(df)
+    favorite = contenders.iloc[0]
+    best_podium = contenders.sort_values("podium_percent", ascending=False).iloc[0]
+    title_race = int((contenders["win_percent"] >= 1).sum())
+
+    st.subheader("🏆 Monte Carlo trophy simulator")
+    st.markdown(
+        f"We replayed the knockout bracket **{total_sims:,}** times using Elo-weighted outcomes. "
+        "Below is how often each team finishes as champion, runner-up, or on the podium."
+    )
+
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Simulations run", f"{total_sims:,}")
+    m2.metric("Title favourite", favorite["team"])
+    m3.metric("Best podium profile", best_podium["team"])
+    m4.metric("Teams with ≥1% title shot", title_race)
+
+    st.markdown("#### Title race favourites")
+    if len(contenders) < 3:
+        for _, row in contenders.head(5).iterrows():
+            st.markdown(
+                f"- **{row['team']}** — {row['win_percent']:.1f}% title · "
+                f"{row['podium_percent']:.1f}% podium"
+            )
+    else:
+        top_three = contenders.head(3)
+        podium_order = [
+            (top_three.iloc[1], "🥈", "2nd favourite"),
+            (top_three.iloc[0], "🥇", "Favourite"),
+            (top_three.iloc[2], "🥉", "3rd favourite"),
+        ]
+        podium_cols = st.columns([1, 1.15, 1], gap="medium")
+        for col, (row, medal, label) in zip(podium_cols, podium_order):
+            with col:
+                with st.container(border=True):
+                    st.markdown(f"**{medal} {label}**")
+                    _show_team_flag(row["team"])
+                    st.markdown(f"**{row['team']}**")
+                    st.metric("Title chance", f"{row['win_percent']:.1f}%")
+                    st.caption(
+                        f"{int(row['champion']):,} simulated wins · "
+                        f"{row['podium_percent']:.1f}% podium"
+                    )
+
+    st.subheader("Pick a team — read their fortune")
+    team_options = contenders["team"].tolist()
+    selected_team = st.selectbox("Choose a nation", options=team_options, label_visibility="collapsed")
+    selected = contenders.loc[contenders["team"] == selected_team].iloc[0]
+    tier = monte_carlo_tier(selected["win_percent"])
+    narrative = team_champion_narrative(selected, total_sims)
+    scale = max(selected["win_percent"], selected["podium_percent"], 0.1)
+    runner_up_pct = selected["runner_up"] / total_sims * 100
+    third_pct = selected["third_place"] / total_sims * 100
+
+    with st.container(border=True):
+        head_left, head_right = st.columns([1, 5], vertical_alignment="center")
+        with head_left:
+            _show_team_flag(selected_team, width=72)
+        with head_right:
+            st.markdown(f"### {selected_team}")
+            st.caption(tier)
+        st.write(narrative)
+        _render_probability_row("Title", selected["win_percent"], scale)
+        _render_probability_row("Podium", selected["podium_percent"], scale)
+        _render_probability_row("Runner-up", runner_up_pct, scale)
+        _render_probability_row("Third place", third_pct, scale)
+        st.caption(
+            f"Elo rating: **{int(selected['rating'])}** · "
+            f"{int(selected['champion']):,} titles · "
+            f"{int(selected['runner_up']):,} runners-up · "
+            f"{int(selected['third_place']):,} third-place finishes"
+        )
+
+    st.subheader("Who belongs in each tier?")
+    tiers = [
+        ("Title heavyweights", contenders[contenders["win_percent"] >= 5]),
+        ("Outside contenders", contenders[(contenders["win_percent"] >= 2) & (contenders["win_percent"] < 5)]),
+        ("Dark horses", contenders[(contenders["win_percent"] >= 0.5) & (contenders["win_percent"] < 2)]),
+        ("Long shots", contenders[(contenders["win_percent"] > 0) & (contenders["win_percent"] < 0.5)]),
+    ]
+    left_col, right_col = st.columns(2)
+    for col, tier_group in [(left_col, tiers[:2]), (right_col, tiers[2:])]:
+        with col:
+            for title, subset in tier_group:
+                st.markdown(f"**{title}**")
+                if subset.empty:
+                    st.caption("No teams in this band.")
+                    continue
+                for _, row in subset.head(6).iterrows():
+                    st.markdown(
+                        f"- **{row['team']}** — {row['win_percent']:.1f}% title · "
+                        f"{row['podium_percent']:.1f}% podium"
+                    )
+
+    sleeper = contenders.sort_values(["podium_percent", "win_percent"], ascending=[False, True]).iloc[0]
+    if sleeper["team"] != favorite["team"]:
+        st.info(
+            f"**Sleeper watch:** {sleeper['team']} punch above their title odds with "
+            f"{sleeper['podium_percent']:.1f}% podium rate despite only "
+            f"{sleeper['win_percent']:.1f}% to win it all."
+        )
 
 
 def render_group_standings(

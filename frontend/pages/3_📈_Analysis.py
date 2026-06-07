@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 from utils.ui import inject_base_styles, render_copyright_footer
 from utils.teams import all_teams_from_fixtures, is_slot_team, resolve_team_name
-from utils.predictions import GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV
+from utils.predictions import GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV, load_monte_carlo_predictions
 WC_GREEN = "#1a5f4a"
 WC_GREEN_LIGHT = "#2d8659"
 WC_ACCENT = "#0b3d2e"
@@ -40,6 +40,7 @@ HISTORICAL_STAT = pd.read_csv(HISTORICAL_STAT_CSV)
 ELO_RATINGS = pd.read_csv(ELO_RATINGS_CSV)
 GROUP_PREDICTIONS = pd.read_csv(GROUP_PREDICTIONS_CSV)
 KNOCKOUT_PREDICTIONS = pd.read_csv(KNOCKOUT_PREDICTIONS_CSV)
+MONTE_CARLO_PREDICTIONS = load_monte_carlo_predictions()
 
 GROUP_PREDICTIONS["home_team"] = GROUP_PREDICTIONS["home_team"].apply(resolve_team_name)
 GROUP_PREDICTIONS["away_team"] = GROUP_PREDICTIONS["away_team"].apply(resolve_team_name)
@@ -72,6 +73,7 @@ wc_elo = (
 
 HISTORICAL_STAT["date"] = pd.to_datetime(HISTORICAL_STAT["date"])
 wc_history = HISTORICAL_STAT[HISTORICAL_STAT["tournament"] == "FIFA World Cup"].copy()
+wc_history = wc_history.dropna(subset=["home_score", "away_score"])
 wc_history["year"] = wc_history["date"].dt.year
 wc_history["total_goals"] = wc_history["home_score"] + wc_history["away_score"]
 goals_by_year = (
@@ -82,7 +84,7 @@ goals_by_year = (
 )
 
 tab_elo, tab_history, tab_predictions = st.tabs(
-    ["🏆 Elo ratings", "📜 World Cup history", "🔮 2026 predictions"]
+    ["⭐ Elo ratings", "📜 World Cup history", "🔮 WC26 predictions"]
 )
 
 with tab_elo:
@@ -130,6 +132,7 @@ with tab_history:
         st.metric("All-time avg goals / match", f"{wc_history['total_goals'].mean():.2f}")
 
 with tab_predictions:
+    st.caption("The prediction analysis is for reference only. The predictions are not guaranteed to be accurate.")
     st.subheader("Predicted goals by group stage group")
     group_goals = (
         GROUP_PREDICTIONS.assign(
@@ -188,6 +191,42 @@ with tab_predictions:
     )
     fig_stats.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
     st.plotly_chart(fig_stats, use_container_width=True)
+    
+    st.divider()
+    st.subheader("Predicted goals by home - away teams")
+    home_away_goals = (
+        ALL_PREDICTIONS.groupby("stage")
+        .agg(
+            avg_home_goals=("predicted_home_goals", "mean"),
+            avg_away_goals=("predicted_away_goals", "mean"),
+        )
+        .reset_index()
+        .rename(
+            columns={
+                "avg_home_goals": "Home goals",
+                "avg_away_goals": "Away goals",
+            }
+        )
+    )
+    fig_home_away = px.bar(
+        home_away_goals.melt(id_vars="stage", var_name="metric", value_name="value"),
+        x="stage",
+        y="value",
+        color="metric",
+        barmode="group",
+        color_discrete_map={
+            "Home goals": WC_GREEN,
+            "Away goals": WC_GREEN_LIGHT,
+        },
+        labels={
+            "stage": "Stage",
+            "value": "Average per match",
+            "metric": "Metric",
+        },
+    )
+    fig_home_away.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
+    st.plotly_chart(fig_home_away, use_container_width=True)
+
 
     st.divider()
     st.subheader("Predicted yellow and red cards by stage")
@@ -257,6 +296,23 @@ with tab_predictions:
     )
     fig_corner.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
     st.plotly_chart(fig_corner, use_container_width=True)
+
+
+    st.divider()
+    st.subheader("Elo ratings and Win Percentage by teams in WC26 predictions")
+    fig_elo_win = px.scatter(
+        MONTE_CARLO_PREDICTIONS,
+        x="rating",
+        y="win_percent",
+        color="team",
+        labels={
+            "rating": "Elo rating",
+            "win_percent": "Win %",
+            "team": "Team",
+        }
+    )
+    fig_elo_win.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
+    st.plotly_chart(fig_elo_win, use_container_width=True)
 
 
 render_copyright_footer()

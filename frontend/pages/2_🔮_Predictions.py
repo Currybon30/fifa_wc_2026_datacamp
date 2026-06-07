@@ -1,8 +1,14 @@
 import streamlit as st
 
 from utils.matches import fetch_api_fixtures, get_football_data_key, parse_finished_match_scores
-from utils.predictions import apply_prediction_filters, build_score_comparison, load_all_predictions
-from utils.ui import inject_base_styles, render_comparison_card, render_copyright_footer, render_prediction_card
+from utils.predictions import apply_prediction_filters, build_score_comparison, load_all_predictions, load_monte_carlo_predictions
+from utils.ui import (
+    inject_base_styles,
+    render_comparison_card,
+    render_copyright_footer,
+    render_monte_carlo_champion_stats,
+    render_prediction_card,
+)
 
 st.set_page_config(page_title="Predictions", page_icon="🔮", layout="wide")
 
@@ -53,8 +59,8 @@ else:
         except Exception as exc:
             comparison_error = str(exc)
 
-    tab_scores, tab_corners, tab_cards, tab_comparison = st.tabs(
-        ["🥅 Goals", "🚩 Corners", "🟡 - 🔴 Cards", "📊 Comparison"]
+    tab_scores, tab_corners, tab_cards, tab_champion_stats, tab_comparison = st.tabs(
+        ["🥅 Goals", "🚩 Corners", "🟡 - 🔴 Cards", "🏅 Champion stats", "📊 Comparison"]
     )
 
     with tab_scores:
@@ -68,6 +74,9 @@ else:
     with tab_cards:
         for _, row in filtered.iterrows():
             render_prediction_card(row, variant="cards")
+
+    with tab_champion_stats:
+        render_monte_carlo_champion_stats(load_monte_carlo_predictions())
 
     with tab_comparison:
         st.caption("The predictions - the actual scores comparison.")

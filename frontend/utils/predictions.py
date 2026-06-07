@@ -14,6 +14,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RESULTS_DIR = PROJECT_ROOT / "FIFA World Cup 2026 - DataCamp Competition" / "results"
 GROUP_PREDICTIONS_CSV = RESULTS_DIR / "final_group_predictions.csv"
 KNOCKOUT_PREDICTIONS_CSV = RESULTS_DIR / "final_knockout_predictions.csv"
+MONTE_CARLO_PREDICTIONS_CSV = RESULTS_DIR / "monte_carlo_results.csv"
 
 _COMMON_COLUMNS = [
     "match_id",
@@ -57,6 +58,71 @@ def load_knockout_predictions() -> pd.DataFrame:
     df["group"] = pd.NA
     df["winner"] = df["match_winner"]
     return df[_COMMON_COLUMNS].sort_values("date_utc").reset_index(drop=True)
+
+@st.cache_data(show_spinner=False)
+def load_monte_carlo_predictions() -> pd.DataFrame:
+    df = pd.read_csv(MONTE_CARLO_PREDICTIONS_CSV)
+    df = df.rename(
+        columns={
+            "Team": "team",
+            "Rating": "rating",
+            "Champion": "champion",
+            "Runner-Up": "runner_up",
+            "3rd Place": "third_place",
+            "Podium": "podium",
+            "Win %": "win_percent",
+            "Pod %": "podium_percent",
+        }
+    )
+    df["team"] = df["team"].map(resolve_team_name)
+    return df.sort_values("win_percent", ascending=False).reset_index(drop=True)
+
+
+def monte_carlo_total_simulations(df: pd.DataFrame) -> int:
+    return int(df["champion"].sum())
+
+
+def monte_carlo_tier(win_percent: float) -> str:
+    if win_percent >= 5:
+        return "Title heavyweight"
+    if win_percent >= 2:
+        return "Outside contender"
+    if win_percent >= 0.5:
+        return "Dark horse"
+    if win_percent > 0:
+        return "Long shot"
+    return "Miracle run"
+
+
+def team_champion_narrative(row: pd.Series, total_sims: int) -> str:
+    team = row["team"]
+    wins = int(row["champion"])
+    runner_up = int(row["runner_up"])
+    third = int(row["third_place"])
+    win_pct = row["win_percent"]
+    podium_pct = row["podium_percent"]
+
+    if win_pct >= 5:
+        opener = f"{team} enter the tournament as genuine title favourites."
+    elif win_pct >= 2:
+        opener = f"{team} belong in the conversation — not the top pick, but very much in the mix."
+    elif win_pct >= 0.5:
+        opener = f"{team} are a live dark horse: the model gives them a puncher's chance."
+    elif win_pct > 0:
+        opener = f"{team} would need a fairytale run, but the simulator still sees a glimmer of hope."
+    else:
+        opener = f"{team} never reached the summit in {total_sims:,} simulated tournaments."
+
+    if win_pct > 0:
+        body = (
+            f" Across {total_sims:,} knock-out simulations they lifted the trophy "
+            f"{wins:,} times ({win_pct:.1f}%), finished runners-up "
+            f"{runner_up:,} times, and took third {third:,} times "
+            f"— a podium finish in {podium_pct:.1f}% of runs."
+        )
+    else:
+        body = f" Their Elo rating of {int(row['rating'])} kept them on the outside looking in."
+    return opener + body
 
 
 @st.cache_data(show_spinner=False)

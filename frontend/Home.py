@@ -1,7 +1,7 @@
 import streamlit as st
 
 from utils.matches import format_date_local, format_kickoff, load_local_fixtures, split_local_fixtures
-from utils.ui import inject_base_styles, render_copyright_footer
+from utils.ui import inject_base_styles, render_copyright_footer, render_html
 
 st.set_page_config(
     page_title="FIFA World Cup 2026",
@@ -26,8 +26,7 @@ last_match = fixtures.iloc[-1]
 
 st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
 
-st.markdown(
-    """
+render_html("""
     <div class="wc-hero">
         <div class="wc-hero-content">
             <h1>⚽ FIFA World Cup 2026</h1>
@@ -39,9 +38,7 @@ st.markdown(
             alt="FIFA World Cup 2026 logo"
         />
     </div>
-    """,
-    unsafe_allow_html=True,
-)
+    """)
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Group stage matches", len(group_fixtures))
@@ -56,51 +53,39 @@ st.subheader("Explore the tournament")
 nav1, nav2, nav3, nav4 = st.columns(4)
 
 with nav1:
-    st.markdown(
-        """
+    render_html("""
         <div class="wc-nav-card">
             <h3>⚽ World Cup 2026</h3>
             <p>Live matches, upcoming fixtures, and full-time results from the tournament.</p>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
     st.page_link("pages/1_⚽_World_Cup_2026.py", label="Open matches hub →")
 
 with nav2:
-    st.markdown(
-        """
+    render_html("""
         <div class="wc-nav-card">
             <h3>🔮 Predictions</h3>
             <p>Submit and review score predictions for every group and knockout match.</p>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
     st.page_link("pages/2_🔮_Predictions.py", label="Go to predictions →")
 
 with nav3:
-    st.markdown(
-        """
+    render_html("""
         <div class="wc-nav-card">
             <h3>📈 Analysis</h3>
             <p>Explore team form, Elo ratings, and historical World Cup statistics.</p>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
     st.page_link("pages/3_📈_Analysis.py", label="View analysis →")
 
 with nav4:
-    st.markdown(
-        """
+    render_html("""
         <div class="wc-nav-card">
             <h3>📊 Data Sources</h3>
             <p>Browse fixtures, knockout slots, and competition datasets.</p>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
     st.page_link("pages/4_📊_Data_Sources.py", label="Browse data sources →")
 
 st.divider()
