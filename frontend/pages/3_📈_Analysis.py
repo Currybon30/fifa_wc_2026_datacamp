@@ -162,8 +162,7 @@ with tab_predictions:
         group_goals,
         x="group",
         y="total_goals",
-        color="total_goals",
-        color_continuous_scale=["#c8e6d4", WC_GREEN],
+        color="group",
         labels={"group": "Group", "total_goals": "Avg predicted goals / match"},
     )
     fig_group.update_layout(

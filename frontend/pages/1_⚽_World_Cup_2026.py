@@ -98,7 +98,7 @@ tab_live, tab_upcoming, tab_completed, tab_standings = st.tabs(
 )
 
 if data_error:
-    st.warning(f"Could not reach API-Sports ({data_error}). Showing local schedule instead.")
+    st.error(f"❗Could not reach API-Sports API. Showing non-live fixtures without live scores instead. Sorry for the inconvenience.")
 
 with tab_live:
     st.warning(f"⚠️ The system is still under development, all of the live matches below are not the FIFA World Cup 2026 matches. We will update once the tournament starts.")
