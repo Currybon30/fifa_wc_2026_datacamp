@@ -9,7 +9,7 @@ st.set_page_config(page_title="Predictions", page_icon="🔮", layout="wide")
 inject_base_styles()
 
 st.title("🔮 Predictions")
-st.caption("The prediction system has been run 50k times with Monte Carlo simulations.")
+st.caption("AI-integrated prediction system for the FIFA World Cup 2026")
 
 predictions = load_all_predictions()
 
@@ -70,12 +70,13 @@ else:
             render_prediction_card(row, variant="cards")
 
     with tab_comparison:
+        st.caption("The predictions - the actual scores comparison.")
         if not football_data_key:
             st.warning("Configure a football-data.org API key to load final scores for comparison.")
         elif comparison_error:
             st.warning(f"Could not load final scores ({comparison_error}).")
         elif comparison_df is None or comparison_df.empty:
-            st.info("No finished matches with both predictions and final scores yet.")
+            st.info("Feature is not available. We will update it once the tournament starts.")
         else:
             exact_count = int(comparison_df["exact_score"].sum())
             result_count = int(comparison_df["result_match"].sum())

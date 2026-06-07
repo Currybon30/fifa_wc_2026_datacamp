@@ -24,7 +24,7 @@ teams = sorted(
 first_match = group_fixtures.iloc[0]
 last_match = fixtures.iloc[-1]
 
-st.warning("The website is still under development. Thank you for your patience.")
+st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
 
 st.markdown(
     """
@@ -95,13 +95,13 @@ with nav4:
     st.markdown(
         """
         <div class="wc-nav-card">
-            <h3>📊 Data</h3>
+            <h3>📊 Data Sources</h3>
             <p>Browse fixtures, knockout slots, and competition datasets.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
-    st.page_link("pages/4_📊_Data.py", label="Browse data →")
+    st.page_link("pages/4_📊_Data_Sources.py", label="Browse data sources →")
 
 st.divider()
 

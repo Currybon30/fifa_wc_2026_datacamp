@@ -23,6 +23,7 @@ FOOTBALL_DATA_BASE = os.getenv("FOOTBALL_DATA_HOST") or st.secrets.get("FOOTBALL
 WORLD_CUP_LEAGUE_ID = 1
 WORLD_CUP_SEASON = 2022 # Change to 2026 when the season starts
 MATCH_DURATION_MINUTES = 105
+LIVE_API_CACHE_TTL = 1200  # 20 minutes — API-Sports free tier refresh interval
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
@@ -128,13 +129,32 @@ def fetch_api_fixtures(api_key: str) -> dict: # Use this for final scores
     logger.info(f"Fetched successfully")
     return fixtures
 
-@st.cache_data(ttl=1200, show_spinner=False)
-def fetch_live_fixtures(api_key: str) -> list[dict]:
-    logger.info(f"Fetching live fixtures...")
+@st.cache_data(ttl=LIVE_API_CACHE_TTL, show_spinner=True)
+def _fetch_live_fixtures_cached(api_key: str) -> tuple[list[dict], float]:
+    logger.info("Fetching live fixtures...")
     fixtures = _api_get(API_FOOTBALL_BASE, "/fixtures", api_key, {"live": "all"})
-    logger.info(f"Fetched successfully")
-    # return [f for f in fixtures if f.get("league", {}).get("id") == WORLD_CUP_LEAGUE_ID]
+    logger.info("Fetched successfully")
+    # return [f for f in fixtures if f.get("league", {}).get("id") == WORLD_CUP_LEAGUE_ID], time.time()
+    return fixtures, time.time()
+
+
+def fetch_live_fixtures(api_key: str) -> list[dict]:
+    fixtures, fetched_at = _fetch_live_fixtures_cached(api_key)
+    st.session_state["live_api_fetched_at"] = fetched_at
     return fixtures
+
+
+def seconds_until_live_api_refresh() -> int:
+    fetched_at = st.session_state.get("live_api_fetched_at")
+    if fetched_at is None:
+        return LIVE_API_CACHE_TTL
+    remaining = LIVE_API_CACHE_TTL - int(time.time() - fetched_at)
+    return max(0, remaining)
+
+
+def format_refresh_countdown(seconds: int) -> str:
+    minutes, secs = divmod(seconds, 60)
+    return f"{minutes}:{secs:02d}"
 
 
 def _local_status(row: pd.Series, now: datetime) -> str:

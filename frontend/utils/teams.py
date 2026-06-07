@@ -24,6 +24,7 @@ GROUP_FIXTURES_CSV = COMPETITION_DIR / "data" / "group_fixtures.csv"
 # Common API / display variants mapped to fixture dataset names.
 FLAG_NAME_ALIASES = {
     "United States": "USA",
+    "Bosnia-Herzegovina": "Bosnia and Herzegovina",
 }
 
 
@@ -37,7 +38,7 @@ def flag_team_name(name: str) -> str:
 
 
 def team_slug(name: str) -> str:
-    normalized = unicodedata.normalize("NFKD", name)
+    normalized = unicodedata.normalize("NFKD", name) 
     ascii_name = normalized.encode("ascii", "ignore").decode("ascii")
     slug = re.sub(r"[^a-z0-9]+", "_", ascii_name.lower()).strip("_")
     return slug or "unknown"

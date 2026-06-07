@@ -4,9 +4,11 @@ from utils.matches import (
     fetch_api_fixtures,
     fetch_live_fixtures,
     filter_upcoming_local_fixtures,
+    format_refresh_countdown,
     get_api_football_key,
     get_football_data_key,
     load_local_fixtures,
+    seconds_until_live_api_refresh,
     split_api_fixtures,
     split_local_fixtures,
 )
@@ -50,6 +52,24 @@ if using_api:
         data_error = str(exc)
         using_api = False
 
+
+@st.fragment(run_every=1)
+def _render_live_refresh_countdown() -> None:
+    remaining = seconds_until_live_api_refresh()
+    if remaining <= 0:
+        st.caption("Refreshing live scores…")
+        st.rerun()
+        return
+    st.metric("Next live score refresh", format_refresh_countdown(remaining))
+
+
+with st.sidebar:
+    st.divider()
+    if using_api and not data_error:
+        _render_live_refresh_countdown()
+    elif not using_api:
+        st.caption("Configure API keys to enable live score refresh.")
+
 display_upcoming_df = filter_upcoming_local_fixtures(
     upcoming_df,
     live_df=live_df,
@@ -81,7 +101,7 @@ if data_error:
     st.warning(f"Could not reach API-Sports ({data_error}). Showing local schedule instead.")
 
 with tab_live:
-    st.warning(f"⚠️ The system is still under development, all the live matches are not the FIFA World Cup 2026 matches. We will update once the tournament starts.")
+    st.warning(f"⚠️ The system is still under development, all of the live matches below are not the FIFA World Cup 2026 matches. We will update once the tournament starts.")
     st.warning(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
     if using_api:
         if live_fixtures:
