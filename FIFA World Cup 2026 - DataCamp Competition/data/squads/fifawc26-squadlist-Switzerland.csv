@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,CHAMAKH Mouhib,Abdelmouhib,CHAMAKH,CHAMAKH,2001-08-25,Club Africain (TUN),189.0,Switzerland
-2,DF,ABDI Ali,Ali,ELABDI,ABDI,1993-12-20,OGC Nice (FRA),177.0,Switzerland
-3,DF,TALBI Montassar,Montassar Omar,TALBI,TALBI,1998-05-26,FC Lorient (FRA),190.0,Switzerland
-4,DF,REKIK Omar,Omar,REKIK,REKIK,2001-12-20,NK Maribor (SVN),188.0,Switzerland
-5,DF,AROUS Adam,Adam,AROUS,AROUS,2004-07-17,Kasımpaşa SK (TUR),188.0,Switzerland
-6,DF,BRONN Dylan,Dylan Daniel Mahmoud,BRONN,BRONN,1995-06-19,Servette FC (SUI),186.0,Switzerland
-7,FW,ACHOURI Elias,Mohamed Elyes,ACHOURI,ACHOURI,1999-02-10,FC København (DEN),187.0,Switzerland
-8,FW,SAAD Elias,Elias,SAAD,SAAD,1999-12-27,Hannover 96 (GER),185.0,Switzerland
-9,FW,MASTOURI Hazem,Hazem,MASTOURI,MASTOURI,1997-06-18,FC Dynamo Makhachkala (RUS),191.0,Switzerland
-10,MF,MEJBRI Hannibal,Hannibal,MEJBRI,MEJBRI,2003-01-21,Burnley FC (ENG),177.0,Switzerland
-11,MF,GHARBI Ismael,Ismael Seifallah,GHARBI,GHARBI,2004-04-10,FC Augsburg (GER),180.0,Switzerland
-12,DF,BEN OUANES Mortadha,Ahmed Mortadha,BEN OUANES,BEN OUANES,1994-07-02,Kasımpaşa SK (TUR),188.0,Switzerland
-13,MF,KHEDIRA Rani,Rani,KHEDIRA,KHEDIRA,1994-01-27,1 . FC Union Berlin (GER),188.0,Switzerland
-14,MF,AYARI Khalil,Khalil,AYARI,AYARI,2005-02-02,Paris Saint-Germain (FRA),174.0,Switzerland
-15,MF,HADJ MAHMOUD Mohamed,Mohamed,BELHADJ MAHMOUD,BELHADJ MAHMOUD,2000-04-24,FC Lugano (SUI),179.0,Switzerland
-16,GK,DAHMEN Aymen,Aymen,DAHMEN,DAHMEN,1997-01-28,CS Sfaxien (TUN),188.0,Switzerland
-17,MF,SKHIRI Ellyes,Ellyes Joris,SKHIRI,SKHIRI,1995-05-10,Eintracht Frankfurt (GER),185.0,Switzerland
-18,FW,ELLOUMI Rayan,Rayan,ELLOUMI,ELLOUMI,2007-09-17,Vancouver Whitecaps FC (CAN),180.0,Switzerland
-19,FW,CHAOUAT Firas,Firas,CHAOUAT,CHAOUAT,1996-05-08,Club Africain (TUN),185.0,Switzerland
-20,DF,VALERY Yan,Yan,VALERY,VALERY,1999-02-22,BSC Young Boys (SUI),181.0,Switzerland
-21,DF,BEN HMIDA Mohamed Amine,Mohamed Amine,BEN HMIDA,BEN HMIDA,1995-12-15,Espérance De Tunisie (TUN),181.0,Switzerland
-22,GK,BEN HESSEN Sabri,Sabri,BEN HSAN,BEN HSAN,1996-06-13,Étoile Du Sahel (TUN),189.0,Switzerland
-23,DF,NEFFATI Moutaz,Moutaz,NEFFATI,NEFFATI,2004-09-04,IFK Norrköping FK (SWE),182.0,Switzerland
-24,DF,CHIKHAOUI Raed,Raed,CHIKHAOUI,CHIKHAOUI,2004-06-09,US Monastir (TUN),191.0,Switzerland
-25,MF,SLIMANE Anis,Anis,BEN SLIMANE,SLIMANE,2001-03-16,Norwich City FC (ENG),188.0,Switzerland
-26,MF,TOUNEKTI Sebastian,Sebastian,TOUNEKTI,TOUNEKTI,2002-07-13,Celtic FC (SCO),182.0,Switzerland
-,Head coach,,Sabri,LAMOUCHI,,,,,France
+1,GK,KOBEL Gregor,Gregor,KOBEL,KOBEL,1997-12-06,Borussia Dortmund (GER),196.0,Switzerland
+2,DF,MUHEIM Miro,Miro Max Maria,MUHEIM,MUHEIM,1998-03-24,Hamburger SV (GER),182.0,Switzerland
+3,DF,WIDMER Silvan,Silvan Dominic,WIDMER,WIDMER,1993-03-05,1 . FSV Mainz 05 (GER),183.0,Switzerland
+4,DF,ELVEDI Nico,Nico,ELVEDI,ELVEDI,1996-09-30,Borussia Mönchengladbach (GER),189.0,Switzerland
+5,DF,AKANJI Manuel,Manuel Obafemi,AKANJI,AKANJI,1995-07-19,FC Internazionale Milano (ITA),188.0,Switzerland
+6,MF,ZAKARIA Denis,Denis Lemi,ZAKARIA LAKO LADO,ZAKARIA,1996-11-20,AS Monaco (FRA),189.0,Switzerland
+7,FW,EMBOLO Breel,Breel Donald,EMBOLO,EMBOLO,1997-02-14,Stade Rennais FC (FRA),184.0,Switzerland
+8,MF,FREULER Remo,Remo Marco,FREULER,FREULER,1992-04-15,Bologna FC (ITA),181.0,Switzerland
+9,MF,MANZAMBI Johan,Johan Kula,MANZAMBI,MANZAMBI,2005-10-14,SC Freiburg (GER),182.0,Switzerland
+10,MF,XHAKA Granit,Granit,XHAKA,XHAKA,1992-09-27,Sunderland AFC (ENG),183.0,Switzerland
+11,FW,NDOYE Dan,Dan,NDOYE,NDOYE,2000-10-25,Nottingham Forest FC (ENG),184.0,Switzerland
+12,GK,MVOGO Yvon,Yvon Landry,MVOGO NGANOMA,MVOGO,1994-06-06,FC Lorient (FRA),190.0,Switzerland
+13,DF,RODRIGUEZ Ricardo,Ricardo Ivan,RODRIGUEZ ARAYA,RODRIGUEZ,1992-08-25,Real Betis (ESP),182.0,Switzerland
+14,MF,JASHARI Ardon,Ardon,JASHARI,JASHARI,2002-07-30,AC Milan (ITA),181.0,Switzerland
+15,MF,SOW Djibril,Mohameth Djibril Ibrahima,SOW,SOW,1997-02-06,Sevilla FC (ESP),183.0,Switzerland
+16,FW,FASSNACHT Christian,Christian Andreas,FASSNACHT,FASSNACHT,1993-11-11,BSC Young Boys (SUI),185.0,Switzerland
+17,FW,VARGAS Ruben,Ruben Estephan,VARGAS MARTINEZ,VARGAS,1998-08-05,Sevilla FC (ESP),179.0,Switzerland
+18,DF,COEMERT Eray,Eray Ervin,CÖMERT,CÖMERT,1998-02-04,Valencia CF (ESP),183.0,Switzerland
+19,FW,OKAFOR Noah,Noah Arinzechukwu,OKAFOR,OKAFOR,2000-05-24,Leeds United FC (ENG),185.0,Switzerland
+20,MF,AEBISCHER Michel,Michel,AEBISCHER,AEBISCHER,1997-01-06,Pisa SC (ITA),183.0,Switzerland
+21,GK,KELLER Marvin,Marvin,KELLER,KELLER,2002-07-03,BSC Young Boys (SUI),189.0,Switzerland
+22,MF,RIEDER Fabian,Fabian,RIEDER,RIEDER,2002-02-16,FC Augsburg (GER),181.0,Switzerland
+23,FW,AMDOUNI Zeki,Mohamed Zeki,AMDOUNI,AMDOUNI,2000-12-04,Burnley FC (ENG),183.0,Switzerland
+24,DF,AMENDA Aurele,Aurèle Florian,AMENDA,AMENDA,2003-07-31,Eintracht Frankfurt (GER),194.0,Switzerland
+25,DF,JAQUEZ Luca,Luca Antony,JAQUEZ,JAQUEZ,2003-06-02,VfB Stuttgart (GER),187.0,Switzerland
+26,FW,ITTEN Cedric,Cedric Jan,ITTEN,ITTEN,1996-12-27,Fortuna Düsseldorf (GER),190.0,Switzerland
+,Head coach,,Murat,YAKIN,,,,,Switzerland

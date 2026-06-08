@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,CROCOMBE Max,Maxime Teremoana,CROCOMBE,CROCOMBE,1993-08-12,Millwall FC (ENG),190.0,Netherlands
-2,DF,PAYNE Tim,Timothy John,PAYNE,PAYNE,1994-01-10,Wellington Phoenix FC (NZL),179.0,Netherlands
-3,DF,DE VRIES Francis,Francis,DE VRIES,DE VRIES,1994-11-28,Auckland FC (NZL),181.0,Netherlands
-4,DF,BINDON Tyler,Tyler Grant,BINDON,BINDON,2005-01-27,Shefeld United FC (ENG),190.0,Netherlands
-5,DF,BOXALL Michael,Michael Joseph,BOXALL,BOXALL,1988-08-18,Minnesota United FC (USA),191.0,Netherlands
-6,MF,BELL Joe,Joe Zen Robert,BELL,BELL,1999-04-27,Viking Stavanger (NOR),182.0,Netherlands
-7,MF,GARBETT Matthew,Matthew Jimmy David,GARBETT,GARBETT,2002-04-13,Peterborough United FC (ENG),192.0,Netherlands
-8,MF,STAMENIC Marko,Marko Seufatu Nikola,STAMENIC,STAMENIC,2002-02-19,Swansea City AFC (WAL),188.0,Netherlands
-9,FW,WOOD Chris,Christopher Grant,WOOD,WOOD,1991-12-07,Nottingham Forest FC (ENG),191.0,Netherlands
-10,MF,SINGH Sarpreet,Sarpreet,SINGH,SINGH,1999-02-20,Wellington Phoenix FC (NZL),180.0,Netherlands
-11,MF,JUST Elijah,Elijah Henry,JUST,JUST,2000-05-01,Motherwell FC (SCO),176.0,Netherlands
-12,GK,PAULSEN Alex,Alexander Noah,PAULSEN,PAULSEN,2002-07-04,Lechia Gdańsk (POL),193.0,Netherlands
-13,DF,CACACE Liberato,Liberato Gianpaolo,CACACE,CACACE,2000-09-27,Wrexham AFC (WAL),182.0,Netherlands
-14,MF,RUFER Alex,Alex Arthur,RUFER,RUFER,1996-06-12,Wellington Phoenix FC (NZL),180.0,Netherlands
-15,DF,PIJNAKER Nando,Nando Zen,PIJNAKER,PIJNAKER,1999-02-25,Auckland FC (NZL),185.0,Netherlands
-16,DF,SURMAN Finn,Finn,SURMAN,SURMAN,2003-09-23,Portland Timbers (USA),190.0,Netherlands
-17,FW,BARBAROUSES Kosta,Kosta,BARBAROUSES,BARBAROUSES,1990-02-19,WS Wanderers FC (AUS),171.0,Netherlands
-18,FW,WAINE Ben,Benjamin Peter,WAINE,WAINE,2001-06-11,Port Vale FC (ENG),185.0,Netherlands
-19,MF,OLD Ben,Benjamin Craig,OLD,OLD,2002-08-13,AS Saint-Etienne (FRA),173.0,Netherlands
-20,MF,McCOWATT Callum,Callum William,MCCOWATT,MCCOWATT,1999-04-30,Silkeborg IF (DEN),180.0,Netherlands
-21,FW,RANDALL Jesse,Jesse Carmichael,RANDALL,RANDALL,2002-08-19,Auckland FC (NZL),176.0,Netherlands
-22,GK,WOUD Michael,Michael Cornelis,WOUD,WOUD,1999-01-16,Auckland FC (NZL),196.0,Netherlands
-23,MF,THOMAS Ryan,Ryan Jared,THOMAS,THOMAS,1994-12-20,PEC Zwolle (NED),176.0,Netherlands
-24,DF,ELLIOT Callan,Callan Rennie,ELLIOT,ELLIOT,1999-07-07,Auckland FC (NZL),177.0,Netherlands
-25,MF,BAYLISS Lachlan,Lachlan Ryan,BAYLISS,BAYLISS,2002-07-24,Newcastle United Jets FC (AUS),178.0,Netherlands
-26,DF,SMITH Tommy,Thomas Jefferson,SMITH,SMITH,1990-03-31,Braintree Town FC (ENG),188.0,Netherlands
-,Head coach,,Darren Shaun,BAZELEY,,,,,New Zealand
+1,GK,VERBRUGGEN Bart,Bart,VERBRUGGEN,VERBRUGGEN,2002-08-18,Brighton & Hove Albion FC (ENG),193.0,Netherlands
+2,DF,TIMBER Jurrien,Jurriën David Norman,TIMBER,J. TIMBER,2001-06-17,Arsenal FC (ENG),179.0,Netherlands
+3,MF,DE ROON Marten,Marten Elco,DE ROON,DE ROON,1991-03-29,Atalanta Bergamo (ITA),186.0,Netherlands
+4,DF,VAN DIJK Virgil,Virgil,VAN DIJK,VIRGIL,1991-07-08,Liverpool FC (ENG),195.0,Netherlands
+5,DF,AKE Nathan,Nathan Benjamin,AKE,AKÉ,1995-02-18,Manchester City FC (ENG),180.0,Netherlands
+6,DF,VAN HECKE Jan Paul,Jan-Paul,VAN HECKE,VAN HECKE,2000-06-08,Brighton & Hove Albion FC (ENG),189.0,Netherlands
+7,MF,KLUIVERT Justin,Justin Dean,KLUIVERT,KLUIVERT,1999-05-05,AFC Bournemouth (ENG),173.0,Netherlands
+8,MF,GRAVENBERCH Ryan,Ryan Jiro,GRAVENBERCH,GRAVENBERCH,2002-05-16,Liverpool FC (ENG),190.0,Netherlands
+9,FW,WEGHORST Wout,Wout François Maria,WEGHORST,WEGHORST,1992-08-07,AFC Ajax (NED),197.0,Netherlands
+10,FW,DEPAY Memphis,Memphis,DEPAY,MEMPHIS,1994-02-13,SC Corinthians (BRA),178.0,Netherlands
+11,FW,GAKPO Cody,Cody Mathès,GAKPO,GAKPO,1999-05-07,Liverpool FC (ENG),193.0,Netherlands
+12,DF,WIEFFER Mats,Mats Henrik Berne,WIEFFER,WIEFFER,1999-11-16,Brighton & Hove Albion FC (ENG),189.0,Netherlands
+13,GK,ROEFS Robin,Robin Gerardus Petrus,ROEFS,ROEFS,2003-01-17,Sunderland AFC (ENG),193.0,Netherlands
+14,MF,REIJNDERS Tijjani,Tijjani Martinus Jan,REIJNDERS,REIJNDERS,1998-07-29,Manchester City FC (ENG),178.0,Netherlands
+15,DF,VAN DE VEN Micky,Micky,VAN DE VEN,VAN DE VEN,2001-04-19,Tottenham Hotspur FC (ENG),193.0,Netherlands
+16,MF,TIL Guus,Guus Berend,TIL,TIL,1997-12-22,PSV Eindhoven (NED),188.0,Netherlands
+17,FW,LANG Noa,Noa Noëll,LANG,LANG,1999-06-17,Galatasaray SK (TUR),176.0,Netherlands
+18,FW,MALEN Donyell,Donyell,MALEN,MALEN,1999-01-19,AS Roma (ITA),178.0,Netherlands
+19,FW,BROBBEY Brian,Brian Ebenezer Adjei,BROBBEY,BROBBEY,2002-02-01,Sunderland AFC (ENG),181.0,Netherlands
+20,MF,KOOPMEINERS Teun,Teun,KOOPMEINERS,KOOPMEINERS,1998-02-28,Juventus FC (ITA),185.0,Netherlands
+21,MF,DE JONG Frenkie,Frenkie,DE JONG,F. DE JONG,1997-05-12,FC Barcelona (ESP),181.0,Netherlands
+22,DF,DUMFRIES Denzel,Denzel Justus Morris,DUMFRIES,DUMFRIES,1996-04-18,FC Internazionale Milano (ITA),188.0,Netherlands
+23,GK,FLEKKEN Mark,Mark Maria Hubertus,FLEKKEN,FLEKKEN,1993-06-13,Bayer 04 Leverkusen (GER),195.0,Netherlands
+24,FW,SUMMERVILLE Crysencio,Crysencio Jilbert Sylverio Cir,SUMMERVILLE,SUMMERVILLE,2001-10-30,West Ham United FC (ENG),172.0,Netherlands
+25,DF,HATO Jorrel,Jorrel Evan,HATO,HATO,2006-03-07,Chelsea FC (ENG),182.0,Netherlands
+26,MF,TIMBER Quinten,Quinten Ryan Crispito,TIMBER,Q. TIMBER,2001-06-17,Olympique Marseille (FRA),176.0,Netherlands
+,Head coach,,Ronald,KOEMAN,,,,,Netherlands

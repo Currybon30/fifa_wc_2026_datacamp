@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,RANGEL Raul,José Raúl,RANGEL AGUILAR,R. RANGEL,2000-02-25,CD Guadalajara (MEX),190.0,Korea Republic
-2,DF,SANCHEZ Jorge,Jorge Eduardo,SÁNCHEZ RAMOS,J. SÁNCHEZ,1997-12-10,PAOK Saloniki (GRE),176.0,Korea Republic
-3,DF,MONTES Cesar,César Jasib,MONTES CASTRO,C. MONTES,1997-02-24,FC Lokomotiv Moscow (RUS),191.0,Korea Republic
-4,DF,ALVAREZ Edson,Edson Omar,ÁLVAREZ VELÁZQUEZ,E. ÁLVAREZ,1997-10-24,Fenerbahçe SK (TUR),180.0,Korea Republic
-5,DF,VASQUEZ Johan,Johan Felipe,VÁSQUEZ IBARRA,J. VÁSQUEZ,1998-10-22,Genoa CFC (ITA),182.0,Korea Republic
-6,MF,LIRA Erik,Erik Antonio,LIRA MÉNDEZ,E. LIRA,2000-05-08,CF Cruz Azul (MEX),172.0,Korea Republic
-7,MF,ROMO Luis,Luis Francisco,ROMO BARRÓN,L. ROMO,1995-06-05,CD Guadalajara (MEX),183.0,Korea Republic
-8,MF,FIDALGO Alvaro,Álvaro,FIDALGO FERNÁNDEZ,FIDALGO,1997-04-09,Real Betis (ESP),175.0,Korea Republic
-9,FW,JIMENEZ Raul,Raúl Alonso,JIMÉNEZ RODRÍGUEZ,RAÚL,1991-05-05,Fulham FC (ENG),188.0,Korea Republic
-10,FW,VEGA Alexis,Ernesto Alexis,VEGA ROJAS,A. VEGA,1997-11-25,Deportivo Toluca FC (MEX),175.0,Korea Republic
-11,FW,GIMENEZ Santiago,Santiago Tomás,GIMENEZ,S. GIMENEZ,2001-04-18,AC Milan (ITA),180.0,Korea Republic
-12,GK,ACEVEDO Carlos,Carlos,ACEVEDO LÓPEZ,C. ACEVEDO,1996-04-19,Club Santos Laguna (MEX),185.0,Korea Republic
-13,GK,OCHOA Guillermo,Francisco Guillermo,OCHOA MAGAÑA,G. OCHOA,1985-07-13,AEL Limassol (CYP),185.0,Korea Republic
-14,FW,GONZALEZ Armando,Armando,GONZÁLEZ ALBA,A. GONZÁLEZ,2003-04-20,CD Guadalajara (MEX),182.0,Korea Republic
-15,DF,REYES Israel,Israel,REYES ROMERO,I. REYES,2000-05-23,Club América (MEX),181.0,Korea Republic
-16,FW,QUINONES Julian,Julián Andrés,QUIÑONES QUIÑONES,J. QUIÑONES,1997-03-24,Al Qadsiah FC (KSA),177.0,Korea Republic
-17,MF,PINEDA Orbelin,Orbelín,PINEDA ALVARADO,ORBELÍN,1996-03-24,AEK Athens (GRE),169.0,Korea Republic
-18,MF,VARGAS Obed,Obed Goméz,VARGAS,O. VARGAS,2005-08-05,Atlético De Madrid (ESP),175.0,Korea Republic
-19,MF,MORA Gilberto,Gilberto Rafael,MORA ZAMBRANO,G. MORA,2008-10-14,Club Tijuana (MEX),175.0,Korea Republic
-20,DF,CHAVEZ Mateo,Mateo,CHÁVEZ GARCÍA,M. CHÁVEZ,2004-05-12,AZ Alkmaar (NED),178.0,Korea Republic
-21,FW,HUERTA Cesar,César Saúl,HUERTA VALERA,C. HUERTA,2000-12-03,RSC Anderlecht (BEL),171.0,Korea Republic
-22,FW,MARTINEZ Guillermo,Guillermo,MARTÍNEZ AYALA,G. MARTÍNEZ,1995-03-15,Pumas UNAM (MEX),191.0,Korea Republic
-23,DF,GALLARDO Jesus,Jesús Daniel,GALLARDO VASCONCELOS,J. GALLARDO,1994-08-15,Deportivo Toluca FC (MEX),174.0,Korea Republic
-24,MF,CHAVEZ Luis,Luis Gerardo,CHÁVEZ MAGALLÓN,L. CHÁVEZ,1996-01-15,FC Dynamo Moscow (RUS),178.0,Korea Republic
-25,FW,ALVARADO Roberto,Roberto Carlos,ALVARADO HERNÁNDEZ,R. ALVARADO,1998-09-07,CD Guadalajara (MEX),176.0,Korea Republic
-26,MF,GUTIERREZ Brian,Brian,GUTIÉRREZ,B. GUTIÉRREZ,2003-06-17,CD Guadalajara (MEX),178.0,Korea Republic
-,Head coach,,Javier,AGUIRRE ONAINDIA,,,,,Mexico
+1,GK,KIM Seunggyu,Seunggyu,KIM,SEUNGGYU,1990-09-30,FC Tokyo (JPN),187.0,Korea Republic
+2,DF,LEE Hanbeom,Hanbeom,LEE,HANBEOM,2002-06-17,FC Midtjylland (DEN),188.0,Korea Republic
+3,MF,LEE Gihyuk,Gihyuk,LEE,GIHYUK,2000-07-07,Gangwon FC (KOR),184.0,Korea Republic
+4,DF,KIM Minjae,Minjae,KIM,MINJAE,1996-11-15,FC Bayern München (GER),190.0,Korea Republic
+5,DF,KIM Taehyeon,Taehyeon,KIM,TAEHYEON,2000-09-17,Kashima Antlers (JPN),186.0,Korea Republic
+6,MF,HWANG Inbeom,Inbeom,HWANG,INBEOM,1996-09-20,Feyenoord Rotterdam (NED),177.0,Korea Republic
+7,FW,SON Heungmin,Heung Min,SON,HEUNGMIN,1992-07-08,LAFC (USA),183.0,Korea Republic
+8,MF,PAIK Seungho,Seungho,PAIK,SEUNGHO,1997-03-17,Birmingham City FC (ENG),182.0,Korea Republic
+9,FW,CHO Guesung,Guesung,CHO,GUESUNG,1998-01-25,FC Midtjylland (DEN),188.0,Korea Republic
+10,MF,LEE Jaesung,Jae Sung,LEE,JAESUNG,1992-08-10,1 . FSV Mainz 05 (GER),180.0,Korea Republic
+11,MF,HWANG Heechan,Hee Chan,HWANG,HEECHAN,1996-01-26,Wolverhampton Wanderers FC (ENG),177.0,Korea Republic
+12,GK,SONG Bumkeun,Bumkeun,SONG,BUMKEUN,1997-10-15,Jeonbuk Hyundai Motors FC (KOR),196.0,Korea Republic
+13,DF,LEE Taeseok,Taeseok,LEE,TAESEOK,2002-07-28,FK Austria Wien (AUT),174.0,Korea Republic
+14,DF,CHO Wije,Wije,CHO,WIJE,2001-08-25,Jeonbuk Hyundai Motors FC (KOR),190.0,Korea Republic
+15,DF,KIM Moonhwan,Moonhwan,KIM,MOONHWAN,1995-08-01,Daejeon Hana Citizen FC (KOR),173.0,Korea Republic
+16,DF,PARK Jinseob,Jinseob,PARK,JINSEOB,1995-10-23,Zhejiang FC (CHN),183.0,Korea Republic
+17,MF,BAE Junho,Junho,BAE,JUNHO,2003-08-21,Stoke City FC (ENG),180.0,Korea Republic
+18,FW,OH Hyeongyu,Hyeongyu,OH,HYEONGYU,2001-04-12,Beşiktaş JK (TUR),183.0,Korea Republic
+19,MF,LEE Kangin,Kangin,LEE,KANGIN,2001-02-19,Paris Saint-Germain (FRA),174.0,Korea Republic
+20,MF,YANG Hyunjun,Hyunjun,YANG,HYUNJUN,2002-05-25,Celtic FC (SCO),179.0,Korea Republic
+21,GK,JO Hyeonwoo,Hyeonwoo,JO,HYEONWOO,1991-09-25,Ulsan HD (KOR),189.0,Korea Republic
+22,DF,SEOL Youngwoo,Youngwoo,SEOL,YOUNGWOO,1998-12-05,FK Crvena Zvezda (SRB),180.0,Korea Republic
+23,DF,CASTROP Jens,Jens,CASTROP,JENS,2003-07-29,Borussia Mönchengladbach (GER),178.0,Korea Republic
+24,MF,KIM Jingyu,Jingyu,KIM,JINGYU,1997-02-24,Jeonbuk Hyundai Motors FC (KOR),177.0,Korea Republic
+25,MF,EOM Jisung,Jisung,EOM,JISUNG,2002-05-09,Swansea City AFC (WAL),177.0,Korea Republic
+26,MF,LEE Donggyeong,Donggyeong,LEE,DONGGYEONG,1997-09-20,Ulsan HD (KOR),175.0,Korea Republic
+,Head coach,,Myung Bo,HONG,,,,,Korea Republic

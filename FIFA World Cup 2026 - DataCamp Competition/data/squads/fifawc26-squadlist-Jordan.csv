@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,KIM Seunggyu,Seunggyu,KIM,SEUNGGYU,1990-09-30,FC Tokyo (JPN),187.0,Jordan
-2,DF,LEE Hanbeom,Hanbeom,LEE,HANBEOM,2002-06-17,FC Midtjylland (DEN),188.0,Jordan
-3,MF,LEE Gihyuk,Gihyuk,LEE,GIHYUK,2000-07-07,Gangwon FC (KOR),184.0,Jordan
-4,DF,KIM Minjae,Minjae,KIM,MINJAE,1996-11-15,FC Bayern München (GER),190.0,Jordan
-5,DF,KIM Taehyeon,Taehyeon,KIM,TAEHYEON,2000-09-17,Kashima Antlers (JPN),186.0,Jordan
-6,MF,HWANG Inbeom,Inbeom,HWANG,INBEOM,1996-09-20,Feyenoord Rotterdam (NED),177.0,Jordan
-7,FW,SON Heungmin,Heung Min,SON,HEUNGMIN,1992-07-08,LAFC (USA),183.0,Jordan
-8,MF,PAIK Seungho,Seungho,PAIK,SEUNGHO,1997-03-17,Birmingham City FC (ENG),182.0,Jordan
-9,FW,CHO Guesung,Guesung,CHO,GUESUNG,1998-01-25,FC Midtjylland (DEN),188.0,Jordan
-10,MF,LEE Jaesung,Jae Sung,LEE,JAESUNG,1992-08-10,1 . FSV Mainz 05 (GER),180.0,Jordan
-11,MF,HWANG Heechan,Hee Chan,HWANG,HEECHAN,1996-01-26,Wolverhampton Wanderers FC (ENG),177.0,Jordan
-12,GK,SONG Bumkeun,Bumkeun,SONG,BUMKEUN,1997-10-15,Jeonbuk Hyundai Motors FC (KOR),196.0,Jordan
-13,DF,LEE Taeseok,Taeseok,LEE,TAESEOK,2002-07-28,FK Austria Wien (AUT),174.0,Jordan
-14,DF,CHO Wije,Wije,CHO,WIJE,2001-08-25,Jeonbuk Hyundai Motors FC (KOR),190.0,Jordan
-15,DF,KIM Moonhwan,Moonhwan,KIM,MOONHWAN,1995-08-01,Daejeon Hana Citizen FC (KOR),173.0,Jordan
-16,DF,PARK Jinseob,Jinseob,PARK,JINSEOB,1995-10-23,Zhejiang FC (CHN),183.0,Jordan
-17,MF,BAE Junho,Junho,BAE,JUNHO,2003-08-21,Stoke City FC (ENG),180.0,Jordan
-18,FW,OH Hyeongyu,Hyeongyu,OH,HYEONGYU,2001-04-12,Beşiktaş JK (TUR),183.0,Jordan
-19,MF,LEE Kangin,Kangin,LEE,KANGIN,2001-02-19,Paris Saint-Germain (FRA),174.0,Jordan
-20,MF,YANG Hyunjun,Hyunjun,YANG,HYUNJUN,2002-05-25,Celtic FC (SCO),179.0,Jordan
-21,GK,JO Hyeonwoo,Hyeonwoo,JO,HYEONWOO,1991-09-25,Ulsan HD (KOR),189.0,Jordan
-22,DF,SEOL Youngwoo,Youngwoo,SEOL,YOUNGWOO,1998-12-05,FK Crvena Zvezda (SRB),180.0,Jordan
-23,DF,CASTROP Jens,Jens,CASTROP,JENS,2003-07-29,Borussia Mönchengladbach (GER),178.0,Jordan
-24,MF,KIM Jingyu,Jingyu,KIM,JINGYU,1997-02-24,Jeonbuk Hyundai Motors FC (KOR),177.0,Jordan
-25,MF,EOM Jisung,Jisung,EOM,JISUNG,2002-05-09,Swansea City AFC (WAL),177.0,Jordan
-26,MF,LEE Donggyeong,Donggyeong,LEE,DONGGYEONG,1997-09-20,Ulsan HD (KOR),175.0,Jordan
-,Head coach,,Myung Bo,HONG,,,,,Korea Republic
+1,GK,YAZEED ABULAILA,Yazeed Mo'ien Hasan,ABULAILA,YAZEED,1993-01-08,Al Hussein SC (JOR),188.0,Jordan
+2,DF,MOHAMMAD ABUHASHEESH,Mohammad Ali Hasan,ABUHASHEESH,ABU HASHEESH,1995-05-09,Al Karma SC (IRQ),179.0,Jordan
+3,DF,ABDALLAH NASIB,Abdallah Mousa Musallam,NASIB,NASIB,1994-02-25,Al Zawra'a SC (IRQ),184.0,Jordan
+4,DF,HUSAM ABUDAHAB,Husam Ali Mohammad,ABUDAHAB,ABU DAHAB,2000-05-13,Al Faisaly SC (JOR),186.0,Jordan
+5,DF,YAZAN ALARAB,Yazan Mousa Mahmoud,ALARAB,ALARAB,1996-01-31,FC Seoul (KOR),185.0,Jordan
+6,MF,AMER JAMOUS,Amer Rasem Adel,JAMOUS,JAMOUS,2002-07-03,Al Zawra'a SC (IRQ),177.0,Jordan
+7,FW,MOHAMMAD ABUZRAIQ,Mohammad Faisal Yousef,ABU ZRAIQ,ABU ZRAIQ,1997-12-30,Raja Casablanca (MAR),170.0,Jordan
+8,MF,NOOR ALRAWABDEH,Noor Al-Deen Mahmoud Ali,AL RAWABDEH,ALRAWABDEH,1997-02-24,Selangor FC (MAS),182.0,Jordan
+9,FW,ALI OLWAN,Ali Iyad Ali,OLWAN,OLWAN,2000-03-26,Al Sailiya SC (QAT),182.0,Jordan
+10,FW,MOUSA ALTAMARI,Mousa Mohammad Mousa,SULEIMAN,ALTAMARI,1997-06-10,Stade Rennais FC (FRA),176.0,Jordan
+11,FW,ODEH FAKHOURY,Odeh Burhan Shehadeh,FAKHOURY,ODEH,2005-11-22,Pyramids FC (EGY),180.0,Jordan
+12,GK,NOUR BANIATEYAH,Noureddin Zaid Khaleel,BANI ATEYAH,BANI ATEYAH,1993-01-25,Al Faisaly SC (JOR),179.0,Jordan
+13,FW,MAHMOUD ALMARDI,Mahmoud Nayef Ahmad,ALMARDI,ALMARDI,1993-10-06,Al Hussein SC (JOR),173.0,Jordan
+14,MF,RAJAEI AYED,Raja'ei Ayed Fadel,HASAN,RAJA'EI,1993-07-25,Al Hussein SC (JOR),175.0,Jordan
+15,MF,IBRAHIM SADEH,Ibrahim Mohammad Sami,SA'DEH,SA'DEH,2000-04-27,Al Karma SC (IRQ),175.0,Jordan
+16,DF,MOHAMMAD ABUALNADI,Mohammad Majed Jamil,ABUALNADI,ABU ALNADI,2001-02-08,Selangor FC (MAS),185.0,Jordan
+17,DF,SALEEM OBAID,Saleem Amer Saleem,OBAID,SALEEM,1992-01-17,Al Hussein SC (JOR),187.0,Jordan
+18,FW,IBRAHIM SABRA,Ibrahim Mohammad Abdallah,SABRA,SABRA,2006-02-01,NK Lokomotiva Zagreb (CRO),184.0,Jordan
+19,DF,SAED ALROSAN,Sa'ed Ahmad Salameh,ALROSAN,SA'ED,1997-02-01,Al Hussein SC (JOR),186.0,Jordan
+20,MF,MOHANNAD ABUTAHA,Mohannad Mahmoud Saleh,ABU TAHA,ABU TAHA,2003-02-02,Al-Quwa Al-Jawiya (IRQ),173.0,Jordan
+21,MF,NIZAR ALRASHDAN,Nizar Mahmoud Ahmed,AL-RASHDAN,NIZAR,1999-03-23,Qatar SC (QAT),183.0,Jordan
+22,GK,ABDALLAH ALFAKHORI,Abdallah Ra'ed Mahmoud,ALFAKHORI,ALFAKHORI,2000-01-22,Al Wahdat SC (JOR),190.0,Jordan
+23,DF,EHSAN HADDAD,Ehsan Manel Farhan,HADDAD,EHSAN,1994-02-05,Al Hussein SC (JOR),174.0,Jordan
+24,FW,ALI AZAIZEH,Ali Ahmad Ali,AZAIZEH,AZAIZEH,2004-04-13,Al Shabab FC (KSA),178.0,Jordan
+25,MF,MOHAMMAD ALDAOUD,Mohammad Ratib Mohammad,ALDAOUD,ALDAOUD,1992-04-12,Al Wahdat SC (JOR),185.0,Jordan
+26,DF,ANAS BADAWI,Anas Said Ghazi,BADAWI,BADAWI,1997-09-13,Al Faisaly SC (JOR),174.0,Jordan
+,Head coach,,Jamal,SELLAMI,,,,,Morocco

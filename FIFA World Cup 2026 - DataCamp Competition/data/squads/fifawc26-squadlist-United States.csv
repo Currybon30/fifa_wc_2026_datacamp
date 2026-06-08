@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,ROCHET Sergio,Sergio Ramón,ROCHET ALVAREZ,S. ROCHET,1993-03-23,SC Internacional (BRA),189.0,United States
-2,DF,GIMENEZ Jose Maria,José María,GIMÉNEZ DE VARGAS,J.M. GIMÉNEZ,1995-01-20,Atlético De Madrid (ESP),186.0,United States
-3,DF,CACERES Sebastian,Sebastián Enzo,CÁCERES RAMOS,S. CACERES,1999-08-18,Club América (MEX),180.0,United States
-4,DF,ARAUJO Ronald,Ronald Federico,ARAÚJO DA SILVA,R. ARAUJO,1999-03-07,FC Barcelona (ESP),185.0,United States
-5,MF,UGARTE Manuel,Manuel,UGARTE RIBEIRO,M. UGARTE,2001-04-11,Manchester United FC (ENG),182.0,United States
-6,MF,BENTANCUR Rodrigo,Rodrigo,BENTANCUR COLMÁN,R. BENTANCUR,1997-06-25,Tottenham Hotspur FC (ENG),187.0,United States
-7,MF,DE LA CRUZ Nicolas,Diego Nicolás,DE LA CRUZ ARCOSA,N. DE LA CRUZ,1997-06-01,CR Flamengo (BRA),167.0,United States
-8,MF,VALVERDE Federico,Federico Santiago,VALVERDE DIPETTA,F. VALVERDE,1998-07-22,Real Madrid C. F. (ESP),182.0,United States
-9,FW,NUNEZ Darwin,Darwin Gabriel,NUÑEZ RIBEIRO,D. NUÑEZ,1999-06-24,Al Hilal SC (KSA),185.0,United States
-10,MF,DE ARRASCAETA Giorgian,Giorgian Daniel,DE ARRASCAETA BENEDETTI,G. DE ARRASCAETA,1994-06-01,CR Flamengo (BRA),177.0,United States
-11,FW,PELLISTRI Facundo,Facundo,PELLISTRI REBOLLO,F. PELLISTRI,2001-12-20,Panathinaikos FC (GRE),174.0,United States
-12,GK,MELE Santiago,Santiago Andres,MELE CASTAÑERO,S. MELE,1997-09-06,CF Monterrey (MEX),185.0,United States
-13,DF,VARELA Guillermo,Guillermo,VARELA OLIVERA,G. VARELA,1993-03-24,CR Flamengo (BRA),174.0,United States
-14,MF,CANOBBIO Agustin,Agustin,CANOBBIO,A. CANOBBIO,1998-10-01,Fluminense FC (BRA),176.0,United States
-15,MF,MARTINEZ Emiliano,Emiliano,MARTÍNEZ TORANZA,E. MARTINEZ,1999-08-17,SE Palmeiras (BRA),184.0,United States
-16,DF,OLIVERA Mathias,Mathías,OLIVERA MIRAMONTES,M. OLIVERA,1997-10-31,SSC Napoli (ITA),174.0,United States
-17,DF,VINA Matias,Matías Nicolas,VIÑA SUSPERREGUY,M. VIÑA,1997-11-09,CA River Plate (ARG),180.0,United States
-18,FW,RODRIGUEZ Brian,Paul Brian,RODRÍGUEZ BRAVO,B. RODRIGUEZ,2000-05-20,Club América (MEX),175.0,United States
-19,FW,AGUIRRE Rodrigo,Rodrigo Sebastian,AGUIRRE SOTO,R. AGUIRRE,1994-10-01,Tigres UANL (MEX),182.0,United States
-20,MF,ARAUJO Maxi,Maximiliano Javier,ARAÚJO VILCHES,M. ARAUJO,2000-02-15,Sporting CP (POR),176.0,United States
-21,FW,VINAS Federico,Federico Sebastian,VIÑAS BARBOZA,F. VIÑAS,1998-06-30,Real Oviedo (ESP),181.0,United States
-22,MF,PIQUEREZ Joaquin,Joaquin,PIQUEREZ MOREIRA,J. PIQUEREZ,1998-08-24,SE Palmeiras (BRA),185.0,United States
-23,GK,MUSLERA Fernando,Nestor Fernando,MUSLERA MICOL,F. MUSLERA,1986-06-16,Estudiantes LP (ARG),190.0,United States
-24,DF,BUENO Santiago,Santiago Ignacio,BUENO SCIUTTO,S. BUENO,1998-11-09,Wolverhampton Wanderers FC (ENG),191.0,United States
-25,MF,SANABRIA Juan Manuel,Juan Manuel,SANABRIA MAGOLÉ,J.M. SANABRIA,2000-03-29,Real Salt Lake (USA),170.0,United States
-26,MF,ZALAZAR Rodrigo,Radrigo,ZALAZAR MARTINEZ,R. ZALAZAR,1999-08-12,SC Braga (POR),175.0,United States
-,Head coach,,Marcelo Alberto,BIELSA,,,,,Argentina
+1,GK,TURNER Matt,Matthew Charles,TURNER,TURNER,1994-06-24,New England Revolution (USA),190.0,United States
+2,DF,DEST Sergino,Sergiño Gianni,DEST,DEST,2000-11-03,PSV Eindhoven (NED),173.0,United States
+3,DF,RICHARDS Chris,Christopher Jeffrey,RICHARDS,RICHARDS,2000-03-28,Crystal Palace FC (ENG),189.0,United States
+4,MF,ADAMS Tyler,Tyler Shaan,ADAMS,ADAMS,1999-02-14,AFC Bournemouth (ENG),175.0,United States
+5,DF,ROBINSON Antonee,Antonee,ROBINSON,A. ROBINSON,1997-08-08,Fulham FC (ENG),183.0,United States
+6,DF,TRUSTY Auston,Auston Levi-Jesaiah,TRUSTY,TRUSTY,1998-08-12,Celtic FC (SCO),190.0,United States
+7,MF,REYNA Giovanni,Giovanni Alejandro,REYNA,REYNA,2002-11-13,Borussia Mönchengladbach (GER),187.0,United States
+8,MF,McKENNIE Weston,Weston James Earl,MC KENNIE,MCKENNIE,1998-08-28,Juventus FC (ITA),180.0,United States
+9,FW,PEPI Ricardo,Ricardo Daniel,PEPI,PEPI,2003-01-09,PSV Eindhoven (NED),185.0,United States
+10,FW,PULISIC Christian,Christian Mate,PULISIC,PULISIC,1998-09-18,AC Milan (ITA),177.0,United States
+11,FW,AARONSON Brenden,Brenden Russell,AARONSON,AARONSON,2000-10-22,Leeds United FC (ENG),177.0,United States
+12,DF,ROBINSON Miles,Miles Gordon,ROBINSON,M. ROBINSON,1997-03-14,FC Cincinnatti (USA),187.0,United States
+13,DF,REAM Tim,Timothy Michael,REAM,REAM,1987-10-05,Charlotte FC (USA),186.0,United States
+14,MF,BERHALTER Sebastian,Sebastian Matthew,BERHALTER,BERHALTER,2001-05-10,Vancouver Whitecaps FC (CAN),175.0,United States
+15,MF,ROLDAN Cristian,Cristian,ROLDAN,ROLDAN,1995-06-03,Seattle Sounders FC (USA),173.0,United States
+16,DF,FREEMAN Alex,Alexander Michael,FREEMAN,FREEMAN,2004-08-09,Villarreal CF (ESP),188.0,United States
+17,MF,TILLMAN Malik,Malik Leon,TILLMAN,TILLMAN,2002-05-28,Bayer 04 Leverkusen (GER),187.0,United States
+18,DF,ARFSTEN Max,Maximilian Michael,ARFSTEN,ARFSTEN,2001-04-19,Columbus Crew (USA),185.0,United States
+19,FW,WRIGHT Haji,Haji Amir,WRIGHT,WRIGHT,1998-03-27,Coventry City FC (ENG),191.0,United States
+20,FW,BALOGUN Folarin,Folarin Jolaoluwa,BALOGUN,BALOGUN,2001-07-03,AS Monaco (FRA),179.0,United States
+21,FW,WEAH Timothy,Timothy Tarpeh,WEAH,WEAH,2000-02-22,Olympique Marseille (FRA),183.0,United States
+22,DF,McKENZIE Mark,Mark Alexander,MCKENZIE,MCKENZIE,1999-02-25,Toulouse FC (FRA),186.0,United States
+23,DF,SCALLY Joe,Joseph Michael,SCALLY,SCALLY,2002-12-31,Borussia Mönchengladbach (GER),184.0,United States
+24,GK,FREESE Matt,Matthew Andrew Geary,FREESE,FREESE,1998-09-02,New York City FC (USA),198.0,United States
+25,GK,BRADY Chris,Christopher Keith,BRADY,BRADY,2004-03-03,Chicago Fire FC (USA),193.0,United States
+26,FW,ZENDEJAS Alex,Alejandro,ZENDEJAS SAAVEDRA,ZENDEJAS,1998-02-07,Club América (MEX),167.0,United States
+,Head coach,,Mauricio Roberto,POCHETTINO TROSSERO,,,,,Argentina

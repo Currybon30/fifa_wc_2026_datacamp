@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,KOBEL Gregor,Gregor,KOBEL,KOBEL,1997-12-06,Borussia Dortmund (GER),196.0,Sweden
-2,DF,MUHEIM Miro,Miro Max Maria,MUHEIM,MUHEIM,1998-03-24,Hamburger SV (GER),182.0,Sweden
-3,DF,WIDMER Silvan,Silvan Dominic,WIDMER,WIDMER,1993-03-05,1 . FSV Mainz 05 (GER),183.0,Sweden
-4,DF,ELVEDI Nico,Nico,ELVEDI,ELVEDI,1996-09-30,Borussia Mönchengladbach (GER),189.0,Sweden
-5,DF,AKANJI Manuel,Manuel Obafemi,AKANJI,AKANJI,1995-07-19,FC Internazionale Milano (ITA),188.0,Sweden
-6,MF,ZAKARIA Denis,Denis Lemi,ZAKARIA LAKO LADO,ZAKARIA,1996-11-20,AS Monaco (FRA),189.0,Sweden
-7,FW,EMBOLO Breel,Breel Donald,EMBOLO,EMBOLO,1997-02-14,Stade Rennais FC (FRA),184.0,Sweden
-8,MF,FREULER Remo,Remo Marco,FREULER,FREULER,1992-04-15,Bologna FC (ITA),181.0,Sweden
-9,MF,MANZAMBI Johan,Johan Kula,MANZAMBI,MANZAMBI,2005-10-14,SC Freiburg (GER),182.0,Sweden
-10,MF,XHAKA Granit,Granit,XHAKA,XHAKA,1992-09-27,Sunderland AFC (ENG),183.0,Sweden
-11,FW,NDOYE Dan,Dan,NDOYE,NDOYE,2000-10-25,Nottingham Forest FC (ENG),184.0,Sweden
-12,GK,MVOGO Yvon,Yvon Landry,MVOGO NGANOMA,MVOGO,1994-06-06,FC Lorient (FRA),190.0,Sweden
-13,DF,RODRIGUEZ Ricardo,Ricardo Ivan,RODRIGUEZ ARAYA,RODRIGUEZ,1992-08-25,Real Betis (ESP),182.0,Sweden
-14,MF,JASHARI Ardon,Ardon,JASHARI,JASHARI,2002-07-30,AC Milan (ITA),181.0,Sweden
-15,MF,SOW Djibril,Mohameth Djibril Ibrahima,SOW,SOW,1997-02-06,Sevilla FC (ESP),183.0,Sweden
-16,FW,FASSNACHT Christian,Christian Andreas,FASSNACHT,FASSNACHT,1993-11-11,BSC Young Boys (SUI),185.0,Sweden
-17,FW,VARGAS Ruben,Ruben Estephan,VARGAS MARTINEZ,VARGAS,1998-08-05,Sevilla FC (ESP),179.0,Sweden
-18,DF,COEMERT Eray,Eray Ervin,CÖMERT,CÖMERT,1998-02-04,Valencia CF (ESP),183.0,Sweden
-19,FW,OKAFOR Noah,Noah Arinzechukwu,OKAFOR,OKAFOR,2000-05-24,Leeds United FC (ENG),185.0,Sweden
-20,MF,AEBISCHER Michel,Michel,AEBISCHER,AEBISCHER,1997-01-06,Pisa SC (ITA),183.0,Sweden
-21,GK,KELLER Marvin,Marvin,KELLER,KELLER,2002-07-03,BSC Young Boys (SUI),189.0,Sweden
-22,MF,RIEDER Fabian,Fabian,RIEDER,RIEDER,2002-02-16,FC Augsburg (GER),181.0,Sweden
-23,FW,AMDOUNI Zeki,Mohamed Zeki,AMDOUNI,AMDOUNI,2000-12-04,Burnley FC (ENG),183.0,Sweden
-24,DF,AMENDA Aurele,Aurèle Florian,AMENDA,AMENDA,2003-07-31,Eintracht Frankfurt (GER),194.0,Sweden
-25,DF,JAQUEZ Luca,Luca Antony,JAQUEZ,JAQUEZ,2003-06-02,VfB Stuttgart (GER),187.0,Sweden
-26,FW,ITTEN Cedric,Cedric Jan,ITTEN,ITTEN,1996-12-27,Fortuna Düsseldorf (GER),190.0,Sweden
-,Head coach,,Murat,YAKIN,,,,,Switzerland
+1,GK,WIDELL ZETTERSTROM Jacob,Jacob Mikael,WIDELL ZETTERSTRÖM,ZETTERSTRÖM,1998-07-11,Derby County FC (ENG),197.0,Sweden
+2,DF,LAGERBIELKE Gustaf,Gustaf Johan,LAGERBIELKE,LAGERBIELKE,2000-04-10,SC Braga (POR),193.0,Sweden
+3,DF,LINDELOF Victor,Victor Jörgen,NILSSON LINDELÖF,LINDELÖF,1994-07-17,Aston Villa FC (ENG),187.0,Sweden
+4,DF,HIEN Isak,Isak Malcolm Kwaku,HIEN,HIEN,1999-01-13,Atalanta Bergamo (ITA),191.0,Sweden
+5,DF,GUDMUNDSSON Gabriel,Gabriel Johan,GUDMUNDSSON,GUDMUNDSSON,1999-04-29,Leeds United FC (ENG),181.0,Sweden
+6,DF,JOHANSSON Herman,Herman Nils,JOHANSSON,H. JOHANSSON,1997-10-16,FC Dallas (USA),190.0,Sweden
+7,MF,BERGVALL Lucas,Lucas Erik Holger,BERGVALL,BERGVALL,2006-02-02,Tottenham Hotspur FC (ENG),187.0,Sweden
+8,DF,SVENSSON Daniel,Daniel Jonathan,SVENSSON,SVENSSON,2002-02-12,Borussia Dortmund (GER),183.0,Sweden
+9,FW,ISAK Alexander,Alexander,ISAK,ISAK,1999-09-21,Liverpool FC (ENG),190.0,Sweden
+10,MF,NYGREN Benjamin,Erik Benjamin,NYGREN,NYGREN,2001-07-08,Celtic FC (SCO),187.0,Sweden
+11,FW,ELANGA Anthony,Anthony David Junior,ELANGA,ELANGA,2002-04-27,Newcastle United FC (ENG),178.0,Sweden
+12,GK,JOHANSSON Viktor,Tobias Viktor,JOHANSSON,V. JOHANSSON,1998-09-14,Stoke City FC (ENG),187.0,Sweden
+13,MF,SEMA Ken,Ken,SEMA,SEMA,1993-09-30,Pafos FC (CYP),180.0,Sweden
+14,DF,EKDAL Hjalmar,Hjalmar,EKDAL,EKDAL,1998-10-21,Burnley FC (ENG),187.0,Sweden
+15,DF,STARFELT Carl,Carl Anders Theodor,STARFELT,STARFELT,1995-06-01,RC Celta Vigo (ESP),185.0,Sweden
+16,MF,KARLSTROM Jesper,Jesper Kewe,KARLSTRÖM,KARLSTRÖM,1995-06-21,Udinese (ITA),182.0,Sweden
+17,FW,GYOKERES Viktor,Viktor Einar,GYÖKERES,GYÖKERES,1998-06-04,Arsenal FC (ENG),189.0,Sweden
+18,MF,AYARI Yasin,Yasin,AYARI,AYARI,2003-10-06,Brighton & Hove Albion FC (ENG),172.0,Sweden
+19,MF,SVANBERG Mattias,Mattias Olof,SVANBERG,SVANBERG,1999-01-05,VfL Wolfsburg (GER),186.0,Sweden
+20,DF,SMITH Eric,Eric Anders,SMITH,SMITH,1997-01-08,FC St. Pauli (GER),192.0,Sweden
+21,DF,BERNHARDSSON Alexander,Alexander Olof,BERNHARDSSON,BERNHARDSSON,1998-09-08,Holstein Kiel (GER),184.0,Sweden
+22,MF,ZENELI Besfort,Besfort,ZENELI,ZENELI,2002-11-21,Royale Union Saint-Gilloise (BEL),187.0,Sweden
+23,GK,NORDFELDT Kristoffer,Bo Kristoffer,NORDFELDT,NORDFELDT,1989-06-23,AIK Stockholm (SWE),190.0,Sweden
+24,DF,STROUD Elliot,Elliot Karl,STROUD,STROUD,2002-06-22,Mjällby AIF (SWE),185.0,Sweden
+25,FW,NILSSON Gustaf,Håkan Gustaf,NILSSON,NILSSON,1997-05-23,Club Brugge (BEL),197.0,Sweden
+26,FW,ALI Taha,Taha Abdi,ALI,ALI,1998-07-01,Malmö FF (SWE),174.0,Sweden
+,Head coach,,Graham Stephen,POTTER,,,,,England

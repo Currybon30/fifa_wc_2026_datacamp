@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,WILLI AMS Ronwen,Ronwen Hayden,WILLI AMS,WILLI AMS,1992-01-21,Mamelodi Sundowns FC (RSA),184.0,Senegal
-2,DF,MATULUDI Thabang,Tholo Thabang,MATULUDI,MATULUDI,1999-01-14,Polokwane City FC (RSA),189.0,Senegal
-3,DF,NDAMANE Khulumani,Khulumani,NDAMANE,NDAMANE,2004-02-05,Mamelodi Sundowns FC (RSA),183.0,Senegal
-4,MF,MOKOENA Teboho,Teboho,MOKOENA,MOKOENA,1997-01-24,Mamelodi Sundowns FC (RSA),177.0,Senegal
-5,MF,MBATHA Thalente,Thalente Wandile,MBATHA,MBATHA,2000-03-06,Orlando Pirates FC (RSA),179.0,Senegal
-6,DF,MODIBA Aubrey,Aubrey Maphosa,MODIBA,MODIBA,1995-07-22,Mamelodi Sundowns FC (RSA),171.0,Senegal
-7,FW,APPOLLIS Oswin,Oswin Reagan,APPOLLIS,APPOLLIS,2001-08-25,Orlando Pirates FC (RSA),171.0,Senegal
-8,FW,MOREMI Tshepang,Tshepang,MOREMI,MOREMI,2000-10-02,Orlando Pirates FC (RSA),169.0,Senegal
-9,FW,FOSTER Lyle,Lyle Brent,FOSTER,FOSTER,2000-09-03,Burnley FC (ENG),185.0,Senegal
-10,FW,MOFOKENG Relebohile,Relebohile,MOFOKENG,MOFOKENG,2004-10-23,Orlando Pirates FC (RSA),168.0,Senegal
-11,MF,ZWANE Themba,Themba,ZWANE,ZWANE,1989-08-03,Mamelodi Sundowns FC (RSA),178.0,Senegal
-12,FW,MASEKO Thapelo,Thapelo,MASEKO,MASEKO,2003-11-11,AEL Limassol (CYP),178.0,Senegal
-13,MF,SITHOLE Sphephelo,Sphephelo S'miso,SITHOLE,SITHOLE,1999-03-03,CD Tondela (POR),197.0,Senegal
-14,DF,MBOKAZI Mbekezeli,Mbekezeli Mfanufikile,MBOKAZI,MBOKAZI,2005-09-19,Chicago Fire FC (USA),177.0,Senegal
-15,FW,RAYNERS Iqraam,Iqraam,RAYNERS,RAYNERS,1995-12-19,Mamelodi Sundowns FC (RSA),174.0,Senegal
-16,GK,CHAINE Sipho,Sipho Justin,CHAINE,CHAINE,1996-12-14,Orlando Pirates FC (RSA),186.0,Senegal
-17,FW,MAKGOPA Evidence,Sekotori Evidence,MAKGOPA,MAKGPA,2000-06-05,Orlando Pirates FC (RSA),183.0,Senegal
-18,DF,KABINI Samukele,Samukele Alucious,KABINI,KABINI,2004-03-15,Molde FK (NOR),179.0,Senegal
-19,DF,SIBISI Nkosinathi,Nkosinathi Emmanuel,SIBISI,SIBISI,1995-09-22,Orlando Pirates FC (RSA),172.0,Senegal
-20,DF,MUDAU Khuliso,Khuliso Johnson,MUDAU,MUDAU,1995-04-26,Mamelodi Sundowns FC (RSA),179.0,Senegal
-21,DF,OKON Ime,Ime Daniel,OKON,OKON,2004-02-20,Hannover 96 (GER),187.0,Senegal
-22,GK,GOSS Ricardo,Stuart Ricardo,GOSS,GOSS,1994-04-02,Siwelele FC (RSA),181.0,Senegal
-23,MF,ADAMS Jayden,Jayden Oswin,ADAMS,ADAMS,2001-05-05,Mamelodi Sundowns FC (RSA),177.0,Senegal
-24,DF,MAKHANYA Olwethu,Olwethu Mpilwenhle,MAKHANYA,MAKHANYA,2004-04-30,Philadelphia Union (USA),185.0,Senegal
-25,FW,SEBELEBELE Kamogelo,Kamogelo Michael,SEBELEBELE,SEBELEBELE,2002-07-21,Orlando Pirates FC (RSA),166.0,Senegal
-26,DF,CROSS Bradley,Bradley Paul,CROSS,CROSS,2001-01-30,Kaizer Chiefs FC (RSA),175.0,Senegal
-,Head coach,,Hugo Henri,BROOS,,,,,Belgium
+1,GK,DIOUF Yehvann,Yehvann Djibril Victor,DIOUF,Y. DIOUF,1999-11-16,OGC Nice (FRA),188.0,Senegal
+2,DF,SARR Mamadou,Mamadou,SARR,SARR,2005-08-29,Chelsea FC (ENG),194.0,Senegal
+3,DF,KOULIBALY Kalidou,Kalidou,KOULIBALY,KOULIBALY,1991-06-20,Al Hilal SC (KSA),186.0,Senegal
+4,DF,SECK Abdoulaye,Abdoulaye,SECK,SECK,1992-06-04,Maccabi Haifa FC (ISR),192.0,Senegal
+5,MF,GUEYE Idrissa Gana,Idrissa Gana,GUEYE,GANA,1989-09-26,Everton FC (ENG),174.0,Senegal
+6,MF,CISS Pathe,Ismaila Pathe,CISS,P.I. CISS,1994-03-16,Rayo Vallecano (ESP),186.0,Senegal
+7,FW,DIAO Assane,Assane,DIAO,DIAO,2005-09-07,Como (ITA),185.0,Senegal
+8,MF,CAMARA Lamine,Lamine,CAMARA,LAMINE,2004-01-01,AS Monaco (FRA),174.0,Senegal
+9,FW,DIENG Bamba,Cheikh Ahmadou Bamba Mbacke,DIENG,B. DIENG,2000-03-23,FC Lorient (FRA),178.0,Senegal
+10,FW,MANE Sadio,Sadio,MANÉ,MANÉ,1992-04-10,Al Nassr FC (KSA),175.0,Senegal
+11,FW,JACKSON Nicolas,Nicolas,JACKSON,JACKSON,2001-06-20,FC Bayern München (GER),187.0,Senegal
+12,FW,NDIAYE Cherif,Pape Cherif,NDIAYE,CHERIF,1996-01-23,Samsunspor (TUR),190.0,Senegal
+13,FW,NDIAYE Iliman,Iliman Cheikh Baroy,NDIAYE,NDIAYE,2000-03-06,Everton FC (ENG),180.0,Senegal
+14,DF,JAKOBS Ismail,Ismail Joshua,JAKOBS,JAKOBS,1999-08-17,Galatasaray SK (TUR),184.0,Senegal
+15,DF,DIATTA Krepin,Krépin,DIATTA,KRÉPIN,1999-02-25,AS Monaco (FRA),173.0,Senegal
+16,GK,MENDY Edouard,Edouard Osoque,MENDY,MENDY,1992-03-01,Al Ahli FC (KSA),194.0,Senegal
+17,MF,SARR Pape Matar,Pape Matar,SARR,P.M. SARR,2002-09-14,Tottenham Hotspur FC (ENG),185.0,Senegal
+18,FW,SARR Ismaila,Ismaila,SARR,SARR,1998-02-25,Crystal Palace FC (ENG),185.0,Senegal
+19,DF,NI AKHATE Moussa,Moussa,NI AKHATÉ,NI AKHATE,1996-03-08,Olympique Lyonnais (FRA),190.0,Senegal
+20,FW,MBAYE Ibrahim,Ibrahim,MBAYE,MBAYE,2008-01-24,Paris Saint-Germain (FRA),175.0,Senegal
+21,MF,DIARRA Habib,Mouhamadou Habib Mbacke,DIARRA,H. DIARRA,2004-01-03,Sunderland AFC (ENG),178.0,Senegal
+22,MF,NDIAYE Bara Sapoko,Bara Sapoko,NDIAYE,BARA,2007-12-31,FC Bayern München (GER),180.0,Senegal
+23,GK,DIAW Mory,Mory,DIAW,DIAW,1993-06-22,Le Havre AC (FRA),197.0,Senegal
+24,DF,MENDY Antoine,Antoine Alpha,MENDY,A. MENDY,2004-05-27,OGC Nice (FRA),187.0,Senegal
+25,DF,DIOUF El Hadji Malick,El Hadji Malick,DIOUF,DIOUF,2004-12-29,West Ham United FC (ENG),177.0,Senegal
+26,MF,GUEYE Pape,Pape Alassane,GUEYE,GUEYE,1999-01-24,Villarreal CF (ESP),189.0,Senegal
+,Head coach,,Pape Bouna,THIAW,,,,,Senegal

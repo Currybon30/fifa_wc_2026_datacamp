@@ -1,28 +1,28 @@
 #,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
-1,GK,DIOUF Yehvann,Yehvann Djibril Victor,DIOUF,Y. DIOUF,1999-11-16,OGC Nice (FRA),188.0,Saudi Arabia
-2,DF,SARR Mamadou,Mamadou,SARR,SARR,2005-08-29,Chelsea FC (ENG),194.0,Saudi Arabia
-3,DF,KOULIBALY Kalidou,Kalidou,KOULIBALY,KOULIBALY,1991-06-20,Al Hilal SC (KSA),186.0,Saudi Arabia
-4,DF,SECK Abdoulaye,Abdoulaye,SECK,SECK,1992-06-04,Maccabi Haifa FC (ISR),192.0,Saudi Arabia
-5,MF,GUEYE Idrissa Gana,Idrissa Gana,GUEYE,GANA,1989-09-26,Everton FC (ENG),174.0,Saudi Arabia
-6,MF,CISS Pathe,Ismaila Pathe,CISS,P.I. CISS,1994-03-16,Rayo Vallecano (ESP),186.0,Saudi Arabia
-7,FW,DIAO Assane,Assane,DIAO,DIAO,2005-09-07,Como (ITA),185.0,Saudi Arabia
-8,MF,CAMARA Lamine,Lamine,CAMARA,LAMINE,2004-01-01,AS Monaco (FRA),174.0,Saudi Arabia
-9,FW,DIENG Bamba,Cheikh Ahmadou Bamba Mbacke,DIENG,B. DIENG,2000-03-23,FC Lorient (FRA),178.0,Saudi Arabia
-10,FW,MANE Sadio,Sadio,MANÉ,MANÉ,1992-04-10,Al Nassr FC (KSA),175.0,Saudi Arabia
-11,FW,JACKSON Nicolas,Nicolas,JACKSON,JACKSON,2001-06-20,FC Bayern München (GER),187.0,Saudi Arabia
-12,FW,NDIAYE Cherif,Pape Cherif,NDIAYE,CHERIF,1996-01-23,Samsunspor (TUR),190.0,Saudi Arabia
-13,FW,NDIAYE Iliman,Iliman Cheikh Baroy,NDIAYE,NDIAYE,2000-03-06,Everton FC (ENG),180.0,Saudi Arabia
-14,DF,JAKOBS Ismail,Ismail Joshua,JAKOBS,JAKOBS,1999-08-17,Galatasaray SK (TUR),184.0,Saudi Arabia
-15,DF,DIATTA Krepin,Krépin,DIATTA,KRÉPIN,1999-02-25,AS Monaco (FRA),173.0,Saudi Arabia
-16,GK,MENDY Edouard,Edouard Osoque,MENDY,MENDY,1992-03-01,Al Ahli FC (KSA),194.0,Saudi Arabia
-17,MF,SARR Pape Matar,Pape Matar,SARR,P.M. SARR,2002-09-14,Tottenham Hotspur FC (ENG),185.0,Saudi Arabia
-18,FW,SARR Ismaila,Ismaila,SARR,SARR,1998-02-25,Crystal Palace FC (ENG),185.0,Saudi Arabia
-19,DF,NI AKHATE Moussa,Moussa,NI AKHATÉ,NI AKHATE,1996-03-08,Olympique Lyonnais (FRA),190.0,Saudi Arabia
-20,FW,MBAYE Ibrahim,Ibrahim,MBAYE,MBAYE,2008-01-24,Paris Saint-Germain (FRA),175.0,Saudi Arabia
-21,MF,DIARRA Habib,Mouhamadou Habib Mbacke,DIARRA,H. DIARRA,2004-01-03,Sunderland AFC (ENG),178.0,Saudi Arabia
-22,MF,NDIAYE Bara Sapoko,Bara Sapoko,NDIAYE,BARA,2007-12-31,FC Bayern München (GER),180.0,Saudi Arabia
-23,GK,DIAW Mory,Mory,DIAW,DIAW,1993-06-22,Le Havre AC (FRA),197.0,Saudi Arabia
-24,DF,MENDY Antoine,Antoine Alpha,MENDY,A. MENDY,2004-05-27,OGC Nice (FRA),187.0,Saudi Arabia
-25,DF,DIOUF El Hadji Malick,El Hadji Malick,DIOUF,DIOUF,2004-12-29,West Ham United FC (ENG),177.0,Saudi Arabia
-26,MF,GUEYE Pape,Pape Alassane,GUEYE,GUEYE,1999-01-24,Villarreal CF (ESP),189.0,Saudi Arabia
-,Head coach,,Pape Bouna,THIAW,,,,,Senegal
+1,GK,NAWAF ALAQIDI,Nawaf Dhahi F,ALAQIDI,ALAQIDI,2000-05-10,Al Nassr FC (KSA),186.0,Saudi Arabia
+2,DF,ALI MAJRASHI,Ali Hassan M,MAJRASHI,MAJRASHI,1999-10-02,Al Ahli FC (KSA),169.0,Saudi Arabia
+3,DF,ALI LAJAMI,Ali Mohammed A,LAJAMI,LAJAMI,1996-04-24,Al Hilal SC (KSA),177.0,Saudi Arabia
+4,DF,ABDULELAH ALAMRI,Abdulelah Ali A,ALAMRI,ALAMRI,1997-01-15,Al Nassr FC (KSA),185.0,Saudi Arabia
+5,DF,HASSAN ALTAMBAKTI,Hassan Mohammed O,ALTAMBAKTI,ALTAMBAKTI,1999-02-09,Al Hilal SC (KSA),183.0,Saudi Arabia
+6,MF,NASSER ALDAWSARI,Nasser Essa S,ALDAWSARI,NASSER,1998-12-19,Al Hilal SC (KSA),178.0,Saudi Arabia
+7,MF,MUSAB ALJUWAYR,Musab Fahad Z,ALJUWAYR,MUSAB,2003-06-20,Al Qadsiah FC (KSA),175.0,Saudi Arabia
+8,FW,AIMAN YAHYA,Aiman Yahya Y,AHMED,AIMAN,2001-05-14,Al Nassr FC (KSA),173.0,Saudi Arabia
+9,FW,FERAS ALBRIKAN,Feras Tariq N,ALBRIKAN,FERAS,2000-05-14,Al Ahli FC (KSA),185.0,Saudi Arabia
+10,FW,SALEM ALDAWSARI,Salem Mohammed S,ALDAWSARI,SALEM,1991-08-19,Al Hilal SC (KSA),173.0,Saudi Arabia
+11,FW,SALEH ALSHEHRI,Saleh Khalid M,ALSHEHRI,ALSHEHRI,1993-11-01,Al Ittihad (KSA),184.0,Saudi Arabia
+12,DF,SAUD ABDULHAMID,Saud Abdullah S,ABDULHAMID,SAUD,1999-07-18,RC Lens (FRA),172.0,Saudi Arabia
+13,DF,NAWAF BU WASHL,Nawaf Meshari M,BU WASHL,NAWAF,1999-09-16,Al Nassr FC (KSA),173.0,Saudi Arabia
+14,DF,HASSAN KADISH,Hassan Kadish Y,MAHBUB,KADISH,1992-09-26,Al Ittihad (KSA),179.0,Saudi Arabia
+15,MF,ABDULLAH ALKHAIBARI,Abdullah Mohammed H,ALKHAIBARI,ALKHAIBARI,1996-08-16,Al Nassr FC (KSA),175.0,Saudi Arabia
+16,MF,ZIYAD ALJOHANI,Ziyad Mubarak E,ALJOHANI,ZIYAD,2001-11-11,Al Ahli FC (KSA),180.0,Saudi Arabia
+17,FW,KHALID ALGHANNAM,Khalid Essa M,ALGHANNAM,KHALID,2000-11-08,Al Ettifaq FC (KSA),171.0,Saudi Arabia
+18,MF,ALA ALHAJJI,Ala Mohsen A,ALHAJJI,ALHAJJI,1995-12-03,Neom SC (KSA),178.0,Saudi Arabia
+19,FW,ABDULLAH ALHAMDDAN,Abdullah Abdulrahman A,ALHAMDDAN,ALHAMDDAN,1999-09-13,Al Nassr FC (KSA),186.0,Saudi Arabia
+20,FW,SULTAN MANDASH,Sultan Ahmed M,MANDASH,MANDASH,1994-10-17,Al Hilal SC (KSA),172.0,Saudi Arabia
+21,GK,MOHAMMED ALOWAIS,Mohammed Khalil I,ALOWAIS,ALOWAIS,1991-10-10,Al Ula Saudi FC (KSA),185.0,Saudi Arabia
+22,GK,AHMED ALKASSAR,Ahmed Ali H,ALKASSAR,ALKASSAR,1991-05-08,Al Qadsiah FC (KSA),178.0,Saudi Arabia
+23,MF,MOHAMED KANNO,Mohamed Ibrahim A,KANNO,KANNO,1994-09-22,Al Hilal SC (KSA),191.0,Saudi Arabia
+24,DF,MOTEB ALHARBI,Moteb Saad S,ALHARBI,MOTEB,2000-02-20,Al Hilal SC (KSA),177.0,Saudi Arabia
+25,DF,JEHAD THIKRI,Jehad Abdullatif A,THIKRI,JEHAD,2001-07-21,Al Qadsiah FC (KSA),184.0,Saudi Arabia
+26,DF,MOHAMMED ABU ALSHAMAT,Mohammed Waheeb S,ABU ALSHAMAT,MOHAMMED,2002-08-11,Al Qadsiah FC (KSA),170.0,Saudi Arabia
+,Head coach,,Georgios,DONIS,,,,,Greece
