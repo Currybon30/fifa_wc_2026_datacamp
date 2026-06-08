@@ -1,0 +1,28 @@
+#,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
+1,GK,SAMBA Brice,Brice Lauriche,SAMBA,SAMBA,1994-04-25,Stade Rennais FC (FRA),187.0,France
+2,DF,GUSTO Malo,Malo Arthur,GUSTO,GUSTO,2003-05-19,Chelsea FC (ENG),179.0,France
+3,DF,DIGNE Lucas,Lucas,DIGNE,DIGNE,1993-07-20,Aston Villa FC (ENG),178.0,France
+4,DF,UPAMECANO Dayot,Dayotchanculle Oswald,UPAMECANO,UPAMECANO,1998-10-27,FC Bayern München (GER),186.0,France
+5,DF,KOUNDE Jules,Jules Olivier,KOUNDE,KOUNDE,1998-11-12,FC Barcelona (ESP),178.0,France
+6,MF,KONE Manu,Kouadio Emmanuel Boris,KONE,KONE,2001-05-17,AS Roma (ITA),185.0,France
+7,FW,DEMBELE Ousmane,Masour Ousmane,DEMBELE,DEMBELE,1997-05-15,Paris Saint-Germain (FRA),179.0,France
+8,MF,TCHOUAMENI Aurelien,Aurélien Djani,TCHOUAMENI,TCHOUAMENI,2000-01-27,Real Madrid C. F. (ESP),188.0,France
+9,FW,THURAM Marcus,Marcus Lilian,THURAM-ULIEN,THURAM,1997-08-06,FC Internazionale Milano (ITA),192.0,France
+10,FW,MBAPPE Kylian,Kylian,MBAPPE LOTTIN,MBAPPE,1998-12-20,Real Madrid C. F. (ESP),180.0,France
+11,FW,OLISE Michael,Michael Akpovie,OLISE,OLISE,2001-12-12,FC Bayern München (GER),184.0,France
+12,FW,BARCOLA Bradley,Bradley Jean-Manuel Essolisa A,BARCOLA,BARCOLA,2002-09-02,Paris Saint-Germain (FRA),187.0,France
+13,MF,KANTE Ngolo,N'golo,KANTE,KANTE,1991-03-29,Fenerbahçe SK (TUR),171.0,France
+14,MF,RABIOT Adrien,Adrien Thibault Marie,RABIOT,RABIOT,1995-04-03,AC Milan (ITA),191.0,France
+15,DF,KONATE Ibrahima,Ibrahima,KONATÉ,KONATE,1999-05-25,Liverpool FC (ENG),194.0,France
+16,GK,MAIGNAN Mike,Mike Peterson,MAIGNAN,MAIGNAN,1995-07-03,AC Milan (ITA),191.0,France
+17,DF,SALIBA William,William Alain André Gabriel,SALIBA,SALIBA,2001-03-24,Arsenal FC (ENG),192.0,France
+18,MF,ZAIRE-EMERY Warren,Warren Marie Jean-Pierre,ZAÏRE-EMERY,ZAIRE EMERY,2006-03-08,Paris Saint-Germain (FRA),176.0,France
+19,DF,HERNANDEZ Theo,Théo Bernard François,HERNANDEZ,T. HERNANDEZ,1997-10-06,Al Hilal SC (KSA),184.0,France
+20,FW,DOUE Desire,Désiré Nonka-Maho,DOUE,DOUE,2005-06-03,Paris Saint-Germain (FRA),182.0,France
+21,DF,HERNANDEZ Lucas,Lucas Francois Bernard,HERNANDEZ,L. HERNANDEZ,1996-02-14,Paris Saint-Germain (FRA),184.0,France
+22,FW,MATETA Jean-Philippe,Jean-Philippe,MATETA,MATETA,1997-06-28,Crystal Palace FC (ENG),192.0,France
+23,GK,RISSER Robin,Robin François Philippe,RISSER,RISSER,2004-12-02,RC Lens (FRA),193.0,France
+24,MF,CHERKI Rayan,Mathis Rayan,CHERKI,CHERKI,2003-08-17,Manchester City FC (ENG),180.0,France
+25,MF,AKLIOUCHE Maghnes,Maghnes,AKLIOUCHE,AKLIOUCHE,2002-02-25,AS Monaco (FRA),183.0,France
+26,DF,LACROIX Maxence,Maxence Guy,LACROIX,LACROIX,2000-04-06,Crystal Palace FC (ENG),192.0,France
+,Head coach,,Didier Claude,DESCHAMPS,,,,,France
