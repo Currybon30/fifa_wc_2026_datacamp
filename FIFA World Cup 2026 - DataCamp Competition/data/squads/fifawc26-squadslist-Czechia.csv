@@ -1,0 +1,28 @@
+#,POS,PLAYER NAME,FIRST NAME(S),LAST NAME(S),NAME ON SHIRT,DOB,CLUB,HEIGHT (CM),NATIONALITY
+1,GK,KOVAR Matej,Matěj,KOVÁŘ,KOVÁŘ,2000-05-17,PSV Eindhoven (NED),196.0,Czechia
+2,DF,ZIMA David,David,ZIMA,ZIMA,2000-11-08,SK Slavia Praha (CZE),190.0,Czechia
+3,DF,HOLES Tomas,Tomáš,HOLEŠ,HOLEŠ,1993-03-31,SK Slavia Praha (CZE),180.0,Czechia
+4,DF,HRANAC Robin,Robin,HRANÁČ,HRANÁČ,2000-01-29,TSG Hoffenheim (GER),189.0,Czechia
+5,DF,COUFAL Vladimir,Vladimír,COUFAL,COUFAL,1992-08-22,TSG Hoffenheim (GER),175.0,Czechia
+6,DF,CHALOUPEK Stepan,Štěpán,CHALOUPEK,CHALOUPEK,2003-03-08,SK Slavia Praha (CZE),188.0,Czechia
+7,DF,KREJCI Ladislav,Ladislav,KREJČÍ,KREJČÍ,1999-04-20,Wolverhampton Wanderers FC (ENG),191.0,Czechia
+8,MF,DARIDA Vladimir,Vladimír,DARIDA,DARIDA,1990-08-08,FC Hradec Králové (CZE),172.0,Czechia
+9,FW,HLOZEK Adam,Adam,HLOŽEK,HLOŽEK,2002-07-25,TSG Hoffenheim (GER),188.0,Czechia
+10,FW,SCHICK Patrik,Patrik,SCHICK,SCHICK,1996-01-24,Bayer 04 Leverkusen (GER),191.0,Czechia
+11,FW,KUCHTA Jan,Jan,KUCHTA,KUCHTA,1997-01-08,AC Sparta Praha (CZE),185.0,Czechia
+12,MF,CERV Lukas,Lukáš,ČERV,ČERV,2001-04-10,FC Viktoria Plzeň (CZE),182.0,Czechia
+13,FW,CHYTIL Mojmir,Mojmír,CHYTIL,CHYTIL,1999-04-29,SK Slavia Praha (CZE),187.0,Czechia
+14,DF,JURASEK David,David,JURÁSEK,JURÁSEK,2000-08-07,SK Slavia Praha (CZE),183.0,Czechia
+15,FW,SULC Pavel,Pavel,ŠULC,ŠULC,2000-12-29,Olympique Lyonnais (FRA),177.0,Czechia
+16,GK,STANEK Jindrich,Jindřich,STANĚK,STANĚK,1996-04-27,SK Slavia Praha (CZE),192.0,Czechia
+17,MF,PROVOD Lukas,Lukáš,PROVOD,PROVOD,1996-10-23,SK Slavia Praha (CZE),191.0,Czechia
+18,MF,SADILEK Michal,Michal,SADÍLEK,SADÍLEK,1999-05-31,SK Slavia Praha (CZE),169.0,Czechia
+19,FW,CHORY Tomas,Tomáš,CHORÝ,CHORÝ,1995-01-26,SK Slavia Praha (CZE),199.0,Czechia
+20,DF,ZELENY Jaroslav,Jaroslav,ZELENÝ,ZELENÝ,1992-08-20,AC Sparta Praha (CZE),190.0,Czechia
+21,DF,DOUDERA David,David,DOUDĚRA,DOUDĚRA,1998-05-31,SK Slavia Praha (CZE),175.0,Czechia
+22,MF,SOUCEK Tomas,Tomáš,SOUČEK,SOUČEK,1995-02-27,West Ham United FC (ENG),192.0,Czechia
+23,GK,HORNICEK Lukas,Lukáš,HORNÍČEK,HORNÍČEK,2002-07-13,SC Braga (POR),198.0,Czechia
+24,MF,SOJKA Alexandr,Alexandr,SOJKA,SOJKA,2003-04-02,FC Viktoria Plzeň (CZE),188.0,Czechia
+25,MF,SOCHUREK Hugo,Hugo,SOCHŮREK,SOCHŮREK,2008-06-07,AC Sparta Praha (CZE),183.0,Czechia
+26,FW,VISINSKY Denis,Denis,VIŠINSKÝ,VIŠINSKÝ,2003-03-21,FC Viktoria Plzeň (CZE),178.0,Czechia
+,Head coach,,Miroslav,KOUBEK,,,,,Czech Republic
