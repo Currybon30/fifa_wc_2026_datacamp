@@ -648,6 +648,7 @@ def render_group_standings(
 
     for group in groups:
         table = standings[group].head(TEAMS_PER_GROUP).reset_index(drop=True).copy()
+        table = table.sort_values(by=["Pts", "GD", "GF"], ascending=[False, False, False])
         table["#"] = table["#"].astype(str)
         st.markdown(f"**Group {group}**")
         st.dataframe(
