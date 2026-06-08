@@ -544,13 +544,14 @@ def render_monte_carlo_champion_stats(df) -> None:
 
 
 def render_monte_carlo_team_matchups(df) -> None:
-    from utils.predictions import lookup_monte_carlo_matchup
+    from utils.predictions import lookup_monte_carlo_matchup, monte_carlo_matchup_total_sims
     from utils.teams import all_teams_from_fixtures, is_slot_team
 
     if df.empty:
         st.info("Monte Carlo team matchup results are not available yet.")
         return
 
+    total_sims = monte_carlo_matchup_total_sims(df)
     tournament_teams = sorted(
         {t for t in all_teams_from_fixtures() if not is_slot_team(t)}
     )
@@ -559,22 +560,44 @@ def render_monte_carlo_team_matchups(df) -> None:
 
     st.subheader("🤜🤛 Monte Carlo team matchups")
     st.markdown(
-        "Pick any two nations to see how often they are drawn to face each other "
-        "across simulated World Cup 2026 tournaments — group stage and knockout."
+        f"Choose two nations to see the probability they **face each other** in World Cup 2026. "
+        f"Based on **{total_sims:,}** full tournament simulations. "
+        "Group-stage meetings use fixed fixtures; knockout meetings use the "
+        "**re-chained bracket** (teams only meet if they actually advance to that slot)."
+    )
+
+    default_a = team_options.index("Portugal") if "Portugal" in team_options else 0
+    default_b = (
+        team_options.index("Argentina")
+        if "Argentina" in team_options
+        else min(1, len(team_options) - 1)
     )
 
     pick_left, pick_right = st.columns(2)
     with pick_left:
-        team_a = st.selectbox("Team A", options=team_options, key="matchup_team_a")
+        team_a = st.selectbox(
+            "Team A",
+            options=team_options,
+            index=default_a,
+            key="matchup_team_a",
+        )
     with pick_right:
         team_b_options = [t for t in team_options if t != team_a]
+        team_b_index = (
+            team_b_options.index("Argentina")
+            if team_a != "Argentina" and "Argentina" in team_b_options
+            else min(default_b, len(team_b_options) - 1)
+        )
         team_b = st.selectbox(
             "Team B",
             options=team_b_options,
+            index=team_b_index,
             key="matchup_team_b",
         )
 
-    matchup_percent, matchup_count = lookup_monte_carlo_matchup(df, team_a, team_b)
+    matchup_percent, matchup_count = lookup_monte_carlo_matchup(
+        df, team_a, team_b, total_sims=total_sims,
+    )
 
     with st.container(border=True):
         flag_left, vs_col, flag_right = st.columns([1, 0.4, 1], vertical_alignment="center")
@@ -587,13 +610,20 @@ def render_monte_carlo_team_matchups(df) -> None:
             _show_team_flag(team_b, width=72)
             st.markdown(f"**{team_b}**")
 
-        st.metric("Chance of facing each other", f"{matchup_percent:.1f}%")
+        st.markdown(f"### {matchup_percent:.1f}%")
+        st.caption("Probability they face each other in World Cup 2026")
         _render_probability_row("Matchup probability", matchup_percent, 100.0)
 
-        if matchup_count > 0:
-            st.caption(f"Met in **{matchup_count:,}** simulated tournament pairings.")
-        else:
-            st.caption("These two nations were never drawn together in the simulations (0%).")
+        if total_sims > 0 and matchup_count > 0:
+            st.caption(
+                f"**{team_a}** and **{team_b}** played each other in "
+                f"**{matchup_count:,}** of **{total_sims:,}** simulated tournaments."
+            )
+        elif total_sims > 0:
+            st.caption(
+                f"**{team_a}** and **{team_b}** never faced each other "
+                f"in any of the **{total_sims:,}** simulated tournaments."
+            )
 
 
 def render_group_standings(

@@ -19,6 +19,9 @@ st.set_page_config(page_title="World Cup 2026", page_icon="⚽", layout="wide")
 
 inject_base_styles()
 
+
+st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
+
 st.title("⚽ World Cup 2026")
 st.caption("Live scores, fixtures, and group standings.")
 

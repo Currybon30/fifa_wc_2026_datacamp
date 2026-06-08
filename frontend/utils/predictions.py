@@ -94,8 +94,18 @@ def load_monte_carlo_team_matchups() -> pd.DataFrame:
     return df.sort_values("matchup_percent", ascending=False).reset_index(drop=True)
 
 
+def monte_carlo_matchup_total_sims(df: pd.DataFrame) -> int:
+    if df.empty:
+        return 0
+    return int(df["matchup_count"].max())
+
+
 def lookup_monte_carlo_matchup(
-    df: pd.DataFrame, team_a: str, team_b: str
+    df: pd.DataFrame,
+    team_a: str,
+    team_b: str,
+    *,
+    total_sims: int | None = None,
 ) -> tuple[float, int]:
     if team_a == team_b or df.empty:
         return 0.0, 0
@@ -104,7 +114,10 @@ def lookup_monte_carlo_matchup(
     if match.empty:
         return 0.0, 0
     row = match.iloc[0]
-    return float(row["matchup_percent"]), int(row["matchup_count"])
+    count = int(row["matchup_count"])
+    if total_sims and total_sims > 0:
+        return round(count / total_sims * 100, 1), count
+    return float(row["matchup_percent"]), count
 
 
 def monte_carlo_total_simulations(df: pd.DataFrame) -> int:

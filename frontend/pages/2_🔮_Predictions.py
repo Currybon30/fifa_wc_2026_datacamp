@@ -15,9 +15,13 @@ st.set_page_config(page_title="Predictions", page_icon="🔮", layout="wide")
 
 inject_base_styles()
 
+
+st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
+
 st.title("🔮 Predictions")
 st.caption("AI-integrated prediction system for the FIFA World Cup 2026")
 st.warning("Predictions are for reference purposes only. We do not guarantee the accuracy.")
+
 
 predictions = load_all_predictions()
 
