@@ -28,9 +28,9 @@ def monte_carlo_aggregate_group_stage(data):
     """
     Aggregate group-stage MC sims per match_id.
 
-    Goals and winning_team use separate modes (draw allowed).
+    Goals use the modal (home, away) score pair; winning_team follows that pair.
     Knockout matches must not be passed here — use
-    monte_carlo_aggregate_knockout_rounds + rechain for knockout.
+    monte_carlo_aggregate_knockout_rounds_cards_corners + rechain for knockout.
     """
 
     def mode(values):
@@ -47,8 +47,7 @@ def monte_carlo_aggregate_group_stage(data):
         # =========================
         # GROUP STAGE OUTCOME STORAGE
         # =========================
-        group_home_goals = []
-        group_away_goals = []
+        score_pairs = []
 
         for sim in sims:
 
@@ -82,12 +81,10 @@ def monte_carlo_aggregate_group_stage(data):
             # GROUP STAGE
             # -------------------------
             if "predicted_home_goals" in sim and "predicted_away_goals" in sim:
-
-                hg = sim["predicted_home_goals"]
-                ag = sim["predicted_away_goals"]
-
-                group_home_goals.append(hg)
-                group_away_goals.append(ag)
+                score_pairs.append((
+                    sim["predicted_home_goals"],
+                    sim["predicted_away_goals"],
+                ))
 
         # =========================
         # BUILD FINAL ROW
@@ -114,10 +111,8 @@ def monte_carlo_aggregate_group_stage(data):
         # =========================
         # GROUP STAGE RESULT
         # =========================
-        if group_home_goals and group_away_goals:
-
-            h = mode(group_home_goals)
-            a = mode(group_away_goals)
+        if score_pairs:
+            h, a = Counter(score_pairs).most_common(1)[0][0]
 
             row["predicted_home_goals"] = h
             row["predicted_away_goals"] = a
@@ -137,7 +132,7 @@ def monte_carlo_aggregate_group_stage(data):
 # =========================
 # KNOCKOUT ROUNDS (corners / cards from one random sim)
 # =========================
-def monte_carlo_aggregate_knockout_rounds(knockout_flat):
+def monte_carlo_aggregate_knockout_rounds_cards_corners(knockout_flat):
     """
     Pick corners / yellow_cards / red_cards from one random sim per match_id.
 
@@ -488,6 +483,110 @@ def rechain_knockout_bracket_monte_carlo(
     return predictions
 
 
+def _is_valid_matchup_team(team):
+    if team is None:
+        return False
+    if isinstance(team, str) and (
+        "Group" in team
+        or "Best 3rd" in team
+        or "Winner Match" in team
+        or "Loser Match" in team
+    ):
+        return False
+    return True
+
+
+def _knockout_pairs_from_rechained_predictions(predictions, knockout_df):
+    pairs = set()
+    matches_by_round = _knockout_matches_by_round(knockout_df)
+
+    for round_name in KNOCKOUT_ROUND_ORDER:
+        for match_id in matches_by_round.get(round_name, []):
+            pred = predictions.get(match_id, {})
+            home = pred.get("predicted_home_team")
+            away = pred.get("predicted_away_team")
+            if _is_valid_matchup_team(home) and _is_valid_matchup_team(away):
+                pairs.add(frozenset((home, away)))
+
+    return pairs
+
+
+def _pairs_from_rechained_sim(
+    group_matches,
+    knockout_matches,
+    knockout_df,
+    model_ctx=None,
+):
+    """
+    Team pairs for one MC iteration after R32 assignment + knockout rechain.
+
+    Knockout pairings must come from rechain_knockout_bracket_monte_carlo so
+    later-round meetings follow propagated winners, not independent per-match
+    teams from the raw simulation output.
+    """
+    pairs = set()
+
+    for match in group_matches:
+        home = match.get("home_team")
+        away = match.get("away_team")
+        if _is_valid_matchup_team(home) and _is_valid_matchup_team(away):
+            pairs.add(frozenset((home, away)))
+
+    if knockout_df is None or not knockout_matches:
+        return pairs
+
+    predictions = {}
+    knockout_flat = {}
+    for match in knockout_matches:
+        mid = int(match["match_id"])
+        predictions[mid] = {k: v for k, v in match.items() if k != "match_id"}
+        knockout_flat[mid] = [match]
+
+    group_stats = build_group_stats_from_results(group_matches)
+    qualifiers = get_round_of_32(group_stats)["r32"]
+
+    predictions = apply_round_of_32_teams_monte_carlo(
+        predictions, knockout_df, qualifiers)
+    predictions = rechain_knockout_bracket_monte_carlo(
+        predictions,
+        knockout_df,
+        knockout_flat,
+        model_ctx=model_ctx,
+    )
+
+    pairs.update(_knockout_pairs_from_rechained_predictions(predictions, knockout_df))
+    return pairs
+
+
+def aggregate_team_matchups_from_monte_carlo(
+    group_stage_sims,
+    knockout_stage_sims,
+    knockout_df=None,
+    model_ctx=None,
+):
+    matchup_counts = Counter()
+
+    for sim_idx in group_stage_sims:
+        sim_ctx = None
+        if model_ctx is not None:
+            base_seed = model_ctx.get("seed")
+            sim_ctx = {
+                **model_ctx,
+                "seed": None if base_seed is None else base_seed + sim_idx,
+            }
+
+        pairs = _pairs_from_rechained_sim(
+            group_stage_sims.get(sim_idx, []),
+            knockout_stage_sims.get(sim_idx, []),
+            knockout_df,
+            model_ctx=sim_ctx,
+        )
+        for pair in pairs:
+            matchup_counts[pair] += 1
+
+    return matchup_counts
+
+
 # =========================
 # FULL PIPELINE
 # =========================
@@ -506,7 +605,7 @@ def run_mc_pipeline(
 
     predictions = monte_carlo_aggregate_group_stage(group_flat)
 
-    for match_id, extras in monte_carlo_aggregate_knockout_rounds(
+    for match_id, extras in monte_carlo_aggregate_knockout_rounds_cards_corners(
             knockout_flat).items():
         predictions.setdefault(match_id, {}).update(extras)
 
@@ -531,7 +630,19 @@ def run_mc_pipeline(
             model_ctx=model_ctx,
         )
 
-    return predictions
+        matchup_counts = aggregate_team_matchups_from_monte_carlo(
+            group_stage_sims,
+            knockout_stage_sims,
+            knockout_df,
+            model_ctx=model_ctx,
+        )
+    else:
+        matchup_counts = aggregate_team_matchups_from_monte_carlo(
+            group_stage_sims,
+            knockout_stage_sims,
+        )
+
+    return predictions, matchup_counts
 
 # =========================
 # FILL PREDICTIONS DF
