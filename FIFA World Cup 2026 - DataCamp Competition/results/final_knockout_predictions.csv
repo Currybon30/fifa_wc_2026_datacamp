@@ -1,33 +1,33 @@
 match_id,round,multiplier,date_utc,venue,slot_home,slot_away,predicted_home_team,predicted_away_team,predicted_home_goals,predicted_away_goals,corners,yellow_cards,red_cards,match_winner,penalties
-73,Round of 32,1,2026-06-28T19:00:00Z,"SoFi Stadium, Los Angeles",Runner-up Group A,Runner-up Group B,South Korea,Switzerland,0,5,5,2,0,away,False
-74,Round of 32,1,2026-06-29T17:00:00Z,"NRG Stadium, Houston",Winner Group C,Runner-up Group F,Brazil,Netherlands,5,2,10,4,0,home,False
-75,Round of 32,1,2026-06-29T20:30:00Z,"Gillette Stadium, Boston",Winner Group E,Best 3rd (Groups A/B/C/D/F),Germany,UEFA Playoff D,2,1,12,3,0,home,False
-76,Round of 32,1,2026-06-30T01:00:00Z,"Estadio BBVA, Monterrey",Winner Group F,Runner-up Group C,Japan,Scotland,1,2,4,4,0,away,False
-77,Round of 32,1,2026-06-30T17:00:00Z,"AT&T Stadium, Dallas",Runner-up Group E,Runner-up Group I,Ecuador,Norway,2,1,12,2,0,home,False
-78,Round of 32,1,2026-06-30T21:00:00Z,"MetLife Stadium, East Rutherford",Winner Group I,Best 3rd (Groups C/D/F/G/H),France,Paraguay,4,3,10,6,0,home,False
-79,Round of 32,1,2026-07-01T01:00:00Z,"Estadio Azteca, Mexico City",Winner Group A,Best 3rd (Groups C/E/F/H/I),Mexico,Scotland,1,0,5,3,1,home,False
-80,Round of 32,1,2026-07-01T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",Winner Group L,Best 3rd (Groups E/H/I/J/K),Croatia,Colombia,1,0,13,7,0,home,False
-81,Round of 32,1,2026-07-01T20:00:00Z,"Lumen Field, Seattle",Winner Group G,Best 3rd (Groups A/E/H/I/J),Belgium,Uruguay,1,0,9,4,0,home,False
-82,Round of 32,1,2026-07-02T00:00:00Z,"Levi's Stadium, Santa Clara",Winner Group D,Best 3rd (Groups B/E/F/I/J),Australia,UEFA Playoff A,4,2,6,1,0,home,False
-83,Round of 32,1,2026-07-02T19:00:00Z,"BMO Field, Toronto",Runner-up Group K,Runner-up Group L,Portugal,Panama,1,1,8,4,0,away,True
-84,Round of 32,1,2026-07-02T23:00:00Z,"SoFi Stadium, Los Angeles",Winner Group H,Runner-up Group J,Spain,Jordan,3,2,11,3,0,home,False
-85,Round of 32,1,2026-07-03T03:00:00Z,"BC Place, Vancouver",Winner Group B,Best 3rd (Groups E/F/G/I/J),Canada,Iran,1,0,5,4,1,home,False
-86,Round of 32,1,2026-07-03T18:00:00Z,"AT&T Stadium, Dallas",Runner-up Group D,Runner-up Group G,Paraguay,New Zealand,2,0,6,3,0,home,False
-87,Round of 32,1,2026-07-03T22:00:00Z,"Hard Rock Stadium, Miami",Winner Group J,Runner-up Group H,Argentina,Uruguay,1,0,8,3,1,home,False
-88,Round of 32,1,2026-07-04T01:30:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",Winner Group K,Best 3rd (Groups D/E/I/J/L),Colombia,Panama,1,0,12,4,0,home,False
-89,Round of 16,2,2026-07-04T17:00:00Z,"NRG Stadium, Houston",Winner Match 73,Winner Match 75,Switzerland,Germany,0,1,11,3,1,away,False
-90,Round of 16,2,2026-07-04T21:00:00Z,"Lincoln Financial Field, Philadelphia",Winner Match 74,Winner Match 77,Brazil,Ecuador,3,1,14,3,0,home,False
-91,Round of 16,2,2026-07-05T20:00:00Z,"MetLife Stadium, East Rutherford",Winner Match 76,Winner Match 78,Scotland,France,1,3,4,8,0,away,False
-92,Round of 16,2,2026-07-06T00:00:00Z,"Estadio Azteca, Mexico City",Winner Match 79,Winner Match 80,Mexico,Croatia,1,0,9,3,0,home,False
-93,Round of 16,2,2026-07-06T19:00:00Z,"AT&T Stadium, Dallas",Winner Match 83,Winner Match 84,Panama,Spain,1,2,16,3,0,away,False
-94,Round of 16,2,2026-07-07T00:00:00Z,"Lumen Field, Seattle",Winner Match 81,Winner Match 82,Belgium,Australia,3,5,7,4,0,away,False
-95,Round of 16,2,2026-07-07T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",Winner Match 86,Winner Match 88,Paraguay,Colombia,1,2,9,8,0,away,False
-96,Round of 16,2,2026-07-07T20:00:00Z,"BC Place, Vancouver",Winner Match 85,Winner Match 87,Canada,Argentina,3,3,8,2,0,away,True
-97,Quarter-final,4,2026-07-09T20:00:00Z,"Gillette Stadium, Boston",Winner Match 89,Winner Match 90,Germany,Brazil,4,0,8,2,0,home,False
-98,Quarter-final,4,2026-07-10T19:00:00Z,"SoFi Stadium, Los Angeles",Winner Match 93,Winner Match 94,Spain,Australia,4,0,16,6,0,home,False
-99,Quarter-final,4,2026-07-11T21:00:00Z,"Hard Rock Stadium, Miami",Winner Match 91,Winner Match 92,France,Mexico,1,2,14,3,0,away,False
-100,Quarter-final,4,2026-07-12T01:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",Winner Match 95,Winner Match 96,Colombia,Argentina,3,0,7,6,0,home,False
-101,Semi-final,8,2026-07-14T19:00:00Z,"AT&T Stadium, Dallas",Winner Match 97,Winner Match 98,Germany,Spain,1,1,9,3,0,away,True
-102,Semi-final,8,2026-07-15T19:00:00Z,"Mercedes-Benz Stadium, Atlanta",Winner Match 99,Winner Match 100,Mexico,Colombia,0,2,16,4,0,away,False
-103,Third-place playoff,8,2026-07-18T21:00:00Z,"Hard Rock Stadium, Miami",Loser Match 101,Loser Match 102,Germany,Mexico,1,1,10,6,0,away,True
-104,Final,16,2026-07-19T19:00:00Z,"MetLife Stadium, East Rutherford",Winner Match 101,Winner Match 102,Spain,Colombia,3,0,9,4,0,home,False
+73,Round of 32,1,2026-06-28T19:00:00Z,"SoFi Stadium, Los Angeles",Runner-up Group A,Runner-up Group B,South Korea,Switzerland,0,1,7,5,0,away,False
+74,Round of 32,1,2026-06-29T17:00:00Z,"NRG Stadium, Houston",Winner Group C,Runner-up Group F,Brazil,Japan,2,1,9,5,0,home,False
+75,Round of 32,1,2026-06-29T20:30:00Z,"Gillette Stadium, Boston",Winner Group E,Best 3rd (Groups A/B/C/D/F),Germany,UEFA Playoff D,2,1,13,4,0,home,False
+76,Round of 32,1,2026-06-30T01:00:00Z,"Estadio BBVA, Monterrey",Winner Group F,Runner-up Group C,Netherlands,Morocco,1,0,11,5,0,home,False
+77,Round of 32,1,2026-06-30T17:00:00Z,"AT&T Stadium, Dallas",Runner-up Group E,Runner-up Group I,Ecuador,Norway,0,1,7,3,0,away,False
+78,Round of 32,1,2026-06-30T21:00:00Z,"MetLife Stadium, East Rutherford",Winner Group I,Best 3rd (Groups C/D/F/G/H),France,New Zealand,2,1,8,7,0,home,False
+79,Round of 32,1,2026-07-01T01:00:00Z,"Estadio Azteca, Mexico City",Winner Group A,Best 3rd (Groups C/E/F/H/I),Mexico,Scotland,1,0,11,6,1,home,False
+80,Round of 32,1,2026-07-01T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",Winner Group L,Best 3rd (Groups E/H/I/J/K),England,Uzbekistan,1,0,10,5,0,home,False
+81,Round of 32,1,2026-07-01T20:00:00Z,"Lumen Field, Seattle",Winner Group G,Best 3rd (Groups A/E/H/I/J),Belgium,Senegal,1,2,12,6,1,away,False
+82,Round of 32,1,2026-07-02T00:00:00Z,"Levi's Stadium, Santa Clara",Winner Group D,Best 3rd (Groups B/E/F/I/J),USA,UEFA Playoff B,2,1,5,3,1,home,False
+83,Round of 32,1,2026-07-02T19:00:00Z,"BMO Field, Toronto",Runner-up Group K,Runner-up Group L,Colombia,Croatia,1,2,12,5,0,away,False
+84,Round of 32,1,2026-07-02T23:00:00Z,"SoFi Stadium, Los Angeles",Winner Group H,Runner-up Group J,Spain,Austria,2,1,14,5,0,home,False
+85,Round of 32,1,2026-07-03T03:00:00Z,"BC Place, Vancouver",Winner Group B,Best 3rd (Groups E/F/G/I/J),Canada,Algeria,1,0,13,9,1,home,False
+86,Round of 32,1,2026-07-03T18:00:00Z,"AT&T Stadium, Dallas",Runner-up Group D,Runner-up Group G,Paraguay,Iran,1,0,8,7,0,home,False
+87,Round of 32,1,2026-07-03T22:00:00Z,"Hard Rock Stadium, Miami",Winner Group J,Runner-up Group H,Argentina,Uruguay,1,0,9,7,0,home,False
+88,Round of 32,1,2026-07-04T01:30:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",Winner Group K,Best 3rd (Groups D/E/I/J/L),Portugal,UEFA Playoff C,2,1,12,7,0,home,False
+89,Round of 16,2,2026-07-04T17:00:00Z,"NRG Stadium, Houston",Winner Match 73,Winner Match 75,Switzerland,Germany,0,1,7,5,0,away,False
+90,Round of 16,2,2026-07-04T21:00:00Z,"Lincoln Financial Field, Philadelphia",Winner Match 74,Winner Match 77,Brazil,Norway,1,2,9,0,0,away,False
+91,Round of 16,2,2026-07-05T20:00:00Z,"MetLife Stadium, East Rutherford",Winner Match 76,Winner Match 78,Netherlands,France,2,1,16,7,1,home,False
+92,Round of 16,2,2026-07-06T00:00:00Z,"Estadio Azteca, Mexico City",Winner Match 79,Winner Match 80,Mexico,England,1,0,10,5,0,home,False
+93,Round of 16,2,2026-07-06T19:00:00Z,"AT&T Stadium, Dallas",Winner Match 83,Winner Match 84,Croatia,Spain,1,2,12,2,0,away,False
+94,Round of 16,2,2026-07-07T00:00:00Z,"Lumen Field, Seattle",Winner Match 81,Winner Match 82,Senegal,USA,1,0,19,1,0,home,False
+95,Round of 16,2,2026-07-07T16:00:00Z,"Mercedes-Benz Stadium, Atlanta",Winner Match 86,Winner Match 88,Paraguay,Portugal,0,1,17,6,0,away,False
+96,Round of 16,2,2026-07-07T20:00:00Z,"BC Place, Vancouver",Winner Match 85,Winner Match 87,Canada,Argentina,0,1,14,2,1,away,False
+97,Quarter-final,4,2026-07-09T20:00:00Z,"Gillette Stadium, Boston",Winner Match 89,Winner Match 90,Germany,Norway,1,2,13,5,0,away,False
+98,Quarter-final,4,2026-07-10T19:00:00Z,"SoFi Stadium, Los Angeles",Winner Match 93,Winner Match 94,Spain,Senegal,2,1,5,8,0,home,False
+99,Quarter-final,4,2026-07-11T21:00:00Z,"Hard Rock Stadium, Miami",Winner Match 91,Winner Match 92,Netherlands,Mexico,2,1,12,2,0,home,False
+100,Quarter-final,4,2026-07-12T01:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",Winner Match 95,Winner Match 96,Portugal,Argentina,2,1,7,5,0,home,False
+101,Semi-final,8,2026-07-14T19:00:00Z,"AT&T Stadium, Dallas",Winner Match 97,Winner Match 98,Norway,Spain,0,1,5,4,0,away,False
+102,Semi-final,8,2026-07-15T19:00:00Z,"Mercedes-Benz Stadium, Atlanta",Winner Match 99,Winner Match 100,Netherlands,Portugal,2,1,12,6,0,home,False
+103,Third-place playoff,8,2026-07-18T21:00:00Z,"Hard Rock Stadium, Miami",Loser Match 101,Loser Match 102,Norway,Portugal,1,2,11,3,0,away,False
+104,Final,16,2026-07-19T19:00:00Z,"MetLife Stadium, East Rutherford",Winner Match 101,Winner Match 102,Spain,Netherlands,2,1,8,5,0,home,False

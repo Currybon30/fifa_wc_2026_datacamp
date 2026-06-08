@@ -1,301 +1,1129 @@
 Team A,Team B,Matchup Count,Matchup %
-Algeria,Jordan,10,100.0
-Belgium,Iran,10,100.0
-Mexico,South Korea,10,100.0
-Brazil,Haiti,10,100.0
-South Africa,South Korea,10,100.0
-Portugal,Uzbekistan,10,100.0
-Australia,Iraq,1,10.0
-Belgium,Egypt,10,100.0
-Egypt,New Zealand,10,100.0
-Australia,USA,10,100.0
-Colombia,Mexico,1,10.0
-Colombia,South Africa,1,10.0
-France,Iraq,10,100.0
-Mexico,South Africa,10,100.0
-Bosnia and Herzegovina,Canada,10,100.0
-Ecuador,Switzerland,2,20.0
-England,Ghana,10,100.0
-Iraq,Norway,10,100.0
-Cabo Verde,Saudi Arabia,10,100.0
-Iraq,New Zealand,1,10.0
-Curaçao,Côte d'Ivoire,10,100.0
-Ecuador,Germany,10,100.0
-Czechia,South Korea,10,100.0
-Turkey,USA,10,100.0
-Ghana,Panama,10,100.0
-Netherlands,Sweden,10,100.0
-Australia,Paraguay,10,100.0
-Curaçao,Ecuador,10,100.0
-France,Netherlands,1,10.0
-Paraguay,Turkey,10,100.0
-Bosnia and Herzegovina,Qatar,10,100.0
-DR Congo,Portugal,10,100.0
-England,Iran,1,10.0
-France,Senegal,10,100.0
-Colombia,Portugal,10,100.0
-Colombia,DR Congo,10,100.0
-Paraguay,USA,10,100.0
-Argentina,Spain,3,30.0
-Germany,South Africa,1,10.0
-Curaçao,Germany,10,100.0
-Norway,Senegal,10,100.0
-Australia,Colombia,3,30.0
-France,Norway,10,100.0
-Japan,Tunisia,10,100.0
-Brazil,Germany,1,10.0
-Morocco,Netherlands,3,30.0
-Morocco,Scotland,10,100.0
-Mexico,Scotland,3,30.0
-Spain,Uruguay,10,100.0
-Japan,Netherlands,10,100.0
-Iraq,Senegal,10,100.0
-South Africa,Uruguay,1,10.0
-Mexico,Uruguay,3,30.0
-Australia,Turkey,10,100.0
-Czechia,Mexico,10,100.0
-Czechia,South Africa,10,100.0
-Austria,Jordan,10,100.0
-Croatia,Mexico,4,40.0
-Sweden,Tunisia,10,100.0
-Brazil,Scotland,10,100.0
-Cabo Verde,Uruguay,10,100.0
-Belgium,France,1,10.0
-Netherlands,Tunisia,10,100.0
-Algeria,Austria,10,100.0
-Côte d'Ivoire,Germany,10,100.0
-Haiti,Scotland,10,100.0
-Curaçao,Qatar,1,10.0
-England,Portugal,2,20.0
-Belgium,New Zealand,10,100.0
-Saudi Arabia,Uruguay,10,100.0
-Germany,Senegal,2,20.0
-Argentina,Austria,10,100.0
-Egypt,Iran,10,100.0
-Colombia,Panama,4,40.0
-Qatar,Switzerland,10,100.0
-Côte d'Ivoire,Ecuador,10,100.0
-Cabo Verde,Spain,10,100.0
-Croatia,England,10,100.0
-Croatia,DR Congo,2,20.0
-Canada,Qatar,10,100.0
-Brazil,Morocco,10,100.0
-Bosnia and Herzegovina,Switzerland,10,100.0
-Australia,Sweden,1,10.0
-Japan,Sweden,10,100.0
-Colombia,Spain,2,20.0
-South Africa,Switzerland,2,20.0
-Brazil,Tunisia,2,20.0
-Canada,Switzerland,10,100.0
-Croatia,Panama,10,100.0
-Algeria,Argentina,10,100.0
-Saudi Arabia,Spain,10,100.0
-England,Uruguay,1,10.0
-Austria,Uruguay,2,20.0
-Haiti,Morocco,10,100.0
-Canada,South Africa,1,10.0
-France,Mexico,1,10.0
-Croatia,Ghana,10,100.0
-Colombia,Uzbekistan,10,100.0
-Iran,Paraguay,1,10.0
-DR Congo,Uzbekistan,10,100.0
-Curaçao,Uruguay,1,10.0
-Argentina,Jordan,10,100.0
-Iran,New Zealand,10,100.0
-England,Panama,10,100.0
-Canada,South Korea,1,10.0
-Brazil,France,1,10.0
-Czechia,Ecuador,1,10.0
-Senegal,South Korea,1,10.0
-Croatia,Netherlands,1,10.0
-England,South Korea,1,10.0
-Brazil,Netherlands,4,40.0
-Netherlands,South Korea,1,10.0
-Haiti,Netherlands,1,10.0
-Algeria,Spain,2,20.0
-Australia,Switzerland,1,10.0
-New Zealand,Switzerland,1,10.0
-Morocco,Senegal,1,10.0
-Austria,Saudi Arabia,2,20.0
-Netherlands,Switzerland,1,10.0
-Belgium,Bosnia and Herzegovina,2,20.0
-Saudi Arabia,Switzerland,1,10.0
-England,Switzerland,1,10.0
-England,Spain,1,10.0
-Belgium,Côte d'Ivoire,2,20.0
-Iran,Turkey,2,20.0
-Croatia,Uzbekistan,2,20.0
-Morocco,Sweden,1,10.0
-Bosnia and Herzegovina,Paraguay,2,20.0
-Belgium,England,1,10.0
-Ecuador,France,2,20.0
-Austria,Mexico,1,10.0
-Jordan,Uruguay,1,10.0
-Belgium,Japan,1,10.0
-Canada,Curaçao,1,10.0
-Germany,Paraguay,1,10.0
-Panama,Uruguay,1,10.0
-Japan,Mexico,2,20.0
-Qatar,USA,2,20.0
-Germany,Switzerland,1,10.0
-Netherlands,Scotland,2,20.0
-Mexico,Norway,1,10.0
-Panama,Portugal,3,30.0
-Austria,Croatia,1,10.0
-Ecuador,Netherlands,1,10.0
-Brazil,Japan,3,30.0
-Germany,Panama,1,10.0
-Australia,Mexico,1,10.0
-Australia,Spain,2,20.0
-Czechia,Panama,1,10.0
-Australia,Germany,1,10.0
-Mexico,Panama,1,10.0
-Czechia,Qatar,1,10.0
-Canada,Spain,2,20.0
-Australia,Iran,1,10.0
-Colombia,England,2,20.0
-South Korea,Switzerland,3,30.0
-Czechia,Egypt,1,10.0
-Belgium,Senegal,1,10.0
-Canada,France,1,10.0
-Belgium,Spain,2,20.0
-Belgium,Mexico,1,10.0
-Canada,Côte d'Ivoire,1,10.0
-Belgium,Paraguay,2,20.0
-New Zealand,Panama,1,10.0
-England,Senegal,1,10.0
-France,Iran,1,10.0
-Austria,Canada,2,20.0
-Canada,Panama,2,20.0
-Czechia,Uruguay,1,10.0
-Australia,New Zealand,1,10.0
-Bosnia and Herzegovina,Germany,2,20.0
-Paraguay,Sweden,1,10.0
-Belgium,Germany,1,10.0
-Ecuador,Norway,4,40.0
-France,Scotland,2,20.0
-Bosnia and Herzegovina,South Korea,1,10.0
-Germany,USA,2,20.0
-Croatia,Spain,1,10.0
-Ecuador,Japan,1,10.0
-Belgium,Canada,1,10.0
-Senegal,Uruguay,1,10.0
-France,Germany,2,20.0
-Jordan,Spain,5,50.0
-Paraguay,Portugal,1,10.0
-Colombia,Croatia,1,10.0
-Belgium,USA,1,10.0
-Côte d'Ivoire,France,1,10.0
-France,Morocco,2,20.0
-Argentina,Canada,1,10.0
-Argentina,Paraguay,1,10.0
-Spain,Uzbekistan,2,20.0
-Japan,Paraguay,1,10.0
-Iran,Senegal,1,10.0
-Côte d'Ivoire,Switzerland,1,10.0
-Egypt,Paraguay,1,10.0
-Czechia,Côte d'Ivoire,1,10.0
-Iran,Japan,1,10.0
-Iraq,Portugal,1,10.0
-Argentina,Uruguay,3,30.0
-Belgium,Saudi Arabia,2,20.0
-England,Uzbekistan,3,30.0
-Côte d'Ivoire,Spain,1,10.0
-Côte d'Ivoire,Japan,1,10.0
-Paraguay,Spain,1,10.0
-Argentina,Switzerland,1,10.0
-Iran,Switzerland,2,20.0
-Argentina,Scotland,1,10.0
-Portugal,Spain,1,10.0
-Brazil,Spain,1,10.0
-Brazil,Norway,4,40.0
-Bosnia and Herzegovina,Brazil,1,10.0
-Egypt,USA,1,10.0
-Bosnia and Herzegovina,South Africa,1,10.0
-Argentina,Egypt,1,10.0
-Colombia,Egypt,1,10.0
-Germany,South Korea,2,20.0
-England,Scotland,1,10.0
-Belgium,Jordan,1,10.0
-Japan,Scotland,1,10.0
-Argentina,Cabo Verde,1,10.0
-Canada,Turkey,1,10.0
-Mexico,Morocco,2,20.0
-Croatia,Portugal,2,20.0
-Australia,France,1,10.0
-England,Mexico,1,10.0
-Canada,Jordan,2,20.0
-France,Sweden,1,10.0
-Argentina,Ecuador,1,10.0
-Ecuador,Paraguay,1,10.0
-Panama,Uzbekistan,1,10.0
-England,France,1,10.0
-Ecuador,Uzbekistan,1,10.0
-England,Morocco,1,10.0
-Australia,Uzbekistan,1,10.0
-Australia,Belgium,2,20.0
-Canada,Japan,1,10.0
-Scotland,Sweden,1,10.0
-Iran,Portugal,1,10.0
-Germany,Norway,1,10.0
-France,New Zealand,2,20.0
-Australia,Bosnia and Herzegovina,2,20.0
-Argentina,Japan,1,10.0
-Argentina,Iran,1,10.0
-Argentina,England,1,10.0
-DR Congo,England,1,10.0
-DR Congo,Spain,2,20.0
-Czechia,France,1,10.0
-Czechia,Germany,2,20.0
-Argentina,Sweden,1,10.0
-Brazil,Colombia,1,10.0
-Argentina,New Zealand,1,10.0
-Colombia,Haiti,1,10.0
-Germany,Mexico,1,10.0
-Colombia,New Zealand,2,20.0
-Curaçao,France,1,10.0
-Ghana,Portugal,2,20.0
-Sweden,Switzerland,1,10.0
-Japan,Morocco,1,10.0
-New Zealand,USA,2,20.0
-Norway,Paraguay,1,10.0
-France,Spain,1,10.0
-Canada,Czechia,1,10.0
-Haiti,South Africa,1,10.0
-New Zealand,Portugal,1,10.0
-Brazil,Sweden,1,10.0
-Morocco,South Korea,1,10.0
-Canada,Saudi Arabia,1,10.0
-Ghana,Mexico,1,10.0
-Senegal,Turkey,1,10.0
-Ecuador,Morocco,1,10.0
-Canada,Morocco,1,10.0
-Brazil,Turkey,1,10.0
-Bosnia and Herzegovina,Croatia,1,10.0
-Croatia,Morocco,1,10.0
-Mexico,Turkey,1,10.0
-Canada,Colombia,1,10.0
-Belgium,Cabo Verde,1,10.0
-Canada,Egypt,1,10.0
-Canada,Mexico,1,10.0
-Argentina,Saudi Arabia,1,10.0
-Croatia,Uruguay,2,20.0
-Ecuador,Tunisia,1,10.0
-Panama,Paraguay,1,10.0
-Austria,Spain,1,10.0
-Croatia,Norway,1,10.0
-Cabo Verde,Jordan,1,10.0
-Iran,South Africa,1,10.0
-Spain,USA,1,10.0
-Switzerland,Turkey,1,10.0
-Bosnia and Herzegovina,Czechia,1,10.0
-Canada,Croatia,1,10.0
-DR Congo,Ghana,1,10.0
-Scotland,Tunisia,1,10.0
-Croatia,USA,1,10.0
-Croatia,Senegal,1,10.0
-Spain,Switzerland,1,10.0
-Ecuador,USA,1,10.0
-Canada,Sweden,1,10.0
-Egypt,Norway,1,10.0
-Czechia,USA,1,10.0
+England,Portugal,11042,22.08
+Morocco,Scotland,50000,100.0
+Croatia,Mexico,5344,10.69
+Curaçao,Uruguay,249,0.5
+Ghana,Panama,50000,100.0
+Mexico,South Africa,50000,100.0
+Brazil,Tunisia,5787,11.57
+Bosnia and Herzegovina,Qatar,50000,100.0
+Curaçao,Germany,50000,100.0
+England,Panama,50000,100.0
+Sweden,Tunisia,50000,100.0
+Egypt,New Zealand,50000,100.0
+Norway,Senegal,50000,100.0
+Colombia,Panama,7392,14.78
+Mexico,South Korea,50000,100.0
+Paraguay,Turkey,50000,100.0
+France,Iraq,50000,100.0
+Czechia,South Africa,50000,100.0
+Croatia,England,50000,100.0
+Qatar,Switzerland,50000,100.0
+Canada,Qatar,50000,100.0
+Japan,Tunisia,50000,100.0
+Germany,Senegal,5113,10.23
+Colombia,Uzbekistan,50000,100.0
+Canada,Switzerland,50000,100.0
+Croatia,Ghana,50000,100.0
+South Africa,Uruguay,181,0.36
+Argentina,Austria,50000,100.0
+Mexico,Uruguay,2401,4.8
+Haiti,Morocco,50000,100.0
+Ecuador,Germany,50000,100.0
+Australia,Sweden,1030,2.06
+Belgium,New Zealand,50000,100.0
+South Africa,Switzerland,3046,6.09
+Ecuador,Switzerland,4974,9.95
+Iran,New Zealand,50000,100.0
+Austria,Uruguay,9641,19.28
+Brazil,Haiti,50000,100.0
+Belgium,France,3851,7.7
+Portugal,Uzbekistan,50000,100.0
+Croatia,Panama,50000,100.0
+Bosnia and Herzegovina,Switzerland,50000,100.0
+Bosnia and Herzegovina,Canada,50000,100.0
+France,Netherlands,7669,15.34
+France,Norway,50000,100.0
+Algeria,Argentina,50000,100.0
+Curaçao,Qatar,424,0.85
+England,Iran,1390,2.78
+Saudi Arabia,Spain,50000,100.0
+Cabo Verde,Uruguay,50000,100.0
+Australia,USA,50000,100.0
+Iraq,Senegal,50000,100.0
+Algeria,Austria,50000,100.0
+Colombia,South Africa,122,0.24
+Brazil,Germany,5111,10.22
+Australia,Iraq,717,1.43
+Netherlands,Tunisia,50000,100.0
+Japan,Netherlands,50000,100.0
+Paraguay,USA,50000,100.0
+Iraq,Norway,50000,100.0
+Curaçao,Ecuador,50000,100.0
+Algeria,Jordan,50000,100.0
+South Africa,South Korea,50000,100.0
+Australia,Paraguay,50000,100.0
+Cabo Verde,Saudi Arabia,50000,100.0
+Spain,Uruguay,50000,100.0
+Iraq,New Zealand,460,0.92
+Croatia,DR Congo,5532,11.06
+Czechia,South Korea,50000,100.0
+France,Senegal,50000,100.0
+Belgium,Iran,50000,100.0
+Brazil,Morocco,50000,100.0
+Czechia,Mexico,50000,100.0
+DR Congo,Portugal,50000,100.0
+Turkey,USA,50000,100.0
+Australia,Turkey,50000,100.0
+France,Mexico,4599,9.2
+Netherlands,Sweden,50000,100.0
+Côte d'Ivoire,Ecuador,50000,100.0
+Argentina,Jordan,50000,100.0
+Austria,Jordan,50000,100.0
+Côte d'Ivoire,Germany,50000,100.0
+Morocco,Netherlands,12306,24.61
+Iran,Paraguay,5096,10.19
+Australia,Colombia,2443,4.89
+Germany,South Africa,4105,8.21
+Colombia,Portugal,50000,100.0
+England,Ghana,50000,100.0
+Egypt,Iran,50000,100.0
+Argentina,Spain,16717,33.43
+Haiti,Scotland,50000,100.0
+DR Congo,Uzbekistan,50000,100.0
+Belgium,Egypt,50000,100.0
+Colombia,DR Congo,50000,100.0
+Mexico,Scotland,4866,9.73
+Colombia,Mexico,2076,4.15
+England,Uruguay,2216,4.43
+Curaçao,Côte d'Ivoire,50000,100.0
+Cabo Verde,Spain,50000,100.0
+Saudi Arabia,Uruguay,50000,100.0
+Japan,Sweden,50000,100.0
+Colombia,Spain,5687,11.37
+Canada,South Africa,2713,5.43
+Brazil,Scotland,50000,100.0
+Brazil,Netherlands,14766,29.53
+Netherlands,South Korea,1559,3.12
+Austria,Saudi Arabia,2747,5.49
+England,South Korea,3047,6.09
+Bosnia and Herzegovina,Paraguay,1644,3.29
+Morocco,Sweden,4416,8.83
+Brazil,France,6432,12.86
+Morocco,Senegal,3078,6.16
+Algeria,Spain,10342,20.68
+Australia,Switzerland,1879,3.76
+England,Switzerland,1216,2.43
+Belgium,Bosnia and Herzegovina,1046,2.09
+Canada,South Korea,7224,14.45
+Iran,Turkey,5023,10.05
+Saudi Arabia,Switzerland,495,0.99
+Czechia,Ecuador,2458,4.92
+Croatia,Netherlands,2033,4.07
+Belgium,Côte d'Ivoire,422,0.84
+New Zealand,Switzerland,1686,3.37
+Croatia,Uzbekistan,9342,18.68
+Netherlands,Switzerland,2315,4.63
+Belgium,England,2132,4.26
+Senegal,South Korea,1529,3.06
+Haiti,Netherlands,3338,6.68
+England,Spain,5919,11.84
+Australia,Iran,5219,10.44
+Mexico,Norway,4670,9.34
+Canada,Spain,3332,6.66
+Ecuador,Netherlands,2139,4.28
+Netherlands,Scotland,10465,20.93
+Czechia,Panama,192,0.38
+Panama,Portugal,9535,19.07
+Ecuador,France,6613,13.23
+Austria,Croatia,2514,5.03
+Belgium,Japan,1482,2.96
+Czechia,Qatar,1031,2.06
+Australia,Mexico,1011,2.02
+Germany,Switzerland,9246,18.49
+Australia,Spain,1832,3.66
+Belgium,Senegal,3115,6.23
+Brazil,Japan,13577,27.15
+Australia,Germany,2688,5.38
+Mexico,Panama,1337,2.67
+Japan,Mexico,2855,5.71
+Austria,Mexico,1140,2.28
+Jordan,Uruguay,4788,9.58
+South Korea,Switzerland,8070,16.14
+Qatar,USA,860,1.72
+Colombia,England,11452,22.9
+Germany,Paraguay,2581,5.16
+Panama,Uruguay,772,1.54
+Germany,Panama,320,0.64
+Canada,Curaçao,4001,8.0
+Czechia,Egypt,640,1.28
+New Zealand,Panama,323,0.65
+Jordan,Spain,9122,18.24
+England,Senegal,2511,5.02
+Bosnia and Herzegovina,South Korea,4555,9.11
+Bosnia and Herzegovina,Germany,6612,13.22
+Belgium,Germany,1342,2.68
+Germany,USA,2370,4.74
+Canada,Panama,418,0.84
+Belgium,Paraguay,5795,11.59
+Australia,New Zealand,3327,6.65
+Canada,Côte d'Ivoire,3267,6.53
+France,Germany,6308,12.62
+Ecuador,Japan,1965,3.93
+Senegal,Uruguay,584,1.17
+Paraguay,Sweden,965,1.93
+Austria,Canada,3051,6.1
+Belgium,Spain,3724,7.45
+Croatia,Spain,6483,12.97
+France,Scotland,4643,9.29
+France,Iran,3533,7.07
+Belgium,Mexico,2133,4.27
+Belgium,Canada,2786,5.57
+Czechia,Uruguay,427,0.85
+Ecuador,Norway,6800,13.6
+Canada,France,1754,3.51
+Belgium,USA,6098,12.2
+Czechia,Côte d'Ivoire,709,1.42
+Paraguay,Spain,1534,3.07
+France,Morocco,5359,10.72
+Egypt,Paraguay,2919,5.84
+Japan,Paraguay,1178,2.36
+Côte d'Ivoire,Spain,221,0.44
+Belgium,Saudi Arabia,1905,3.81
+Iraq,Portugal,170,0.34
+Argentina,Paraguay,1851,3.7
+Argentina,Uruguay,16471,32.94
+Côte d'Ivoire,Switzerland,2670,5.34
+Côte d'Ivoire,France,2735,5.47
+Argentina,Canada,7342,14.68
+Paraguay,Portugal,5173,10.35
+England,Uzbekistan,10425,20.85
+Côte d'Ivoire,Japan,604,1.21
+Colombia,Croatia,11223,22.45
+Iran,Senegal,2476,4.95
+Iran,Japan,1038,2.08
+Spain,Uzbekistan,3752,7.5
+Portugal,Spain,6778,13.56
+Egypt,USA,3076,6.15
+Belgium,Jordan,2559,5.12
+Brazil,Norway,6037,12.07
+Bosnia and Herzegovina,South Africa,1763,3.53
+Canada,Jordan,1180,2.36
+Germany,South Korea,8309,16.62
+Canada,Turkey,1717,3.43
+Argentina,Egypt,999,2.0
+Mexico,Morocco,5223,10.45
+England,Scotland,1554,3.11
+Brazil,Spain,1486,2.97
+Croatia,Portugal,11964,23.93
+Bosnia and Herzegovina,Brazil,404,0.81
+Australia,France,2694,5.39
+Argentina,Switzerland,5147,10.29
+Japan,Scotland,8700,17.4
+Argentina,Cabo Verde,3135,6.27
+Iran,Switzerland,2101,4.2
+Argentina,Scotland,408,0.82
+England,Mexico,9217,18.43
+Colombia,Egypt,603,1.21
+Ecuador,Uzbekistan,308,0.62
+France,Sweden,1861,3.72
+Canada,Japan,2670,5.34
+Argentina,Iran,2656,5.31
+Panama,Uzbekistan,5499,11.0
+Iran,Portugal,3744,7.49
+Ecuador,Paraguay,1046,2.09
+France,New Zealand,3028,6.06
+Australia,Bosnia and Herzegovina,1848,3.7
+Argentina,Ecuador,1226,2.45
+Australia,Belgium,5826,11.65
+Australia,Uzbekistan,1252,2.5
+Argentina,England,3714,7.43
+Argentina,Japan,1743,3.49
+England,Morocco,2138,4.28
+Scotland,Sweden,3735,7.47
+Germany,Norway,6784,13.57
+England,France,3748,7.5
+Curaçao,France,3176,6.35
+Canada,Czechia,4461,8.92
+Haiti,South Africa,218,0.44
+Argentina,New Zealand,1243,2.49
+Germany,Mexico,6646,13.29
+Sweden,Switzerland,1860,3.72
+New Zealand,Portugal,1687,3.37
+Japan,Morocco,10393,20.79
+Colombia,New Zealand,741,1.48
+DR Congo,Spain,1691,3.38
+Argentina,Sweden,665,1.33
+Czechia,Germany,6754,13.51
+France,Spain,2446,4.89
+Brazil,Colombia,671,1.34
+Czechia,France,814,1.63
+Norway,Paraguay,2480,4.96
+Colombia,Haiti,60,0.12
+New Zealand,USA,3412,6.82
+DR Congo,England,6500,13.0
+Ghana,Portugal,6705,13.41
+Croatia,Uruguay,1973,3.95
+Morocco,South Korea,2230,4.46
+Bosnia and Herzegovina,Croatia,192,0.38
+Ecuador,Morocco,1641,3.28
+Argentina,Saudi Arabia,5142,10.28
+Brazil,Sweden,6299,12.6
+Belgium,Cabo Verde,1323,2.65
+Ghana,Mexico,482,0.96
+Senegal,Turkey,2148,4.3
+Canada,Mexico,5468,10.94
+Croatia,Morocco,1327,2.65
+Canada,Egypt,2043,4.09
+Brazil,Turkey,607,1.21
+Canada,Saudi Arabia,732,1.46
+Canada,Morocco,743,1.49
+Canada,Colombia,1061,2.12
+Mexico,Turkey,956,1.91
+DR Congo,Ghana,1697,3.39
+Egypt,Norway,2424,4.85
+Ecuador,USA,992,1.98
+Canada,Sweden,2298,4.6
+Cabo Verde,Jordan,769,1.54
+Switzerland,Turkey,1771,3.54
+Croatia,Senegal,1549,3.1
+Iran,South Africa,1151,2.3
+Panama,Paraguay,619,1.24
+Spain,Switzerland,2887,5.77
+Croatia,USA,1178,2.36
+Scotland,Tunisia,3317,6.63
+Spain,USA,1502,3.0
+Czechia,USA,321,0.64
+Bosnia and Herzegovina,Czechia,2664,5.33
+Austria,Spain,15439,30.88
+Canada,Croatia,1152,2.3
+Croatia,Norway,2449,4.9
+Ecuador,Tunisia,544,1.09
+Norway,Spain,2771,5.54
+Portugal,Scotland,545,1.09
+Iraq,USA,866,1.73
+Colombia,Ghana,4859,9.72
+France,Japan,5908,11.82
+Jordan,USA,1027,2.05
+Scotland,South Korea,1975,3.95
+France,Switzerland,1780,3.56
+Germany,Turkey,2693,5.39
+Jordan,New Zealand,688,1.38
+Curaçao,Norway,3216,6.43
+Norway,Switzerland,1920,3.84
+Ghana,Spain,1064,2.13
+Belgium,Switzerland,2416,4.83
+France,Portugal,2108,4.22
+Iraq,Switzerland,275,0.55
+Austria,USA,1522,3.04
+Mexico,Saudi Arabia,2618,5.24
+Australia,Norway,2574,5.15
+Curaçao,Morocco,451,0.9
+Austria,South Korea,535,1.07
+Mexico,Portugal,2543,5.09
+Argentina,South Korea,768,1.54
+Czechia,Tunisia,244,0.49
+France,Tunisia,1663,3.33
+Brazil,Mexico,4588,9.18
+Belgium,South Korea,2444,4.89
+South Korea,Spain,1269,2.54
+Brazil,Czechia,941,1.88
+Argentina,Brazil,1040,2.08
+Iran,Uzbekistan,848,1.7
+Curaçao,Czechia,771,1.54
+Argentina,Belgium,3828,7.66
+Belgium,Sweden,609,1.22
+New Zealand,Norway,2597,5.19
+Netherlands,Norway,6851,13.7
+Argentina,Mexico,1813,3.63
+Belgium,South Africa,1865,3.73
+Czechia,Switzerland,4770,9.54
+Colombia,Iran,1662,3.32
+Bosnia and Herzegovina,Ecuador,2831,5.66
+Belgium,Brazil,856,1.71
+Belgium,Portugal,4479,8.96
+Sweden,USA,1187,2.37
+Brazil,Ecuador,3189,6.38
+Iran,Jordan,1481,2.96
+Bosnia and Herzegovina,Iran,730,1.46
+Côte d'Ivoire,Norway,2820,5.64
+Argentina,Portugal,4275,8.55
+England,Norway,3732,7.46
+Cabo Verde,Mexico,1944,3.89
+Bosnia and Herzegovina,Turkey,1791,3.58
+Ecuador,Portugal,1107,2.21
+Croatia,France,2332,4.66
+Argentina,France,1929,3.86
+Tunisia,Turkey,983,1.97
+France,Paraguay,2414,4.83
+Switzerland,Uruguay,2719,5.44
+Canada,Uruguay,3861,7.72
+Australia,Uruguay,844,1.69
+Ecuador,Senegal,5913,11.83
+Norway,Turkey,2542,5.08
+Morocco,Norway,4814,9.63
+Norway,Uruguay,1048,2.1
+Algeria,Turkey,1000,2.0
+Algeria,Belgium,2934,5.87
+Colombia,Turkey,2369,4.74
+Austria,Ghana,393,0.79
+Japan,USA,1382,2.76
+England,Jordan,2106,4.21
+Argentina,Colombia,2510,5.02
+Belgium,Norway,3896,7.79
+Haiti,Sweden,976,1.95
+Mexico,Switzerland,5839,11.68
+Austria,Switzerland,2165,4.33
+Norway,Sweden,1706,3.41
+Czechia,Iran,1726,3.45
+Austria,Japan,790,1.58
+France,Jordan,349,0.7
+Iran,USA,5385,10.77
+Norway,Saudi Arabia,460,0.92
+Canada,Tunisia,2189,4.38
+Brazil,Senegal,4138,8.28
+France,Turkey,2520,5.04
+Germany,Qatar,2686,5.37
+South Korea,Uzbekistan,643,1.29
+Brazil,Portugal,1261,2.52
+Japan,Norway,5229,10.46
+Austria,Cabo Verde,1550,3.1
+Haiti,Japan,2661,5.32
+Japan,Uzbekistan,491,0.98
+Curaçao,Senegal,2953,5.91
+Japan,Portugal,1382,2.76
+Canada,Portugal,2821,5.64
+Japan,Spain,1669,3.34
+Argentina,DR Congo,539,1.08
+Canada,Senegal,1262,2.52
+Côte d'Ivoire,Senegal,2504,5.01
+Austria,England,3034,6.07
+Argentina,Senegal,1158,2.32
+Canada,Germany,8090,16.18
+Qatar,South Korea,1724,3.45
+New Zealand,Paraguay,3267,6.53
+France,Uruguay,1028,2.06
+Czechia,New Zealand,825,1.65
+Belgium,Colombia,2276,4.55
+Canada,Ecuador,5112,10.22
+Curaçao,Scotland,331,0.66
+Austria,DR Congo,391,0.78
+Curaçao,Japan,575,1.15
+Norway,Scotland,3972,7.94
+Germany,Scotland,1959,3.92
+DR Congo,Germany,151,0.3
+Algeria,DR Congo,216,0.43
+Belgium,Turkey,5440,10.88
+Algeria,Iran,1685,3.37
+Germany,Japan,3125,6.25
+Senegal,USA,2209,4.42
+Algeria,Senegal,402,0.8
+DR Congo,Panama,3010,6.02
+Canada,New Zealand,2234,4.47
+Portugal,Turkey,5120,10.24
+England,Germany,1673,3.35
+Germany,Netherlands,3522,7.04
+Germany,Uruguay,742,1.48
+Bosnia and Herzegovina,Uruguay,586,1.17
+Switzerland,USA,1858,3.72
+Uruguay,Uzbekistan,928,1.86
+Argentina,Bosnia and Herzegovina,992,1.98
+Australia,Egypt,2980,5.96
+Belgium,Uruguay,2324,4.65
+Bosnia and Herzegovina,Colombia,201,0.4
+Bosnia and Herzegovina,England,220,0.44
+South Korea,Tunisia,503,1.01
+Austria,Belgium,3366,6.73
+Argentina,Germany,1853,3.71
+DR Congo,Iran,279,0.56
+Jordan,Paraguay,875,1.75
+Brazil,Iraq,702,1.4
+Ecuador,South Korea,3203,6.41
+Brazil,Croatia,1411,2.82
+New Zealand,Uzbekistan,376,0.75
+Croatia,South Korea,1825,3.65
+Netherlands,Uzbekistan,648,1.3
+Australia,Portugal,5440,10.88
+Côte d'Ivoire,South Korea,994,1.99
+France,Haiti,1476,2.95
+New Zealand,Sweden,165,0.33
+Portugal,USA,5441,10.88
+Ghana,Uzbekistan,3311,6.62
+Cabo Verde,Croatia,453,0.91
+Canada,Iran,2653,5.31
+Algeria,Mexico,708,1.42
+Norway,Portugal,2273,4.55
+Algeria,Uruguay,5568,11.14
+Algeria,Panama,654,1.31
+Algeria,Norway,555,1.11
+Algeria,Saudi Arabia,1438,2.88
+Netherlands,Paraguay,1392,2.78
+Iran,Uruguay,1623,3.25
+Australia,England,1326,2.65
+Australia,Canada,1908,3.82
+Paraguay,Senegal,1977,3.95
+Australia,Jordan,923,1.85
+England,Saudi Arabia,1096,2.19
+Bosnia and Herzegovina,France,477,0.95
+Austria,France,1017,2.03
+Curaçao,Turkey,377,0.75
+Curaçao,Egypt,147,0.29
+Austria,Egypt,720,1.44
+Algeria,Egypt,650,1.3
+Japan,Senegal,3339,6.68
+Austria,Uzbekistan,978,1.96
+Cabo Verde,Senegal,180,0.36
+Argentina,Curaçao,574,1.15
+Curaçao,Switzerland,3266,6.53
+Australia,Senegal,2105,4.21
+Mexico,Sweden,1219,2.44
+Panama,Senegal,397,0.79
+Belgium,Scotland,438,0.88
+Australia,Austria,1413,2.83
+Austria,Iran,2038,4.08
+Belgium,Panama,896,1.79
+Curaçao,Portugal,688,1.38
+Ecuador,Iraq,1865,3.73
+Egypt,Turkey,2864,5.73
+Algeria,Australia,1123,2.25
+Netherlands,Senegal,4148,8.3
+Norway,South Korea,2180,4.36
+Bosnia and Herzegovina,Mexico,3217,6.43
+Belgium,Czechia,2908,5.82
+Argentina,Australia,1986,3.97
+USA,Uzbekistan,1256,2.51
+Canada,Netherlands,2764,5.53
+Canada,USA,1842,3.68
+Netherlands,Panama,436,0.87
+Netherlands,Spain,2290,4.58
+Canada,Iraq,356,0.71
+Curaçao,Spain,235,0.47
+Cabo Verde,Panama,137,0.27
+Switzerland,Tunisia,1753,3.51
+Netherlands,New Zealand,640,1.28
+Iran,Iraq,687,1.37
+Australia,Curaçao,392,0.78
+France,Panama,570,1.14
+Iraq,Panama,121,0.24
+England,Japan,2072,4.14
+Algeria,England,2438,4.88
+Panama,South Africa,74,0.15
+Japan,South Africa,256,0.51
+Saudi Arabia,South Korea,1000,2.0
+Panama,Spain,2519,5.04
+Senegal,Sweden,1124,2.25
+Iran,Norway,3303,6.61
+Egypt,Senegal,1624,3.25
+Brazil,Curaçao,833,1.67
+Brazil,South Africa,459,0.92
+Argentina,Netherlands,2125,4.25
+New Zealand,Senegal,1906,3.81
+Argentina,Norway,2028,4.06
+Curaçao,South Korea,1170,2.34
+Austria,Ecuador,521,1.04
+Belgium,Netherlands,1891,3.78
+Argentina,Uzbekistan,1403,2.81
+Mexico,Netherlands,3854,7.71
+Côte d'Ivoire,England,220,0.44
+DR Congo,Mexico,957,1.91
+Argentina,Côte d'Ivoire,433,0.87
+Jordan,Saudi Arabia,1357,2.71
+Bosnia and Herzegovina,New Zealand,553,1.11
+Côte d'Ivoire,Iraq,787,1.57
+Ghana,South Korea,154,0.31
+France,USA,2553,5.11
+Paraguay,Uzbekistan,1256,2.51
+Japan,South Korea,1277,2.55
+Senegal,Switzerland,1286,2.57
+Algeria,Japan,385,0.77
+Scotland,Senegal,2484,4.97
+Iraq,Paraguay,749,1.5
+DR Congo,Senegal,203,0.41
+Morocco,USA,309,0.62
+Mexico,Uzbekistan,1869,3.74
+DR Congo,Switzerland,140,0.28
+DR Congo,Morocco,163,0.33
+Morocco,Paraguay,349,0.7
+Cabo Verde,DR Congo,39,0.08
+Australia,Qatar,774,1.55
+Belgium,Ecuador,771,1.54
+Japan,New Zealand,493,0.99
+New Zealand,Turkey,3221,6.44
+Iraq,Mexico,1096,2.19
+Colombia,Jordan,661,1.32
+Qatar,Turkey,782,1.56
+Cabo Verde,South Africa,181,0.36
+Morocco,Tunisia,4019,8.04
+Croatia,South Africa,350,0.7
+Canada,Norway,1921,3.84
+Egypt,Switzerland,1522,3.04
+South Korea,Sweden,607,1.21
+England,Iraq,545,1.09
+Croatia,Japan,1356,2.71
+Algeria,Croatia,1918,3.84
+Egypt,France,2975,5.95
+Iran,South Korea,1480,2.96
+Germany,Portugal,1954,3.91
+Austria,Portugal,2323,4.65
+Spain,Sweden,457,0.91
+Iraq,Turkey,766,1.53
+Portugal,Sweden,292,0.58
+South Korea,Turkey,739,1.48
+England,Turkey,1148,2.3
+England,Paraguay,1168,2.34
+Japan,Switzerland,2283,4.57
+Canada,England,1329,2.66
+Curaçao,Iraq,1008,2.02
+Norway,USA,2600,5.2
+Haiti,Norway,1212,2.42
+Brazil,Switzerland,1543,3.09
+Bosnia and Herzegovina,Côte d'Ivoire,1059,2.12
+Portugal,Switzerland,2047,4.09
+Mexico,Tunisia,1198,2.4
+Spain,Turkey,1576,3.15
+Australia,Croatia,1207,2.41
+Sweden,Turkey,1017,2.03
+Mexico,Senegal,3380,6.76
+Turkey,Uruguay,705,1.41
+Canada,Paraguay,1684,3.37
+Panama,South Korea,470,0.94
+Colombia,South Korea,786,1.57
+Croatia,Scotland,970,1.94
+Côte d'Ivoire,Qatar,374,0.75
+Turkey,Uzbekistan,1197,2.39
+Croatia,Jordan,1566,3.13
+Iran,Netherlands,1392,2.78
+Argentina,Turkey,1826,3.65
+New Zealand,Uruguay,757,1.51
+Colombia,Netherlands,1107,2.21
+Algeria,Bosnia and Herzegovina,293,0.59
+Croatia,Iran,1302,2.6
+Cabo Verde,South Korea,708,1.42
+England,USA,1119,2.24
+Netherlands,USA,1473,2.95
+Ghana,Netherlands,131,0.26
+Ghana,Iraq,63,0.13
+Belgium,Croatia,1987,3.97
+Croatia,Paraguay,1177,2.35
+Czechia,Ghana,59,0.12
+Germany,Morocco,2668,5.34
+Curaçao,Mexico,1813,3.63
+Czechia,Portugal,384,0.77
+Australia,Côte d'Ivoire,323,0.65
+Senegal,Spain,1596,3.19
+Czechia,Senegal,707,1.41
+Germany,Spain,2928,5.86
+Czechia,Scotland,854,1.71
+Australia,Czechia,415,0.83
+DR Congo,Paraguay,428,0.86
+Côte d'Ivoire,Sweden,222,0.44
+Canada,Uzbekistan,561,1.12
+Tunisia,Uzbekistan,99,0.2
+Australia,Brazil,650,1.3
+Belgium,Uzbekistan,1186,2.37
+Scotland,South Africa,421,0.84
+Croatia,Tunisia,276,0.55
+Brazil,Uzbekistan,475,0.95
+Norway,Uzbekistan,816,1.63
+Algeria,Switzerland,1124,2.25
+Australia,Japan,1323,2.65
+France,Uzbekistan,723,1.45
+Switzerland,Uzbekistan,454,0.91
+Bosnia and Herzegovina,Norway,561,1.12
+DR Congo,New Zealand,129,0.26
+Netherlands,Uruguay,1025,2.05
+Austria,Colombia,1617,3.23
+Brazil,Iran,650,1.3
+Germany,Iraq,1299,2.6
+Germany,Iran,676,1.35
+Iraq,Japan,530,1.06
+Algeria,Uzbekistan,528,1.06
+Mexico,Paraguay,907,1.81
+Morocco,South Africa,433,0.87
+Haiti,Mexico,2440,4.88
+Morocco,Switzerland,795,1.59
+Panama,Switzerland,327,0.65
+Paraguay,South Korea,713,1.43
+England,Haiti,335,0.67
+Brazil,England,2151,4.3
+Brazil,Jordan,124,0.25
+Austria,Netherlands,983,1.97
+England,New Zealand,459,0.92
+Portugal,Uruguay,2206,4.41
+Ghana,Uruguay,292,0.58
+Ghana,Paraguay,308,0.62
+Canada,Ghana,142,0.28
+Japan,Uruguay,860,1.72
+Egypt,Japan,424,0.85
+South Korea,Uruguay,971,1.94
+Côte d'Ivoire,Uzbekistan,192,0.38
+Bosnia and Herzegovina,Portugal,364,0.73
+Bosnia and Herzegovina,USA,2110,4.22
+Portugal,Senegal,1243,2.49
+Belgium,Tunisia,542,1.08
+Bosnia and Herzegovina,Jordan,227,0.45
+Senegal,Uzbekistan,499,1.0
+Germany,Uzbekistan,580,1.16
+Ecuador,South Africa,1501,3.0
+Senegal,Tunisia,975,1.95
+Iran,Spain,2027,4.05
+Iraq,Sweden,207,0.41
+Colombia,Switzerland,833,1.67
+Australia,Netherlands,1620,3.24
+Côte d'Ivoire,Mexico,1578,3.16
+Algeria,Paraguay,1080,2.16
+Ecuador,Iran,435,0.87
+Algeria,Colombia,870,1.74
+Belgium,Curaçao,516,1.03
+France,South Africa,370,0.74
+Qatar,South Africa,664,1.33
+Egypt,England,396,0.79
+Brazil,Egypt,219,0.44
+South Africa,USA,224,0.45
+Croatia,Turkey,1114,2.23
+Argentina,South Africa,126,0.25
+Bosnia and Herzegovina,Saudi Arabia,143,0.29
+Portugal,Saudi Arabia,333,0.67
+Bosnia and Herzegovina,Senegal,379,0.76
+Egypt,Portugal,1421,2.84
+Brazil,Canada,1409,2.82
+England,Netherlands,3085,6.17
+Austria,Brazil,512,1.02
+Iran,Qatar,161,0.32
+Czechia,Japan,532,1.06
+Austria,New Zealand,935,1.87
+Colombia,Ecuador,575,1.15
+Iraq,Scotland,436,0.87
+Ecuador,New Zealand,172,0.34
+Côte d'Ivoire,Turkey,326,0.65
+Argentina,Morocco,666,1.33
+Morocco,Turkey,371,0.74
+Belgium,Morocco,630,1.26
+Algeria,Netherlands,424,0.85
+Argentina,Croatia,3257,6.51
+Mexico,USA,825,1.65
+New Zealand,Tunisia,150,0.3
+Croatia,New Zealand,511,1.02
+Bosnia and Herzegovina,Netherlands,576,1.15
+Morocco,Uzbekistan,380,0.76
+Netherlands,Portugal,2099,4.2
+Colombia,Paraguay,2493,4.99
+Morocco,Spain,750,1.5
+Scotland,Switzerland,497,0.99
+Scotland,Spain,473,0.95
+Ecuador,Turkey,1006,2.01
+Egypt,Morocco,281,0.56
+South Africa,Turkey,229,0.46
+Colombia,Curaçao,375,0.75
+Ecuador,Scotland,1247,2.49
+Cabo Verde,New Zealand,374,0.75
+Algeria,USA,1161,2.32
+Paraguay,Switzerland,1627,3.25
+Algeria,Sweden,164,0.33
+Croatia,Ecuador,552,1.1
+Curaçao,Netherlands,536,1.07
+Côte d'Ivoire,South Africa,416,0.83
+Ecuador,England,721,1.44
+Colombia,Senegal,735,1.47
+Norway,South Africa,448,0.9
+Czechia,Uzbekistan,245,0.49
+Austria,Norway,1037,2.07
+Czechia,Spain,520,1.04
+DR Congo,South Korea,321,0.64
+Croatia,Iraq,370,0.74
+Cabo Verde,Tunisia,33,0.07
+Ecuador,Mexico,3162,6.32
+Cabo Verde,Switzerland,183,0.37
+Austria,Panama,958,1.92
+Bosnia and Herzegovina,Curaçao,1211,2.42
+Cabo Verde,Iran,815,1.63
+Egypt,South Africa,425,0.85
+Ghana,Norway,183,0.37
+Côte d'Ivoire,Portugal,617,1.23
+Iraq,Saudi Arabia,60,0.12
+Saudi Arabia,South Africa,204,0.41
+Saudi Arabia,Senegal,307,0.61
+Netherlands,Turkey,1507,3.01
+Japan,Turkey,1334,2.67
+Ghana,Turkey,276,0.55
+Haiti,Senegal,752,1.5
+Bosnia and Herzegovina,Japan,563,1.13
+Brazil,South Korea,2261,4.52
+Croatia,Czechia,746,1.49
+Czechia,Turkey,376,0.75
+Argentina,Czechia,278,0.56
+Mexico,Qatar,1176,2.35
+DR Congo,Tunisia,27,0.05
+Jordan,Uzbekistan,428,0.86
+Jordan,Mexico,506,1.01
+Cabo Verde,England,688,1.38
+Germany,Jordan,260,0.52
+Colombia,Norway,1274,2.55
+Iran,Morocco,522,1.04
+Iraq,South Korea,448,0.9
+Austria,Czechia,275,0.55
+New Zealand,Spain,745,1.49
+Jordan,Panama,598,1.2
+Curaçao,Uzbekistan,193,0.39
+Mexico,New Zealand,521,1.04
+Curaçao,South Africa,461,0.92
+Côte d'Ivoire,Paraguay,320,0.64
+Mexico,Spain,2279,4.56
+Côte d'Ivoire,Egypt,96,0.19
+Australia,Panama,625,1.25
+Croatia,Germany,1275,2.55
+Croatia,Côte d'Ivoire,148,0.3
+Paraguay,Tunisia,890,1.78
+Côte d'Ivoire,Scotland,342,0.68
+Algeria,Portugal,1115,2.23
+Czechia,Morocco,1011,2.02
+Brazil,Paraguay,526,1.05
+Tunisia,USA,1133,2.27
+Czechia,England,1209,2.42
+South Africa,Spain,234,0.47
+Ecuador,Sweden,674,1.35
+Czechia,Haiti,483,0.97
+Australia,South Africa,212,0.42
+Scotland,Turkey,287,0.57
+Colombia,Iraq,146,0.29
+Jordan,Switzerland,818,1.64
+New Zealand,South Africa,543,1.09
+Egypt,South Korea,492,0.98
+Croatia,Switzerland,1019,2.04
+Australia,Ecuador,1087,2.17
+Haiti,South Korea,1002,2.0
+Panama,Saudi Arabia,217,0.43
+France,South Korea,1943,3.89
+Croatia,Egypt,433,0.87
+Egypt,Jordan,552,1.1
+Cabo Verde,Czechia,339,0.68
+Colombia,Japan,762,1.52
+Norway,Qatar,92,0.18
+Colombia,USA,2437,4.87
+Colombia,Germany,1021,2.04
+Egypt,Ghana,131,0.26
+France,Saudi Arabia,491,0.98
+Austria,Turkey,1357,2.71
+Germany,Tunisia,790,1.58
+Paraguay,Qatar,734,1.47
+Ecuador,Uruguay,532,1.06
+Brazil,Panama,311,0.62
+Brazil,USA,506,1.01
+Ghana,Saudi Arabia,96,0.19
+Croatia,Saudi Arabia,826,1.65
+Saudi Arabia,USA,206,0.41
+Austria,Bosnia and Herzegovina,465,0.93
+Egypt,Mexico,395,0.79
+Ghana,Switzerland,110,0.22
+Jordan,Turkey,925,1.85
+Curaçao,Tunisia,164,0.33
+Australia,South Korea,696,1.39
+Czechia,Netherlands,673,1.35
+Austria,Senegal,747,1.49
+Panama,Turkey,573,1.15
+Algeria,Germany,395,0.79
+Cabo Verde,Canada,292,0.58
+Senegal,South Africa,324,0.65
+Portugal,South Africa,150,0.3
+Germany,Haiti,512,1.02
+Haiti,Switzerland,55,0.11
+New Zealand,Saudi Arabia,581,1.16
+Germany,Sweden,977,1.95
+Austria,Germany,945,1.89
+Australia,Tunisia,971,1.94
+Japan,Qatar,100,0.2
+Argentina,Ghana,493,0.99
+Netherlands,Saudi Arabia,241,0.48
+Côte d'Ivoire,Uruguay,230,0.46
+Argentina,Panama,1186,2.37
+Belgium,Iraq,1073,2.15
+Iraq,Qatar,19,0.04
+Ecuador,Spain,1034,2.07
+Scotland,Uzbekistan,308,0.62
+Argentina,Tunisia,606,1.21
+Cabo Verde,Uzbekistan,71,0.14
+Paraguay,Uruguay,765,1.53
+Egypt,Scotland,181,0.36
+Panama,USA,639,1.28
+Iran,Sweden,373,0.75
+Iraq,Spain,218,0.44
+Saudi Arabia,Tunisia,81,0.16
+Iraq,Uruguay,99,0.2
+New Zealand,South Korea,674,1.35
+Algeria,Ghana,286,0.57
+Norway,Tunisia,1438,2.88
+Austria,Paraguay,1349,2.7
+Paraguay,South Africa,211,0.42
+Cabo Verde,Norway,274,0.55
+Cabo Verde,Japan,81,0.16
+Iran,Saudi Arabia,1118,2.24
+Argentina,USA,1959,3.92
+Iraq,Netherlands,583,1.17
+Bosnia and Herzegovina,Spain,709,1.42
+Côte d'Ivoire,Iran,245,0.49
+Iran,Mexico,1272,2.54
+Colombia,Uruguay,1457,2.91
+Austria,Tunisia,278,0.56
+Egypt,Iraq,390,0.78
+USA,Uruguay,754,1.51
+Egypt,Uruguay,617,1.23
+Côte d'Ivoire,USA,340,0.68
+Curaçao,England,242,0.48
+Belgium,Ghana,373,0.75
+Norway,Panama,578,1.16
+Côte d'Ivoire,Jordan,81,0.16
+Bosnia and Herzegovina,Egypt,440,0.88
+Czechia,Sweden,257,0.51
+Belgium,Qatar,243,0.49
+Croatia,Haiti,194,0.39
+Austria,Morocco,346,0.69
+Netherlands,South Africa,268,0.54
+Algeria,New Zealand,806,1.61
+Ghana,Jordan,217,0.43
+Czechia,Saudi Arabia,485,0.97
+England,Sweden,484,0.97
+Saudi Arabia,Uzbekistan,181,0.36
+Iran,Panama,672,1.34
+Colombia,France,1243,2.49
+Paraguay,Saudi Arabia,191,0.38
+Cabo Verde,Egypt,307,0.61
+Egypt,Spain,665,1.33
+Curaçao,DR Congo,77,0.15
+DR Congo,Netherlands,247,0.49
+Brazil,Uruguay,414,0.83
+Japan,Saudi Arabia,195,0.39
+Iraq,Jordan,79,0.16
+Ecuador,Egypt,145,0.29
+Portugal,South Korea,983,1.97
+Belgium,DR Congo,392,0.78
+Iraq,Morocco,485,0.97
+DR Congo,France,277,0.55
+Colombia,Scotland,369,0.74
+Bosnia and Herzegovina,Tunisia,420,0.84
+Iran,Scotland,359,0.72
+Ecuador,Qatar,1084,2.17
+Saudi Arabia,Sweden,91,0.18
+Australia,Morocco,398,0.8
+Algeria,Czechia,170,0.34
+Algeria,France,519,1.04
+DR Congo,Turkey,449,0.9
+Austria,Scotland,234,0.47
+Egypt,Saudi Arabia,444,0.89
+Croatia,Sweden,322,0.64
+Sweden,Uruguay,373,0.75
+Côte d'Ivoire,New Zealand,147,0.29
+DR Congo,Ecuador,112,0.22
+Ecuador,Saudi Arabia,74,0.15
+Egypt,Uzbekistan,314,0.63
+Ghana,USA,329,0.66
+Australia,Ghana,273,0.55
+Algeria,Brazil,254,0.51
+Algeria,Ecuador,213,0.43
+Austria,Curaçao,229,0.46
+Brazil,New Zealand,264,0.53
+Algeria,Canada,1455,2.91
+Haiti,Uzbekistan,61,0.12
+Algeria,Cabo Verde,834,1.67
+Jordan,Tunisia,101,0.2
+Jordan,Norway,361,0.72
+Algeria,South Korea,358,0.72
+Morocco,Panama,282,0.56
+Curaçao,New Zealand,158,0.32
+Qatar,Spain,106,0.21
+Ghana,South Africa,31,0.06
+Brazil,Ghana,111,0.22
+Morocco,Uruguay,310,0.62
+Bosnia and Herzegovina,Iraq,93,0.19
+Cabo Verde,Sweden,36,0.07
+Haiti,Tunisia,876,1.75
+Cabo Verde,Germany,22,0.04
+Czechia,Norway,870,1.74
+Brazil,Côte d'Ivoire,956,1.91
+Bosnia and Herzegovina,Cabo Verde,59,0.12
+Cabo Verde,Portugal,119,0.24
+Cabo Verde,Netherlands,88,0.18
+Cabo Verde,France,338,0.68
+Colombia,Czechia,312,0.62
+South Africa,Tunisia,132,0.26
+Colombia,Morocco,531,1.06
+Morocco,Portugal,853,1.71
+Curaçao,Paraguay,384,0.77
+Czechia,Paraguay,354,0.71
+Canada,Scotland,494,0.99
+Austria,Sweden,318,0.64
+New Zealand,Qatar,146,0.29
+Australia,DR Congo,411,0.82
+Côte d'Ivoire,Morocco,421,0.84
+Colombia,Saudi Arabia,235,0.47
+Egypt,Sweden,151,0.3
+Croatia,Curaçao,157,0.31
+Curaçao,Jordan,94,0.19
+Qatar,Sweden,107,0.21
+DR Congo,USA,465,0.93
+Spain,Tunisia,390,0.78
+Japan,Jordan,260,0.52
+Iraq,South Africa,117,0.23
+Bosnia and Herzegovina,Sweden,428,0.86
+England,South Africa,498,1.0
+Jordan,Netherlands,310,0.62
+Ghana,Senegal,155,0.31
+Ghana,Scotland,82,0.16
+Jordan,Senegal,289,0.58
+Austria,Côte d'Ivoire,217,0.43
+New Zealand,Scotland,192,0.38
+DR Congo,Egypt,119,0.24
+Curaçao,Saudi Arabia,51,0.1
+Sweden,Uzbekistan,141,0.28
+Jordan,South Korea,229,0.46
+DR Congo,Uruguay,378,0.76
+Curaçao,Iran,271,0.54
+Ecuador,Haiti,305,0.61
+Germany,Ghana,80,0.16
+France,Ghana,163,0.33
+Ghana,Japan,100,0.2
+Algeria,Morocco,199,0.4
+Australia,Saudi Arabia,219,0.44
+Egypt,Panama,244,0.49
+Iran,Tunisia,348,0.7
+Egypt,Netherlands,611,1.22
+Australia,Scotland,271,0.54
+England,Tunisia,414,0.83
+Algeria,Curaçao,124,0.25
+Iraq,Uzbekistan,85,0.17
+Jordan,Portugal,816,1.63
+Scotland,USA,199,0.4
+Côte d'Ivoire,Netherlands,547,1.09
+Egypt,Germany,146,0.29
+Paraguay,Scotland,213,0.43
+Curaçao,Sweden,177,0.35
+Bosnia and Herzegovina,Haiti,13,0.03
+Argentina,Qatar,171,0.34
+Haiti,Iran,56,0.11
+DR Congo,Scotland,134,0.27
+Japan,Panama,305,0.61
+South Korea,USA,628,1.26
+Scotland,Uruguay,203,0.41
+Colombia,Côte d'Ivoire,301,0.6
+Cabo Verde,Ecuador,36,0.07
+Jordan,Sweden,125,0.25
+Algeria,Iraq,83,0.17
+Colombia,Sweden,211,0.42
+Australia,Haiti,40,0.08
+Tunisia,Uruguay,339,0.68
+Panama,Tunisia,64,0.13
+Jordan,Scotland,77,0.15
+Jordan,Morocco,109,0.22
+Panama,Sweden,87,0.17
+Haiti,Spain,36,0.07
+Qatar,Uruguay,96,0.19
+Germany,New Zealand,197,0.39
+South Africa,Uzbekistan,101,0.2
+Cabo Verde,Scotland,27,0.05
+Ecuador,Panama,137,0.27
+Côte d'Ivoire,DR Congo,64,0.13
+Curaçao,USA,360,0.72
+DR Congo,Norway,307,0.61
+Brazil,DR Congo,182,0.36
+Argentina,Iraq,168,0.34
+Iraq,Tunisia,167,0.33
+Canada,Haiti,57,0.11
+Algeria,Tunisia,134,0.27
+Morocco,Saudi Arabia,74,0.15
+Brazil,Saudi Arabia,93,0.19
+Panama,Scotland,227,0.45
+Algeria,Côte d'Ivoire,102,0.2
+Ghana,New Zealand,145,0.29
+Haiti,USA,22,0.04
+Qatar,Tunisia,100,0.2
+Austria,South Africa,140,0.28
+DR Congo,Japan,161,0.32
+Czechia,Jordan,106,0.21
+Bosnia and Herzegovina,Scotland,153,0.31
+Qatar,Uzbekistan,12,0.02
+Netherlands,Qatar,96,0.19
+Colombia,Tunisia,165,0.33
+Portugal,Tunisia,280,0.56
+Qatar,Scotland,19,0.04
+Morocco,New Zealand,224,0.45
+Canada,DR Congo,164,0.33
+Jordan,South Africa,79,0.16
+Egypt,Tunisia,129,0.26
+Algeria,South Africa,85,0.17
+Côte d'Ivoire,Haiti,62,0.12
+Haiti,Iraq,143,0.29
+Curaçao,Panama,54,0.11
+DR Congo,South Africa,63,0.13
+DR Congo,Sweden,54,0.11
+Haiti,Panama,48,0.1
+Cabo Verde,Turkey,79,0.16
+Ecuador,Jordan,177,0.35
+Bosnia and Herzegovina,Morocco,208,0.42
+Austria,Iraq,141,0.28
+Morocco,Qatar,21,0.04
+France,Qatar,72,0.14
+Haiti,Paraguay,35,0.07
+South Africa,Sweden,127,0.25
+Haiti,Uruguay,23,0.05
+Haiti,Turkey,36,0.07
+Côte d'Ivoire,Saudi Arabia,35,0.07
+Jordan,Qatar,42,0.08
+DR Congo,Jordan,179,0.36
+Cabo Verde,Colombia,96,0.19
+Ghana,Morocco,99,0.2
+Qatar,Saudi Arabia,39,0.08
+Bosnia and Herzegovina,Panama,58,0.12
+Czechia,DR Congo,109,0.22
+Austria,Qatar,89,0.18
+Algeria,Scotland,144,0.29
+Czechia,Iraq,235,0.47
+Qatar,Senegal,76,0.15
+Brazil,Qatar,53,0.11
+Egypt,Qatar,128,0.26
+Saudi Arabia,Turkey,203,0.41
+Curaçao,Haiti,64,0.13
+Saudi Arabia,Scotland,61,0.12
+Côte d'Ivoire,Tunisia,166,0.33
+Colombia,Qatar,17,0.03
+Ecuador,Ghana,51,0.1
+Côte d'Ivoire,Ghana,12,0.02
+Germany,Saudi Arabia,117,0.23
+Ghana,Iran,344,0.69
+Haiti,Portugal,65,0.13
+Algeria,Haiti,26,0.05
+DR Congo,Saudi Arabia,76,0.15
+Australia,Cabo Verde,76,0.15
+Bosnia and Herzegovina,Ghana,23,0.05
+Croatia,Qatar,19,0.04
+Cabo Verde,Ghana,68,0.14
+Egypt,Haiti,32,0.06
+Cabo Verde,Curaçao,14,0.03
+Côte d'Ivoire,Panama,40,0.08
+Argentina,Haiti,46,0.09
+Ghana,Haiti,23,0.05
+Belgium,Haiti,62,0.12
+Haiti,New Zealand,25,0.05
+Cabo Verde,Iraq,37,0.07
+Haiti,Jordan,12,0.02
+Bosnia and Herzegovina,Uzbekistan,96,0.19
+Panama,Qatar,7,0.01
+DR Congo,Iraq,34,0.07
+Brazil,Cabo Verde,40,0.08
+DR Congo,Haiti,24,0.05
+Cabo Verde,USA,84,0.17
+Cabo Verde,Paraguay,73,0.15
+Portugal,Qatar,34,0.07
+Algeria,Qatar,64,0.13
+Bosnia and Herzegovina,DR Congo,35,0.07
+Cabo Verde,Côte d'Ivoire,19,0.04
+Cabo Verde,Qatar,13,0.03
+Curaçao,Ghana,18,0.04
+Ghana,Sweden,26,0.05
+Haiti,Saudi Arabia,20,0.04
+England,Qatar,24,0.05
+Cabo Verde,Morocco,35,0.07
+Austria,Haiti,28,0.06
+Cabo Verde,Haiti,4,0.01
+Ghana,Tunisia,25,0.05
+Haiti,Qatar,3,0.01
+Ghana,Qatar,2,0.0
+DR Congo,Qatar,3,0.01
