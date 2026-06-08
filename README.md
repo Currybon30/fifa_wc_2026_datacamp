@@ -139,24 +139,6 @@ The tournament is simulated many times to estimate probabilities and rankings.
 
 ---
 
-# 📂 Project Structure
+## 🎯 50K Runs Monte Carlo Simulation
 
-```bash
-fifa_wc_2026_datacamp/
-│
-├── data/
-│   ├── elo.csv
-│   ├── former_names.csv
-│   ├── group_fixtures.csv
-│   ├── history_stat.csv
-│   └── knockout_slots.csv
-│
-│
-├── competition_title.ipynb
-├── feature_engineering.py
-├── helpers.py
-├── models.ipynb
-├── notebook.ipynb
-├── preprocessing.ipynb
-├── simulations.py
-└── README.md
+To view the results of the 50K runs Monte Carlo simulation, please access my Kaggle notebook [here](https://www.kaggle.com/code/tuongnguyenpham/fifa-world-cup-2026-prediction-system)
