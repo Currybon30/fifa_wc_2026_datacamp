@@ -2,12 +2,15 @@ import streamlit as st
 
 from utils.matches import format_date_local, format_kickoff, load_local_fixtures, split_local_fixtures
 from utils.ui import inject_base_styles, render_copyright_footer, render_html
+from utils.countdown import countdown_timer
 
 st.set_page_config(
     page_title="FIFA World Cup 2026",
     page_icon="⚽",
     layout="wide",
 )
+
+countdown_timer()
 
 inject_base_styles()
 

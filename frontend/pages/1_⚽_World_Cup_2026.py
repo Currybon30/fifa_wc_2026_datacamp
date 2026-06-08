@@ -14,11 +14,12 @@ from utils.matches import (
 )
 from utils.standings import get_football_data_key, get_group_standings
 from utils.ui import inject_base_styles, render_copyright_footer, render_group_standings, render_match_card_api, render_match_card_local
-
+from utils.countdown import countdown_timer
 st.set_page_config(page_title="World Cup 2026", page_icon="⚽", layout="wide")
 
 inject_base_styles()
 
+countdown_timer()
 
 st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
 
@@ -30,6 +31,7 @@ football_data_key = get_football_data_key()
 using_api = api_football_key is not None and football_data_key is not None
 
 with st.sidebar:
+    st.divider()
     group_filter = st.multiselect(
         "Filter by group",
         options=sorted(load_local_fixtures()["group"].dropna().unique()),
