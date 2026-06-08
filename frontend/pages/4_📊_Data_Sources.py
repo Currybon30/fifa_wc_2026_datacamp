@@ -16,7 +16,6 @@ st.divider()
 
 st.write("To access the datasets, please visit my [Kaggle World Cup 2026 Data](https://www.kaggle.com/datasets/tuongnguyenpham/fifa-wc26-data).")
 
-st.write("To view my full project, please visit my [GitHub repository](https://github.com/Currybon30/fifa_wc_2026_datacamp).")
 
 st.divider()
 
