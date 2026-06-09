@@ -16,6 +16,7 @@ from utils.standings import get_football_data_key, get_group_standings
 from utils.squads import list_squad_teams
 from utils.ui import inject_base_styles, render_copyright_footer, render_group_standings, render_match_card_api, render_match_card_local, render_squad_table
 from utils.countdown import countdown_timer
+from utils.usertimezone import render_country_timezone_selector
 st.set_page_config(page_title="World Cup 2026", page_icon="⚽", layout="wide")
 
 inject_base_styles()
@@ -31,6 +32,7 @@ using_api = api_football_key is not None and football_data_key is not None
 
 with st.sidebar:
     st.divider()
+    render_country_timezone_selector()
     group_filter = st.multiselect(
         "Filter by group",
         options=sorted(load_local_fixtures()["group"].dropna().unique()),

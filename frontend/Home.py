@@ -1,6 +1,7 @@
 import streamlit as st
 
 from utils.matches import format_date_local, format_kickoff, load_local_fixtures, split_local_fixtures
+from utils.usertimezone import render_country_timezone_selector
 from utils.ui import inject_base_styles, render_copyright_footer, render_html
 from utils.countdown import countdown_timer
 from config.logging import setup_logging
@@ -15,6 +16,9 @@ st.set_page_config(
 )
 
 countdown_timer()
+
+with st.sidebar:
+    render_country_timezone_selector()
 
 inject_base_styles()
 

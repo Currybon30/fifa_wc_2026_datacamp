@@ -8,8 +8,6 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 import logging
-from zoneinfo import ZoneInfo
-
 logger = logging.getLogger(__name__)
 
 import pandas as pd
@@ -218,82 +216,28 @@ def _parse_utc_datetime(iso_date: str | datetime) -> datetime:
     else:
         dt = iso_date
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
-    return dt.astimezone()
-
-
-_WINDOWS_TZ_ABBREVS = {
-    "Coordinated Universal Time": "UTC",
-    "Greenwich Mean Time": "GMT",
-    "Pacific Standard Time": "PST",
-    "Pacific Daylight Time": "PDT",
-    "US Mountain Standard Time": "MST",
-    "Mountain Standard Time": "MST",
-    "Mountain Daylight Time": "MDT",
-    "Central Standard Time": "CST",
-    "Central Daylight Time": "CDT",
-    "Eastern Standard Time": "EST",
-    "Eastern Daylight Time": "EDT",
-    "Atlantic Standard Time": "AST",
-    "Atlantic Daylight Time": "ADT",
-    "Alaskan Standard Time": "AKST",
-    "Alaskan Daylight Time": "AKDT",
-    "Hawaiian Standard Time": "HST",
-    "GMT Standard Time": "GMT",
-    "GMT Daylight Time": "BST",
-    "W. Europe Standard Time": "CET",
-    "Central Europe Standard Time": "CET",
-    "Central European Standard Time": "CET",
-    "Romance Standard Time": "CET",
-    "SE Asia Standard Time": "ICT",
-    "Singapore Standard Time": "SGT",
-    "Tokyo Standard Time": "JST",
-    "Korea Standard Time": "KST",
-    "China Standard Time": "CST",
-    "AUS Eastern Standard Time": "AEST",
-    "AUS Eastern Daylight Time": "AEDT",
-    "India Standard Time": "IST",
-}
-
-
-def _compact_offset(dt: datetime) -> str:
-    offset = dt.utcoffset()
-    if offset is None:
-        return "LOCAL"
-    total_minutes = int(offset.total_seconds() // 60)
-    sign = "+" if total_minutes >= 0 else "-"
-    hours, minutes = divmod(abs(total_minutes), 60)
-    if minutes:
-        return f"GMT{sign}{hours}:{minutes:02d}"
-    return f"GMT{sign}{hours}"
-
-
-def _local_tz_label(dt: datetime) -> str:
-    for candidate in (dt.strftime("%Z"), dt.tzname()):
-        if candidate and len(candidate) <= 5 and candidate != "%%Z":
-            return candidate
-        if candidate in _WINDOWS_TZ_ABBREVS:
-            return _WINDOWS_TZ_ABBREVS[candidate]
-
-    is_dst = dt.dst() is not None and dt.dst() != timedelta(0)
-    if time.daylight:
-        system_abbr = time.tzname[1 if is_dst else 0]
-        if system_abbr:
-            return system_abbr
-
-    return _compact_offset(dt)
+        return dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
 
 
 def format_kickoff(iso_date: str | datetime) -> str:
-    user_timezone = get_user_timezone()
-    local_dt = _parse_utc_datetime(iso_date).astimezone(ZoneInfo(user_timezone))
-    hour = int(local_dt.strftime("%I"))
-    clock = f"{hour}:{local_dt.strftime('%M %p')}"
-    return f"{local_dt.strftime('%a %b %d')} · {clock} {_local_tz_label(local_dt)}"
+    utc_dt = _parse_utc_datetime(iso_date)
+    viewer_tz = get_user_timezone()
+    display_dt = (
+        utc_dt if viewer_tz.key == "UTC" else utc_dt.astimezone(viewer_tz)
+    )
+    hour = int(display_dt.strftime("%I"))
+    clock = f"{hour}:{display_dt.strftime('%M %p')}"
+    return f"{display_dt.strftime('%a %b %d')} · {clock}"
 
 
 def format_date_local(iso_date: str | datetime) -> str:
-    return _parse_utc_datetime(iso_date).strftime("%B %d, %Y")
+    utc_dt = _parse_utc_datetime(iso_date)
+    viewer_tz = get_user_timezone()
+    display_dt = (
+        utc_dt if viewer_tz.key == "UTC" else utc_dt.astimezone(viewer_tz)
+    )
+    return display_dt.strftime("%B %d, %Y")
 
 
 def status_badge(status: str) -> str:
