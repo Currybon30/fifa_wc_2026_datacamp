@@ -107,7 +107,9 @@ tab_live, tab_upcoming, tab_completed, tab_standings, tab_squads = st.tabs(
 with tab_live:
     if data_error:
         st.warning(f"""
-        Due to the non-profit website, we are unable to provide live scores of the World Cup 2026 matches. Please visit [the official FIFA website](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures) for the latest updates.
+        Due to the non-profit website, we are striving to find a company that provides a free API for the live scores. 
+        Unfortunately, if you see this message, we are unable to provide live scores of the World Cup 2026 matches. 
+        Please visit [the official FIFA website](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures) for the latest updates.
         Sorry for the inconvenience.
         """)
     if not data_error:    
