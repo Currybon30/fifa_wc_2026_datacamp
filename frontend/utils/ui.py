@@ -380,7 +380,7 @@ def render_match_card_local(row, *, live: bool = False, finished: bool = False) 
                 <div class="wc-score">vs</div>
                 {_team_cell(row["away_team"], away=True)}
             </div>
-            <div class="wc-meta">{format_kickoff(row["date_utc"])} · {row["venue"]}</div>
+            <div class="wc-meta">{format_kickoff(row["date_utc"])} · Stadium: {row["venue"]}</div>
         </div>
         """)
 
