@@ -608,7 +608,7 @@ def render_monte_carlo_team_matchups(df) -> None:
     from utils.teams import all_teams_from_fixtures, is_slot_team
 
     if df.empty:
-        st.info("Monte Carlo team matchup results are not available yet.")
+        st.info("Team matchups results are not available yet.")
         return
 
     total_sims = monte_carlo_matchup_total_sims(df)
@@ -618,12 +618,9 @@ def render_monte_carlo_team_matchups(df) -> None:
     teams_in_data = sorted(set(df["team_a"]) | set(df["team_b"]))
     team_options = sorted(set(tournament_teams) | set(teams_in_data))
 
-    st.subheader("🤜🤛 Monte Carlo team matchups")
+    st.subheader("🤜🤛 Team matchups")
     st.markdown(
-        f"Choose two nations to see the probability they **face each other** in World Cup 2026. "
-        f"Based on **{total_sims:,}** full tournament simulations. "
-        "Group-stage meetings use fixed fixtures; knockout meetings use the "
-        "**re-chained bracket** (teams only meet if they actually advance to that slot)."
+        f"Choose two nations to see the probability they **face each other** in the FIFA World Cup 2026. "
     )
 
     default_a = team_options.index("Portugal") if "Portugal" in team_options else 0
@@ -669,21 +666,8 @@ def render_monte_carlo_team_matchups(df) -> None:
         with flag_right:
             _show_team_flag(team_b, width=72)
             st.markdown(f"**{team_b}**")
-
-        st.markdown(f"### {matchup_percent:.1f}%")
-        st.caption("Probability they face each other in World Cup 2026")
-        _render_probability_row("Matchup probability", matchup_percent, 100.0)
-
-        if total_sims > 0 and matchup_count > 0:
-            st.caption(
-                f"**{team_a}** and **{team_b}** played each other in "
-                f"**{matchup_count:,}** of **{total_sims:,}** simulated tournaments."
-            )
-        elif total_sims > 0:
-            st.caption(
-                f"**{team_a}** and **{team_b}** never faced each other "
-                f"in any of the **{total_sims:,}** simulated tournaments."
-            )
+        _render_probability_row("Probability they face each other in the FIFA World Cup 2026 is:", matchup_percent, 100.0)
+        st.caption("This probability is based on the number of times these two teams have been simulated to face each other in the FIFA World Cup 2026.")
 
 
 def render_group_standings(

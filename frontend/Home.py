@@ -31,8 +31,6 @@ teams = sorted(
 first_match = group_fixtures.iloc[0]
 last_match = fixtures.iloc[-1]
 
-st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
-
 render_html("""
     <div class="wc-hero">
         <div class="wc-hero-content">

@@ -22,8 +22,6 @@ inject_base_styles()
 
 countdown_timer()
 
-st.warning("The website is still under development. Some features are not available or incomplete. We will keep updating it as the tournament progresses. Thank you for your patience.")
-
 st.title("⚽ World Cup 2026")
 st.caption("Live scores, fixtures, and group standings.")
 
@@ -70,11 +68,11 @@ def _render_live_refresh_countdown() -> None:
 
 
 with st.sidebar:
-    st.divider()
     if using_api and not data_error:
+        st.divider()
         _render_live_refresh_countdown()
     elif not using_api:
-        st.caption("Configure API keys to enable live score refresh.")
+        pass
 
 display_upcoming_df = filter_upcoming_local_fixtures(
     upcoming_df,
@@ -106,7 +104,10 @@ tab_live, tab_upcoming, tab_completed, tab_standings, tab_squads = st.tabs(
 
 with tab_live:
     if data_error:
-        st.error(f"❗Could not reach API-Sports API. Showing non-live fixtures without live scores instead. Sorry for the inconvenience.")
+        st.warning(f"""
+        Due to the non-profit website, we are unable to provide live scores of the World Cup 2026 matches. Please visit [the official FIFA website](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures) for the latest updates.
+        Sorry for the inconvenience.
+        """)
     if not data_error:    
         st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
     if using_api:
