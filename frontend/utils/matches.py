@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 import logging
+from zoneinfo import ZoneInfo
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +17,7 @@ import requests
 import streamlit as st
 from dotenv import load_dotenv
 
+from utils.usertimezone import get_user_timezone
 from utils.teams import resolve_team_name
 
 load_dotenv()
@@ -122,22 +124,17 @@ def _api_get(base: str, path: str, api_key: str, params: dict[str, Any] | None =
 
 @st.cache_data(ttl=1200, show_spinner=False)
 def fetch_api_fixtures(api_key: str) -> dict: # Use this for final scores
-    logger.info("Fetching API fixtures...")
     fixtures = _api_get(
         FOOTBALL_DATA_BASE,
         "competitions/WC/matches",
         api_key
     )
-    logger.info("Fetched successfully")
     return fixtures
 
 @st.cache_data(ttl=LIVE_API_CACHE_TTL, show_spinner=True)
 def _fetch_live_fixtures_cached(api_key: str) -> tuple[list[dict], float]:
-    logger.info("Fetching live fixtures...")
     fixtures = _api_get(API_FOOTBALL_BASE, "/fixtures", api_key, {"live": "all"})
-    logger.info("Fetched successfully")
-    # return [f for f in fixtures if f.get("league", {}).get("id") == WORLD_CUP_LEAGUE_ID], time.time()
-    return fixtures, time.time()
+    return [f for f in fixtures if f.get("league", {}).get("id") == WORLD_CUP_LEAGUE_ID], time.time()
 
 
 def fetch_live_fixtures(api_key: str) -> list[dict]:
@@ -288,7 +285,8 @@ def _local_tz_label(dt: datetime) -> str:
 
 
 def format_kickoff(iso_date: str | datetime) -> str:
-    local_dt = _parse_utc_datetime(iso_date)
+    user_timezone = get_user_timezone()
+    local_dt = _parse_utc_datetime(iso_date).astimezone(ZoneInfo(user_timezone))
     hour = int(local_dt.strftime("%I"))
     clock = f"{hour}:{local_dt.strftime('%M %p')}"
     return f"{local_dt.strftime('%a %b %d')} · {clock} {_local_tz_label(local_dt)}"
