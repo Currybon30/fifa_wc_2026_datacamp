@@ -25,6 +25,9 @@ GROUP_FIXTURES_CSV = COMPETITION_DIR / "data" / "group_fixtures.csv"
 FLAG_NAME_ALIASES = {
     "United States": "USA",
     "Bosnia-Herzegovina": "Bosnia and Herzegovina",
+    "Korea Republic": "South Korea",
+    "IR Iran": "Iran",
+    "Côte D'Ivoire": "Côte d'Ivoire",
 }
 
 
@@ -33,6 +36,8 @@ def resolve_team_name(name: str) -> str:
 
 
 def flag_team_name(name: str) -> str:
+    if name in FLAG_NAME_ALIASES:
+        return FLAG_NAME_ALIASES[name]
     resolved = resolve_team_name(name)
     return FLAG_NAME_ALIASES.get(resolved, resolved)
 

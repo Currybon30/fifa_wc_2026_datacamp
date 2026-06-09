@@ -13,7 +13,8 @@ from utils.matches import (
     split_local_fixtures,
 )
 from utils.standings import get_football_data_key, get_group_standings
-from utils.ui import inject_base_styles, render_copyright_footer, render_group_standings, render_match_card_api, render_match_card_local
+from utils.squads import list_squad_teams
+from utils.ui import inject_base_styles, render_copyright_footer, render_group_standings, render_match_card_api, render_match_card_local, render_squad_table
 from utils.countdown import countdown_timer
 st.set_page_config(page_title="World Cup 2026", page_icon="⚽", layout="wide")
 
@@ -93,21 +94,21 @@ if football_data_key:
     except Exception as exc:
         standings_error = str(exc)
 
-tab_live, tab_upcoming, tab_completed, tab_standings = st.tabs(
+tab_live, tab_upcoming, tab_completed, tab_standings, tab_squads = st.tabs(
     [
         f"🔴 Live ({len(live_fixtures) if using_api else len(live_df)})",
         f"📅 Upcoming ({len(display_upcoming_df)})",
         f"✅ Completed ({len(completed_fixtures) if using_api else len(completed_df)})",
         "📋 Standings",
+        "🤝 Squads"
     ]
 )
 
-if data_error:
-    st.error(f"❗Could not reach API-Sports API. Showing non-live fixtures without live scores instead. Sorry for the inconvenience.")
-
 with tab_live:
-    st.warning(f"⚠️ The system is still under development, all of the live matches below are not the FIFA World Cup 2026 matches. We will update once the tournament starts.")
-    st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
+    if data_error:
+        st.error(f"❗Could not reach API-Sports API. Showing non-live fixtures without live scores instead. Sorry for the inconvenience.")
+    if not data_error:    
+        st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
     if using_api:
         if live_fixtures:
             for fixture in live_fixtures:
@@ -155,5 +156,13 @@ with tab_standings:
         st.info("No standings data is available from football-data.org yet.")
     else:
         render_group_standings(standings, group_filter=group_filter or None)
+
+with tab_squads:
+    squad_teams = list_squad_teams()
+    if not squad_teams:
+        st.info("No squad data is available yet.")
+    else:
+        selected_team = st.selectbox("Select a team", options=squad_teams)
+        render_squad_table(selected_team)
 
 render_copyright_footer()

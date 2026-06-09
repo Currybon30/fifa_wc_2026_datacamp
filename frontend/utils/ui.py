@@ -1,11 +1,14 @@
 """Shared Streamlit UI helpers."""
 
 from datetime import datetime
+import html
 import textwrap
 
 import streamlit as st
 
+from utils.teams import flag_file_path
 from utils.standings import STANDINGS_TABLE_HEIGHT, TEAMS_PER_GROUP
+from utils.squads import get_squad
 
 
 def render_html(body: str) -> None:
@@ -13,8 +16,6 @@ def render_html(body: str) -> None:
 
 
 def _show_team_flag(team_name: str, *, width: int = 56) -> None:
-    from utils.teams import flag_file_path
-
     path = flag_file_path(team_name)
     if path.exists():
         st.image(str(path), width=width)
@@ -125,6 +126,65 @@ def inject_base_styles() -> None:
             color: #666;
             font-size: 0.85rem;
             margin-top: 0.35rem;
+        }
+        .wc-coach-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            color: #fff;
+            margin: 1rem 0 1.5rem 0;
+            border-left: 5px solid #e9c46a;
+            box-shadow: 0 8px 24px rgba(15, 52, 96, 0.18);
+        }
+        .wc-coach-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #e9c46a;
+            font-weight: 700;
+        }
+        .wc-coach-name {
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin: 0.35rem 0 0.2rem 0;
+            line-height: 1.2;
+        }
+        .wc-coach-meta {
+            font-size: 0.92rem;
+            opacity: 0.88;
+        }
+        .wc-squad-pos-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 1rem 0 0.45rem 0;
+            padding-left: 0.65rem;
+            border-left: 4px solid var(--wc-pos-color, #1a5f4a);
+        }
+        .wc-player-card {
+            border: 1px solid #e6e6e6;
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            margin-bottom: 0.65rem;
+            background: rgba(255, 255, 255, 0.82);
+            border-top: 3px solid var(--wc-pos-color, #1a5f4a);
+            min-height: 160px;
+        }
+        .wc-player-name {
+            font-size: 0.98rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            line-height: 1.25;
+            color: black;
+        }
+        .wc-player-shirt {
+            font-size: 0.78rem;
+            color: black;
+            margin-bottom: 0.35rem;
+        }
+        .wc-player-meta {
+            font-size: 0.8rem;
+            color: black;
+            line-height: 1.45;
         }
         .wc-nav-card {
             border: 1px solid #ddd;
@@ -669,3 +729,124 @@ def render_group_standings(
                 "Pts": stat_column,
             },
         )
+
+_SQUAD_POSITION_GROUPS = (
+    ("GK", "🧤 Goalkeepers", "#b45309"),
+    ("DF", "🛡️ Defenders", "#1d4ed8"),
+    ("MF", "⚡ Midfielders", "#15803d"),
+    ("FW", "🎯 Forwards", "#b91c1c"),
+)
+
+def _squad_field(value, label: str) -> str | None:
+    import pandas as pd
+
+    if pd.isna(value) or not str(value).strip():
+        return None
+    if label == "Height":
+        try:
+            return f"{label}: {int(float(value))} cm"
+        except (TypeError, ValueError):
+            return f"{label}: {value}"
+    return f"{label}: {value}"
+
+
+def _render_player_card(row, *, accent_color: str) -> None:
+    name = html.escape(str(row.get("player_name") or "Unknown player"))
+    shirt = row.get("name_on_shirt")
+    meta_lines = [
+        html.escape(line)
+        for line in (
+            _squad_field(row.get("club"), "Club"),
+            _squad_field(row.get("height"), "Height"),
+            _squad_field(row.get("dob"), "Born"),
+        )
+        if line
+    ]
+    shirt_html = ""
+    if (
+        shirt is not None
+        and str(shirt).strip()
+    ):
+        shirt_html = f'<div class="wc-player-shirt">👕 Shirt: {html.escape(str(shirt))}</div>'
+
+    meta_html = "<br>".join(meta_lines) if meta_lines else "—"
+    render_html(f"""
+        <div class="wc-player-card" style="--wc-pos-color: {accent_color};">
+            <div class="wc-player-name">{name}</div>
+            {shirt_html}
+            <div class="wc-player-meta">{meta_html}</div>
+        </div>
+        """)
+
+
+def _render_player_group(group, *, label: str, accent_color: str, cols_per_row: int = 3) -> None:
+    render_html(
+        f'<div class="wc-squad-pos-title" style="--wc-pos-color: {accent_color};">{label}</div>'
+    )
+    players = [row for _, row in group.iterrows()]
+    for start in range(0, len(players), cols_per_row):
+        cols = st.columns(cols_per_row)
+        for col, row in zip(cols, players[start:start + cols_per_row]):
+            with col:
+                _render_player_card(row, accent_color=accent_color)
+
+
+def _render_coach_card(coach) -> None:
+    import pandas as pd
+
+    from utils.squads import coach_display_name
+    from utils.teams import flag_static_url
+
+    name = html.escape(coach_display_name(coach))
+    nationality = coach.get("nationality")
+    nationality_html = ""
+    if pd.notna(nationality) and str(nationality).strip():
+        nat = str(nationality).strip()
+        nationality_html = f"Nationality: {html.escape(nat)}"
+    render_html(f"""
+        <div class="wc-coach-card">
+            <div class="wc-coach-label">📋 Head coach</div>
+            <div class="wc-coach-name">{name}</div>
+            <div class="wc-coach-meta">
+                {nationality_html}
+            </div>
+        </div>
+        """)
+
+
+def render_squad_table(team_name: str) -> None:
+    from utils.squads import split_squad_players_coach
+
+    try:
+        squad = get_squad(team_name)
+    except KeyError:
+        st.warning(f"Squad data for **{team_name}** is not available.")
+        return
+
+    players, coach = split_squad_players_coach(squad)
+
+    head_left, head_right = st.columns([1, 5], vertical_alignment="center")
+    with head_left:
+        _show_team_flag(team_name, width=72)
+    with head_right:
+        st.markdown(f"### {team_name}")
+        coach_note = " · 1 Head Coach" if coach is not None else ""
+        st.caption(f"{len(players)} players{coach_note}")
+
+    if coach is not None:
+        _render_coach_card(coach)
+
+    if players.empty:
+        st.info("No player rows found for this squad.")
+        return
+
+    counts = players["position"].value_counts()
+    metric_cols = st.columns(4)
+    for col, (code, label, _) in zip(metric_cols, _SQUAD_POSITION_GROUPS):
+        col.metric(label.split(" ", 1)[1], int(counts.get(code, 0)))
+
+    for code, label, color in _SQUAD_POSITION_GROUPS:
+        group = players[players["position"] == code]
+        if group.empty:
+            continue
+        _render_player_group(group, label=label, accent_color=color)
