@@ -31,8 +31,8 @@ football_data_key = get_football_data_key()
 using_api = api_football_key is not None and football_data_key is not None
 
 with st.sidebar:
-    st.divider()
     render_country_timezone_selector()
+    st.divider()
     group_filter = st.multiselect(
         "Filter by group",
         options=sorted(load_local_fixtures()["group"].dropna().unique()),

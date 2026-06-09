@@ -313,7 +313,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
                     {score_html}
                     {_team_cell(away, away=True)}
                 </div>
-                <div class="wc-meta">{format_kickoff(fixture["fixture"]["date"])} · {location}</div>
+                <div class="wc-meta">{format_kickoff(fixture["fixture"]["date"])} · Stadium: {location}</div>
             </div>
             """)
     else:
