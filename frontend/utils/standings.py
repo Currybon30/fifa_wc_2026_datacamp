@@ -9,7 +9,9 @@ import streamlit as st
 
 from utils.matches import FOOTBALL_DATA_BASE, _api_headers
 from utils.teams import resolve_team_name
-from config.logging import logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 STANDINGS_COLUMNS = ["#", "Team", "P", "W", "D", "L", "GF", "GA", "GD", "Pts"]
 TEAMS_PER_GROUP = 4

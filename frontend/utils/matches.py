@@ -7,7 +7,9 @@ import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
-from config.logging import logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 import pandas as pd
 import requests
@@ -120,13 +122,13 @@ def _api_get(base: str, path: str, api_key: str, params: dict[str, Any] | None =
 
 @st.cache_data(ttl=1200, show_spinner=False)
 def fetch_api_fixtures(api_key: str) -> dict: # Use this for final scores
-    logger.info(f"Fetching API fixtures...")
+    logger.info("Fetching API fixtures...")
     fixtures = _api_get(
         FOOTBALL_DATA_BASE,
         "competitions/WC/matches",
         api_key
     )
-    logger.info(f"Fetched successfully")
+    logger.info("Fetched successfully")
     return fixtures
 
 @st.cache_data(ttl=LIVE_API_CACHE_TTL, show_spinner=True)
