@@ -15,7 +15,8 @@ st.set_page_config(
     layout="wide",
 )
 
-if seconds_until_world_cup_start() > 0:
+if seconds_until_world_cup_start() > 0 and not st.session_state.get("countdown_dialog_opened", False):
+    st.session_state["countdown_dialog_opened"] = True
     open_world_cup_countdown_dialog()
 
 countdown_timer() # Sidebar
