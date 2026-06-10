@@ -82,7 +82,7 @@ def split_squad_players_coach(
 def coach_display_name(coach: pd.Series) -> str:
     parts = [
         str(value).strip()
-        for value in (coach.get("first_name"), coach.get("last_name"))
+        for value in (coach.get("last_name"), coach.get("first_name"))
         if pd.notna(value) and str(value).strip()
     ]
     if parts:

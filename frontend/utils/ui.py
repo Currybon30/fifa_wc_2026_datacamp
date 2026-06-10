@@ -429,7 +429,7 @@ def render_prediction_card(row, *, variant: str = "scores") -> None:
                 {center_html}
                 {_team_cell(away, away=True)}
             </div>
-            <div class="wc-meta">{kickoff} · {venue}{meta_extra}</div>
+            <div class="wc-meta">{kickoff} · Stadium: {venue}{meta_extra}</div>
         </div>
         """)
 
