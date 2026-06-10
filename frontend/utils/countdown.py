@@ -12,7 +12,7 @@ def format_world_cup_countdown(seconds: float | int) -> str:
 
     parts = []
     if days:
-        parts.append(f"{days:02d}d")
+        parts.append(f"{days}d")
     if hours:
         parts.append(f"{hours:02d}h")
     if minutes:
