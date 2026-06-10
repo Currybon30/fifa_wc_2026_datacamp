@@ -22,7 +22,7 @@ def format_world_cup_countdown(seconds: float | int) -> str:
     return " ".join(parts)
 
 
-def __seconds_until_world_cup_start():
+def seconds_until_world_cup_start():
     """
     Calculate the number of seconds until the FIFA World Cup 2026 starts.
     """
@@ -30,7 +30,7 @@ def __seconds_until_world_cup_start():
 
 @st.fragment(run_every=1)
 def _render_world_cup_countdown() -> None:
-    remaining = __seconds_until_world_cup_start()
+    remaining = seconds_until_world_cup_start()
     if remaining <= 0:
         st.title("🎉FIFA World Cup 2026 is kicking off!")
         return

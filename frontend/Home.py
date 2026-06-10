@@ -3,7 +3,7 @@ import streamlit as st
 from utils.matches import format_date_local, format_kickoff, load_local_fixtures, split_local_fixtures
 from utils.usertimezone import render_country_timezone_selector
 from utils.ui import inject_base_styles, render_copyright_footer, render_html
-from utils.countdown import countdown_timer
+from utils.countdown import countdown_timer, seconds_until_world_cup_start, format_world_cup_countdown
 from config.logging import setup_logging
 
 # Initialize logging
@@ -15,7 +15,21 @@ st.set_page_config(
     layout="wide",
 )
 
-countdown_timer()
+wc_countdown_remaining = seconds_until_world_cup_start()
+
+@st.dialog(title=" ")
+def wc_countdown_dialog():
+    st.title("⏳ FIFA World Cup 2026 Countdown")
+    st.metric(
+        "The FIFA World Cup 2026 will start in:",
+        format_world_cup_countdown(wc_countdown_remaining),
+    )
+    st.caption("Please open the sidebar for more options.")
+    
+if wc_countdown_remaining > 0:
+    wc_countdown_dialog()
+
+countdown_timer() # Sidebar
 
 with st.sidebar:
     render_country_timezone_selector()
