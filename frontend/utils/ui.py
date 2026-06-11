@@ -458,11 +458,11 @@ def render_comparison_card(row) -> None:
 
     center_html = (
         f'<div class="wc-score">'
-        f"<div>{predicted} → {actual}</div>"
-        f'<div class="wc-score-pens">Predicted → Actual</div>'
+        f"<div>{predicted} | {actual}</div>"
+        f'<div class="wc-score-pens">Predicted | Actual</div>'
         f"</div>"
     )
-    meta_extra = f" · Predicted winner: {format_winner(row)}"
+    meta_extra = f" · Predicted Winner: {format_winner(row)}"
 
     render_html(f"""
         <div class="wc-card">
@@ -473,7 +473,7 @@ def render_comparison_card(row) -> None:
                 {center_html}
                 {_team_cell(away, away=True)}
             </div>
-            <div class="wc-meta">{kickoff} · {venue}{meta_extra}</div>
+            <div class="wc-meta">{kickoff} · Stadium: {venue}{meta_extra}</div>
         </div>
         """)
 

@@ -52,8 +52,8 @@ live_df, upcoming_df, completed_df = split_local_fixtures(df)
 if using_api:
     try:
         non_live_fixtures = fetch_api_fixtures(football_data_key)
-        live_fixtures = fetch_live_fixtures(api_football_key)
         _, completed_fixtures = split_api_fixtures(non_live_fixtures)
+        live_fixtures = fetch_live_fixtures(api_football_key)
     except Exception as exc:
         data_error = str(exc)
         using_api = False
@@ -135,20 +135,12 @@ with tab_upcoming:
         st.success("No upcoming fixtures in the local schedule.")
 
 with tab_completed:
-    if using_api:
-        shown = completed_fixtures[:limit]
-        if shown:
-            for fixture in shown:
-                render_match_card_api(fixture)
-        else:
-            st.info("No completed matches yet — the tournament has not started.")
+    shown = completed_fixtures[:limit]
+    if shown:
+        for fixture in shown:
+            render_match_card_api(fixture)
     else:
-        shown = completed_df.head(limit)
-        if len(shown):
-            for _, row in shown.iterrows():
-                render_match_card_local(row, finished=True)
-        else:
-            st.info("No completed matches yet — the tournament has not started.")
+        st.info("No completed matches yet — the tournament has not started.")
 
 with tab_standings:
     if not football_data_key:
