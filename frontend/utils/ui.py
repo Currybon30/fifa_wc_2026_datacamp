@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import html
+from re import L
 import textwrap
 
 import streamlit as st
@@ -272,7 +273,7 @@ def _team_cell(team_name: str, *, away: bool = False) -> str:
     return f'<div class="wc-team {align_class}">{flag_html}<span style="color: black;">{team_name}</span></div>'
 
 
-def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
+def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None) -> None:
     if live:
         from utils.matches import (
             fixture_away_team,
@@ -326,6 +327,9 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
             format_kickoff,
         )
 
+        if localdf is not None:
+            match_local = localdf[localdf['date_utc'] == fixture['utcDate']]
+
         status = fixture.get("status", "")
         home = fd_match_home_team(fixture)
         away = fd_match_away_team(fixture)
@@ -350,7 +354,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False) -> None:
                     {score_html}
                     {_team_cell(away, away=True)}
                 </div>
-                <div class="wc-meta">{format_kickoff(fixture["utcDate"])}</div>
+                <div class="wc-meta">{format_kickoff(fixture["utcDate"])} · Stadium: {match_local["venue"].loc[0]}</div>
             </div>
             """)
 
