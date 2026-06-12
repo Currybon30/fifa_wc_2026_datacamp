@@ -22,7 +22,7 @@ LOGO_PLACEHOLDER_URL = "app/static/logo-placeholder.png"
 GROUP_FIXTURES_CSV = COMPETITION_DIR / "data" / "group_fixtures.csv"
 
 # Common API / display variants mapped to fixture dataset names.
-FLAG_NAME_ALIASES = {
+__FLAG_NAME_ALIASES = {
     "United States": "USA",
     "Bosnia-Herzegovina": "Bosnia and Herzegovina",
     "Korea Republic": "South Korea",
@@ -36,10 +36,10 @@ def resolve_team_name(name: str) -> str:
 
 
 def flag_team_name(name: str) -> str:
-    if name in FLAG_NAME_ALIASES:
-        return FLAG_NAME_ALIASES[name]
+    if name in __FLAG_NAME_ALIASES:
+        return __FLAG_NAME_ALIASES[name]
     resolved = resolve_team_name(name)
-    return FLAG_NAME_ALIASES.get(resolved, resolved)
+    return __FLAG_NAME_ALIASES.get(resolved, resolved)
 
 
 def team_slug(name: str) -> str:

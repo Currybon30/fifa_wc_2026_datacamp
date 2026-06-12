@@ -6,9 +6,8 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-
 from utils.matches import format_kickoff
-from utils.teams import resolve_team_name
+from utils.teams import flag_team_name, resolve_team_name
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RESULTS_DIR = PROJECT_ROOT / "FIFA World Cup 2026 - DataCamp Competition" / "results"
@@ -60,6 +59,7 @@ def load_knockout_predictions() -> pd.DataFrame:
     df["winner"] = df["match_winner"]
     return df[_COMMON_COLUMNS].sort_values("date_utc").reset_index(drop=True)
 
+
 @st.cache_data(show_spinner=False)
 def load_monte_carlo_predictions() -> pd.DataFrame:
     df = pd.read_csv(MONTE_CARLO_PREDICTIONS_CSV)
@@ -77,6 +77,7 @@ def load_monte_carlo_predictions() -> pd.DataFrame:
     )
     df["team"] = df["team"].map(resolve_team_name)
     return df.sort_values("win_percent", ascending=False).reset_index(drop=True)
+
 
 @st.cache_data(show_spinner=False)
 def load_monte_carlo_team_matchups() -> pd.DataFrame:
@@ -195,12 +196,18 @@ def build_score_comparison(predictions: pd.DataFrame, actual: pd.DataFrame) -> p
     if predictions.empty or actual.empty:
         return pd.DataFrame()
 
-    merged = predictions.merge(actual, on=["home_team", "away_team"], how="inner")
+    actual = actual.copy()
+    actual["home_team"] = actual["home_team"].map(flag_team_name)
+    actual["away_team"] = actual["away_team"].map(flag_team_name)
+
+    merged = predictions.merge(
+        actual, on=["home_team", "away_team"], how="inner")
     if merged.empty:
         return merged
 
     merged["actual_outcome"] = merged.apply(
-        lambda row: _match_outcome(row["actual_home_goals"], row["actual_away_goals"]),
+        lambda row: _match_outcome(
+            row["actual_home_goals"], row["actual_away_goals"]),
         axis=1,
     )
     merged["exact_score"] = (
