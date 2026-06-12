@@ -274,7 +274,7 @@ def _team_cell(team_name: str, *, away: bool = False) -> str:
     return f'<div class="wc-team {align_class}">{flag_html}<span style="color: black;">{team_name}</span></div>'
 
 
-def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None) -> None:
+def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, index = None) -> None:
     if live:
         from utils.matches import (
             fixture_away_team,
@@ -345,6 +345,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None) 
         status_label = fd_status_badge(status)
         pen_html = f'<div class="wc-score-pens">{pen_score}</div>' if pen_score else ""
         score_html = f'<div class="wc-score"><div>{main_score}</div>{pen_html}</div>'
+        
 
         render_html(f"""
             <div class="wc-card">
@@ -355,7 +356,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None) 
                     {score_html}
                     {_team_cell(away, away=True)}
                 </div>
-                <div class="wc-meta">{format_kickoff(fixture["utcDate"])} · Stadium: {match_local["venue"].loc[0]}</div>
+                <div class="wc-meta">{format_kickoff(fixture["utcDate"])} · Stadium: {match_local["venue"].loc[index]}</div>
             </div>
             """)
 
