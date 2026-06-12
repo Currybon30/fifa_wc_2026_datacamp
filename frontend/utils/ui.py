@@ -454,11 +454,11 @@ def render_comparison_card(row) -> None:
         badge_class = "wc-badge-exact"
         badge_label = "Exact score"
     elif row["result_match"]:
-        badge_class = "wc-badge-upcoming"
-        badge_label = "Result match"
-    else:
         badge_class = "wc-badge-miss"
-        badge_label = f"Off by {int(row['goal_error'])} goals"
+        badge_label = f"Wrong off by {int(row['goal_error'])} goals"
+    else:
+        badge_class = "wc-badge-upcoming"
+        badge_label = "Upcoming match"
 
     center_html = (
         f'<div class="wc-score">'
