@@ -86,9 +86,7 @@ def get_football_data_key() -> str | None:
 
 @st.cache_data(ttl=21600, show_spinner=False)
 def fetch_group_standings(api_key: str) -> dict[str, pd.DataFrame]:
-    logger.info("Fetching group standings...")
     response = _fetch_standings_response(api_key)
-    logger.info("Fetched successfully")
     return _parse_api_response(response)
 
 

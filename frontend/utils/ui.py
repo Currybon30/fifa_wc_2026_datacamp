@@ -681,7 +681,6 @@ def render_group_standings(
     *,
     group_filter: list[str] | None = None,
 ) -> None:
-    st.caption("Standings will be updated every 12 hours.")
     st.caption("P: Games played | W: Wins | D: Draws | L: Losses | GF: Goals for | GA: Goals against | GD: Goal difference | Pts: Points")
 
     groups = sorted(standings.keys())
