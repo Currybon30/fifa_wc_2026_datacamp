@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime, timezone
 
 KICKOFF_UTC = datetime(2026, 6, 11, 19, 0, 0, tzinfo=timezone.utc)
+END_UTC = datetime(2026, 7, 19, 23, 59, 59, tzinfo=timezone.utc)
 
 
 def format_world_cup_countdown(seconds: float | int) -> str:
@@ -24,6 +25,12 @@ def seconds_until_world_cup_start():
     """
     return (KICKOFF_UTC - datetime.now(timezone.utc)).total_seconds()
 
+def seconds_until_world_cup_end():
+    """
+    Calculate the number of seconds until the FIFA World Cup 2026 ends.
+    """
+    return (END_UTC - datetime.now(timezone.utc)).total_seconds()
+
 @st.fragment(run_every=1)
 def _render_world_cup_countdown() -> None:
     remaining = seconds_until_world_cup_start()
@@ -40,8 +47,12 @@ def _render_world_cup_countdown() -> None:
 @st.fragment(run_every=1)
 def _render_world_cup_countdown_dialog_body() -> None:
     remaining = seconds_until_world_cup_start()
+    remaining_end = seconds_until_world_cup_end()
     if remaining <= 0:
         st.title("🎉 FIFA World Cup 2026 is kicking off!")
+        return
+    if remaining_end <= 0:
+        st.title("🏆 FIFA World Cup 2026 has been ended!")
         return
     st.title("⏳ FIFA World Cup 2026 Countdown")
     st.metric(
