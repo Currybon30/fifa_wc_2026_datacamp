@@ -96,8 +96,8 @@ goals_by_year = (
     .sort_values("year")
 )
 
-tab_elo, tab_history, tab_predictions = st.tabs(
-    ["⭐ Elo ratings", "📜 World Cup history", "🔮 WC26 predictions"]
+tab_elo, tab_history, tab_predictions, tab_comparison_charts = st.tabs(
+    ["⭐ Elo ratings", "📜 World Cup history", "🔮 WC26 predictions", "📊 Comparison charts"]
 )
 
 with tab_elo:
@@ -331,6 +331,9 @@ with tab_predictions:
     )
     fig_elo_win.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
     st.plotly_chart(fig_elo_win, width='stretch')
+with tab_comparison_charts:
+    st.subheader("Comparison of predicted vs actual statistics")
+    st.warning("Charts are available once the tournament finishes. Please check back later.")
 
 
 render_copyright_footer()
