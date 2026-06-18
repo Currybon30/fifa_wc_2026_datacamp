@@ -452,15 +452,15 @@ def render_comparison_card(row) -> None:
     predicted = format_predicted_score(row)
     actual = format_actual_score(row)
 
-    if row["exact_score"] and row["result_match"]:
+    if row["exact_score"] and row["correct_winner"]:
         badge_class = "wc-badge-exact"
-        badge_label = "Exact score"
-    elif not row["exact_score"] and row["result_match"]:
+        badge_label = "Exact score and winner"
+    elif not row["exact_score"] and row["correct_winner"]:
         badge_class = "wc-badge-miss"
-        badge_label = f"Correct winner - Wrong scores off by {int(row['goal_error'])} goals"
+        badge_label = f"Correct winner - Wrong scores off by {int(row['goal_difference'])} goals"
     else:
         badge_class = "wc-badge-wrong"
-        badge_label = f"Wrong winner, off by {int(row['goal_error'])} goals" if row["goal_error"] is not None else "Wrong winner"
+        badge_label = f"Wrong winner, off by {int(row['goal_difference'])} goals" if row["goal_difference"] is not None else "Wrong winner"
 
     center_html = (
         f'<div class="wc-score">'

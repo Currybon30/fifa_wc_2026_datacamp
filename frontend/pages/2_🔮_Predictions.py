@@ -95,13 +95,13 @@ else:
             st.info("Feature is not available. We will update it once the tournament starts.")
         else:
             exact_count = int(comparison_df["exact_score"].sum())
-            result_count = int(comparison_df["result_match"].sum())
+            correct_winner_count = int(comparison_df["correct_winner"].sum())
             avg_error = comparison_df["goal_error"].mean()
 
             c1, c2, c3 = st.columns(3)
             c1.metric("Finished matches compared", len(comparison_df))
             c2.metric("Exact scores", exact_count)
-            c3.metric("Result matches", result_count)
+            c3.metric("Correct predicted winner matches", correct_winner_count)
             st.caption(f"Average goal error: {avg_error:.1f} goals per match.")
 
             for _, row in comparison_df.iterrows():

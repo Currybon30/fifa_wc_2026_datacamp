@@ -214,10 +214,14 @@ def build_score_comparison(predictions: pd.DataFrame, actual: pd.DataFrame) -> p
         (merged["predicted_home_goals"] == merged["actual_home_goals"])
         & (merged["predicted_away_goals"] == merged["actual_away_goals"])
     )
-    merged["result_match"] = merged["winner"] == merged["actual_outcome"]
+    merged["correct_winner"] = merged["winner"] == merged["actual_outcome"]
     merged["goal_error"] = (
         (merged["predicted_home_goals"] - merged["actual_home_goals"]).abs()
         + (merged["predicted_away_goals"] - merged["actual_away_goals"]).abs()
+    )
+    merged["goal_difference"] = (
+        (merged["actual_home_goals"] - merged["actual_away_goals"]).abs()
+        - (merged["predicted_home_goals"] - merged["predicted_away_goals"]).abs()
     )
     return merged.sort_values("date_utc").reset_index(drop=True)
 
