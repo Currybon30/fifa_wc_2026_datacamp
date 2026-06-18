@@ -28,6 +28,8 @@ __FLAG_NAME_ALIASES = {
     "Korea Republic": "South Korea",
     "IR Iran": "Iran",
     "Côte D'Ivoire": "Côte d'Ivoire",
+    "Ivory Coast": "Côte d'Ivoire",
+    "Cape Verde Islands": "Cabo Verde",
 }
 
 

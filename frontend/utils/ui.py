@@ -7,9 +7,10 @@ import textwrap
 
 import streamlit as st
 
-from utils.teams import flag_file_path
+from utils.teams import flag_file_path, flag_team_name
 from utils.standings import STANDINGS_TABLE_HEIGHT, TEAMS_PER_GROUP
 from utils.squads import get_squad
+from feature_engineering import resolve_team_original_to_updated
 
 
 def render_html(body: str) -> None:
@@ -329,7 +330,8 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, 
         )
 
         if localdf is not None:
-            match_local = localdf[localdf['date_utc'] == fixture['utcDate']]
+            match_local = localdf
+            
 
         status = fixture.get("status", "")
         home = fd_match_home_team(fixture)
@@ -338,8 +340,8 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, 
         round_name = fd_match_round_name(fixture)
         
         match_row_with_local = match_local[
-            (match_local["home_team"] == home) &
-            (match_local["away_team"] == away)
+            (match_local["home_team"].apply(resolve_team_original_to_updated).str.contains(flag_team_name(home))) &
+            (match_local["away_team"].apply(resolve_team_original_to_updated).str.contains(flag_team_name(away)))
         ]
 
         badge_class = (
