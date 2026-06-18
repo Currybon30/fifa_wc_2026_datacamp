@@ -336,6 +336,11 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, 
         away = fd_match_away_team(fixture)
         main_score, pen_score = fd_match_score_lines(fixture)
         round_name = fd_match_round_name(fixture)
+        
+        match_row_with_local = match_local[
+            (match_local["home_team"] == home) &
+            (match_local["away_team"] == away)
+        ]
 
         badge_class = (
             "wc-badge-finished"
@@ -356,7 +361,7 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, 
                     {score_html}
                     {_team_cell(away, away=True)}
                 </div>
-                <div class="wc-meta">{format_kickoff(fixture["utcDate"])} · Stadium: {match_local["venue"].loc[index]}</div>
+                <div class="wc-meta">{format_kickoff(fixture["utcDate"])} · Stadium: {match_row_with_local.iloc[0]["venue"]}</div>
             </div>
             """)
 
