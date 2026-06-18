@@ -137,10 +137,8 @@ with tab_upcoming:
 with tab_completed:
     shown = completed_fixtures[:limit]
     if shown:
-        index = 0
         for fixture in shown:
-            render_match_card_api(fixture, localdf=completed_df, index=index)
-            index += 1
+            render_match_card_api(fixture, localdf=completed_df)
     else:
         st.info("No completed matches yet — the tournament has not started.")
 
