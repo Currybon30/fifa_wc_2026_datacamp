@@ -339,6 +339,10 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, 
         main_score, pen_score = fd_match_score_lines(fixture)
         round_name = fd_match_round_name(fixture)
         
+        # st.write(match_local["home_team"], match_local["away_team"])
+        # st.write(flag_team_name(home))
+        # st.write(flag_team_name(away))
+        
         match_row_with_local = match_local[
             (match_local["home_team"].apply(resolve_team_original_to_updated).str.contains(flag_team_name(home))) &
             (match_local["away_team"].apply(resolve_team_original_to_updated).str.contains(flag_team_name(away)))

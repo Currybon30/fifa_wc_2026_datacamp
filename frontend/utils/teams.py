@@ -30,6 +30,7 @@ __FLAG_NAME_ALIASES = {
     "Côte D'Ivoire": "Côte d'Ivoire",
     "Ivory Coast": "Côte d'Ivoire",
     "Cape Verde Islands": "Cabo Verde",
+    "Congo DR": "DR Congo"
 }
 
 
