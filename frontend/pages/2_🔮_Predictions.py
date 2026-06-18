@@ -102,7 +102,7 @@ else:
             c1.metric("Finished matches compared", len(comparison_df))
             c2.metric("Exact scores", exact_count)
             c3.metric("Correct predicted winner matches", correct_winner_count)
-            st.caption(f"Accuracy: {((exact_count + correct_winner_count) / len(comparison_df)):.1f}| Average goal error: {avg_error:.1f} goals per match.")
+            st.caption(f"Accuracy: {((exact_count + correct_winner_count) / len(comparison_df)):.1f} | Average goal error: {avg_error:.1f} goals per match.")
 
             for _, row in comparison_df.iterrows():
                 render_comparison_card(row)
