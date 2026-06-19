@@ -124,7 +124,7 @@ with tab_live:
         for _, row in live_df.iterrows():
             render_match_card_local(row, live=True)
     else:
-        st.info("No matches are live right now. The tournament kicks off soon — see Upcoming for the schedule.")
+        st.info("No matches are live right now. Please check Upcoming for the schedule.")
 
 with tab_upcoming:
     shown = display_upcoming_df.head(limit)
