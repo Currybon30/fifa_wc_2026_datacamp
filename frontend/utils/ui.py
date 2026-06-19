@@ -275,7 +275,7 @@ def _team_cell(team_name: str, *, away: bool = False) -> str:
     return f'<div class="wc-team {align_class}">{flag_html}<span style="color: black;">{team_name}</span></div>'
 
 
-def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, index = None) -> None:
+def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, group = None) -> None:
     if live:
         from utils.matches import (
             fixture_away_team,
@@ -328,7 +328,10 @@ def render_match_card_api(fixture: dict, *, live: bool = False, localdf = None, 
             fd_status_badge,
             format_kickoff,
         )
-
+        
+        if group and fixture["group"].split("_")[1] not in group:
+            return
+                
         if localdf is not None:
             match_local = localdf
             
