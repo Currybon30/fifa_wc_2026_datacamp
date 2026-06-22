@@ -232,6 +232,7 @@ def apply_prediction_filters(
     stage_filter: str,
     group_filter: list[str],
     round_filter: list[str],
+    previous_matches_include: bool,
 ) -> pd.DataFrame:
     filtered = predictions.copy()
     if stage_filter == "Group stage":
@@ -242,6 +243,8 @@ def apply_prediction_filters(
         filtered = filtered[filtered["group"].isin(group_filter)]
     if round_filter:
         filtered = filtered[filtered["round"].isin(round_filter)]
+    if not previous_matches_include:
+        filtered = filtered[filtered["date_utc"] > pd.Timestamp.now(tz="UTC")]
     return filtered.reset_index(drop=True)
 
 

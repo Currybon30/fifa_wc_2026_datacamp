@@ -24,11 +24,13 @@ st.caption("***Predictions are for reference purposes only. We do not guarantee 
 predictions = load_all_predictions()
 
 with st.sidebar:
+    previous_matches_include = st.checkbox("Include previous matches", value=False)
     stage_filter = st.selectbox(
         "Stage",
         options=["All", "Group stage", "Knockout"],
         index=0,
     )
+    
     group_options = sorted(predictions["group"].dropna().unique())
     group_filter = st.multiselect("Filter by group", options=group_options, default=[])
     round_options = sorted(predictions.loc[predictions["stage"] == "knockout", "round"].unique())
@@ -40,6 +42,7 @@ scoped = apply_prediction_filters(
     stage_filter=stage_filter,
     group_filter=group_filter,
     round_filter=round_filter,
+    previous_matches_include=previous_matches_include,
 )
 filtered = scoped.head(limit)
 
@@ -59,7 +62,7 @@ else:
     if football_data_key:
         try:
             actual_scores = parse_finished_match_scores(fetch_api_fixtures(football_data_key))
-            comparison_df = build_score_comparison(scoped, actual_scores)
+            comparison_df = build_score_comparison(predictions.copy(), actual_scores)
         except Exception as exc:
             comparison_error = str(exc)
 
@@ -102,7 +105,7 @@ else:
             c1.metric("Finished matches compared", len(comparison_df))
             c2.metric("Exact scores", exact_count)
             c3.metric("Correct predicted winner matches", correct_winner_count)
-            st.caption(f"Accuracy: {(((exact_count + correct_winner_count) / len(comparison_df)) * 100):.1f}% | Average goal error: {avg_error:.1f} goals per match.")
+            st.caption(f"Accuracy (match winner): {(((exact_count + correct_winner_count) / len(comparison_df)) * 100):.1f}% | Average goal error: {avg_error:.1f} goals per match.")
 
             for _, row in comparison_df.iterrows():
                 render_comparison_card(row)

@@ -24,7 +24,7 @@ API_FOOTBALL_BASE = os.getenv("API_FOOTBALL_HOST") or st.secrets.get("API_FOOTBA
 FOOTBALL_DATA_BASE = os.getenv("FOOTBALL_DATA_HOST") or st.secrets.get("FOOTBALL_DATA_HOST")
 WORLD_CUP_LEAGUE_ID = 1
 WORLD_CUP_SEASON = 2022 # Change to 2026 when the season starts
-MATCH_DURATION_MINUTES = 105
+MATCH_DURATION_MINUTES = 120
 LIVE_API_CACHE_TTL = 1200  # 20 minutes — API-Sports free tier refresh interval
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
