@@ -89,7 +89,8 @@ else:
         render_monte_carlo_team_matchups(load_monte_carlo_team_matchups())
 
     with tab_comparison:
-        st.caption("The predictions - the actual scores comparison.")
+        st.caption("The predicted - the actual scores comparison.")
+        st.caption("*** Filters are not applicable for this tab ***")
         if not football_data_key:
             st.warning("Configure a football-data.org API key to load final scores for comparison.")
         elif comparison_error:
