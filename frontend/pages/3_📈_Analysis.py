@@ -38,7 +38,7 @@ if str(COMPETITION_DIR) not in sys.path:
 HISTORICAL_STAT_CSV = COMPETITION_DIR / "data" / "history_stat.csv"
 ELO_RATINGS_CSV = COMPETITION_DIR / "data" / "elo.csv"
 PREDICTION_ACTUAL_GROUP_CSV = COMPETITION_DIR / "results" / "group_fixtures_actual.csv"
-# PREDICTION_ACTUAL_KNOCKOUT_CSV = COMPETITION_DIR / "results" /
+PREDICTION_ACTUAL_KNOCKOUT_CSV = COMPETITION_DIR / "results" / "knockout_slots_actual.csv"
 
 st.set_page_config(page_title="Analysis", page_icon="📈", layout="wide")
 
@@ -54,7 +54,7 @@ ELO_RATINGS = pd.read_csv(ELO_RATINGS_CSV)
 GROUP_PREDICTIONS = pd.read_csv(GROUP_PREDICTIONS_CSV)
 KNOCKOUT_PREDICTIONS = pd.read_csv(KNOCKOUT_PREDICTIONS_CSV)
 PREDICTION_ACTUAL_GROUP = pd.read_csv(PREDICTION_ACTUAL_GROUP_CSV)
-# PREDICTION_ACTUAL_KNOCKOUT = pd.read_csv(PREDICTION_ACTUAL_KNOCKOUT_CSV)
+PREDICTION_ACTUAL_KNOCKOUT = pd.read_csv(PREDICTION_ACTUAL_KNOCKOUT_CSV)
 MONTE_CARLO_PREDICTIONS = load_monte_carlo_predictions()
 
 GROUP_PREDICTIONS["home_team"] = GROUP_PREDICTIONS["home_team"].apply(
@@ -512,6 +512,26 @@ with tab_comparison_charts:
                     </div>
                 </div>
             """)
+            
+            num_of_corners_dc_off_by_two_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_dc"] + 2)].shape[0]
+            num_of_corners_dc_off_by_two_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_dc"] - 2)].shape[0]
+            total_corners_dc_off_by_two = num_of_corners_dc_off_by_two_plus + num_of_corners_dc_off_by_two_minus
+            num_of_corners_kaggle_off_by_two_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_kaggle"] + 2)].shape[0]
+            num_of_corners_kaggle_off_by_two_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_kaggle"] - 2)].shape[0]
+            total_corners_kaggle_off_by_two = num_of_corners_kaggle_off_by_two_plus + num_of_corners_kaggle_off_by_two_minus
+            st.header("Number of corners predictions off by 2:")
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{total_corners_dc_off_by_two}</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{total_corners_kaggle_off_by_two}</div>
+                    </div>
+                </div>
+            """)
         with tab_cards:
             number_of_correct_yellow_cards_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_dc"])].shape[0]
             number_of_correct_yellow_cards_kaggle = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_kaggle"])].shape[0]
@@ -592,14 +612,7 @@ with tab_comparison_charts:
             num_of_yellow_cards_kaggle_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_kaggle"] - 1)].shape[0]
             total_yellow_cards_kaggle_off_by_one = num_of_yellow_cards_kaggle_off_by_one_plus + num_of_yellow_cards_kaggle_off_by_one_minus
             
-            num_of_red_cards_dc_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_dc"] + 1)].shape[0]
-            num_of_red_cards_dc_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_dc"] - 1)].shape[0]
-            total_red_cards_dc_off_by_one = num_of_red_cards_dc_off_by_one_plus + num_of_red_cards_dc_off_by_one_minus
-            num_of_red_cards_kaggle_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_kaggle"] + 1)].shape[0]
-            num_of_red_cards_kaggle_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_kaggle"] - 1)].shape[0]
-            total_red_cards_kaggle_off_by_one = num_of_red_cards_kaggle_off_by_one_plus + num_of_red_cards_kaggle_off_by_one_minus
-            
-            st.header("Number of cards predictions off by 1:")
+            st.header("Number of yellow cards predictions off by 1:")
             render_html(f"""
                 <div class="wc-stat-grid">
                     <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
@@ -609,14 +622,6 @@ with tab_comparison_charts:
                     <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW_LIGHT};">
                         <div class="wc-stat-label">50K simulations</div>
                         <div class="wc-stat-value">{total_yellow_cards_kaggle_off_by_one}</div>
-                    </div>
-                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
-                        <div class="wc-stat-label">2K simulations</div>
-                        <div class="wc-stat-value">{total_red_cards_dc_off_by_one}</div>
-                    </div>
-                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED_LIGHT};">
-                        <div class="wc-stat-label">50K simulations</div>
-                        <div class="wc-stat-value">{total_red_cards_kaggle_off_by_one}</div>
                     </div>
                 </div>
             """)
