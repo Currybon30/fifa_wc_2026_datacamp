@@ -445,6 +445,31 @@ with tab_comparison_charts:
             )
             st.plotly_chart(fig_goals, width='stretch')
 
+            st.divider()
+
+            num_of_goals_diff_dc = PREDICTION_ACTUAL_GROUP[abs(PREDICTION_ACTUAL_GROUP["home_goals"] - PREDICTION_ACTUAL_GROUP["away_goals"]) == abs(PREDICTION_ACTUAL_GROUP["home_goals_dc"] - PREDICTION_ACTUAL_GROUP["away_goals_dc"])].shape[0]
+            num_of_goals_diff_kaggle = PREDICTION_ACTUAL_GROUP[abs(PREDICTION_ACTUAL_GROUP["home_goals"] - PREDICTION_ACTUAL_GROUP["away_goals"]) == abs(PREDICTION_ACTUAL_GROUP["home_goals_kaggle"] - PREDICTION_ACTUAL_GROUP["away_goals_kaggle"])].shape[0]
+            num_of_goals_total_dc = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["home_goals"] + PREDICTION_ACTUAL_GROUP["away_goals"] == PREDICTION_ACTUAL_GROUP["home_goals_dc"] + PREDICTION_ACTUAL_GROUP["away_goals_dc"]].shape[0]
+            num_of_goals_total_kaggle = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["home_goals"] + PREDICTION_ACTUAL_GROUP["away_goals"] == PREDICTION_ACTUAL_GROUP["home_goals_kaggle"] + PREDICTION_ACTUAL_GROUP["away_goals_kaggle"]].shape[0]
+
+            st.header("Number of goals predictions with the same goal difference:")
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{num_of_goals_diff_dc}</div>
+                    </div>
+                </div>
+            """)
+            st.header("Number of goals predictions with the same total goals:")
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{num_of_goals_total_kaggle}</div>
+                    </div>
+                </div>
+            """)
         with tab_corners:
             number_of_correct_corners_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_dc"])].shape[0]
             number_of_correct_corners_kaggle = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_kaggle"])].shape[0]
