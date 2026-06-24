@@ -459,11 +459,19 @@ with tab_comparison_charts:
                         <div class="wc-stat-label">2K simulations</div>
                         <div class="wc-stat-value">{num_of_goals_diff_dc}</div>
                     </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{num_of_goals_diff_kaggle}</div>
+                    </div>
                 </div>
             """)
             st.header("Number of goals predictions with the same total goals:")
             render_html(f"""
                 <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{num_of_goals_total_dc}</div>
+                    </div>
                     <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
                         <div class="wc-stat-label">50K simulations</div>
                         <div class="wc-stat-value">{num_of_goals_total_kaggle}</div>
