@@ -346,6 +346,8 @@ with tab_comparison_charts:
     tab_group_stage, tab_knockout_stage = st.tabs(
         ["Group Stage", "Knockout Stage"]
     )
+    PREDICTION_ACTUAL_GROUP = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["home_goals"] != -1]
+    
     with tab_group_stage:
         tab_winner, tab_goals, tab_corners, tab_cards = st.tabs(
         ["Match Winner", "Goals", "Corners", "Cards"]
