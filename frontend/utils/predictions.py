@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -244,7 +245,7 @@ def apply_prediction_filters(
     if round_filter:
         filtered = filtered[filtered["round"].isin(round_filter)]
     if not previous_matches_include:
-        filtered = filtered[filtered["date_utc"] > pd.Timestamp.now(tz="UTC")]
+        filtered = filtered[filtered["date_utc"] > (pd.Timestamp.now(tz="UTC") - timedelta(hours=2, minutes=30))]
     return filtered.reset_index(drop=True)
 
 

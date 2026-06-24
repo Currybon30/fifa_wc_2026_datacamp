@@ -32,6 +32,8 @@ if str(COMPETITION_DIR) not in sys.path:
 
 HISTORICAL_STAT_CSV = COMPETITION_DIR / "data" / "history_stat.csv"
 ELO_RATINGS_CSV = COMPETITION_DIR / "data" / "elo.csv"
+PREDICTION_ACTUAL_GROUP_CSV = COMPETITION_DIR / "results" / "group_fixtures_actual.csv"
+# PREDICTION_ACTUAL_KNOCKOUT_CSV = COMPETITION_DIR / "results" /
 
 st.set_page_config(page_title="Analysis", page_icon="📈", layout="wide")
 
@@ -46,6 +48,8 @@ HISTORICAL_STAT = pd.read_csv(HISTORICAL_STAT_CSV)
 ELO_RATINGS = pd.read_csv(ELO_RATINGS_CSV)
 GROUP_PREDICTIONS = pd.read_csv(GROUP_PREDICTIONS_CSV)
 KNOCKOUT_PREDICTIONS = pd.read_csv(KNOCKOUT_PREDICTIONS_CSV)
+PREDICTION_ACTUAL_GROUP = pd.read_csv(PREDICTION_ACTUAL_GROUP_CSV)
+# PREDICTION_ACTUAL_KNOCKOUT = pd.read_csv(PREDICTION_ACTUAL_KNOCKOUT_CSV)
 MONTE_CARLO_PREDICTIONS = load_monte_carlo_predictions()
 
 GROUP_PREDICTIONS["home_team"] = GROUP_PREDICTIONS["home_team"].apply(
@@ -332,8 +336,20 @@ with tab_predictions:
     fig_elo_win.update_layout(**PLOT_LAYOUT, height=380, legend_title="")
     st.plotly_chart(fig_elo_win, width='stretch')
 with tab_comparison_charts:
-    st.subheader("Comparison of predicted vs actual statistics")
+    st.subheader("Comparison of predicted (2K and 50K simulations) vs actual statistics")
     st.warning("Charts are available once the tournament finishes. Please check back later.")
+    tab_group_stage, tab_knockout_stage = st.tabs(
+        ["Group Stage", "Knockout Stage"]
+    )
+    with tab_group_stage:
+        tab_winners, tab_goals, tab_corners, tab_cards = st.tabs(
+        ["Match Winner", "Goals", "Corners", "Cards"]
+    )
+    with tab_knockout_stage:
+        tab_qualified_teams, tab_winners, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
+        ["Qualified Teams", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
+    )
+    
 
 
 render_copyright_footer()
