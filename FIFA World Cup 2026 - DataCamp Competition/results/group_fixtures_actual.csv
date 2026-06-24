@@ -43,10 +43,10 @@ match_id,home_team,away_team,home_goals_kaggle,home_goals_dc,home_goals,away_goa
 42,France,FIFA Playoff 2,2,2,3,0,0,0,11,11,6,4,3,1,0,0,0,home,home,home
 43,Norway,Senegal,1,1,3,1,1,2,8,6,9,6,6,0,0,0,0,draw,draw,home
 44,Jordan,Algeria,1,1,1,1,1,2,8,12,11,3,10,2,0,0,0,draw,draw,away
-45,Portugal,Uzbekistan,2,1,-1,1,1,-1,3,4,-1,3,3,-1,0,0,-1,home,draw,
-46,England,Ghana,2,1,-1,0,0,-1,10,17,-1,1,8,-1,0,0,-1,home,home,
-47,Panama,Croatia,1,0,-1,1,1,-1,9,17,-1,2,2,-1,0,0,-1,draw,away,
-48,Colombia,FIFA Playoff 1,1,1,-1,0,0,-1,9,11,-1,6,2,-1,1,1,-1,home,home,
+45,Portugal,Uzbekistan,2,1,5,1,1,0,3,4,5,3,3,2,0,0,0,home,draw,home
+46,England,Ghana,2,1,0,0,0,0,10,17,11,1,8,2,0,0,0,home,home,draw
+47,Panama,Croatia,1,0,0,1,1,1,9,17,9,2,2,2,0,0,0,draw,away,away
+48,Colombia,FIFA Playoff 1,1,1,1,0,0,0,9,11,9,6,2,3,1,1,0,home,home,home
 49,Switzerland,Canada,1,1,-1,1,1,-1,13,9,-1,7,10,-1,1,1,-1,draw,draw,
 50,UEFA Playoff A,Qatar,1,1,-1,0,0,-1,6,7,-1,6,5,-1,1,1,-1,home,home,
 51,Scotland,Brazil,1,1,-1,1,1,-1,10,15,-1,5,3,-1,0,0,-1,draw,draw,
