@@ -337,7 +337,7 @@ with tab_predictions:
     st.plotly_chart(fig_elo_win, width='stretch')
 with tab_comparison_charts:
     st.subheader("Comparison of predicted (2K and 50K simulations) vs actual statistics")
-    st.warning("Charts are available once the tournament finishes. Please check back later.")
+    st.warning("Charts are available once the group stage has ended. Please check back later.")
     tab_group_stage, tab_knockout_stage = st.tabs(
         ["Group Stage", "Knockout Stage"]
     )
@@ -347,7 +347,7 @@ with tab_comparison_charts:
     )
     with tab_knockout_stage:
         tab_qualified_teams, tab_winners, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
-        ["Qualified Teams", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
+        ["Qualified Team", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
     )
     
 
