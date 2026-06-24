@@ -231,6 +231,46 @@ def inject_base_styles() -> None:
             color: #888;
             font-size: 0.82rem;
         }
+        .wc-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 0.75rem 0 1.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .wc-stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .wc-stat-card {
+            border: 1px solid #e6e6e6;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 252, 250, 0.9) 100%);
+            border-top: 4px solid var(--wc-stat-accent, #1a5f4a);
+            box-shadow: 0 4px 14px rgba(11, 61, 46, 0.06);
+        }
+        .wc-stat-label {
+            font-size: 0.78rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.45rem;
+            line-height: 1.35;
+        }
+        .wc-stat-value {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #0b3d2e;
+            line-height: 1.1;
+        }
+        .wc-stat-sub {
+            font-size: 0.88rem;
+            color: #2d8659;
+            margin-top: 0.4rem;
+            font-weight: 600;
+        }
         .wc-podium-favourite-marker {
             display: none;
         }

@@ -1,20 +1,25 @@
+import datetime
 import sys
 from pathlib import Path
+from time import timezone
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 from utils.predictions import (GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV,
                                load_monte_carlo_predictions)
 from utils.teams import (all_teams_from_fixtures, is_slot_team,
                          resolve_team_name)
-from utils.ui import inject_base_styles, render_copyright_footer
+from utils.ui import inject_base_styles, render_copyright_footer, render_html
 
 WC_GREEN = "#1a5f4a"
 WC_GREEN_LIGHT = "#2d8659"
 WC_ACCENT = "#0b3d2e"
 WC_YELLOW = "#f5b041"
+WC_YELLOW_LIGHT = "#f7c777"
 WC_RED = "#c0392b"
+WC_RED_LIGHT = "#e78277"
 PLOT_LAYOUT = dict(
     template="plotly_white",
     paper_bgcolor="rgba(0,0,0,0)",
@@ -337,17 +342,290 @@ with tab_predictions:
     st.plotly_chart(fig_elo_win, width='stretch')
 with tab_comparison_charts:
     st.subheader("Comparison of predicted (2K and 50K simulations) vs actual statistics")
-    st.warning("Charts are available once the group stage has ended. Please check back later.")
+    st.caption(f"This feature will be updated as the competition progresses but infrequently.")
     tab_group_stage, tab_knockout_stage = st.tabs(
         ["Group Stage", "Knockout Stage"]
     )
     with tab_group_stage:
-        tab_winners, tab_goals, tab_corners, tab_cards = st.tabs(
+        tab_winner, tab_goals, tab_corners, tab_cards = st.tabs(
         ["Match Winner", "Goals", "Corners", "Cards"]
     )
+        with tab_winner:
+            number_of_correct_winners_dc = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == PREDICTION_ACTUAL_GROUP["winning_team_dc"]].shape[0]
+            number_of_correct_winners_kaggle = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == PREDICTION_ACTUAL_GROUP["winning_team_kaggle"]].shape[0]
+            total_group_matches = len(PREDICTION_ACTUAL_GROUP)
+            dc_accuracy = (
+                100 * number_of_correct_winners_dc / total_group_matches
+                if total_group_matches else 0
+            )
+            kaggle_accuracy = (
+                100 * number_of_correct_winners_kaggle / total_group_matches
+                if total_group_matches else 0
+            )
+
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                        <div class="wc-stat-label">Group stage matches</div>
+                        <div class="wc-stat-value">{total_group_matches}</div>
+                        <div class="wc-stat-sub">Completed fixtures in dataset</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_winners_dc}</div>
+                        <div class="wc-stat-sub">{dc_accuracy:.1f}% match-winner accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_winners_kaggle}</div>
+                        <div class="wc-stat-sub">{kaggle_accuracy:.1f}% match-winner accuracy</div>
+                    </div>
+                </div>
+                """)
+
+            fig_winner = px.bar(
+                x=["2K simulations", "50K simulations"],
+                y=[number_of_correct_winners_dc, number_of_correct_winners_kaggle],
+                labels={"x": "Number of simulation iterations", "y": "Number of correct winners"},
+                color=["2K simulations", "50K simulations"],
+                color_discrete_map={
+                    "2K simulations": WC_GREEN,
+                    "50K simulations": WC_GREEN_LIGHT,
+                },
+                range_y=[0, total_group_matches + 1],
+            )
+            fig_winner.update_layout(
+                **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+            )
+            st.plotly_chart(fig_winner, width='stretch')
+        
+        with tab_goals:
+            number_of_correct_goal_pairs_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["home_goals"] == PREDICTION_ACTUAL_GROUP["home_goals_dc"]) & (PREDICTION_ACTUAL_GROUP["away_goals"] == PREDICTION_ACTUAL_GROUP["away_goals_dc"])].shape[0]
+            number_of_correct_goal_pairs_kaggle = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["home_goals"] == PREDICTION_ACTUAL_GROUP["home_goals_kaggle"]) & (PREDICTION_ACTUAL_GROUP["away_goals"] == PREDICTION_ACTUAL_GROUP["away_goals_kaggle"])].shape[0]
+            total_group_matches = len(PREDICTION_ACTUAL_GROUP)
+            dc_accuracy = (
+                100 * number_of_correct_goal_pairs_dc / total_group_matches
+                if total_group_matches else 0
+            )
+            kaggle_accuracy = (
+                100 * number_of_correct_goal_pairs_kaggle / total_group_matches
+                if total_group_matches else 0
+            )
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                        <div class="wc-stat-label">Group stage matches</div>
+                        <div class="wc-stat-value">{total_group_matches}</div>
+                        <div class="wc-stat-sub">Completed fixtures in dataset</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_goal_pairs_dc}</div>
+                        <div class="wc-stat-sub">{dc_accuracy:.1f}% goal pair accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_goal_pairs_kaggle}</div>
+                        <div class="wc-stat-sub">{kaggle_accuracy:.1f}% goal pair accuracy</div>
+                    </div>
+                </div>
+            """)
+            fig_goals = px.bar(
+                x=["2K simulations", "50K simulations"],
+                y=[number_of_correct_goal_pairs_dc, number_of_correct_goal_pairs_kaggle],
+                labels={"x": "Number of simulation iterations", "y": "Number of correct goal pairs"},
+                color=["2K simulations", "50K simulations"],
+                color_discrete_map={
+                    "2K simulations": WC_GREEN,
+                    "50K simulations": WC_GREEN_LIGHT,
+                }
+            )
+            fig_goals.update_layout(
+                **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+            )
+            st.plotly_chart(fig_goals, width='stretch')
+
+        with tab_corners:
+            number_of_correct_corners_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_dc"])].shape[0]
+            number_of_correct_corners_kaggle = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_kaggle"])].shape[0]
+            total_group_matches = len(PREDICTION_ACTUAL_GROUP)
+            dc_accuracy = (
+                100 * number_of_correct_corners_dc / total_group_matches
+                if total_group_matches else 0
+            )
+            kaggle_accuracy = (
+                100 * number_of_correct_corners_kaggle / total_group_matches
+                if total_group_matches else 0
+            )
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                        <div class="wc-stat-label">Group stage matches</div>
+                        <div class="wc-stat-value">{total_group_matches}</div>
+                        <div class="wc-stat-sub">Completed fixtures in dataset</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_corners_dc}</div>
+                        <div class="wc-stat-sub">{dc_accuracy:.1f}% corner accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_corners_kaggle}</div>
+                        <div class="wc-stat-sub">{kaggle_accuracy:.1f}% corner accuracy</div>
+                    </div>
+                </div>
+            """)
+            fig_corners = px.bar(
+                x=["2K simulations", "50K simulations"],
+                y=[number_of_correct_corners_dc, number_of_correct_corners_kaggle],
+                labels={"x": "Number of simulation iterations", "y": "Number of correct corners"},
+                color=["2K simulations", "50K simulations"],
+                color_discrete_map={
+                    "2K simulations": WC_GREEN,
+                    "50K simulations": WC_GREEN_LIGHT,
+                }
+            )
+            fig_corners.update_layout(
+                **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+            )
+            st.plotly_chart(fig_corners, width='stretch')
+
+            st.divider()
+
+            num_of_corners_dc_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_dc"] + 1)].shape[0]
+            num_of_corners_dc_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_dc"] - 1)].shape[0]
+            total_corners_dc_off_by_one = num_of_corners_dc_off_by_one_plus + num_of_corners_dc_off_by_one_minus
+            num_of_corners_kaggle_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_kaggle"] + 1)].shape[0]
+            num_of_corners_kaggle_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["corners"] == PREDICTION_ACTUAL_GROUP["corners_kaggle"] - 1)].shape[0]
+            total_corners_kaggle_off_by_one = num_of_corners_kaggle_off_by_one_plus + num_of_corners_kaggle_off_by_one_minus
+            st.header("Number of corners predictions off by 1:")
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{total_corners_dc_off_by_one}</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{total_corners_kaggle_off_by_one}</div>
+                    </div>
+                </div>
+            """)
+        with tab_cards:
+            number_of_correct_yellow_cards_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_dc"])].shape[0]
+            number_of_correct_yellow_cards_kaggle = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_kaggle"])].shape[0]
+            number_of_correct_red_cards_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_dc"])].shape[0]
+            number_of_correct_red_cards_kaggle = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_kaggle"])].shape[0]
+            total_group_matches = len(PREDICTION_ACTUAL_GROUP)
+            yellow_cards_accuracy_dc = (
+                100 * number_of_correct_yellow_cards_dc / total_group_matches
+                if total_group_matches else 0
+            )
+            yellow_cards_accuracy_kaggle = (
+                100 * number_of_correct_yellow_cards_kaggle / total_group_matches
+                if total_group_matches else 0
+            )
+            red_cards_accuracy_dc = (
+                100 * number_of_correct_red_cards_dc / total_group_matches
+                if total_group_matches else 0
+            )
+            red_cards_accuracy_kaggle = (
+                100 * number_of_correct_red_cards_kaggle / total_group_matches
+                if total_group_matches else 0
+            )
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                        <div class="wc-stat-label">Group stage matches</div>
+                        <div class="wc-stat-value">{total_group_matches}</div>
+                        <div class="wc-stat-sub">Completed fixtures in dataset</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_yellow_cards_dc}</div>
+                        <div class="wc-stat-sub">{yellow_cards_accuracy_dc:.1f}% yellow card accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_yellow_cards_kaggle}</div>
+                        <div class="wc-stat-sub">{yellow_cards_accuracy_kaggle:.1f}% yellow card accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_red_cards_dc}</div>
+                        <div class="wc-stat-sub">{red_cards_accuracy_dc:.1f}% red card accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{number_of_correct_red_cards_kaggle}</div>
+                        <div class="wc-stat-sub">{red_cards_accuracy_kaggle:.1f}% red card accuracy</div>
+                    </div>
+                </div>
+            """)
+
+            fig_cards = go.Figure()
+
+            fig_cards.add_bar(
+                name="Yellow cards",
+                x=["2K simulations", "50K simulations"],
+                y=[number_of_correct_yellow_cards_dc, number_of_correct_yellow_cards_kaggle],
+                marker_color=WC_YELLOW,
+            )
+            fig_cards.add_bar(
+                name="Red cards",
+                x=["2K simulations", "50K simulations"],
+                y=[number_of_correct_red_cards_dc, number_of_correct_red_cards_kaggle],
+                marker_color=WC_RED,
+            )
+            fig_cards.update_layout(
+                **PLOT_LAYOUT, height=380, legend_title="", showlegend=True, barmode="group",
+            )
+            st.plotly_chart(fig_cards, width='stretch')
+
+            st.divider()
+
+            num_of_yellow_cards_dc_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_dc"] + 1)].shape[0]
+            num_of_yellow_cards_dc_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_dc"] - 1)].shape[0]
+            total_yellow_cards_dc_off_by_one = num_of_yellow_cards_dc_off_by_one_plus + num_of_yellow_cards_dc_off_by_one_minus
+            num_of_yellow_cards_kaggle_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_kaggle"] + 1)].shape[0]
+            num_of_yellow_cards_kaggle_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["yellow_cards"] == PREDICTION_ACTUAL_GROUP["yellow_cards_kaggle"] - 1)].shape[0]
+            total_yellow_cards_kaggle_off_by_one = num_of_yellow_cards_kaggle_off_by_one_plus + num_of_yellow_cards_kaggle_off_by_one_minus
+            
+            num_of_red_cards_dc_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_dc"] + 1)].shape[0]
+            num_of_red_cards_dc_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_dc"] - 1)].shape[0]
+            total_red_cards_dc_off_by_one = num_of_red_cards_dc_off_by_one_plus + num_of_red_cards_dc_off_by_one_minus
+            num_of_red_cards_kaggle_off_by_one_plus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_kaggle"] + 1)].shape[0]
+            num_of_red_cards_kaggle_off_by_one_minus = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["red_cards"] == PREDICTION_ACTUAL_GROUP["red_cards_kaggle"] - 1)].shape[0]
+            total_red_cards_kaggle_off_by_one = num_of_red_cards_kaggle_off_by_one_plus + num_of_red_cards_kaggle_off_by_one_minus
+            
+            st.header("Number of cards predictions off by 1:")
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{total_yellow_cards_dc_off_by_one}</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{total_yellow_cards_kaggle_off_by_one}</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{total_red_cards_dc_off_by_one}</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{total_red_cards_kaggle_off_by_one}</div>
+                    </div>
+                </div>
+            """)
+            
+
+            
     with tab_knockout_stage:
-        tab_qualified_teams, tab_winners, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
-        ["Qualified Team", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
+        tab_qualified_team_pair, tab_winner, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
+        ["Qualified Team Pair", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
     )
     
 
