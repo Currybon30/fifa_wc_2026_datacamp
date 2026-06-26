@@ -57,7 +57,7 @@ match_id,group,home_team,away_team,date_utc,venue,predicted_home_goals,predicted
 56,E,Ecuador,Germany,2026-06-25T20:00:00Z,"MetLife Stadium, East Rutherford",0,1,11,5,0,away
 57,F,Japan,UEFA Playoff B,2026-06-25T23:00:00Z,"AT&T Stadium, Dallas",1,1,9,4,0,draw
 58,F,Tunisia,Netherlands,2026-06-25T23:00:00Z,"GEHA Field at Arrowhead Stadium, Kansas City",0,1,8,2,0,away
-59,D,USA,UEFA Playoff C,2026-06-26T02:00:00Z,"SoFi Stadium, Los Angeles",1,1,9,7,0,draw
+59,D,UEFA Playoff C,USA,2026-06-26T02:00:00Z,"SoFi Stadium, Los Angeles",1,1,9,7,0,draw
 60,D,Paraguay,Australia,2026-06-26T02:00:00Z,"Levi's Stadium, Santa Clara",1,1,10,3,0,draw
 61,I,Norway,France,2026-06-26T19:00:00Z,"Gillette Stadium, Boston",1,1,14,5,0,draw
 62,I,Senegal,FIFA Playoff 2,2026-06-26T19:00:00Z,"BMO Field, Toronto",1,0,6,7,0,home
