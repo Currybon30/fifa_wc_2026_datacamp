@@ -494,50 +494,6 @@ def render_prediction_card(row, *, variant: str = "scores") -> None:
         """)
 
 
-def render_comparison_card(row) -> None:
-    from utils.matches import format_kickoff
-    from utils.predictions import format_actual_score, format_predicted_score, format_winner
-
-    home = row["home_team"]
-    away = row["away_team"]
-    round_name = row["round"]
-    kickoff = format_kickoff(row["date_utc"])
-    venue = row["venue"]
-    predicted = format_predicted_score(row)
-    actual = format_actual_score(row)
-
-    if row["exact_score"] and row["correct_winner"]:
-        badge_class = "wc-badge-exact"
-        badge_label = "Exact score and winner"
-    elif not row["exact_score"] and row["correct_winner"]:
-        badge_class = "wc-badge-miss"
-        badge_label = f"Correct winner - Wrong scores off by {int(row['goal_error'])} goals"
-    else:
-        badge_class = "wc-badge-wrong"
-        badge_label = f"Wrong winner, off by {int(row['goal_error'])} goals" if row["goal_error"] is not None else "Wrong winner"
-
-    center_html = (
-        f'<div class="wc-score">'
-        f"<div>{predicted} | {actual}</div>"
-        f'<div class="wc-score-pens">Predicted | Actual</div>'
-        f"</div>"
-    )
-    meta_extra = f" · Predicted Winner: {format_winner(row)}"
-
-    render_html(f"""
-        <div class="wc-card">
-            <span class="wc-badge {badge_class}">{badge_label}</span>
-            <span style="margin-left:0.5rem;color:#666;font-size:0.85rem;">{round_name}</span>
-            <div class="wc-match-row">
-                {_team_cell(home)}
-                {center_html}
-                {_team_cell(away, away=True)}
-            </div>
-            <div class="wc-meta">{kickoff} · Stadium: {venue}{meta_extra}</div>
-        </div>
-        """)
-
-
 def _render_probability_row(label: str, value: float, scale: float) -> None:
     st.caption(label)
     st.progress(min(value / scale, 1.0) if scale > 0 else 0.0, text=f"{value:.1f}%")

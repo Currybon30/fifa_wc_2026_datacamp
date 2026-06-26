@@ -4,7 +4,6 @@ from utils.matches import fetch_api_fixtures, get_football_data_key, parse_finis
 from utils.predictions import apply_prediction_filters, build_score_comparison, load_all_predictions, load_monte_carlo_predictions, load_monte_carlo_team_matchups
 from utils.ui import (
     inject_base_styles,
-    render_comparison_card,
     render_copyright_footer,
     render_monte_carlo_champion_stats,
     render_monte_carlo_team_matchups,
@@ -55,19 +54,9 @@ else:
     col3.metric("Avg corners / match", f"{filtered['corners'].mean():.1f}")
     col4.metric("Avg cards / match", f"{(filtered['yellow_cards'] + filtered['red_cards']).mean():.1f}")
 
-    football_data_key = get_football_data_key()
-    comparison_df = None
-    comparison_error: str | None = None
 
-    if football_data_key:
-        try:
-            actual_scores = parse_finished_match_scores(fetch_api_fixtures(football_data_key))
-            comparison_df = build_score_comparison(predictions.copy(), actual_scores)
-        except Exception as exc:
-            comparison_error = str(exc)
-
-    tab_scores, tab_corners, tab_cards, tab_champion_stats, tab_team_matchups, tab_comparison = st.tabs(
-        ["🥅 Goals", "🚩 Corners", "🟡 - 🔴 Cards", "🏅 Champion stats", "🤜🤛 Team Matchups", "📊 Comparison"]
+    tab_scores, tab_corners, tab_cards, tab_champion_stats, tab_team_matchups= st.tabs(
+        ["🥅 Goals", "🚩 Corners", "🟡 - 🔴 Cards", "🏅 Champion stats", "🤜🤛 Team Matchups"]
     )
 
     with tab_scores:
@@ -87,28 +76,5 @@ else:
 
     with tab_team_matchups:
         render_monte_carlo_team_matchups(load_monte_carlo_team_matchups())
-
-    with tab_comparison:
-        st.caption("The predicted - the actual scores comparison.")
-        st.caption("*** Filters are not applicable for this tab ***")
-        if not football_data_key:
-            st.warning("Configure a football-data.org API key to load final scores for comparison.")
-        elif comparison_error:
-            st.warning(f"Could not load final scores ({comparison_error}).")
-        elif comparison_df is None or comparison_df.empty:
-            st.info("Feature is not available. We will update it once the tournament starts.")
-        else:
-            exact_count = int(comparison_df["exact_score"].sum())
-            correct_winner_count = int(comparison_df["correct_winner"].sum())
-            avg_error = comparison_df["goal_error"].mean()
-
-            c1, c2, c3 = st.columns(3)
-            c1.metric("Finished matches compared", len(comparison_df))
-            c2.metric("Exact scores", exact_count)
-            c3.metric("Correct predicted winner matches", correct_winner_count)
-            st.caption(f"Accuracy (match winner): {(((correct_winner_count) / len(comparison_df)) * 100):.1f}% | Average goal error: {avg_error:.1f} goals per match.")
-
-            for _, row in comparison_df.iterrows():
-                render_comparison_card(row)
 
 render_copyright_footer()
