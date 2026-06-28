@@ -67,7 +67,7 @@ match_id,home_team,away_team,home_goals_kaggle,home_goals_dc,home_goals,away_goa
 66,New Zealand,Belgium,1,1,1,1,1,5,7,7,13,6,4,2,0,0,0,draw,draw,away
 67,Panama,England,0,0,0,1,1,2,14,10,10,2,3,3,0,0,0,away,away,away
 68,Croatia,Ghana,1,2,2,0,0,1,6,9,5,4,3,2,0,0,0,home,home,home
-69,Colombia,Portugal,1,1,-1,1,1,-1,7,12,-1,4,5,-1,0,0,-1,draw,draw,
-70,FIFA Playoff 1,Uzbekistan,0,0,-1,1,1,-1,10,9,-1,5,5,-1,0,0,-1,away,away,
-71,Algeria,Austria,1,0,-1,1,1,-1,11,10,-1,5,3,-1,0,0,-1,draw,away,
-72,Jordan,Argentina,0,0,-1,1,1,-1,11,18,-1,5,8,-1,0,0,-1,away,away,
+69,Colombia,Portugal,1,1,0,1,1,0,7,12,7,4,5,1,0,0,0,draw,draw,draw
+70,FIFA Playoff 1,Uzbekistan,0,0,3,1,1,1,10,9,6,5,5,5,0,0,0,away,away,home
+71,Algeria,Austria,1,0,3,1,1,3,11,10,3,5,3,1,0,0,0,draw,away,draw
+72,Jordan,Argentina,0,0,1,1,1,3,11,18,8,5,8,3,0,0,0,away,away,away
