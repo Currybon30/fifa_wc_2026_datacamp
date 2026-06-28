@@ -73,7 +73,7 @@ def load_group_fixtures() -> pd.DataFrame:
 def load_knockout_slots() -> pd.DataFrame:
     df = pd.read_csv(KNOCKOUT_SLOTS_CSV)
     df["date_utc"] = pd.to_datetime(df["date_utc"], utc=True)
-    df = df.rename(columns={"slot_home": "home_team", "slot_away": "away_team"})
+    # df = df.rename(columns={"slot_home": "home_team", "slot_away": "away_team"})
     df["stage"] = "knockout"
     df["group"] = pd.NA
     return df[_FIXTURE_COLUMNS].sort_values("date_utc").reset_index(drop=True)
