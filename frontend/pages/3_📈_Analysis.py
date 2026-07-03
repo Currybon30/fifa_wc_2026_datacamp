@@ -342,7 +342,6 @@ with tab_predictions:
     st.plotly_chart(fig_elo_win, width='stretch')
 with tab_comparison_charts:
     st.subheader("Comparison of predicted (2K and 50K simulations) vs actual statistics")
-    st.caption(f"This feature will be updated as the competition progresses but infrequently.")
     tab_group_stage, tab_knockout_stage = st.tabs(
         ["Group Stage", "Knockout Stage"]
     )
