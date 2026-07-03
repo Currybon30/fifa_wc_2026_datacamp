@@ -7,7 +7,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-from utils.predictions import (GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV,
+from utils.predictions import (GROUP_PREDICTIONS_CSV, KNOCKOUT_PREDICTIONS_CSV, apply_prediction_filters,
                                load_monte_carlo_predictions)
 from utils.teams import (all_teams_from_fixtures, is_slot_team,
                          resolve_team_name)
@@ -355,6 +355,19 @@ with tab_comparison_charts:
         with tab_winner:
             number_of_correct_winners_dc = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == PREDICTION_ACTUAL_GROUP["winning_team_dc"]].shape[0]
             number_of_correct_winners_kaggle = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == PREDICTION_ACTUAL_GROUP["winning_team_kaggle"]].shape[0]
+
+            number_of_home_wins = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == "home"].shape[0]
+            number_of_away_wins = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == "away"].shape[0]
+            number_of_draws = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team"] == "draw"].shape[0]
+
+            number_of_home_wins_dc = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team_dc"] == "home"].shape[0]
+            number_of_away_wins_dc = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team_dc"] == "away"].shape[0]
+            number_of_draws_dc = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team_dc"] == "draw"].shape[0]
+
+            number_of_home_wins_kaggle = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team_kaggle"] == "home"].shape[0]
+            number_of_away_wins_kaggle = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team_kaggle"] == "away"].shape[0]
+            number_of_draws_kaggle = PREDICTION_ACTUAL_GROUP[PREDICTION_ACTUAL_GROUP["winning_team_kaggle"] == "draw"].shape[0]
+
             total_group_matches = len(PREDICTION_ACTUAL_GROUP)
             dc_accuracy = (
                 100 * number_of_correct_winners_dc / total_group_matches
@@ -400,6 +413,35 @@ with tab_comparison_charts:
                 **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
             )
             st.plotly_chart(fig_winner, width='stretch')
+
+            st.divider()
+
+            st.header("Comparison of actual match-winner distribution vs predictions")
+
+            fig_home_away_draws = go.Figure()
+
+            fig_home_away_draws.add_bar(
+                name="Actual Result",
+                x=["Home wins", "Away wins", "Draws"],
+                y=[number_of_home_wins, number_of_away_wins, number_of_draws]
+            )
+            fig_home_away_draws.add_bar(
+                name="2K simulations",
+                x=["Home wins", "Away wins", "Draws"],
+                y=[number_of_home_wins_dc, number_of_away_wins_dc, number_of_draws_dc]
+            )
+            fig_home_away_draws.add_bar(
+                name="50K simulations",
+                x=["Home wins", "Away wins", "Draws"],
+                y=[number_of_home_wins_kaggle, number_of_away_wins_kaggle, number_of_draws_kaggle]
+            )
+            fig_home_away_draws.update_layout(
+                **PLOT_LAYOUT, height=380, legend_title="", showlegend=True, barmode="group"
+            )
+            fig_home_away_draws.update_xaxes(title="Result")
+            fig_home_away_draws.update_yaxes(title="Number of matches")
+
+            st.plotly_chart(fig_home_away_draws, width='stretch')
         
         with tab_goals:
             number_of_correct_goal_pairs_dc = PREDICTION_ACTUAL_GROUP[(PREDICTION_ACTUAL_GROUP["home_goals"] == PREDICTION_ACTUAL_GROUP["home_goals_dc"]) & (PREDICTION_ACTUAL_GROUP["away_goals"] == PREDICTION_ACTUAL_GROUP["away_goals_dc"])].shape[0]
@@ -679,7 +721,23 @@ with tab_comparison_charts:
         tab_qualified_team_pair, tab_winner, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
         ["Qualified Team Pair", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
     )
-    
-
+        round_filter = st.multiselect("Filter by round", options=PREDICTION_ACTUAL_KNOCKOUT["round"].unique(), default=[])
+        scoped = apply_prediction_filters(
+            PREDICTION_ACTUAL_KNOCKOUT,
+            stage_filter="",
+            group_filter=[],
+            previous_matches_include=True,
+            round_filter=round_filter,
+        )
+        if scoped["home_team"].isna().all():
+            st.error("This round has not been played yet, please select a different round")
+            st.stop()
+        
+        filled_teams_cells = scoped[scoped["home_team"].notna() & scoped["away_team"].notna()]
+        filled_teams_cells_count = len(filled_teams_cells)
+        filled_match_info_cells = scoped[scoped["home_goals"].notna()]
+        filled_match_info_cells_count = len(filled_match_info_cells)
+        with tab_qualified_team_pair:
+            pass
 
 render_copyright_footer()

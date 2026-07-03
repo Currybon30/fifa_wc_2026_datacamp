@@ -32,7 +32,7 @@ with st.sidebar:
     
     group_options = sorted(predictions["group"].dropna().unique())
     group_filter = st.multiselect("Filter by group", options=group_options, default=[])
-    round_options = sorted(predictions.loc[predictions["stage"] == "knockout", "round"].unique())
+    round_options = predictions.loc[predictions["stage"] == "knockout", "round"].unique()
     round_filter = st.multiselect("Filter by knockout round", options=round_options, default=[])
     limit = st.slider("Matches to show", min_value=5, max_value=len(predictions), value=min(20, len(predictions)), step=5)
 
