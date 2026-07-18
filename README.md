@@ -4,6 +4,19 @@ An advanced football analytics and tournament simulation system for predicting t
 
 This project combines multiple ML models, feature engineering pipelines, and probabilistic tournament simulations to generate realistic football match predictions.
 
+Live URL: https://fifa-worldcup26-tnp.streamlit.app/
+
+<img width="1536" height="696" alt="home" src="https://github.com/user-attachments/assets/c3f6d404-1103-4ccc-bf14-7b22b87cb286" />
+
+<img width="1536" height="698" alt="analysis-page" src="https://github.com/user-attachments/assets/fb914bfc-48ee-4df2-9807-0f8dbeed2019" />
+
+<br/>
+<br/>
+<br/>
+
+
+**Note:** Predictions are generated using historical data and pre-trained machine learning models. The system simulates the entire 2026 FIFA World Cup from the beginning of the tournament and does not update based on live match results.
+
 ---
 
 # 👁️‍🗨️ Overview
