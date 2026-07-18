@@ -12,22 +12,22 @@ match_id,round,slot_home,slot_away,home_team_kaggle,home_team_dc,home_team,away_
 83,Round of 32,Runner-up Group K,Runner-up Group L,Colombia,Colombia,Portugal,Croatia,Croatia,Croatia,1,1,2,2,0,1,12,12,14,5,0,3,0,0,0,away,home,home,FALSE,FALSE,FALSE
 84,Round of 32,Winner Group H,Runner-up Group J,Spain,Spain,Spain,Austria,Austria,Austria,2,2,3,1,1,0,14,10,9,5,3,1,0,0,0,home,home,home,FALSE,FALSE,FALSE
 85,Round of 32,Winner Group B,Best 3rd (Groups E/F/G/I/J),Canada,Canada,Switzerland,Algeria,New Zealand,Algeria,1,1,2,0,0,0,13,11,6,9,4,2,1,1,0,home,home,home,FALSE,FALSE,FALSE
-86,Round of 32,Runner-up Group D,Runner-up Group G,Paraguay,USA,Australia,Iran,Iran,Egypt,1,1,,0,0,,8,4,,7,0,,0,0,,home,home,,FALSE,FALSE,
-87,Round of 32,Winner Group J,Runner-up Group H,Argentina,Argentina,Argentina,Uruguay,Uruguay,Cabo Verde,1,1,,0,0,,9,10,,7,4,,0,1,,home,home,,FALSE,FALSE,
-88,Round of 32,Winner Group K,Best 3rd (Groups D/E/I/J/L),Portugal,Portugal,Colombia,Turkey,Turkey,Ghana,2,2,,1,1,,12,7,,7,8,,0,0,,home,home,,FALSE,FALSE,
-89,Round of 16,Winner Match 73,Winner Match 75,Switzerland,Switzerland,Canada,Germany,Germany,Morocco,0,0,,1,1,,7,14,,5,5,,0,0,,away,away,,FALSE,FALSE,
-90,Round of 16,Winner Match 74,Winner Match 77,Brazil,Japan,Brazil,Norway,Norway,Norway,1,1,,2,0,,9,4,,0,3,,0,1,,away,home,,FALSE,FALSE,
-91,Round of 16,Winner Match 76,Winner Match 78,Netherlands,Netherlands,Paraguay,France,France,France,2,2,,1,1,,16,9,,7,2,,1,0,,home,home,,FALSE,FALSE,
-92,Round of 16,Winner Match 79,Winner Match 80,Mexico,Mexico,Mexico,England,England,England,1,0,,0,1,,10,10,,5,1,,0,0,,home,away,,FALSE,FALSE,
-93,Round of 16,Winner Match 83,Winner Match 84,Croatia,Colombia,Portugal,Spain,Spain,Spain,1,1,,2,2,,12,2,,2,4,,0,0,,away,away,,FALSE,FALSE,
-94,Round of 16,Winner Match 81,Winner Match 82,USA,Australia,USA,Senegal,Senegal,Belgium,1,1,,0,1,,19,15,,1,8,,0,0,,home,home,,FALSE,TRUE,
-95,Round of 16,Winner Match 86,Winner Match 88,Paraguay,USA,,Portugal,Portugal,,0,0,,1,1,,17,15,,6,4,,0,1,,away,away,,FALSE,FALSE,
-96,Round of 16,Winner Match 85,Winner Match 87,Canada,Canada,,Argentina,Argentina,,0,1,,1,0,,14,9,,2,10,,1,0,,away,home,,FALSE,FALSE,
-97,Quarter-final,Winner Match 89,Winner Match 90,Germany,Germany,,Norway,Japan,,1,1,,2,2,,13,5,,5,5,,0,0,,away,away,,FALSE,FALSE,
-98,Quarter-final,Winner Match 93,Winner Match 94,Spain,Spain,,Senegal,Senegal,,2,2,,1,0,,5,13,,8,1,,0,0,,home,home,,FALSE,FALSE,
-99,Quarter-final,Winner Match 91,Winner Match 92,Netherlands,Netherlands,,Mexico,England,,2,1,,1,0,,12,8,,2,4,,0,1,,home,home,,FALSE,FALSE,
-100,Quarter-final,Winner Match 95,Winner Match 96,Portugal,Portugal,,Argentina,Canada,,2,2,,1,1,,7,8,,5,5,,0,0,,home,home,,FALSE,FALSE,
-101,Semi-final,Winner Match 97,Winner Match 98,Norway,Japan,,Spain,Spain,,0,1,,1,2,,5,10,,4,4,,0,0,,away,away,,FALSE,FALSE,
-102,Semi-final,Winner Match 99,Winner Match 100,Netherlands,Netherlands,,Portugal,Portugal,,2,2,,1,1,,12,8,,6,8,,0,0,,home,home,,FALSE,FALSE,
-103,Third-place playoff,Loser Match 101,Loser Match 102,Norway,Japan,,Portugal,Portugal,,1,1,,2,0,,11,10,,3,6,,0,0,,away,home,,FALSE,FALSE,
-104,Final,Winner Match 101,Winner Match 102,Spain,Spain,,Netherlands,Netherlands,,2,1,,1,2,,8,14,,5,6,,0,0,,home,away,,FALSE,FALSE,
+86,Round of 32,Runner-up Group D,Runner-up Group G,Paraguay,USA,Australia,Iran,Iran,Egypt,1,1,1,0,0,1,8,4,11,7,0,2,0,0,0,home,home,away,FALSE,FALSE,TRUE
+87,Round of 32,Winner Group J,Runner-up Group H,Argentina,Argentina,Argentina,Uruguay,Uruguay,Cabo Verde,1,1,3,0,0,2,9,10,16,7,4,2,0,1,0,home,home,home,FALSE,FALSE,FALSE
+88,Round of 32,Winner Group K,Best 3rd (Groups D/E/I/J/L),Portugal,Portugal,Colombia,Turkey,Turkey,Ghana,2,2,1,1,1,0,12,7,5,7,8,5,0,0,0,home,home,home,FALSE,FALSE,FALSE
+89,Round of 16,Winner Match 73,Winner Match 75,Switzerland,Switzerland,Canada,Germany,Germany,Morocco,0,0,0,1,1,3,7,14,12,5,5,8,0,0,0,away,away,away,FALSE,FALSE,FALSE
+90,Round of 16,Winner Match 74,Winner Match 77,Brazil,Japan,Brazil,Norway,Norway,Norway,1,1,1,2,0,2,9,4,10,0,3,1,0,1,0,away,home,away,FALSE,FALSE,FALSE
+91,Round of 16,Winner Match 76,Winner Match 78,Netherlands,Netherlands,Paraguay,France,France,France,2,2,0,1,1,1,16,9,14,7,2,3,1,0,0,home,home,away,FALSE,FALSE,FALSE
+92,Round of 16,Winner Match 79,Winner Match 80,Mexico,Mexico,Mexico,England,England,England,1,0,2,0,1,3,10,10,14,5,1,6,0,0,1,home,away,away,FALSE,FALSE,FALSE
+93,Round of 16,Winner Match 83,Winner Match 84,Croatia,Colombia,Portugal,Spain,Spain,Spain,1,1,0,2,2,1,12,2,10,2,4,3,0,0,0,away,away,away,FALSE,FALSE,FALSE
+94,Round of 16,Winner Match 81,Winner Match 82,USA,Australia,USA,Senegal,Senegal,Belgium,1,1,1,0,1,4,19,15,8,1,8,2,0,0,0,home,home,away,FALSE,TRUE,FALSE
+95,Round of 16,Winner Match 86,Winner Match 88,Paraguay,USA,Argentina,Portugal,Portugal,Egypt,0,0,3,1,1,2,17,15,7,6,4,4,0,1,0,away,away,away,FALSE,FALSE,FALSE
+96,Round of 16,Winner Match 85,Winner Match 87,Canada,Canada,Switzerland,Argentina,Argentina,Columbia,0,1,0,1,0,0,14,9,10,2,10,5,1,0,0,away,home,home,FALSE,FALSE,TRUE
+97,Quarter-final,Winner Match 89,Winner Match 90,Germany,Germany,France,Norway,Japan,Morocco,1,1,2,2,2,0,13,5,10,5,5,1,0,0,0,away,away,home,FALSE,FALSE,FALSE
+98,Quarter-final,Winner Match 93,Winner Match 94,Spain,Spain,Spain,Senegal,Senegal,Belgium,2,2,2,1,0,1,5,13,6,8,1,4,0,0,0,home,home,home,FALSE,FALSE,FALSE
+99,Quarter-final,Winner Match 91,Winner Match 92,Netherlands,Netherlands,Norway,Mexico,England,England,2,1,1,1,0,2,12,8,11,2,4,1,0,1,0,home,home,away,FALSE,FALSE,FALSE
+100,Quarter-final,Winner Match 95,Winner Match 96,Portugal,Portugal,Argentina,Argentina,Canada,Switzerland,2,2,3,1,1,1,7,8,10,5,5,4,0,0,1,home,home,home,FALSE,FALSE,FALSE
+101,Semi-final,Winner Match 97,Winner Match 98,Norway,Japan,France,Spain,Spain,Spain,0,1,0,1,2,2,5,10,8,4,4,3,0,0,0,away,away,away,FALSE,FALSE,FALSE
+102,Semi-final,Winner Match 99,Winner Match 100,Netherlands,Netherlands,England,Portugal,Portugal,Argentina,2,2,1,1,1,2,12,8,7,6,8,4,0,0,0,home,home,away,FALSE,FALSE,FALSE
+103,Third-place playoff,Loser Match 101,Loser Match 102,Norway,Japan,France,Portugal,Portugal,England,1,1,,2,0,,11,10,,3,6,,0,0,,away,home,,FALSE,FALSE,
+104,Final,Winner Match 101,Winner Match 102,Spain,Spain,Spain,Netherlands,Netherlands,Argentina,2,1,,1,2,,8,14,,5,6,,0,0,,home,away,,FALSE,FALSE,

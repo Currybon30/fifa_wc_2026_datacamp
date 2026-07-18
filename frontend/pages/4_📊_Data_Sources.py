@@ -1,6 +1,6 @@
 import streamlit as st
 
-from utils.ui import inject_base_styles, render_copyright_footer, render_html
+from utils.ui import inject_base_styles, render_copyright_footer
 
 st.set_page_config(page_title="Data", page_icon="📊", layout="wide")
 
@@ -14,6 +14,7 @@ st.divider()
 
 st.write("To access the datasets, please visit my [Kaggle World Cup 2026 Data](https://www.kaggle.com/datasets/tuongnguyenpham/fifa-wc26-data).")
 
+st.write("Due to the incorrect match order in the dataset retrieved from a competition, please modify the match order in the dataset to match the actual match order in case you want to use the dataset for your own analysis.")
 
 st.divider()
 

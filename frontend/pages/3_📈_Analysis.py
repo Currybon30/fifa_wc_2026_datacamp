@@ -105,8 +105,8 @@ goals_by_year = (
     .sort_values("year")
 )
 
-tab_elo, tab_history, tab_predictions, tab_comparison_charts = st.tabs(
-    ["⭐ Elo ratings", "📜 World Cup history", "🔮 WC26 predictions", "📊 Comparison charts"]
+tab_elo, tab_history, tab_predictions, tab_comparison_charts, tab_model_evaluation = st.tabs(
+    ["⭐ Elo ratings", "📜 World Cup history", "🔮 WC26 predictions", "📊 Comparison charts", "🧪 Model Evaluation"]
 )
 
 with tab_elo:
@@ -717,9 +717,7 @@ with tab_comparison_charts:
 
             
     with tab_knockout_stage:
-        tab_qualified_team_pair, tab_winner, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
-        ["Qualified Team Pair", "Match Winner", "Goals", "Corners", "Cards", "Penalties"]
-    )
+        st.warning("Due to the incorrect match order in the dataset retrieved from a competition, the predictions are affected and somehow not meaningful as expected.")
         round_filter = st.multiselect("Filter by round", options=PREDICTION_ACTUAL_KNOCKOUT["round"].unique(), default=[])
         scoped = apply_prediction_filters(
             PREDICTION_ACTUAL_KNOCKOUT,
@@ -731,12 +729,765 @@ with tab_comparison_charts:
         if scoped["home_team"].isna().all():
             st.error("This round has not been played yet, please select a different round")
             st.stop()
+        tab_qualified_team_pair, tab_winner, tab_goals, tab_corners, tab_cards, tab_penalties = st.tabs(
+            ["Qualified Team Pair", "Match Winner", "Goals", "Corners", "Cards", "Penalties"])
         
-        filled_teams_cells = scoped[scoped["home_team"].notna() & scoped["away_team"].notna()]
-        filled_teams_cells_count = len(filled_teams_cells)
-        filled_match_info_cells = scoped[scoped["home_goals"].notna()]
-        filled_match_info_cells_count = len(filled_match_info_cells)
+        filled_teams = scoped[scoped["home_team"].notna() & scoped["away_team"].notna()]
+        played = scoped[scoped["home_goals"].notna()]
+        round_label = ", ".join(round_filter) if round_filter else "All"
+
         with tab_qualified_team_pair:
-            pass
+            total_knockout_matches = len(filled_teams)
+            num_of_correct_qualified_team_pairs_dc = filled_teams[
+                (filled_teams["home_team"] == filled_teams["home_team_dc"])
+                & (filled_teams["away_team"] == filled_teams["away_team_dc"])
+            ].shape[0]
+            num_of_correct_qualified_team_pairs_kaggle = filled_teams[
+                (filled_teams["home_team"] == filled_teams["home_team_kaggle"])
+                & (filled_teams["away_team"] == filled_teams["away_team_kaggle"])
+            ].shape[0]
+            num_of_correct_qualified_home_teams_dc = filled_teams[
+                filled_teams["home_team"] == filled_teams["home_team_dc"]
+            ].shape[0]
+            num_of_correct_qualified_home_teams_kaggle = filled_teams[
+                filled_teams["home_team"] == filled_teams["home_team_kaggle"]
+            ].shape[0]
+            num_of_correct_qualified_away_teams_dc = filled_teams[
+                filled_teams["away_team"] == filled_teams["away_team_dc"]
+            ].shape[0]
+            num_of_correct_qualified_away_teams_kaggle = filled_teams[
+                filled_teams["away_team"] == filled_teams["away_team_kaggle"]
+            ].shape[0]
+            qualified_team_pair_accuracy_dc = (
+                100 * num_of_correct_qualified_team_pairs_dc / total_knockout_matches
+                if total_knockout_matches else 0
+            )
+            qualified_team_pair_accuracy_kaggle = (
+                100 * num_of_correct_qualified_team_pairs_kaggle / total_knockout_matches
+                if total_knockout_matches else 0
+            )
+            qualified_home_teams_accuracy_dc = (
+                100 * num_of_correct_qualified_home_teams_dc / total_knockout_matches
+                if total_knockout_matches else 0
+            )
+            qualified_home_teams_accuracy_kaggle = (
+                100 * num_of_correct_qualified_home_teams_kaggle / total_knockout_matches
+                if total_knockout_matches else 0
+            )
+            qualified_away_teams_accuracy_dc = (
+                100 * num_of_correct_qualified_away_teams_dc / total_knockout_matches
+                if total_knockout_matches else 0
+            )
+            qualified_away_teams_accuracy_kaggle = (
+                100 * num_of_correct_qualified_away_teams_kaggle / total_knockout_matches
+                if total_knockout_matches else 0
+            )
+
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                        <div class="wc-stat-label">Total knockout matches</div>
+                        <div class="wc-stat-value">{total_knockout_matches}</div>
+                        <div class="wc-stat-sub">Filtered by round: {round_label}</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations</div>
+                        <div class="wc-stat-value">{num_of_correct_qualified_team_pairs_dc}</div>
+                        <div class="wc-stat-sub">{qualified_team_pair_accuracy_dc:.1f}% qualified team pair accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations</div>
+                        <div class="wc-stat-value">{num_of_correct_qualified_team_pairs_kaggle}</div>
+                        <div class="wc-stat-sub">{qualified_team_pair_accuracy_kaggle:.1f}% qualified team pair accuracy</div>
+                    </div>
+                </div>
+            """)
+
+            fig_qualified_team_pair = px.bar(
+                x=["2K simulations", "50K simulations"],
+                y=[num_of_correct_qualified_team_pairs_dc, num_of_correct_qualified_team_pairs_kaggle],
+                labels={"x": "Number of simulation iterations", "y": "Number of correct qualified team pairs"},
+                color=["2K simulations", "50K simulations"],
+                color_discrete_map={
+                    "2K simulations": WC_GREEN,
+                    "50K simulations": WC_GREEN_LIGHT,
+                }
+            )
+            fig_qualified_team_pair.update_layout(
+                **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+            )
+            st.plotly_chart(fig_qualified_team_pair, width='stretch')
+
+            st.divider()
+            st.header("Home / away slot accuracy")
+            render_html(f"""
+                <div class="wc-stat-grid">
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations — home</div>
+                        <div class="wc-stat-value">{num_of_correct_qualified_home_teams_dc}</div>
+                        <div class="wc-stat-sub">{qualified_home_teams_accuracy_dc:.1f}% home slot accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations — home</div>
+                        <div class="wc-stat-value">{num_of_correct_qualified_home_teams_kaggle}</div>
+                        <div class="wc-stat-sub">{qualified_home_teams_accuracy_kaggle:.1f}% home slot accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                        <div class="wc-stat-label">2K simulations — away</div>
+                        <div class="wc-stat-value">{num_of_correct_qualified_away_teams_dc}</div>
+                        <div class="wc-stat-sub">{qualified_away_teams_accuracy_dc:.1f}% away slot accuracy</div>
+                    </div>
+                    <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                        <div class="wc-stat-label">50K simulations — away</div>
+                        <div class="wc-stat-value">{num_of_correct_qualified_away_teams_kaggle}</div>
+                        <div class="wc-stat-sub">{qualified_away_teams_accuracy_kaggle:.1f}% away slot accuracy</div>
+                    </div>
+                </div>
+            """)
+
+        with tab_winner:
+            if played.empty:
+                st.info("No completed matches in this filter yet.")
+            else:
+                total_knockout_matches = len(played)
+                num_of_correct_winner_dc = played[
+                    played["match_winner"] == played["match_winner_dc"]
+                ].shape[0]
+                num_of_correct_winner_kaggle = played[
+                    played["match_winner"] == played["match_winner_kaggle"]
+                ].shape[0]
+                number_of_home_wins = played[played["match_winner"] == "home"].shape[0]
+                number_of_away_wins = played[played["match_winner"] == "away"].shape[0]
+                number_of_home_wins_dc = played[played["match_winner_dc"] == "home"].shape[0]
+                number_of_away_wins_dc = played[played["match_winner_dc"] == "away"].shape[0]
+                number_of_home_wins_kaggle = played[played["match_winner_kaggle"] == "home"].shape[0]
+                number_of_away_wins_kaggle = played[played["match_winner_kaggle"] == "away"].shape[0]
+                winner_accuracy_dc = (
+                    100 * num_of_correct_winner_dc / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                winner_accuracy_kaggle = (
+                    100 * num_of_correct_winner_kaggle / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                            <div class="wc-stat-label">Total knockout matches</div>
+                            <div class="wc-stat-value">{total_knockout_matches}</div>
+                            <div class="wc-stat-sub">Filtered by round: {round_label}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{num_of_correct_winner_dc}</div>
+                            <div class="wc-stat-sub">{winner_accuracy_dc:.1f}% winner accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{num_of_correct_winner_kaggle}</div>
+                            <div class="wc-stat-sub">{winner_accuracy_kaggle:.1f}% winner accuracy</div>
+                        </div>
+                    </div>
+                """)
+                fig_winner = px.bar(
+                    x=["2K simulations", "50K simulations"],
+                    y=[num_of_correct_winner_dc, num_of_correct_winner_kaggle],
+                    labels={"x": "Number of simulation iterations", "y": "Number of correct winners"},
+                    color=["2K simulations", "50K simulations"],
+                    color_discrete_map={
+                        "2K simulations": WC_GREEN,
+                        "50K simulations": WC_GREEN_LIGHT,
+                    }
+                )
+                fig_winner.update_layout(
+                    **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+                )
+                st.plotly_chart(fig_winner, width='stretch')
+
+                st.divider()
+                st.header("Comparison of actual match-winner distribution vs predictions")
+                fig_home_away = go.Figure()
+                fig_home_away.add_bar(
+                    name="Actual Result",
+                    x=["Home wins", "Away wins"],
+                    y=[number_of_home_wins, number_of_away_wins],
+                )
+                fig_home_away.add_bar(
+                    name="2K simulations",
+                    x=["Home wins", "Away wins"],
+                    y=[number_of_home_wins_dc, number_of_away_wins_dc],
+                )
+                fig_home_away.add_bar(
+                    name="50K simulations",
+                    x=["Home wins", "Away wins"],
+                    y=[number_of_home_wins_kaggle, number_of_away_wins_kaggle],
+                )
+                fig_home_away.update_layout(
+                    **PLOT_LAYOUT, height=380, legend_title="", showlegend=True, barmode="group"
+                )
+                fig_home_away.update_xaxes(title="Result")
+                fig_home_away.update_yaxes(title="Number of matches")
+                st.plotly_chart(fig_home_away, width='stretch')
+
+        with tab_goals:
+            if played.empty:
+                st.info("No completed matches in this filter yet.")
+            else:
+                total_knockout_matches = len(played)
+                number_of_correct_goal_pairs_dc = played[
+                    (played["home_goals"] == played["home_goals_dc"])
+                    & (played["away_goals"] == played["away_goals_dc"])
+                ].shape[0]
+                number_of_correct_goal_pairs_kaggle = played[
+                    (played["home_goals"] == played["home_goals_kaggle"])
+                    & (played["away_goals"] == played["away_goals_kaggle"])
+                ].shape[0]
+                dc_accuracy = (
+                    100 * number_of_correct_goal_pairs_dc / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                kaggle_accuracy = (
+                    100 * number_of_correct_goal_pairs_kaggle / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                            <div class="wc-stat-label">Total knockout matches</div>
+                            <div class="wc-stat-value">{total_knockout_matches}</div>
+                            <div class="wc-stat-sub">Filtered by round: {round_label}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_goal_pairs_dc}</div>
+                            <div class="wc-stat-sub">{dc_accuracy:.1f}% goal pair accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_goal_pairs_kaggle}</div>
+                            <div class="wc-stat-sub">{kaggle_accuracy:.1f}% goal pair accuracy</div>
+                        </div>
+                    </div>
+                """)
+                fig_goals = px.bar(
+                    x=["2K simulations", "50K simulations"],
+                    y=[number_of_correct_goal_pairs_dc, number_of_correct_goal_pairs_kaggle],
+                    labels={"x": "Number of simulation iterations", "y": "Number of correct goal pairs"},
+                    color=["2K simulations", "50K simulations"],
+                    color_discrete_map={
+                        "2K simulations": WC_GREEN,
+                        "50K simulations": WC_GREEN_LIGHT,
+                    }
+                )
+                fig_goals.update_layout(
+                    **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+                )
+                st.plotly_chart(fig_goals, width='stretch')
+
+                st.divider()
+                num_of_goals_diff_dc = played[
+                    (abs(played["home_goals"] - played["away_goals"])
+                     == abs(played["home_goals_dc"] - played["away_goals_dc"]))
+                    & ((played["home_goals"] != played["home_goals_dc"])
+                       | (played["away_goals"] != played["away_goals_dc"]))
+                ].shape[0]
+                num_of_goals_diff_kaggle = played[
+                    (abs(played["home_goals"] - played["away_goals"])
+                     == abs(played["home_goals_kaggle"] - played["away_goals_kaggle"]))
+                    & ((played["home_goals"] != played["home_goals_kaggle"])
+                       | (played["away_goals"] != played["away_goals_kaggle"]))
+                ].shape[0]
+                num_of_goals_total_dc = played[
+                    (played["home_goals"] + played["away_goals"]
+                     == played["home_goals_dc"] + played["away_goals_dc"])
+                    & ((played["home_goals"] != played["home_goals_dc"])
+                       | (played["away_goals"] != played["away_goals_dc"]))
+                ].shape[0]
+                num_of_goals_total_kaggle = played[
+                    (played["home_goals"] + played["away_goals"]
+                     == played["home_goals_kaggle"] + played["away_goals_kaggle"])
+                    & ((played["home_goals"] != played["home_goals_kaggle"])
+                       | (played["away_goals"] != played["away_goals_kaggle"]))
+                ].shape[0]
+
+                st.header("Number of goals predictions with the same goal difference but wrong final pair of goals:")
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{num_of_goals_diff_dc}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{num_of_goals_diff_kaggle}</div>
+                        </div>
+                    </div>
+                """)
+                st.header("Number of goals predictions with the same total goals but wrong final pair of goals:")
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{num_of_goals_total_dc}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{num_of_goals_total_kaggle}</div>
+                        </div>
+                    </div>
+                """)
+
+        with tab_corners:
+            if played.empty:
+                st.info("No completed matches in this filter yet.")
+            else:
+                total_knockout_matches = len(played)
+                number_of_correct_corners_dc = played[
+                    played["corners"] == played["corners_dc"]
+                ].shape[0]
+                number_of_correct_corners_kaggle = played[
+                    played["corners"] == played["corners_kaggle"]
+                ].shape[0]
+                dc_accuracy = (
+                    100 * number_of_correct_corners_dc / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                kaggle_accuracy = (
+                    100 * number_of_correct_corners_kaggle / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                            <div class="wc-stat-label">Total knockout matches</div>
+                            <div class="wc-stat-value">{total_knockout_matches}</div>
+                            <div class="wc-stat-sub">Filtered by round: {round_label}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_corners_dc}</div>
+                            <div class="wc-stat-sub">{dc_accuracy:.1f}% corner accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_corners_kaggle}</div>
+                            <div class="wc-stat-sub">{kaggle_accuracy:.1f}% corner accuracy</div>
+                        </div>
+                    </div>
+                """)
+                fig_corners = px.bar(
+                    x=["2K simulations", "50K simulations"],
+                    y=[number_of_correct_corners_dc, number_of_correct_corners_kaggle],
+                    labels={"x": "Number of simulation iterations", "y": "Number of correct corners"},
+                    color=["2K simulations", "50K simulations"],
+                    color_discrete_map={
+                        "2K simulations": WC_GREEN,
+                        "50K simulations": WC_GREEN_LIGHT,
+                    }
+                )
+                fig_corners.update_layout(
+                    **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+                )
+                st.plotly_chart(fig_corners, width='stretch')
+
+                st.divider()
+                total_corners_dc_off_by_one = played[
+                    (played["corners"] == played["corners_dc"] + 1)
+                    | (played["corners"] == played["corners_dc"] - 1)
+                ].shape[0]
+                total_corners_kaggle_off_by_one = played[
+                    (played["corners"] == played["corners_kaggle"] + 1)
+                    | (played["corners"] == played["corners_kaggle"] - 1)
+                ].shape[0]
+                st.header("Number of corners predictions off by 1:")
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{total_corners_dc_off_by_one}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{total_corners_kaggle_off_by_one}</div>
+                        </div>
+                    </div>
+                """)
+
+                total_corners_dc_off_by_two = played[
+                    (played["corners"] == played["corners_dc"] + 2)
+                    | (played["corners"] == played["corners_dc"] - 2)
+                ].shape[0]
+                total_corners_kaggle_off_by_two = played[
+                    (played["corners"] == played["corners_kaggle"] + 2)
+                    | (played["corners"] == played["corners_kaggle"] - 2)
+                ].shape[0]
+                st.header("Number of corners predictions off by 2:")
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{total_corners_dc_off_by_two}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{total_corners_kaggle_off_by_two}</div>
+                        </div>
+                    </div>
+                """)
+
+        with tab_cards:
+            if played.empty:
+                st.info("No completed matches in this filter yet.")
+            else:
+                total_knockout_matches = len(played)
+                number_of_correct_yellow_cards_dc = played[
+                    played["yellow_cards"] == played["yellow_cards_dc"]
+                ].shape[0]
+                number_of_correct_yellow_cards_kaggle = played[
+                    played["yellow_cards"] == played["yellow_cards_kaggle"]
+                ].shape[0]
+                number_of_correct_red_cards_dc = played[
+                    played["red_cards"] == played["red_cards_dc"]
+                ].shape[0]
+                number_of_correct_red_cards_kaggle = played[
+                    played["red_cards"] == played["red_cards_kaggle"]
+                ].shape[0]
+                yellow_cards_accuracy_dc = (
+                    100 * number_of_correct_yellow_cards_dc / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                yellow_cards_accuracy_kaggle = (
+                    100 * number_of_correct_yellow_cards_kaggle / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                red_cards_accuracy_dc = (
+                    100 * number_of_correct_red_cards_dc / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                red_cards_accuracy_kaggle = (
+                    100 * number_of_correct_red_cards_kaggle / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                            <div class="wc-stat-label">Total knockout matches</div>
+                            <div class="wc-stat-value">{total_knockout_matches}</div>
+                            <div class="wc-stat-sub">Filtered by round: {round_label}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_yellow_cards_dc}</div>
+                            <div class="wc-stat-sub">{yellow_cards_accuracy_dc:.1f}% yellow card accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_yellow_cards_kaggle}</div>
+                            <div class="wc-stat-sub">{yellow_cards_accuracy_kaggle:.1f}% yellow card accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_red_cards_dc}</div>
+                            <div class="wc-stat-sub">{red_cards_accuracy_dc:.1f}% red card accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{number_of_correct_red_cards_kaggle}</div>
+                            <div class="wc-stat-sub">{red_cards_accuracy_kaggle:.1f}% red card accuracy</div>
+                        </div>
+                    </div>
+                """)
+
+                fig_cards = go.Figure()
+                fig_cards.add_bar(
+                    name="Yellow cards",
+                    x=["2K simulations", "50K simulations"],
+                    y=[number_of_correct_yellow_cards_dc, number_of_correct_yellow_cards_kaggle],
+                    marker_color=WC_YELLOW,
+                )
+                fig_cards.add_bar(
+                    name="Red cards",
+                    x=["2K simulations", "50K simulations"],
+                    y=[number_of_correct_red_cards_dc, number_of_correct_red_cards_kaggle],
+                    marker_color=WC_RED,
+                )
+                fig_cards.update_layout(
+                    **PLOT_LAYOUT, height=380, legend_title="", showlegend=True, barmode="group",
+                )
+                st.plotly_chart(fig_cards, width='stretch')
+
+                st.divider()
+                total_yellow_cards_dc_off_by_one = played[
+                    (played["yellow_cards"] == played["yellow_cards_dc"] + 1)
+                    | (played["yellow_cards"] == played["yellow_cards_dc"] - 1)
+                ].shape[0]
+                total_yellow_cards_kaggle_off_by_one = played[
+                    (played["yellow_cards"] == played["yellow_cards_kaggle"] + 1)
+                    | (played["yellow_cards"] == played["yellow_cards_kaggle"] - 1)
+                ].shape[0]
+                st.header("Number of yellow cards predictions off by 1:")
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{total_yellow_cards_dc_off_by_one}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{total_yellow_cards_kaggle_off_by_one}</div>
+                        </div>
+                    </div>
+                """)
+
+        with tab_penalties:
+            if played.empty:
+                st.info("No completed matches in this filter yet.")
+            else:
+                total_knockout_matches = len(played)
+                num_of_correct_penalties_dc = played[
+                    played["penalties"] == played["penalties_dc"]
+                ].shape[0]
+                num_of_correct_penalties_kaggle = played[
+                    played["penalties"] == played["penalties_kaggle"]
+                ].shape[0]
+                num_of_actual_penalties = played[played["penalties"] == True].shape[0]
+                num_of_penalties_dc = played[played["penalties_dc"] == True].shape[0]
+                num_of_penalties_kaggle = played[played["penalties_kaggle"] == True].shape[0]
+                penalties_accuracy_dc = (
+                    100 * num_of_correct_penalties_dc / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                penalties_accuracy_kaggle = (
+                    100 * num_of_correct_penalties_kaggle / total_knockout_matches
+                    if total_knockout_matches else 0
+                )
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                            <div class="wc-stat-label">Total knockout matches</div>
+                            <div class="wc-stat-value">{total_knockout_matches}</div>
+                            <div class="wc-stat-sub">Filtered by round: {round_label}</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{num_of_correct_penalties_dc}</div>
+                            <div class="wc-stat-sub">{penalties_accuracy_dc:.1f}% penalties accuracy</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{num_of_correct_penalties_kaggle}</div>
+                            <div class="wc-stat-sub">{penalties_accuracy_kaggle:.1f}% penalties accuracy</div>
+                        </div>
+                    </div>
+                """)
+                fig_penalties = px.bar(
+                    x=["2K simulations", "50K simulations"],
+                    y=[num_of_correct_penalties_dc, num_of_correct_penalties_kaggle],
+                    labels={"x": "Number of simulation iterations", "y": "Number of correct penalty outcomes"},
+                    color=["2K simulations", "50K simulations"],
+                    color_discrete_map={
+                        "2K simulations": WC_GREEN,
+                        "50K simulations": WC_GREEN_LIGHT,
+                    }
+                )
+                fig_penalties.update_layout(
+                    **PLOT_LAYOUT, height=380, legend_title="", showlegend=False
+                )
+                st.plotly_chart(fig_penalties, width='stretch')
+
+                st.divider()
+                st.header("Matches decided by penalties")
+                render_html(f"""
+                    <div class="wc-stat-grid">
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                            <div class="wc-stat-label">Actual</div>
+                            <div class="wc-stat-value">{num_of_actual_penalties}</div>
+                            <div class="wc-stat-sub">Went to penalties</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                            <div class="wc-stat-label">2K simulations</div>
+                            <div class="wc-stat-value">{num_of_penalties_dc}</div>
+                            <div class="wc-stat-sub">Predicted penalties</div>
+                        </div>
+                        <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                            <div class="wc-stat-label">50K simulations</div>
+                            <div class="wc-stat-value">{num_of_penalties_kaggle}</div>
+                            <div class="wc-stat-sub">Predicted penalties</div>
+                        </div>
+                    </div>
+                """)
+
+with tab_model_evaluation:
+    st.subheader("Model evaluation")
+    st.caption(
+        "Accuracy of 2K and 50K simulations across completed group and knockout matches."
+    )
+
+    group_played = PREDICTION_ACTUAL_GROUP[
+        PREDICTION_ACTUAL_GROUP["home_goals"].notna()
+        & (PREDICTION_ACTUAL_GROUP["home_goals"] != -1)
+    ].copy()
+    knockout_played = PREDICTION_ACTUAL_KNOCKOUT[
+        PREDICTION_ACTUAL_KNOCKOUT["home_goals"].notna()
+    ].copy()
+    total_matches = len(group_played) + len(knockout_played)
+
+    correct_winner_dc = (
+        (group_played["winning_team"] == group_played["winning_team_dc"]).sum()
+        + (knockout_played["match_winner"] == knockout_played["match_winner_dc"]).sum()
+    )
+    correct_winner_kaggle = (
+        (group_played["winning_team"] == group_played["winning_team_kaggle"]).sum()
+        + (knockout_played["match_winner"] == knockout_played["match_winner_kaggle"]).sum()
+    )
+    correct_goals_dc = (
+        (
+            (group_played["home_goals"] == group_played["home_goals_dc"])
+            & (group_played["away_goals"] == group_played["away_goals_dc"])
+        ).sum()
+        + (
+            (knockout_played["home_goals"] == knockout_played["home_goals_dc"])
+            & (knockout_played["away_goals"] == knockout_played["away_goals_dc"])
+        ).sum()
+    )
+    correct_goals_kaggle = (
+        (
+            (group_played["home_goals"] == group_played["home_goals_kaggle"])
+            & (group_played["away_goals"] == group_played["away_goals_kaggle"])
+        ).sum()
+        + (
+            (knockout_played["home_goals"] == knockout_played["home_goals_kaggle"])
+            & (knockout_played["away_goals"] == knockout_played["away_goals_kaggle"])
+        ).sum()
+    )
+    correct_corners_dc = (
+        (group_played["corners"] == group_played["corners_dc"]).sum()
+        + (knockout_played["corners"] == knockout_played["corners_dc"]).sum()
+    )
+    correct_corners_kaggle = (
+        (group_played["corners"] == group_played["corners_kaggle"]).sum()
+        + (knockout_played["corners"] == knockout_played["corners_kaggle"]).sum()
+    )
+    correct_yellow_dc = (
+        (group_played["yellow_cards"] == group_played["yellow_cards_dc"]).sum()
+        + (knockout_played["yellow_cards"] == knockout_played["yellow_cards_dc"]).sum()
+    )
+    correct_yellow_kaggle = (
+        (group_played["yellow_cards"] == group_played["yellow_cards_kaggle"]).sum()
+        + (knockout_played["yellow_cards"] == knockout_played["yellow_cards_kaggle"]).sum()
+    )
+    correct_red_dc = (
+        (group_played["red_cards"] == group_played["red_cards_dc"]).sum()
+        + (knockout_played["red_cards"] == knockout_played["red_cards_dc"]).sum()
+    )
+    correct_red_kaggle = (
+        (group_played["red_cards"] == group_played["red_cards_kaggle"]).sum()
+        + (knockout_played["red_cards"] == knockout_played["red_cards_kaggle"]).sum()
+    )
+
+    def _pct(correct: int) -> float:
+        return 100 * correct / total_matches if total_matches else 0
+
+    winner_acc_dc, winner_acc_kaggle = _pct(correct_winner_dc), _pct(correct_winner_kaggle)
+    goals_acc_dc, goals_acc_kaggle = _pct(correct_goals_dc), _pct(correct_goals_kaggle)
+    corners_acc_dc, corners_acc_kaggle = _pct(correct_corners_dc), _pct(correct_corners_kaggle)
+    yellow_acc_dc, yellow_acc_kaggle = _pct(correct_yellow_dc), _pct(correct_yellow_kaggle)
+    red_acc_dc, red_acc_kaggle = _pct(correct_red_dc), _pct(correct_red_kaggle)
+
+    render_html(f"""
+        <div class="wc-stat-grid">
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_ACCENT};">
+                <div class="wc-stat-label">Completed matches</div>
+                <div class="wc-stat-value">{total_matches}</div>
+                <div class="wc-stat-sub">{len(group_played)} group matches · {len(knockout_played)} knockout matches</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                <div class="wc-stat-label">2K — Match Winner</div>
+                <div class="wc-stat-value">{winner_acc_dc:.1f}%</div>
+                <div class="wc-stat-sub">{correct_winner_dc} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                <div class="wc-stat-label">50K — Match Winner</div>
+                <div class="wc-stat-value">{winner_acc_kaggle:.1f}%</div>
+                <div class="wc-stat-sub">{correct_winner_kaggle} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                <div class="wc-stat-label">2K — Goals</div>
+                <div class="wc-stat-value">{goals_acc_dc:.1f}%</div>
+                <div class="wc-stat-sub">{correct_goals_dc} / {total_matches} correct pairs</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                <div class="wc-stat-label">50K — Goals</div>
+                <div class="wc-stat-value">{goals_acc_kaggle:.1f}%</div>
+                <div class="wc-stat-sub">{correct_goals_kaggle} / {total_matches} correct pairs</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN};">
+                <div class="wc-stat-label">2K — Corners</div>
+                <div class="wc-stat-value">{corners_acc_dc:.1f}%</div>
+                <div class="wc-stat-sub">{correct_corners_dc} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_GREEN_LIGHT};">
+                <div class="wc-stat-label">50K — Corners</div>
+                <div class="wc-stat-value">{corners_acc_kaggle:.1f}%</div>
+                <div class="wc-stat-sub">{correct_corners_kaggle} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW};">
+                <div class="wc-stat-label">2K — Yellow cards</div>
+                <div class="wc-stat-value">{yellow_acc_dc:.1f}%</div>
+                <div class="wc-stat-sub">{correct_yellow_dc} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_YELLOW_LIGHT};">
+                <div class="wc-stat-label">50K — Yellow cards</div>
+                <div class="wc-stat-value">{yellow_acc_kaggle:.1f}%</div>
+                <div class="wc-stat-sub">{correct_yellow_kaggle} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED};">
+                <div class="wc-stat-label">2K — Red cards</div>
+                <div class="wc-stat-value">{red_acc_dc:.1f}%</div>
+                <div class="wc-stat-sub">{correct_red_dc} / {total_matches} correct</div>
+            </div>
+            <div class="wc-stat-card" style="--wc-stat-accent: {WC_RED_LIGHT};">
+                <div class="wc-stat-label">50K — Red cards</div>
+                <div class="wc-stat-value">{red_acc_kaggle:.1f}%</div>
+                <div class="wc-stat-sub">{correct_red_kaggle} / {total_matches} correct</div>
+            </div>
+        </div>
+    """)
+
+    eval_rows = [
+        {"Category": "Match Winner", "Model": "2K simulations", "Accuracy": winner_acc_dc, "Correct": correct_winner_dc},
+        {"Category": "Match Winner", "Model": "50K simulations", "Accuracy": winner_acc_kaggle, "Correct": correct_winner_kaggle},
+        {"Category": "Goals", "Model": "2K simulations", "Accuracy": goals_acc_dc, "Correct": correct_goals_dc},
+        {"Category": "Goals", "Model": "50K simulations", "Accuracy": goals_acc_kaggle, "Correct": correct_goals_kaggle},
+        {"Category": "Corners", "Model": "2K simulations", "Accuracy": corners_acc_dc, "Correct": correct_corners_dc},
+        {"Category": "Corners", "Model": "50K simulations", "Accuracy": corners_acc_kaggle, "Correct": correct_corners_kaggle},
+        {"Category": "Yellow cards", "Model": "2K simulations", "Accuracy": yellow_acc_dc, "Correct": correct_yellow_dc},
+        {"Category": "Yellow cards", "Model": "50K simulations", "Accuracy": yellow_acc_kaggle, "Correct": correct_yellow_kaggle},
+        {"Category": "Red cards", "Model": "2K simulations", "Accuracy": red_acc_dc, "Correct": correct_red_dc},
+        {"Category": "Red cards", "Model": "50K simulations", "Accuracy": red_acc_kaggle, "Correct": correct_red_kaggle},
+    ]
+    eval_df = pd.DataFrame(eval_rows)
+
+    fig_eval = px.bar(
+        eval_df,
+        x="Category",
+        y="Accuracy",
+        color="Model",
+        barmode="group",
+        text=eval_df["Accuracy"].map(lambda v: f"{v:.1f}%"),
+        color_discrete_map={
+            "2K simulations": WC_GREEN,
+            "50K simulations": WC_GREEN_LIGHT,
+        },
+        labels={"Accuracy": "Accuracy (%)", "Category": ""},
+    )
+    fig_eval.update_traces(textposition="outside")
+    fig_eval.update_layout(
+        **PLOT_LAYOUT,
+        height=420,
+        legend_title="",
+        yaxis=dict(range=[0, 110], ticksuffix="%"),
+    )
+    st.plotly_chart(fig_eval, width="stretch")
 
 render_copyright_footer()
