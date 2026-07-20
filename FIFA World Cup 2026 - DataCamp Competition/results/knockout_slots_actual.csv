@@ -29,5 +29,5 @@ match_id,round,slot_home,slot_away,home_team_kaggle,home_team_dc,home_team,away_
 100,Quarter-final,Winner Match 95,Winner Match 96,Portugal,Portugal,Argentina,Argentina,Canada,Switzerland,2,2,3,1,1,1,7,8,10,5,5,4,0,0,1,home,home,home,FALSE,FALSE,FALSE
 101,Semi-final,Winner Match 97,Winner Match 98,Norway,Japan,France,Spain,Spain,Spain,0,1,0,1,2,2,5,10,8,4,4,3,0,0,0,away,away,away,FALSE,FALSE,FALSE
 102,Semi-final,Winner Match 99,Winner Match 100,Netherlands,Netherlands,England,Portugal,Portugal,Argentina,2,2,1,1,1,2,12,8,7,6,8,4,0,0,0,home,home,away,FALSE,FALSE,FALSE
-103,Third-place playoff,Loser Match 101,Loser Match 102,Norway,Japan,France,Portugal,Portugal,England,1,1,,2,0,,11,10,,3,6,,0,0,,away,home,,FALSE,FALSE,
-104,Final,Winner Match 101,Winner Match 102,Spain,Spain,Spain,Netherlands,Netherlands,Argentina,2,1,,1,2,,8,14,,5,6,,0,0,,home,away,,FALSE,FALSE,
+103,Third-place playoff,Loser Match 101,Loser Match 102,Norway,Japan,France,Portugal,Portugal,England,1,1,4,2,0,6,11,10,7,3,6,0,0,0,0,away,home,away,FALSE,FALSE,FALSE
+104,Final,Winner Match 101,Winner Match 102,Spain,Spain,Spain,Netherlands,Netherlands,Argentina,2,1,1,1,2,0,8,14,13,5,6,5,0,0,1,home,away,home,FALSE,FALSE,FALSE
