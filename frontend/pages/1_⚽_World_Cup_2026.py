@@ -26,9 +26,9 @@ countdown_timer()
 st.title("⚽ World Cup 2026")
 st.caption("Live scores, fixtures, and group standings.")
 
-api_football_key = get_api_football_key()
+api_football_key = get_api_football_key() 
 football_data_key = get_football_data_key()
-using_api = api_football_key is not None and football_data_key is not None
+using_api = football_data_key is not None
 
 with st.sidebar:
     render_country_timezone_selector()
@@ -59,20 +59,20 @@ if using_api:
         using_api = False
 
 
-@st.fragment(run_every=1)
-def _render_live_refresh_countdown() -> None:
-    remaining = seconds_until_live_api_refresh()
-    if remaining <= 0:
-        st.caption("Refreshing live scores…")
-        st.rerun()
-        return
-    st.metric("Next live score refresh", format_refresh_countdown(remaining))
+# @st.fragment(run_every=1)
+# def _render_live_refresh_countdown() -> None:
+#     remaining = seconds_until_live_api_refresh()
+#     if remaining <= 0:
+#         st.caption("Refreshing live scores…")
+#         st.rerun()
+#         return
+#     st.metric("Next live score refresh", format_refresh_countdown(remaining))
 
 
 with st.sidebar:
     if using_api and not data_error:
         st.divider()
-        _render_live_refresh_countdown()
+        # _render_live_refresh_countdown()
     elif not using_api:
         pass
 
@@ -105,26 +105,27 @@ tab_live, tab_upcoming, tab_completed, tab_standings, tab_squads = st.tabs(
 )
 
 with tab_live:
-    if data_error:
-        st.warning(f"""
-        Due to the non-profit website, we are striving to find a company that provides a free API for the live scores. 
-        Unfortunately, if you see this message, we are unable to provide live scores of the World Cup 2026 matches. 
-        Please visit [the official FIFA website](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures) for the latest updates.
-        Sorry for the inconvenience.
-        """)
-    if not data_error:    
-        st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
-    if using_api:
-        if live_fixtures:
-            for fixture in live_fixtures:
-                render_match_card_api(fixture, live=True)
-        else:
-            st.info("No World Cup matches are live right now. Check the Upcoming tab for the next kickoffs.")
-    elif len(live_df):
-        for _, row in live_df.iterrows():
-            render_match_card_local(row, live=True)
-    else:
-        st.info("No matches are live right now. Please check Upcoming for the schedule.")
+    # if data_error:
+    #     st.warning(f"""
+    #     Due to the non-profit website, we are striving to find a company that provides a free API for the live scores. 
+    #     Unfortunately, if you see this message, we are unable to provide live scores of the World Cup 2026 matches. 
+    #     Please visit [the official FIFA website](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures) for the latest updates.
+    #     Sorry for the inconvenience.
+    #     """)
+    # if not data_error:    
+    #     st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
+    # if using_api:
+    #     if live_fixtures:
+    #         for fixture in live_fixtures:
+    #             render_match_card_api(fixture, live=True)
+    #     else:
+    #         st.info("No World Cup matches are live right now. Check the Upcoming tab for the next kickoffs.")
+    # elif len(live_df):
+    #     for _, row in live_df.iterrows():
+    #         render_match_card_local(row, live=True)
+    # else:
+    #     st.info("No matches are live right now. Please check Upcoming for the schedule.")
+    st.info("FIFA World Cup 2026 has been ended. Please check the Completed tab for the results.")
 
 with tab_upcoming:
     shown = display_upcoming_df.head(limit)

@@ -34,8 +34,12 @@ def seconds_until_world_cup_end():
 @st.fragment(run_every=1)
 def _render_world_cup_countdown() -> None:
     remaining = seconds_until_world_cup_start()
-    if remaining <= 0:
+    remaining_end = seconds_until_world_cup_end()
+    if remaining <= 0 and remaining_end > 0:
         st.title("🎉 FIFA World Cup 2026 is kicking off!")
+        return
+    if remaining_end <= 0:
+        st.title("🏆 FIFA World Cup 2026 has been ended!")
         return
     st.title("⏳ FIFA World Cup 2026 Countdown")
     st.metric(
@@ -48,7 +52,7 @@ def _render_world_cup_countdown() -> None:
 def _render_world_cup_countdown_dialog_body() -> None:
     remaining = seconds_until_world_cup_start()
     remaining_end = seconds_until_world_cup_end()
-    if remaining <= 0:
+    if remaining <= 0 and remaining_end > 0:
         st.title("🎉 FIFA World Cup 2026 is kicking off!")
         return
     if remaining_end <= 0:

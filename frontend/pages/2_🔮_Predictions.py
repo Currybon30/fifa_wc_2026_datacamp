@@ -23,7 +23,7 @@ st.caption("***Predictions are for reference purposes only. We do not guarantee 
 predictions = load_all_predictions()
 
 with st.sidebar:
-    previous_matches_include = st.checkbox("Include previous matches", value=False)
+    previous_matches_include = st.checkbox("Include previous matches", value=True)
     stage_filter = st.selectbox(
         "Stage",
         options=["All", "Group stage", "Knockout"],
@@ -46,7 +46,7 @@ scoped = apply_prediction_filters(
 filtered = scoped.head(limit)
 
 if filtered.empty:
-    st.info("No predictions match the selected filters.")
+    st.info("No predictions match the selected filters. Please check the box to include previous matches.")
 else:
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Matches shown", len(filtered))

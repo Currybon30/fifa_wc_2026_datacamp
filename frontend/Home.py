@@ -109,12 +109,15 @@ _, upcoming_fixtures, _ = split_local_fixtures(fixtures)
 preview = upcoming_fixtures.head(5)[["round", "home_team", "away_team", "date_utc", "venue"]].copy()
 preview["date_utc"] = preview["date_utc"].map(format_kickoff)
 preview.columns = ["Round", "Home", "Away", "Kickoff", "Venue"]
-st.dataframe(preview, width='stretch', hide_index=True)
+if len(preview) == 0:
+    st.write("FIFA World Cup 2026 has been ended.")
+else:
+    st.dataframe(preview, width='stretch', hide_index=True)
 
-st.caption(
-    f"Showing the next {len(preview)} upcoming matches. "
-    f"Tournament runs {format_date_local(first_match['date_utc'])} – "
-    f"{format_date_local(last_match['date_utc'])} (local dates)."
-)
+    st.caption(
+        f"Showing the next {len(preview)} upcoming matches. "
+        f"Tournament runs {format_date_local(first_match['date_utc'])} – "
+        f"{format_date_local(last_match['date_utc'])} (local dates)."
+    )
 
 render_copyright_footer()
