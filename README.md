@@ -6,12 +6,14 @@ This project combines multiple ML models, feature engineering pipelines, and pro
 
 Live URL: https://fifa-worldcup26-tnp.streamlit.app/
 
-<img width="1536" height="696" alt="home" src="https://github.com/user-attachments/assets/c3f6d404-1103-4ccc-bf14-7b22b87cb286" />
+<p align="center">
+  <img width=auto height="400" alt="home" src="https://github.com/user-attachments/assets/c3f6d404-1103-4ccc-bf14-7b22b87cb286" />
+  
+  <img width=auto height="400" alt="pred" src="https://github.com/user-attachments/assets/7bd276b2-27a1-4deb-82a7-9c404195be75" />
+  
+  <img width=auto height="400" alt="analysis-page" src="https://github.com/user-attachments/assets/fb914bfc-48ee-4df2-9807-0f8dbeed2019" />
+<p/>
 
-<img width="1536" height="698" alt="analysis-page" src="https://github.com/user-attachments/assets/fb914bfc-48ee-4df2-9807-0f8dbeed2019" />
-
-<br/>
-<br/>
 <br/>
 
 
