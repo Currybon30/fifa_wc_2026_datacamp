@@ -1,10 +1,12 @@
+from utils.teams import is_slot_team
 import streamlit as st
-
-from utils.matches import format_date_local, format_kickoff, load_local_fixtures, split_local_fixtures
-from utils.usertimezone import render_country_timezone_selector
-from utils.ui import inject_base_styles, render_copyright_footer, render_html
-from utils.countdown import countdown_timer, open_world_cup_countdown_dialog, seconds_until_world_cup_start
 from config.logging import setup_logging
+from utils.countdown import (countdown_timer, open_world_cup_countdown_dialog,
+                             seconds_until_world_cup_start)
+from utils.matches import (format_date_local, format_kickoff,
+                           load_local_fixtures, split_local_fixtures)
+from utils.ui import inject_base_styles, render_copyright_footer, render_html
+from utils.usertimezone import render_country_timezone_selector
 
 # Initialize logging
 setup_logging()
@@ -19,14 +21,13 @@ if seconds_until_world_cup_start() > 0 and not st.session_state.get("countdown_d
     st.session_state["countdown_dialog_opened"] = True
     open_world_cup_countdown_dialog()
 
-countdown_timer() # Sidebar
+countdown_timer()  # Sidebar
 
 with st.sidebar:
     render_country_timezone_selector()
 
 inject_base_styles()
 
-from utils.teams import is_slot_team
 
 fixtures = load_local_fixtures()
 group_fixtures = fixtures[fixtures["stage"] == "group"]
@@ -106,11 +107,12 @@ st.divider()
 st.subheader("Next upcoming matches")
 
 _, upcoming_fixtures, _ = split_local_fixtures(fixtures)
-preview = upcoming_fixtures.head(5)[["round", "home_team", "away_team", "date_utc", "venue"]].copy()
+preview = upcoming_fixtures.head(
+    5)[["round", "home_team", "away_team", "date_utc", "venue"]].copy()
 preview["date_utc"] = preview["date_utc"].map(format_kickoff)
 preview.columns = ["Round", "Home", "Away", "Kickoff", "Venue"]
 if len(preview) == 0:
-    st.write("FIFA World Cup 2026 has been ended.")
+    st.write("FIFA World Cup 2026 has ended.")
 else:
     st.dataframe(preview, width='stretch', hide_index=True)
 

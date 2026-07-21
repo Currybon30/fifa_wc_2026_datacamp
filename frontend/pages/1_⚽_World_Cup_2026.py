@@ -1,22 +1,18 @@
 import streamlit as st
-
-from utils.matches import (
-    fetch_api_fixtures,
-    fetch_live_fixtures,
-    filter_upcoming_local_fixtures,
-    format_refresh_countdown,
-    get_api_football_key,
-    get_football_data_key,
-    load_local_fixtures,
-    seconds_until_live_api_refresh,
-    split_api_fixtures,
-    split_local_fixtures,
-)
-from utils.standings import get_football_data_key, get_group_standings
-from utils.squads import list_squad_teams
-from utils.ui import inject_base_styles, render_copyright_footer, render_group_standings, render_match_card_api, render_match_card_local, render_squad_table
 from utils.countdown import countdown_timer
+from utils.matches import (fetch_api_fixtures, fetch_live_fixtures,
+                           filter_upcoming_local_fixtures,
+                           format_refresh_countdown, get_api_football_key,
+                           get_football_data_key, load_local_fixtures,
+                           seconds_until_live_api_refresh, split_api_fixtures,
+                           split_local_fixtures)
+from utils.squads import list_squad_teams
+from utils.standings import get_football_data_key, get_group_standings
+from utils.ui import (inject_base_styles, render_copyright_footer,
+                      render_group_standings, render_match_card_api,
+                      render_match_card_local, render_squad_table)
 from utils.usertimezone import render_country_timezone_selector
+
 st.set_page_config(page_title="World Cup 2026", page_icon="⚽", layout="wide")
 
 inject_base_styles()
@@ -26,7 +22,7 @@ countdown_timer()
 st.title("⚽ World Cup 2026")
 st.caption("Live scores, fixtures, and group standings.")
 
-api_football_key = get_api_football_key() 
+api_football_key = get_api_football_key()
 football_data_key = get_football_data_key()
 using_api = football_data_key is not None
 
@@ -38,7 +34,8 @@ with st.sidebar:
         options=sorted(load_local_fixtures()["group"].dropna().unique()),
         default=[],
     )
-    limit = st.slider("Matches to show", min_value=5, max_value=104, value=20, step=5)
+    limit = st.slider("Matches to show", min_value=5,
+                      max_value=104, value=20, step=5)
 
 live_fixtures: list = []
 completed_fixtures: list = []
@@ -107,12 +104,12 @@ tab_live, tab_upcoming, tab_completed, tab_standings, tab_squads = st.tabs(
 with tab_live:
     # if data_error:
     #     st.warning(f"""
-    #     Due to the non-profit website, we are striving to find a company that provides a free API for the live scores. 
-    #     Unfortunately, if you see this message, we are unable to provide live scores of the World Cup 2026 matches. 
+    #     Due to the non-profit website, we are striving to find a company that provides a free API for the live scores.
+    #     Unfortunately, if you see this message, we are unable to provide live scores of the World Cup 2026 matches.
     #     Please visit [the official FIFA website](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures) for the latest updates.
     #     Sorry for the inconvenience.
     #     """)
-    # if not data_error:    
+    # if not data_error:
     #     st.info(f"Due to the limitation of the API-Sports free tier, we can only update the live scores every 20 minutes. Thank you for your understanding.")
     # if using_api:
     #     if live_fixtures:
@@ -125,7 +122,8 @@ with tab_live:
     #         render_match_card_local(row, live=True)
     # else:
     #     st.info("No matches are live right now. Please check Upcoming for the schedule.")
-    st.info("FIFA World Cup 2026 has been ended. Please check the Completed tab for the results.")
+    st.info(
+        "FIFA World Cup 2026 has ended. Please check the Completed tab for the results.")
 
 with tab_upcoming:
     shown = display_upcoming_df.head(limit)
@@ -139,7 +137,8 @@ with tab_completed:
     shown = completed_fixtures[:limit]
     if shown:
         for fixture in shown:
-            render_match_card_api(fixture, localdf=completed_df, group=group_filter)
+            render_match_card_api(
+                fixture, localdf=completed_df, group=group_filter)
     else:
         st.info("No completed matches yet — the tournament has not started.")
 
@@ -149,7 +148,8 @@ with tab_standings:
             "Football-data.org API key is not configured. Standings will be available once it is set."
         )
     elif standings_error:
-        st.warning(f"Could not load standings from football-data.org ({standings_error}).")
+        st.warning(
+            f"Could not load standings from football-data.org ({standings_error}).")
     elif not standings:
         st.info("No standings data is available from football-data.org yet.")
     else:
