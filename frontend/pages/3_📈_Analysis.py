@@ -38,7 +38,7 @@ if str(COMPETITION_DIR) not in sys.path:
 HISTORICAL_STAT_CSV = COMPETITION_DIR / "data" / "history_stat.csv"
 ELO_RATINGS_CSV = COMPETITION_DIR / "data" / "elo.csv"
 PREDICTION_ACTUAL_GROUP_CSV = COMPETITION_DIR / "results" / "group_fixtures_actual.csv"
-PREDICTION_ACTUAL_KNOCKOUT_CSV = COMPETITION_DIR / "results" / "knockout_slots_actual.csv"
+PREDICTION_ACTUAL_KNOCKOUT_CSV = COMPETITION_DIR / "results" / "knockout_slots_actual_v2.csv"
 
 st.set_page_config(page_title="Analysis", page_icon="📈", layout="wide")
 
@@ -717,7 +717,6 @@ with tab_comparison_charts:
 
             
     with tab_knockout_stage:
-        st.warning("Due to the incorrect match order in the dataset retrieved from a competition, the predictions are affected and somehow not meaningful as expected.")
         round_filter = st.multiselect("Filter by round", options=PREDICTION_ACTUAL_KNOCKOUT["round"].unique(), default=[])
         scoped = apply_prediction_filters(
             PREDICTION_ACTUAL_KNOCKOUT,

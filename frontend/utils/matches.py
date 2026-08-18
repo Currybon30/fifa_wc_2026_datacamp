@@ -40,7 +40,7 @@ KNOCKOUT_SLOTS_CSV = (
     PROJECT_ROOT
     / "FIFA World Cup 2026 - DataCamp Competition"
     / "data"
-    / "knockout_slots.csv"
+    / "knockout_slots_v2.csv"
 )
 
 _FIXTURE_COLUMNS = [
