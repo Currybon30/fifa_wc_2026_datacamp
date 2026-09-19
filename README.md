@@ -1,5 +1,12 @@
 # ⚽🏆🌍 FIFA World Cup 2026 Prediction System
 
+  [![Streamlit](https://img.shields.io/badge/Frontend-Streamlit%201.58-red.svg?logo=streamlit&logoColor=red)](https://streamlit.io/)
+  [![FIFA](https://img.shields.io/badge/World%20Cup%202026-FIFA-blue.svg?logo=fifa&logoColor=blue)](https://www.fifa.com/worldcup/)
+  [![Datacamp](https://img.shields.io/badge/Competition-Datacamp-03EF62.svg?logo=datacamp&logoColor=#03EF62)](https://www.datacamp.com/)
+  [![Python](https://img.shields.io/badge/Programming%20Language-Python%203.11-blue.svg?logo=python&logoColor=blue)](https://www.python.org/)
+  [![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-F37626.svg?logo=jupyter&logoColor=#F37626)](https://jupyter.org/)
+  [![Kaggle](https://img.shields.io/badge/Dataset-Kaggle-20BEFF.svg?logo=kaggle&logoColor=#20BEFF)](https://www.kaggle.com/)
+
 An advanced football analytics and tournament simulation system for predicting the **2026 FIFA World Cup** using ML, Elo ratings, statistical modeling, and Monte Carlo simulations.
 
 This project combines multiple ML models, feature engineering pipelines, and probabilistic tournament simulations to generate realistic football match predictions.
@@ -7,12 +14,14 @@ This project combines multiple ML models, feature engineering pipelines, and pro
 Live URL: https://fifa-worldcup26-tnp.streamlit.app/
 
 <p align="center">
+  
   <img width=auto height="400" alt="home" src="https://github.com/user-attachments/assets/c3f6d404-1103-4ccc-bf14-7b22b87cb286" />
   
   <img width=auto height="400" alt="pred" src="https://github.com/user-attachments/assets/7bd276b2-27a1-4deb-82a7-9c404195be75" />
   
   <img width=auto height="400" alt="analysis-page" src="https://github.com/user-attachments/assets/fb914bfc-48ee-4df2-9807-0f8dbeed2019" />
-<p/>
+
+</p>
 
 <br/>
 
